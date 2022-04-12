@@ -1,0 +1,50 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div id="pj-titre" class="objet">
+        <div class="flexrow">
+            <div class="grid-2col" style="max-width: 134px;">
+                <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="128" width="128"/>
+            </div>
+            <div class="grid-2col">
+                <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                <h2>Description</h2>
+                <textarea name="data.description" style="min-height: 80px">{{data.data.description}}</textarea>
+                <input class="model" name="data.techno" type="text" value="{{data.data.techno}}" placeholder="☆ ☆ ☆ ☆ ☆" style="font-size: 1.2em;text-align: right;"/>
+            </div>
+        </div>
+    </div>  
+    <div class="flexrow objet">
+        <div class="grid-2col">
+            <label>Type
+                <input name="data.genre" type="text" value="{{data.data.genre}}" placeholder="Type"/>
+            </label>
+            <label>Point de résitance
+                <input name="data.resitance" type="text" value="{{data.data.resitance}}" placeholder="Poit de resitance"/>
+            </label>
+            <label>Poids
+                <input name="data.poids" type="text" value="{{data.data.poids}}" placeholder="Poids"/>
+            </label>
+        </div>
+        <div class="grid-2col">
+            <label>Valeur
+                <input name="data.valeur" type="text" value="{{data.data.valeur}}" placeholder="Valeur"/>
+            </label>
+            <label>Point de vie
+                <input name="data.hp.max" type="text" value="{{data.data.hp.max}}" placeholder="Poit de vie"/>
+            </label>
+            <label>Quantité
+                <input name="data.quantite" type="text" value="{{data.data.quantite}}" placeholder="Valeur"/>
+            </label>
+        </div>
+    </div>
+    <p style="column-count: 5;border: 1px solid #782e22;padding: 5px;background: #595959;color: #fff;">
+            <span class="ancienete">✬ ☆ ☆ ☆ ☆</span><br>
+            <span class="ancienete">★ ☆ ☆ ☆ ☆</span><br>
+            <span class="ancienete">★ ✬ ☆ ☆ ☆</span><br>
+            <span class="ancienete">★ ★ ☆ ☆ ☆</span><br>
+            <span class="ancienete">★ ★ ✬ ☆ ☆</span><br>
+            <span class="ancienete">★ ★ ★ ☆ ☆</span><br>
+            <span class="ancienete">★ ★ ★ ✬ ☆</span><br>
+            <span class="ancienete">★ ★ ★ ★ ☆</span><br>
+            <span class="ancienete">★ ★ ★ ★ ✬</span><br>
+            <span class="ancienete">★ ★ ★ ★ ★</span></p>
+</form>

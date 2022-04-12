@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.Liber.window-app .window-content{background-image: none;overflow:hidden }
+.Liber .fiche{display: block;height: 800px;width: 1200px;}
+.Liber header {background:#09141a;color: #fff};
+.Liber .col2{display: block;height: 752px;float: left;width: 590px;}
+.Liber{width:1196px;height: 800px;font-family: 'Roboto', sans-serif;display: block;overflow: hidden;}
+form.Liber{display: table-cell;}
+.Liber .fiche nav.sheet-tabs{margin:0px;border-top:none;border-bottom:none;padding:0px 0;height: 35px;}
+.Liber .head input[type="text"]{background:none; border:none;}
+.Liber .head,.Liber main,.Liber .autres,.Liber .autre{width: 595px;display:block;}
+.Liber .autre{float: left;}
+.Liber .head{background: #09141a;height: 120px;border-radius:60px 0 0 60px;}
+.Liber .head img.avatar {height: 120px;width: 120px; border-radius:60px;float: left;background:#000}
+/*.Liber .head span.post {height: 20px;width: 20px;display: inline-block; float: right; margin-right: 10px}*/
+.Liber .head input{color:#fff}
+.Liber .head input.nomperso{text-transform: uppercase;height: 20px; display: block; font-size: 1.2em;width:calc(100% - 130px);}
+.Liber .headtext{ padding:5px;}
+.Liber .head .rexrow{margin-top: 10px;color: #fff;background: #253745;height: 80px;width:590px;padding: 5px 5px 5px 130px;border-radius: 60px 0 0 60px;display: block;}
+.Liber .head .rexrow input{border-bottom:solid 1px #6a7885;width:96px;}
+.Liber .head .rexrow input.religion {width: 59px}
+.Liber .head .rexrow input.avantagerace {width: 186px}
+.Liber .head .rexrow input.niveau {width: 44px}
+.grid-2col,.grid-3col,.grid-9col {float:left;}
+.grid-2col {width:50%;}.grid-3col {width:33.33%;}.grid-9col {width:11%;}
+.Liber .sheet nav.sheet-tabs {border:none}
+/*.Liber .head .separator{width:calc(100% - 10px);height: 0px; border-top: 1px solid #fff;margin:27px 5px 7px 5px;}*/
+.Liber button.aucune,.Liber button.focus,.Liber button.defensif,.Liber button.offensif{width: 20px;height: 20px;display: inline-block;border: none;float:right;}
+.Liber input[type="text"].solit{background: url(../assets/icon/solitude.png)left center no-repeat;background-size: contain;margin-left: 10px}
+.Liber input[type="text"].solit,.Liber .armcl,.Liber .boucl{color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
+.Liber main{background: #253745; height: 628px; margin-top: 5px;color:#fff;}
+.Liber .autres{background: #253745; height: 753px; margin-left: 5px;}
+.Liber h2 {width:100%; background:#09141a;color: #fff;font-size: 1em;padding: 5px;border-bottom: 0;}
+.Liber .deno{width: 206px;border-bottom: 1px solid #6a7885;padding: 0px;display: block;margin: 0 5px 5px 5px;height: 28px;float: left;}
+.Liber .stat input,.Liber .stat2 input,.Liber .features input{background:#09141a; margin:0;display: inline-block;float: left;height: 28px;width: 40px;color:#fff;text-align: center;}
+.Liber .stat input.hp,.Liber .stat input.actarm, .Liber .stat input.actbou, .Liber .stat input.protection, .Liber .stat2 input{border: 1px solid #6a7885;}
+.Liber .stat input.hpmax,.Liber .stat input.actarmmax,.Liber .stat input.actboumax{border-top: 1px solid #6a7885;border-bottom:1px solid #6a7885;border-right: 1px solid #6a7885; border-left:none}
+.Liber .second{padding-top: 5px}
+.Liber .stat2 input,.Liber .stat2 label{margin-left:calc(50% - 20px);margin-top: 0}
+.Liber .stat2 p{text-align: center;margin-bottom: 0}
+.Liber .stat2 label{width:40px;display: block;}
+.Liber textarea{width: 100%;height: 255px;background: #253745;color:#fff;border:none;resize: none;}
+.Liber input[type="button"],.Liber .stat2 label{background:#e13b23;border:none;color:#fff;padding: 5px;font-weight: bold;cursor: pointer}
+.Liber .clear{clear: both}.Liber .center{text-align: center;}
+.Liber .coutmax,.Liber .maxsort {width:100%;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;}
+.Liber .modif button.desequi{float: right;background: #e13b23;border: none;color: #fff;width: 50px;height: 50px;font-size: 2em;cursor: pointer}
+.Liber a.item{display: inline-block;color:#6f727b;background:#09141a;width:20%;padding: 9px 2px;margin: 0;text-align: center}
+.Liber a.item span{width: 103%;border-right:1px solid #6a7885; height: 20px;display: block}
+.Liber a.item:hover,.Liber a.active{background:#253745;color:#fff;}
+.Liber .tabs{background: #09141a;}
+.Liber .tab{padding: 20px 8px 0 5px;}
+.Liber .features button{float: left;width: 142px;height: 28px;font-weight: normal;text-align: left;border-bottom: 1px solid #6a7885;border:none;border-bottom:#6a7885 solid 1px;color:#6a7885;background: none;margin-right: 5px;}
+.Liber .features button:hover{color:#fff}
+.Liber .features input{border: 1px solid #6a7885;}
+.Liber .features .compt{width: 188px; float: left; margin: 3px}
+.Liber .features .compt p{color:#6a7885;font-size: 0.8em}
+.Liber .features input.restant{border:none;background: none;text-align: center;font-size: 1.4em;}
+.Liber .carac .compt{width: 100%;display: block}
+.Liber .carac span{width:calc(30% - 5px);display: inline-block;margin-right: 5px;color:#6a7885;font-size: 0.8em;text-align: right;}
+.Liber .carac input[type="text"]{width: 70%;display: inline-block;border:none;border-bottom: 1px solid #6a7885;color:#fff;background: none}
+.Liber .carac input[type="button"]{float: right;background: #e13b23;border: none;color: #fff;width: 100px;height: 30px;font-size: 1em;cursor: pointer; margin:3px;}
+.Liber .carac input[type="text"].talent,.Liber .carac input[type="text"].faiblesse{border:1px solid #6a7885;width:64%;background:#09141a;height: 30px;}
+.Liber .talentliste,.Liber .faiblesseliste{width: 56%;display: inline-block;height: 30px;margin-top: 3px;border: none;background: #09141a;color: #fff;}
+.Liber .items .encom{width: 100%;border: 1px solid #6a7885; height: 28px;margin-bottom: 20px}
+.Liber .items .encom p{width: 100%;margin-left: 5px;height: 28px;font-size: 0.8em;color: #fff;margin-top: -26px;}
+.Liber .items .barenc{width: 100%;background: #0080c0;height: 26px;display: block;}
+.Liber .items .encom input {border: none;background: none;color: #fff}
+.Liber .items input.maingaucequi,.Liber .items input.maindroiequi,.Liber .items input.armurequi,.Liber .items input.bouclierqui{border:1px solid #6a7885;width:45%;background:#09141a;height: 30px;color: #fff;margin-bottom: 5px;}
+.Liber .items .desequi{float: right;background: #e13b23;border: none;color: #fff;width: 30px;height: 30px;font-size: 1em;cursor: pointer;margin-right: 10px;}
+.Liber .items .jetdedegat{float: right;background: #e13b23;border: none;color: #fff;width: 105px;height: 25px;font-size: 0.8em;cursor: pointer;margin: 3px;text-align: center;}
+.Liber .items-list {list-style: none;margin: 7px 0;padding: 0;overflow-y: auto;}
+.Liber .items-list .item-header {font-weight: bold;text-align: left;padding-left: 0;margin-left: 0;}
+.Liber .items-list .item {height: 30px;line-height: 24px;padding: 3px 0;border-bottom: 1px solid #BBB;overflow: hidden;color:#fff;font-weight: normal;opacity: 0.6}
+.Liber .items-list .item:hover {opacity:1}
+.Liber .items-list .item-image {-webkit-box-flex: 0;-ms-flex: 0 0 24px;flex: 0 0 24px;margin-right: 5px;width: 25px}
+.Liber .items-list .item img {display: block;}
+.Liber .items-list .item-resitance,.Liber .items-list .item-hpmax,.Liber .items-list .item-genre,.Liber .items-list .item-techno,.Liber .items-list .item-duree,.Liber .items-list .item-classe,.Liber .items-list .item-controls,.Liber .items-list .item-image,.Liber .items-list .item-name,.Liber .items-list .item-description,.Liber .items-list .item-description2,.Liber .items-list .item-portee,.Liber .items-list .item-dommage,.Liber .items-list .item-poids,.Liber .items-list .item-poids,.Liber .items-list .item-valeur,.Liber .items-list .item-qt,.Liber .items-list .item-qty,.Liber .items-list .item-hand{display:block;height:25px;float: left;overflow: hidden;}
+.Liber .items-list .item-name {margin: 0;width: 80px;float: left;}
+.Liber .items-list .item-description{width: 168px;float: left}
+.Liber .items-list .item-description2{width: 230px;float: left}
+.Liber .items-list .item-genre{width: 20px;float: left; text-align: center}
+.Liber .items-list .item-classe{width: 50px;float: left}
+.Liber .items-list .item-duree{width: 72px;float: left}
+.Liber .items-list .item-techno{width: 82px;float: left;text-align: center;}
+.Liber .items-list .item-resitance,.Liber .items-list .item-hpmax,.Liber .items-list .item-portee,.Liber .items-list .item-dommage,.Liber .items-list .item-poids,.Liber .items-list .item-poid,.Liber .items-list .item-valeur,.Liber .items-list .item-qty,.Liber .items-list .item-qt{width: 30px;float: left;text-align: center}
+.Liber .items-list .item-hand{width: 62px;float: left;filter: invert(1);}
+.Liber .items-list .item-controls{-webkit-box-flex: 0;-ms-flex: 0 0 86px;flex: 0 0 86px;text-align: right;width: 41px;}
+.Liber .stats select{border: none;height: 30px;width: 50%; margin: 3px;background: #0d0d0d;color: #fff;}
+.Liber .stats input{border: none;height: 30px;width: 40%;padding:5px;float: right;margin: 4px;background:#e13b23;border:none;color:#fff;padding: 5px;font-weight: bold;cursor: pointer}
+.Liber .stat input.insoin,.Liber .stat input.avant,.Liber .stat input.desan{border:none;color: #fff;text-align: right;opacity: 0.5}
+.Liber input.insoin{background:url("../assets/icon/pvi.png")left center no-repeat;background-size: contain;}
+.Liber input.avant{background:url("../assets/icon/avantage.png")left center no-repeat;background-size: contain;}
+.Liber input.desan{background:url("../assets/icon/avantage-2.png")left center no-repeat;background-size: contain;}
+.Liber .etat button{width: 37px;height: 37px;border:none;opacity: 0.5;margin-top: 20px;margin-bottom: 20px}
+.Liber .etat0 {background: url(" ../assets/icon/etat-0.png");background-size: cover;margin-left: 20px;}
+.Liber .etat1 {background: url(" ../assets/icon/etat-1.png");background-size: cover;}
+.Liber .etat2 {background: url(" ../assets/icon/etat-2.png");background-size: cover;}
+.Liber .etat3 {background: url(" ../assets/icon/etat-3.png");background-size: cover;}
+.Liber .etat4 {background: url(" ../assets/icon/etat-4.png");background-size: cover;}
+.Liber .etat5 {background: url(" ../assets/icon/etat-5.png");background-size: cover;}
+.Liber .etat6 {background: url(" ../assets/icon/etat-6.png");background-size: cover;}
+.Liber .etat7 {background: url(" ../assets/icon/etat-7.png");background-size: cover;}
+.Liber .etat8 {background: url(" ../assets/icon/etat-8.png");background-size: cover;}
+.Liber .etat9 {background: url(" ../assets/icon/etat-9.png");background-size: cover;}
+.Liber .etat10 {background: url(" ../assets/icon/etat-10.png");background-size: cover;}
+.Liber .etat11 {background: url(" ../assets/icon/etat-11.png");background-size: cover;}
+.Liber .etat12 {background: url(" ../assets/icon/aucune.png");background-size: cover;}
+.Liber .maindroite,.Liber .maingauche,.Liber .armor{width: 20px; height: 20px; display: inline-block;cursor: pointer;}
+.Liber .maindroite {background: url(" ../assets/icon/hand.png");background-size: cover;}
+.Liber .maingauche {background: url(" ../assets/icon/hand2.png");background-size: cover;}
+.Liber .armor {background: url(" ../assets/icon/armor.png");background-size: cover;}
+
+.Liber .santes{height: 400px; background: url("../assets/icon/res3_silhouette.png") no-repeat center center;}
+.Liber .vaisseau{height: 400px; background: url("../assets/icon/vaisseau.png") no-repeat center center;background-size: contain}
+.Liber .zone{width: 120px;position: relative; text-align: center}
+.Liber .zone input{font-weight: bold;background: white}
+.Liber .tete{left: calc(50% - 60px);top:20px;}
+.Liber .bd{left: calc(50% - 180px);top:100px;}
+.Liber .torse{left: calc(50% - 60px);top:100px;}
+.Liber .blinder{left: calc(50% - 60px);top:150px;}
+.Liber .bg{left: calc(50% + 60px);top:38px;}
+.Liber .jd{left: calc(50% - 160px);top:150px;}
+.Liber .jg{left: calc(50% + 40px);top:119px;}
+.Liber .poupe{left: calc(50% - 60px);top:219px;}
+.Liber .bar {height: 5px; display: block;}
+.Liber .etoile{text-align: center;}
+.Liber .anciente{cursor: pointer;}
+.Liber .armcl,.Liber .boucl,.Liber .viecl{margin-left: 10px;padding-top: 15px;}
+.Liber .armcl{background: url("../assets/icon/armure.png")no-repeat left center; }
+.Liber .boucl{background: url("../assets/icon/bouclier.png")no-repeat left center; }
+.Liber .viecl{background: url("../assets/icon/vie.png")no-repeat left center;color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
+.Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}

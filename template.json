@@ -1,0 +1,220 @@
+{
+    "Actor": {
+        "types":[
+            "personnage",
+            "pnj",
+            "monstre",
+            "vehicule"
+        ],
+        "templates":{
+            "stat":{
+                "hp": {
+                  "value":20,
+                  "max": 20
+                },
+                "armure":{
+                  "value":"0",
+                  "max": "0"
+                },
+                "protections":{
+                  "value":"0",
+                  "max": "0"
+                },
+                "avantage":0,
+                "desavantage":0,
+                "solit":0,
+                "tete":100,
+                "bd":100,
+                "torse":100,
+                "bg":100,
+                "jd":100,
+                "jg":100,
+                "encombrement": {
+                  "value": 0,
+                  "max": 0
+                }
+            },            
+            "attributs":{
+                "Agilité":0,
+                "Artisanat":0,
+                "Balistique":0,
+                "Combat":0,
+                "ConGén":0,
+                "ConSpécif":0,
+                "Dextérité":0,
+                "Diplomatie":0,
+                "Discrétion":0,
+                "Force":0,
+                "Investigation":0,
+                "Jeu":0,
+                "Mécanique":0,
+                "Médecine":0,
+                "Natation":0,
+                "Navigation":0,
+                "Négociation":0,
+                "Perception":0,
+                "Pilotage":0,
+                "Piratage":0,
+                "Pistage":0,
+                "Religion":0,
+                "Science":0,
+                "Survie":0,
+                "Tir":0,
+                "Visée":0,
+                "bonus":0
+            },
+            "background":{
+                "histoire":"",
+                "race":"",
+                "bonusrace":"",
+                "metier":"",
+                "bonusmetier":"",
+                "posture":"Aucune",
+                "level":"1",
+                "etat":""  
+            }
+        },
+        "personnage":{
+            "templates":["stat","attributs","background"], 
+            "caractere":{
+                "residence":"",
+                "sang":"",
+                "politique":"",
+                "interets":"",
+                "deces":"",
+                "moral":"",
+                "amour":"",
+                "amitie":"",
+                "haine":"",
+                "principale":"",
+                "secondaire":"",
+                "passion":"",
+                "caract":"",
+                "personnalite":"",
+                "perception":"",
+                "objectif":"",
+                "rancunier":"",
+                "tare":"",
+                "obsession":"",
+                "distingue":""
+            },
+            "armed":"",
+            "armeg":"",
+            "degatd":"",
+            "degatg":"",
+            "prod":"",
+            "prog":""
+        },
+        "pnj":{
+            "templates":["stat","attributs","background"],
+            "armed":"",
+            "armeg":"",
+            "degatd":"",
+            "degatg":"",
+            "prod":"",
+            "prog":""
+        },
+        "monstre":{
+            "templates":["stat","attributs","background"],
+            "armed":"",
+            "armeg":"",
+            "degatd":"",
+            "degatg":"",
+            "prod":"",
+            "prog":"",
+            "degat":""
+        },
+        "vehicule":{
+            "templates":["stat","attributs","background"],
+            "ia":0,
+            "equi":0,
+            "piece":0,
+            "blindage":0,
+            "bouclier":0,
+            "tehnologie":0,
+            "prix":0,
+            "model":"",
+            "ordre":""
+        }
+
+        
+    },
+    "Item": {
+        "types": [
+            "arme",
+            "armure",
+            "bouclier",
+            "objet",
+            "piece",
+            "planete"
+        ],
+        "arme": {
+            "description": "",
+            "genre": "",
+            "degats": "",
+            "portee": "",
+            "poids":"1",
+            "techno":"☆ ☆ ☆ ☆ ☆",
+            "valeur":"10",
+            "quantite":"1"
+        },
+        "armure": {
+            "description": "",
+            "genre": "",
+            "resitance": 0,
+            "hp": {
+                "value":0,
+                "max": 0
+            },
+            "poids":"1",
+            "techno":"☆ ☆ ☆ ☆ ☆",
+            "valeur":"10",
+            "quantite":"1"
+        },
+        "bouclier": {
+            "description": "",
+            "genre": "",
+            "resitance": 0,
+            "hp": {
+                "value":0,
+                "max": 0
+            },
+            "poids":"1",
+            "techno":"☆ ☆ ☆ ☆ ☆",
+            "valeur":"10",
+            "quantite":"1"
+        },
+        "objet": {
+            "description": "",
+            "genre": "",
+            "poids":"1",
+            "techno":"☆ ☆ ☆ ☆ ☆",
+            "valeur":"10",
+            "quantite":"1"
+        },
+        "piece": {
+            "description": "",
+            "techno":"☆ ☆ ☆ ☆ ☆",
+            "quantite":"1",
+            "valeur": "" 
+        },
+        "planete": {
+            "surnom": "",
+            "domination":"",
+            "pouplation":"",
+            "description": "",
+            "niveau_arme":"",
+            "niveau_crime":"", 
+            "niveau_secu":"", 
+            "niveau_tech":"", 
+            "pop_humain":"",
+            "pop_arthuriens":"",
+            "pop_draconiens":"",
+            "pop_machine":"",
+            "pop_pleiadiens":"",
+            "pop_yoribiens":"",
+            "pop_elfen":"",
+            "pop_orquanien":""
+        }
+    }
+}

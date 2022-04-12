@@ -1,0 +1,70 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div id="pj-titre" class="objet">
+        <div class="flexrow">
+            <div class="grid-2col" style="max-width: 134px;">
+                <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="128" width="128"/>
+            </div>
+            <div class="grid-2col">
+                <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                <h1><input name="surname" type="text" value="{{data.data.surnom}}" placeholder="Surnom"/></h1>
+                <h2>Description</h2>
+                <textarea name="data.description" style="min-height: 80px">{{data.data.description}}</textarea>
+                <input class="model" name="data.domination" type="text" value="{{data.data.domination}}" placeholder="Controlée par :" style="font-size: 1.2em;text-align: right;"/>
+            </div>
+        </div>
+    </div>  
+    <h2>Niveau :</h2>
+    <div class="flexrow objet">
+        <div class="grid-2col">
+            <label>Arme
+                <input name="data.niveau_arme" type="text" value="{{data.data.niveau_arme}}" placeholder="Arme"/>
+            </label>
+            <label>Crime
+                <input name="data.niveau_crime" type="text" value="{{data.data.niveau_crime}}" placeholder="Crime"/>
+            </label>
+        </div>
+        <div class="grid-2col">
+            <label>Sécurité
+                <input name="data.niveau_secu" type="text" value="{{data.data.niveau_secu}}" placeholder="Sécurité"/>
+            </label>
+            <label>Technologie
+                <input name="data.niveau_tech" type="text" value="{{data.data.niveau_tech}}" placeholder="Technologie"/>
+            </label>
+        </div>
+    </div>
+    <h2>Population :</h2>
+    <label>
+        <input name="data.pouplation" type="text" value="{{data.data.pouplation}}" placeholder="Nombre d'individu"/>
+    </label>
+    <div class="flexrow objet">
+        
+        <div class="grid-2col">
+            <label>Humains
+                <input name="data.pop_humain" type="text" value="{{data.data.pop_humain}}" placeholder="Humain"/>
+            </label>
+            <label>Arthuriens
+                <input name="data.pop_arthuriens" type="text" value="{{data.data.pop_arthuriens}}" placeholder="Arthuriens"/>
+            </label>
+            <label>Draconniens
+                <input name="data.pop_draconiens" type="text" value="{{data.data.pop_draconiens}}" placeholder="Draconniens"/>
+            </label>
+            <label>Machine
+                <input name="data.pop_machine" type="text" value="{{data.data.pop_machine}}" placeholder="Machine"/>
+            </label>
+        </div>
+        <div class="grid-2col">
+            <label>Pleiadiens
+                <input name="data.pop_pleiadiens" type="text" value="{{data.data.pop_pleiadiens}}" placeholder="Pleiadiens"/>
+            </label>
+            <label>Yoribiens
+                <input name="data.pop_yoribiens" type="text" value="{{data.data.pop_yoribiens}}" placeholder="Yoribiens"/>
+            </label>
+            <label>Elfen
+                <input name="data.pop_elfen" type="text" value="{{data.data.pop_elfen}}" placeholder="Elfen"/>
+            </label>
+            <label>Orquanien
+                <input name="data.pop_orquanien" type="text" value="{{data.data.pop_orquanien}}" placeholder="Orquanien"/>
+            </label>
+        </div>
+    </div>
+</form>
