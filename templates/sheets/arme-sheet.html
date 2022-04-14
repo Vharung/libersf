@@ -6,7 +6,7 @@
             </div>
             <div class="grid-2col">
                 <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-                <h2>Description</h2>
+                <h2>{{localize 'libersf.descri'}}</h2>
                 <textarea name="data.description" style="min-height: 80px">{{data.data.description}}</textarea>
                 <input class="model" name="data.techno" type="text" value="{{data.data.techno}}" placeholder="☆ ☆ ☆ ☆ ☆" style="font-size: 1.2em;text-align: right;"/>
             </div>
@@ -14,24 +14,24 @@
     </div>  
     <div class="flexrow objet">
         <div class="grid-2col">
-            <label>Type
+            <label>{{localize 'libersf.type'}}
                 <input name="data.genre" type="text" value="{{data.data.genre}}" placeholder="Type"/>
             </label>
-            <label>Dégâts
+            <label>{{localize 'libersf.degat'}}
                 <input name="data.degats" type="text" value="{{data.data.degats}}" placeholder="0"/>
             </label>
-            <label>Poids
+            <label>{{localize 'libersf.pds'}}
                 <input name="data.poids" type="text" value="{{data.data.poids}}" placeholder="Poids"/>
             </label>
         </div>
         <div class="grid-2col">
-            <label>Portée
+            <label>{{localize 'libersf.portee'}}
                 <input name="data.portee" type="text" value="{{data.data.portee}}" placeholder="0"/> 
             </label>
-            <label>Valeur
+            <label>{{localize 'libersf.valeur'}}
                 <input name="data.valeur" type="text" value="{{data.data.valeur}}" placeholder="Valeur"/>
             </label>
-            <label>Quantité
+            <label>{{localize 'libersf.qte'}}
                 <input name="data.quantite" type="text" value="{{data.data.quantite}}" placeholder="Valeur"/>
             </label>
         </div>

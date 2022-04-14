@@ -7,7 +7,7 @@
             <div class="grid-2col">
                 <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
                 <h1><input name="surname" type="text" value="{{data.data.surnom}}" placeholder="Surnom"/></h1>
-                <h2>Description</h2>
+                <h2>{{localize 'libersf.descri'}}</h2>
                 <textarea name="data.description" style="min-height: 80px">{{data.data.description}}</textarea>
                 <input class="model" name="data.domination" type="text" value="{{data.data.domination}}" placeholder="Controlée par :" style="font-size: 1.2em;text-align: right;"/>
             </div>
@@ -16,53 +16,53 @@
     <h2>Niveau :</h2>
     <div class="flexrow objet">
         <div class="grid-2col">
-            <label>Arme
+            <label>{{localize 'libersf.arme'}}
                 <input name="data.niveau_arme" type="text" value="{{data.data.niveau_arme}}" placeholder="Arme"/>
             </label>
-            <label>Crime
+            <label>{{localize 'libersf.crime'}}
                 <input name="data.niveau_crime" type="text" value="{{data.data.niveau_crime}}" placeholder="Crime"/>
             </label>
         </div>
         <div class="grid-2col">
-            <label>Sécurité
+            <label>{{localize 'libersf.secu'}}
                 <input name="data.niveau_secu" type="text" value="{{data.data.niveau_secu}}" placeholder="Sécurité"/>
             </label>
-            <label>Technologie
+            <label>{{localize 'libersf.techno'}}
                 <input name="data.niveau_tech" type="text" value="{{data.data.niveau_tech}}" placeholder="Technologie"/>
             </label>
         </div>
     </div>
-    <h2>Population :</h2>
+    <h2>{{localize 'libersf.pop'}} :</h2>
     <label>
         <input name="data.pouplation" type="text" value="{{data.data.pouplation}}" placeholder="Nombre d'individu"/>
     </label>
     <div class="flexrow objet">
         
         <div class="grid-2col">
-            <label>Humains
+            <label>{{localize 'libersf.humain'}}
                 <input name="data.pop_humain" type="text" value="{{data.data.pop_humain}}" placeholder="Humain"/>
             </label>
-            <label>Arthuriens
+            <label>{{localize 'libersf.arthu'}}
                 <input name="data.pop_arthuriens" type="text" value="{{data.data.pop_arthuriens}}" placeholder="Arthuriens"/>
             </label>
-            <label>Draconniens
+            <label>{{localize 'libersf.dragon'}}
                 <input name="data.pop_draconiens" type="text" value="{{data.data.pop_draconiens}}" placeholder="Draconniens"/>
             </label>
-            <label>Machine
+            <label>{{localize 'libersf.machinev'}}
                 <input name="data.pop_machine" type="text" value="{{data.data.pop_machine}}" placeholder="Machine"/>
             </label>
         </div>
         <div class="grid-2col">
-            <label>Pleiadiens
+            <label>{{localize 'libersf.pleiadiens'}}
                 <input name="data.pop_pleiadiens" type="text" value="{{data.data.pop_pleiadiens}}" placeholder="Pleiadiens"/>
             </label>
-            <label>Yoribiens
+            <label>{{localize 'libersf.yor'}}
                 <input name="data.pop_yoribiens" type="text" value="{{data.data.pop_yoribiens}}" placeholder="Yoribiens"/>
             </label>
-            <label>Elfen
+            <label>{{localize 'libersf.elf'}}
                 <input name="data.pop_elfen" type="text" value="{{data.data.pop_elfen}}" placeholder="Elfen"/>
             </label>
-            <label>Orquanien
+            <label>{{localize 'libersf.orqu'}}
                 <input name="data.pop_orquanien" type="text" value="{{data.data.pop_orquanien}}" placeholder="Orquanien"/>
             </label>
         </div>

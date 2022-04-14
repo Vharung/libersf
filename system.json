@@ -1,7 +1,7 @@
 {
     "name": "libersf",
-    "title": "Liber SF ",
-    "description": "The Liber SF  system for FoundryVTT!",
+    "title": "liber SF ",
+    "description": "The libersf SF  system for FoundryVTT!",
     "version": "0.0.1",
     "minimumCoreVersion": "0.9",
     "compatibleCoreVersion": "0.9",
@@ -10,14 +10,85 @@
     "esmodules": ["module/libersf.js"],
     "styles": ["css/libersf.css"],
     "scripts": [],
-    "packs": [],
-    "languages": [],
+    "packs": [
+        {
+          "name": "monstre",
+          "label": "Monstres",
+          "system": "libersf",
+          "path": "./pack/monstre.db",
+          "entity": "Actor",
+          "type": "Actor"
+        },
+        {
+          "name": "vehicule",
+          "label": "Véhicule",
+          "system": "libersf",
+          "path": "./pack/vehicule.db",
+          "entity": "Actor",
+          "type": "Actor"
+        },
+        {
+          "name": "armure",
+          "label": "Armure",
+          "system": "libersf",
+          "path": "./pack/armurebouclier.db",
+          "entity": "Item",
+          "type": "Item"
+        },
+        {
+          "name": "arme",
+          "label": "Arme",
+          "system": "libersf",
+          "path": "./pack/armes.db",
+          "entity": "Item",
+          "type": "Item"
+        },
+        {
+          "name": "chargeur",
+          "label": "Chargeur",
+          "system": "libersf",
+          "path": "./pack/chargeur.db",
+          "entity": "Item",
+          "type": "Item"
+        },
+        {
+          "name": "objet",
+          "label": "Objet",
+          "system": "libersf",
+          "path": "./pack/objet.db",
+          "entity": "Item",
+          "type": "Item"
+        },
+        {
+          "name": "pieces",
+          "label": "Pieces",
+          "system": "libersf",
+          "path": "./pack/pieces.db",
+          "entity": "Item",
+          "type": "Item"
+        },
+        {
+          "name": "planete",
+          "label": "planete",
+          "system": "libersf",
+          "path": "./pack/Planete.db",
+          "entity": "Item",
+          "type": "Item"
+        }
+    ],
+    "languages": [
+      {
+        "lang": "fr",
+        "name": "Français",
+        "path": "lang/fr.json"
+      }
+    ],
     "gridDistance": 1,
     "gridUnits": "m",
     "primaryTokenAttribute": "hp",
     "secondaryTokenAttribute": "psy",
-    "url": "",
-    "manifest": "",
-    "download": "https://github.com/Vharung/libersf",
+    "url": "https://github.com/Vharung/libersfsf",
+    "manifest": "https://github.com/Vharung/libersf/blob/main/system.json",
+    "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
     "license": "LICENSE.txt"
 }

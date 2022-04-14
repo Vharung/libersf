@@ -9,32 +9,32 @@
 					<input class="nomperso" name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
 					<div class="rexrow">
 						<div class="grid-3col">			
-							<p>Race : <input class="race" name="data.race" type="text" value="{{data.data.race}}" placeholder="Race"/></p>
+							<p>{{localize 'libersf.race'}} : <input class="race" name="data.race" type="text" value="{{data.data.race}}" placeholder="Race"/></p>
 						</div>
 						<div class="grid-3col">
-							<p>Métier : <input class="metier" name="data.metier" type="text" value="{{data.data.metier}}" placeholder="Clan"/></p>
+							<p>{{localize 'libersf.metier'}} : <input class="metier" name="data.metier" type="text" value="{{data.data.metier}}" placeholder="Clan"/></p>
 						</div>
 						<div class="grid-3col">
-							<p>Faction : <input class="faction" name="data.religion" type="text" value="{{data.data.religion}}" placeholder="Faction  - Religion"/></p>
+							<p>{{localize 'libersf.faction'}} : <input class="faction" name="data.religion" type="text" value="{{data.data.religion}}" placeholder="Faction  - Religion"/></p>
 						</div>
 						<!--div class="separator"></div-->
-						<p>Bonus : <input name="data.bonusrace" type="text" value="{{data.data.bonusrace}}" placeholder="Bonus" style="width: 158px"/> <input name="data.bonusmetier" type="text" value="{{data.data.bonusmetier}}" placeholder="bonusmetier" style="width: 158px"/>Level : <input class="niveau" name="data.level" type="text" value="{{data.data.level}}" placeholder="1"/></p>
+						<p>{{localize 'libersf.bonus'}} : <input name="data.bonusrace" type="text" value="{{data.data.bonusrace}}" placeholder="Bonus" style="width: 158px"/> <input name="data.bonusmetier" type="text" value="{{data.data.bonusmetier}}" placeholder="bonusmetier" style="width: 158px"/>{{localize 'libersf.level'}} : <input class="niveau" name="data.level" type="text" value="{{data.data.level}}" placeholder="1"/></p>
 					</div>
 					
 				</div>
 			</div>
 		</div>
 		<main>
-			<h2>Histoire</h2>
+			<h2>{{localize 'libersf.histoire'}}</h2>
 				<textarea class="histoire" name="data.histoire">{{data.data.histoire}}</textarea>
-			<h2>Feuille de personnages</h2>
+			<h2>{{localize 'libersf.etat'}}</h2>
 			<div class="rexrow stat">
 				<div class="grid-2col">
-					<p><span class="deno">❤ Point de vie</span><input class="hp" name="data.hp.value" type="text" value="{{data.data.hp.value}}" placeholder="10" style="width: 40px;"/><input class="hpmax" name="data.hp.max" type="text" value="{{data.data.hp.max}}" placeholder="10" style="width: 40px;"/>
+					<p><span class="deno">❤ {{localize 'libersf.vie'}}</span><input class="hp" name="data.hp.value" type="text" value="{{data.data.hp.value}}" placeholder="10" style="width: 40px;"/><input class="hpmax" name="data.hp.max" type="text" value="{{data.data.hp.max}}" placeholder="10" style="width: 40px;"/>
 				</div>
 				<div class="grid-2col">
-					<p><span class="deno">⛉ Armure</span><input class="actarm" name="data.armure.value" type="text" value="{{data.data.armure.value}}" placeholder="0"/><input class="actarmmax" name="data.armure.max" type="text" value="{{data.data.armure.max}}" placeholder="0"/>
-					<span class="deno">⛉ Bouclier</span><input class="actbou" name="data.protections.value" type="text" value="{{data.data.protections.value}}" placeholder="0"/><input  class="actboumax" name="data.protections.max" type="text" value="{{data.data.protections.max}}" placeholder="0"/> </p>
+					<p><span class="deno">⛉ {{localize 'libersf.armure'}}</span><input class="actarm" name="data.armure.value" type="text" value="{{data.data.armure.value}}" placeholder="0"/><input class="actarmmax" name="data.armure.max" type="text" value="{{data.data.armure.max}}" placeholder="0"/>
+					<span class="deno">⛉ {{localize 'libersf.bouclier'}}</span><input class="actbou" name="data.protections.value" type="text" value="{{data.data.protections.value}}" placeholder="0"/><input  class="actboumax" name="data.protections.max" type="text" value="{{data.data.protections.max}}" placeholder="0"/> </p>
 				</div>
 				<div class="clear"></div>
 				<div class="etat">
@@ -58,15 +58,15 @@
 			<div class="clear"></div>
 			<div class="rexrow modif">
 				<div class="grid-3col">
-					<h2>Point de solitude</h2>
+					<h2>{{localize 'libersf.solitude'}}</h2>
 					<input class="solit" name="data.solit" type="text" value="{{data.data.solit}}" placeholder="0"/>
 				</div>
 				<div class="grid-3col">
-					<h2>Point d'Armure</h2>
+					<h2>{{localize 'libersf.ptarmor'}}</h2>
 					<div class="armcl"><span class="ptarm"></span></div>
 				</div>
 				<div class="grid-3col">
-					<h2>Point de Bouclier</h2>
+					<h2>{{localize 'libersf.ptboucl'}}</h2>
 					<div class="boucl"><span class="ptbou"></span></div>
 				</div>
 			</div>
@@ -76,130 +76,129 @@
 		<div class="autres">
 			{{!-- Sheet Tab Navigation --}}
 		    <nav class="sheet-tabs tabs" data-group="primary">
-		        <!--a class="item" data-tab="description">Description</a--><a class="item active" data-tab="features"><span>Compétence</span></a><a class="item" data-tab="carac"><span>Caractère</span></a><a class="item" data-tab="items"><span>Inventaire</span></a><a class="item" data-tab="sante"><span>Santé</span></a><a class="item" data-tab="lab">⚙</a>
+		        <a class="item active" data-tab="features"><span>{{localize 'libersf.cpt'}}</span></a><a class="item" data-tab="carac"><span>{{localize 'libersf.cara'}}</span></a><a class="item" data-tab="items"><span>{{localize 'libersf.inv'}}</span></a><a class="item" data-tab="sante"><span>{{localize 'libersf.sante'}}</span></a><a class="item" data-tab="lab">⚙</a>
 		    </nav>
 		    {{!-- Sheet Body --}}
 			<section class="sheet-body" style="overflow: hidden;height: 717px;">
 			    {{!-- Features Tab --}}
 				<div id="features" class="tab features"  data-group="primary" data-tab="features">
-					<div class="compt"><button class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Agilité}}">Agilité</button>
+					<div class="compt"><button class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Agilité}}">{{localize 'libersf.agil'}}</button>
 					<input class="cpt0" name="data.Agilité" type="text" value="{{data.data.Agilité}}" placeholder="{{data.data.Agilité}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Artisanat" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Artisanat}}">Artisanat</button>
+					<div class="compt"><button class="jetdedes" data-name="Artisanat" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Artisanat}}">{{localize 'libersf.arti'}}</button>
 					<input class="cpt1" name="data.Artisanat" type="text" value="{{data.data.Artisanat}}" placeholder="{{data.data.Artisanat}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Balistique" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Balistique}}">Balistique</button>
+					<div class="compt"><button class="jetdedes" data-name="Balistique" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Balistique}}">{{localize 'libersf.bali'}}</button>
 					<input class="cpt2" name="data.Balistique" type="text" value="{{data.data.Balistique}}" placeholder="{{data.data.Balistique}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Combat" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Combat}}">Combat</button>
+					<div class="compt"><button class="jetdedes" data-name="Combat" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Combat}}">{{localize 'libersf.comb'}}</button>
 					<input class="cpt3" name="data.Combat" type="text" value="{{data.data.Combat}}" placeholder="{{data.data.Combat}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="ConGén" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.ConGén}}">ConGén</button>
+					<div class="compt"><button class="jetdedes" data-name="ConGén" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.ConGén}}">{{localize 'libersf.cong'}}</button>
 					<input class="cpt4" name="data.ConGén" type="text" value="{{data.data.ConGén}}" placeholder="{{data.data.ConGén}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.ConSpécif}}">ConSpécif</button>
+					<div class="compt"><button class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.ConSpécif}}">{{localize 'libersf.comp'}}</button>
 					<input class="cpt5" name="data.ConSpécif" type="text" value="{{data.data.ConSpécif}}" placeholder="{{data.data.ConSpécif}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Dextérité" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Dextérité}}">Dextérité</button>
+					<div class="compt"><button class="jetdedes" data-name="Dextérité" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Dextérité}}">{{localize 'libersf.dext'}}</button>
 					<input class="cpt6" name="data.Dextérité" type="text" value="{{data.data.Dextérité}}" placeholder="{{data.data.Dextérité}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Diplomatie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Diplomatie}}">Diplomatie</button>
+					<div class="compt"><button class="jetdedes" data-name="Diplomatie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Diplomatie}}">{{localize 'libersf.dipl'}}</button>
 					<input class="cpt7" name="data.Diplomatie" type="text" value="{{data.data.Diplomatie}}" placeholder="{{data.data.Diplomatie}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Discrétion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Discrétion}}">Discrétion</button>
+					<div class="compt"><button class="jetdedes" data-name="Discrétion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Discrétion}}">{{localize 'libersf.a'}}Discrétion</button>
 					<input class="cpt8" name="data.Discrétion" type="text" value="{{data.data.Discrétion}}" placeholder="{{data.data.Discrétion}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Force" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Force}}">Force</button>
+					<div class="compt"><button class="jetdedes" data-name="Force" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Force}}">{{localize 'libersf.forc'}}</button>
 					<input class="cpt9" name="data.Force" type="text" value="{{data.data.Force}}" placeholder="{{data.data.Force}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Investigation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Investigation}}">Investigation</button>
+					<div class="compt"><button class="jetdedes" data-name="Investigation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Investigation}}">{{localize 'libersf.inve'}}</button>
 					<input class="cpt10" name="data.Investigation" type="text" value="{{data.data.Investigation}}" placeholder="{{data.data.Investigation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Jeu" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Jeu}}">Jeu</button>
+					<div class="compt"><button class="jetdedes" data-name="Jeu" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Jeu}}">{{localize 'libersf.ajeu'}}</button>
 					<input class="cpt11" name="data.Jeu" type="text" value="{{data.data.Jeu}}" placeholder="{{data.data.Jeu}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Mécanique" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Mécanique}}">Mécanique</button>
+					<div class="compt"><button class="jetdedes" data-name="Mécanique" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Mécanique}}">{{localize 'libersf.meca'}}</button>
 					<input class="cpt12" name="data.Mécanique" type="text" value="{{data.data.Mécanique}}" placeholder="{{data.data.Mécanique}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Médecine" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Médecine}}">Médecine</button>
+					<div class="compt"><button class="jetdedes" data-name="Médecine" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Médecine}}">{{localize 'libersf.mede'}}</button>
 					<input class="cpt13" name="data.Médecine" type="text" value="{{data.data.Médecine}}" placeholder="{{data.data.Médecine}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Natation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Natation}}">Natation</button>
+					<div class="compt"><button class="jetdedes" data-name="Natation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Natation}}">{{localize 'libersf.nata'}}</button>
 					<input class="cpt14" name="data.Natation" type="text" value="{{data.data.Natation}}" placeholder="{{data.data.Natation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Navigation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Navigation}}">Navigation</button>
+					<div class="compt"><button class="jetdedes" data-name="Navigation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Navigation}}">{{localize 'libersf.navi'}}</button>
 					<input class="cpt15" name="data.Navigation" type="text" value="{{data.data.Navigation}}" placeholder="{{data.data.Navigation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Négociation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Négociation}}">Négociation</button>
+					<div class="compt"><button class="jetdedes" data-name="Négociation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Négociation}}">{{localize 'libersf.nego'}}</button>
 					<input class="cpt16" name="data.Négociation" type="text" value="{{data.data.Négociation}}" placeholder="{{data.data.Négociation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Perception" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Perception}}">Perception</button>
+					<div class="compt"><button class="jetdedes" data-name="Perception" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Perception}}">{{localize 'libersf.perc'}}</button>
 					<input class="cpt17" name="data.Perception" type="text" value="{{data.data.Perception}}" placeholder="{{data.data.Perception}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Pilotage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Pilotage}}">Pilotage</button>
+					<div class="compt"><button class="jetdedes" data-name="Pilotage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Pilotage}}">{{localize 'libersf.pilo'}}</button>
 					<input class="cpt18" name="data.Pilotage" type="text" value="{{data.data.Pilotage}}" placeholder="{{data.data.Pilotage}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Piratage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Piratage}}">Piratage</button>
+					<div class="compt"><button class="jetdedes" data-name="Piratage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Piratage}}">{{localize 'libersf.pira'}}</button>
 					<input class="cpt19" name="data.Piratage" type="text" value="{{data.data.Piratage}}" placeholder="{{data.data.Piratage}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Pistage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Pistage}}">Pistage</button>
+					<div class="compt"><button class="jetdedes" data-name="Pistage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Pistage}}">{{localize 'libersf.pist'}}</button>
 					<input class="cpt20" name="data.Pistage" type="text" value="{{data.data.Pistage}}" placeholder="{{data.data.Pistage}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Religion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Religion}}">Religion</button>
+					<div class="compt"><button class="jetdedes" data-name="Religion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Religion}}">{{localize 'libersf.a'}}Religion</button>
 					<input class="cpt21" name="data.Religion" type="text" value="{{data.data.Religion}}" placeholder="{{data.data.Religion}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Science" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Science}}">Science</button>
+					<div class="compt"><button class="jetdedes" data-name="Science" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Science}}">{{localize 'libersf.a'}}Science</button>
 					<input class="cpt22" name="data.Science" type="text" value="{{data.data.Science}}" placeholder="{{data.data.Science}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Survie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Survie}}">Survie</button>
+					<div class="compt"><button class="jetdedes" data-name="Survie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Survie}}">{{localize 'libersf.surv'}}</button>
 					<input class="cpt23" name="data.Survie" type="text" value="{{data.data.Survie}}" placeholder="{{data.data.Survie}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Tir}}">Tir</button>
+					<div class="compt"><button class="jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Tir}}">{{localize 'libersf.atir'}}</button>
 					<input class="cpt24" name="data.Tir" type="text" value="{{data.data.Tir}}" placeholder="{{data.data.Tir}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Visée}}">Visée</button>
+					<div class="compt"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Visée}}">{{localize 'libersf.vise'}}</button>
 					<input class="cpt25" name="data.Visée" type="text" value="{{data.data.Visée}}" placeholder="{{data.data.Visée}}" style="text-align: center"/>
 					</div>
 					<div class="clear"></div>
 					<div class="grid-2col" style="margin-top: 20px">
-						<h2 style="text-align:center">Point restant</h2>
+						<h2 style="text-align:center">{{localize 'libersf.restant'}}</h2>
 						<input class="pointrestant" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" type="text" value="0" readonly/>
 					</div>
 					<div class="grid-2col" style="margin-top: 20px">
-						<h2 style="text-align:center">Bonus MJ</h2>
+						<h2 style="text-align:center">{{localize 'libersf.bonusmj'}}</h2>
 						<input class="malussactor" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" name="data.malus" type="text" value="{{data.data.malus}}" placeholder="0"/>
 					</div>
 				</div>
 
 				{{!-- Carac Tab --}}
 				<div id="carac" class="tab carac" data-group="primary" data-tab="carac">
-		            <div class="compt"><span>Résidence :</span><input class="residence" name="data.caractere.residence" type="text" value="{{data.data.caractere.residence}}" placeholder="Résidence"/></div>
-		            <div class="compt"><span>Famille de sang :</span><input class="sang" name="data.caractere.sang" type="text" value="{{data.data.caractere.sang}}" placeholder="Famille de sang"/></div>
-		            <div class="compt"><span>Famille politique /secte :</span><input class="secte" name="data.caractere.politique" type="text" value="{{data.data.caractere.politique}}" placeholder="politique"/></div>
-		            <div class="compt"><span>Groupe d interets :</span><input class="interet" name="data.caractere.interets" type="text" value="{{data.data.caractere.interets}}" placeholder="interets"/></div>
-		            <div class="compt"><span>Deces d'un proche :</span><input class="proche" name="data.caractere.deces" type="text" value="{{data.data.caractere.deces}}" placeholder="deces"/></div>
-		            <div class="compt"><span>Sens Moral/valeur :</span><input class="moral" name="data.caractere.moral" type="text" value="{{data.data.caractere.moral}}" placeholder="moral"/></div>
-		            <div class="compt"><span>Amour :</span><input class="amour" name="data.caractere.amour" type="text" value="{{data.data.caractere.amour}}" placeholder="amour"/></div>
-		            <div class="compt"><span>Amitie :</span><input class="amitie" name="data.caractere.amitie" type="text" value="{{data.data.caractere.amitie}}" placeholder="amitie"/></div>
-		            <div class="compt"><span>Haine :</span><input class="haine" name="data.caractere.haine" type="text" value="{{data.data.caractere.haine}}" placeholder="haine"/></div>
-		            <div class="compt"><span>Activite principale :</span><input class="principale" name="data.caractere.principale" type="text" value="{{data.data.caractere.principale}}" placeholder="principale"/></div>
-		            <div class="compt"><span>Activite secondaire :</span><input class="secondaire" name="data.caractere.secondaire" type="text" value="{{data.data.caractere.secondaire}}" placeholder="secondaire"/></div>
-		            <div class="compt"><span>Passion :</span><input class="passion" name="data.caractere.passion" type="text" value="{{data.data.caractere.passion}}" placeholder="passion"/></div>
-		            <div class="compt"><span>Caractere :</span><input class="caractere" name="data.caractere.caract" type="text" value="{{data.data.caractere.caract}}" placeholder="caractere"/></div>
-		            <div class="compt"><span>Personnalite :</span><input class="personnalite" name="data.caractere.personnalite" type="text" value="{{data.data.caractere.personnalite}}" placeholder="personnalite"/></div>
-		            <div class="compt"><span>Perception du monde :</span><input class="monde" name="data.caractere.perception" type="text" value="{{data.data.caractere.perception}}" placeholder="perception"/></div>
-		            <div class="compt"><span>Objectif :</span><input class="objectif" name="data.caractere.objectif" type="text" value="{{data.data.caractere.objectif}}" placeholder="objectif"/></div>
-		            <div class="compt"><span>Rancunier :</span><input class="rancunier" name="data.caractere.rancunier" type="text" value="{{data.data.caractere.rancunier}}" placeholder="rancunier"/></div>
-		            <div class="compt"><span>Tare mentale :</span><input class="tare" name="data.caractere.tare" type="text" value="{{data.data.caractere.tare}}" placeholder="tare"/></div>
-		            <div class="compt"><span>Obsession :</span><input class="obsession" name="data.caractere.obsession" type="text" value="{{data.data.caractere.obsession}}" placeholder="obsession"/></div>
-		            <div class="compt"><span>Distingue le bien du mal :</span><input class="distingue" name="data.caractere.distingue" type="text" value="{{data.data.caractere.distingue}}" placeholder="distingue"/></div>
+		            <div class="compt"><span>{{localize 'libersf.resid'}} :</span><input class="residence" name="data.caractere.residence" type="text" value="{{data.data.caractere.residence}}" placeholder="{{localize 'libersf.resid'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.sanga'}} :</span><input class="sang" name="data.caractere.sang" type="text" value="{{data.data.caractere.sang}}" placeholder="{{localize 'libersf.sanga'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.secte'}} :</span><input class="secte" name="data.caractere.politique" type="text" value="{{data.data.caractere.politique}}" placeholder="{{localize 'libersf.secte'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.inter'}} :</span><input class="interet" name="data.caractere.interets" type="text" value="{{data.data.caractere.interets}}" placeholder="{{localize 'libersf.inter'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.deces'}} :</span><input class="proche" name="data.caractere.deces" type="text" value="{{data.data.caractere.deces}}" placeholder="{{localize 'libersf.deces'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.moral'}} :</span><input class="moral" name="data.caractere.moral" type="text" value="{{data.data.caractere.moral}}" placeholder="{{localize 'libersf.moral'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.amour'}} :</span><input class="amour" name="data.caractere.amour" type="text" value="{{data.data.caractere.amour}}" placeholder="{{localize 'libersf.amour'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.amiti'}} :</span><input class="amitie" name="data.caractere.amitie" type="text" value="{{data.data.caractere.amitie}}" placeholder="{{localize 'libersf.amiti'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.haine'}} :</span><input class="haine" name="data.caractere.haine" type="text" value="{{data.data.caractere.haine}}" placeholder="{{localize 'libersf.haine'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.princ'}} :</span><input class="principale" name="data.caractere.principale" type="text" value="{{data.data.caractere.principale}}" placeholder="{{localize 'libersf.princ'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.secon'}} :</span><input class="secondaire" name="data.caractere.secondaire" type="text" value="{{data.data.caractere.secondaire}}" placeholder="{{localize 'libersf.secon'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.passi'}} :</span><input class="passion" name="data.caractere.passion" type="text" value="{{data.data.caractere.passion}}" placeholder="{{localize 'libersf.passi'}} "/></div>
+		            <div class="compt"><span>{{localize 'libersf.carac'}} :</span><input class="caractere" name="data.caractere.caract" type="text" value="{{data.data.caractere.caract}}" placeholder="{{localize 'libersf.carac'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.persn'}} :</span><input class="personnalite" name="data.caractere.personnalite" type="text" value="{{data.data.caractere.personnalite}}" placeholder="{{localize 'libersf.persn'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.perso'}} :</span><input class="monde" name="data.caractere.perception" type="text" value="{{data.data.caractere.perception}}" placeholder="{{localize 'libersf.perso'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.objec'}} :</span><input class="objectif" name="data.caractere.objectif" type="text" value="{{data.data.caractere.objectif}}" placeholder="{{localize 'libersf.objec'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.rancu'}} :</span><input class="rancunier" name="data.caractere.rancunier" type="text" value="{{data.data.caractere.rancunier}}" placeholder="{{localize 'libersf.rancu'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.menta'}} :</span><input class="tare" name="data.caractere.tare" type="text" value="{{data.data.caractere.tare}}" placeholder="{{localize 'libersf.menta'}}"/></div>
+		            <div class="compt"><span>{{localize 'libersf.obess'}} :</span><input class="obsession" name="data.caractere.obsession" type="text" value="{{data.data.caractere.obsession}}" placeholder="{{localize 'libersf.obess'}}"/></div>
 				    
 				</div>
 				{{!-- Items Tab --}}
 				<div id="items" class="tab items" data-group="primary" data-tab="items">
 					<div class="encom"><div class="barenc"></div>
-						<p>Encombrement <input class="encours" name="data.encombrement.value" type="text" value="{{data.data.encombrement.value}}" placeholder="0" style="width: 40px;" readonly=""/> / 
-						<input class="enc" name="data.encombrement.max" type="text" value="{{data.data.encombrement.max}}" placeholder="0" style="width: 40px;" readonly="" /> Kg</p>
+						<p>{{localize 'libersf.encombrement'}} <input class="encours" name="data.encombrement.value" type="text" value="{{data.data.encombrement.value}}" placeholder="0" style="width: 40px;" readonly=""/> / 
+						<input class="enc" name="data.encombrement.max" type="text" value="{{data.data.encombrement.max}}" placeholder="0" style="width: 40px;" readonly="" /> {{localize 'libersf.kg'}}</p>
 					</div>
 					<div class="flexrow">
 						<div class="grid-2col" style="text-align: center" class="unemain">
@@ -210,19 +209,19 @@
 						</div>
 					</div>
 					<div style="overflow: auto;height: 610px;">
-						<h2 style="margin-top: 20px">Armes</h2>
+						<h2 style="margin-top: 20px">{{localize 'libersf.armes'}}</h2>
 						<ol class="items-list">
 			                <li class="item rexrow item-header">
 			                  <div class="item-image"></div>
-			                  <div class="item-name">Nom</div>
+			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description">Description</div>               
-			                  <div class="item-portee">Prt</div>
-			                  <div class="item-dommage">Dg</div>
-			                  <div class="item-poids">Pds</div>
-			                  <div class="item-valeur">Cr</div>
-			                  <div class="item-techno">Techno</div>
-			                  <div class="item-qty">Qte</div>
+			                  <div class="item-description">{{localize 'libersf.descri'}}</div>               
+			                  <div class="item-portee">{{localize 'libersf.l1'}}</div>
+			                  <div class="item-dommage">{{localize 'libersf.l2'}}</div>
+			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
+			                  <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+			                  <div class="item-techno">{{localize 'libersf.l5'}}</div>
+			                  <div class="item-qty">{{localize 'libersf.l6'}}</div>
 			                  <div class="item-controls">
 			                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
 			                  </div>
@@ -247,19 +246,19 @@
 			                </li>
 			            {{/each}}
 		        		</ol>
-				    	<h2 style="margin-top: 20px">Armures</h2>
+				    	<h2 style="margin-top: 20px">{{localize 'libersf.armures'}}</h2>
 						<ol class="items-list">
 			                <li class="item rexrow item-header">
 			                  <div class="item-image"></div>
-			                  <div class="item-name">Nom</div>
+			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description">Description</div>               
-			                  <div class="item-resitance">Rst</div>
-			                  <div class="item-hpmax">PV</div>
-			                  <div class="item-poids">Pds</div>
-			                  <div class="item-valeur">Cr</div>
-			                  <div class="item-techno">Techno</div>
-			                  <div class="item-qty">Qte</div>
+			                  <div class="item-description">{{localize 'libersf.descri'}}</div>               
+			                  <div class="item-resitance">{{localize 'libersf.l7'}}</div>
+			                  <div class="item-hpmax">{{localize 'libersf.l8'}}</div>
+			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
+			                  <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+			                  <div class="item-techno">{{localize 'libersf.l5'}}</div>
+			                  <div class="item-qty">{{localize 'libersf.l6'}}</div>
 			                  <div class="item-controls">
 			                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
 			                  </div>
@@ -284,17 +283,17 @@
 			                </li>
 			            {{/each}}
 		        		</ol>
-				    	<h2 style="margin-top: 20px">Inventaire</h2>
+				    	<h2 style="margin-top: 20px">{{localize 'libersf.inv'}}</h2>
 						<ol class="items-list">
 			                <li class="item rexrow item-header">
 			                  <div class="item-image"></div>
-			                  <div class="item-name">Nom</div>
+			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description2">Description</div>               
-			                  <div class="item-poids">Pds</div>
-			                  <div class="item-valeur">Cr</div>
-			                  <div class="item-techno">Techno</div>
-			                  <div class="item-qty">Qte</div>
+			                  <div class="item-description2">{{localize 'libersf.descri'}}</div>               
+			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
+			                  <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+			                  <div class="item-techno">{{localize 'libersf.l5'}}</div>
+			                  <div class="item-qty">{{localize 'libersf.l6'}}</div>
 			                  <div class="item-controls">
 			                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
 			                  </div>
@@ -347,44 +346,44 @@
 							<input name="data.jg" type="text" value="{{data.data.jg}}" placeholder="jg"/>
 						</div>
 					</div>
-					<h2 style="text-align: center;">Dégâts subits par zone</h2>
+					<h2 style="text-align: center;">{{localize 'libersf.zone'}}</h2>
 					<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="width: 310px; height: auto;float: right;margin-top:10px">
 				</div>
 				{{!-- Lab Tab --}}
 				<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
-					<h2 style="margin-top: 20px">Race</h2>
+					<h2 style="margin-top: 20px">{{localize 'libersf.race'}}</h2>
 					<SELECT class="raceliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
-	                    <option>Humain</option>
-	                    <option>Pleiadiens</option>
-	                    <option>Arthuriens</option>
-	                    <option>Yoribiens</option>
-	                    <option>Alpha Draconiens</option>
-	                    <option>Elfen</option>
-	                    <option>Machine</option>
-	                    <option>Orquanien</option>
+	                    <option>{{localize 'libersf.humain'}}</option>
+	                    <option>{{localize 'libersf.pleiadiens'}}</option>
+	                    <option>{{localize 'libersf.artu'}}</option>
+	                    <option>{{localize 'libersf.yor'}}</option>
+	                    <option>{{localize 'libersf.dragon'}}</option>
+	                    <option>{{localize 'libersf.elf'}}</option>
+	                    <option>{{localize 'libersf.machine'}}</option>
+	                    <option>{{localize 'libersf.orqu'}}</option>
 	                </SELECT>
-	                <input type="button" value="Choisir" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
-	                <h2 style="margin-top: 20px">Faction</h2>
+	                <input type="button" value="{{localize 'libersf.choisir'}}" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+	                <h2 style="margin-top: 20px">{{localize 'libersf.faction'}}</h2>
 					<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
-	                    <option>L'empire</option>
-	                    <option>La Pléide</option>
-	                    <option>OMC</option>
-	                    <option>La fédération</option>
-	                    <option>La rébellion</option>
-	                    <option>Les fanatiques</option>
+	                    <option>{{localize 'libersf.empire'}}</option>
+	                    <option>{{localize 'libersf.pleide'}}</option>
+	                    <option>{{localize 'libersf.omc'}}</option>
+	                    <option>{{localize 'libersf.fede'}}</option>
+	                    <option>{{localize 'libersf.rebel'}}</option>
+	                    <option>{{localize 'libersf.fan'}}</option>
 	                </SELECT>
-	                <input type="button" value="Choisir" class="factionchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
-	                <h2 style="margin-top: 20px">Métier</h2>
+	                <input type="button" value="{{localize 'libersf.choisir'}}" class="factionchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+	                <h2 style="margin-top: 20px">{{localize 'libersf.metier'}}</h2>
 					<SELECT class="metierliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
-	                    <option>Artisans</option>
-	                    <option>Commerce</option>
-	                    <option>Colons</option>
-	                    <option>Intellect.</option>
-	                    <option>Malandrins</option>
-	                    <option>Pilote</option>
-	                    <option>Medecin</option>
-	                    <option>Militaire</option>
-	                    <option>Mécanicien</option>
+	                    <option>{localize 'libersf.metier1'}}</option>
+	                    <option>{localize 'libersf.metier2'}}</option>
+	                    <option>{localize 'libersf.metier3'}}</option>
+	                    <option>{localize 'libersf.metier4'}}</option>
+	                    <option>{localize 'libersf.metier5'}}</option>
+	                    <option>{localize 'libersf.metier6'}}</option>
+	                    <option>{localize 'libersf.metier7'}}</option>
+	                    <option>{localize 'libersf.metier8'}}</option>
+	                    <option>{localize 'libersf.metier9'}}</option>
 	                </SELECT>
 	                <input type="button" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
 						

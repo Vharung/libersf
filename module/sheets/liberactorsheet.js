@@ -86,8 +86,8 @@ export class LiberActorSheet extends ActorSheet {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
             let d = Dialog.confirm({
-                title: "Suppression d'élément",
-                content: "<p>Confirmer la suppression de '" + item.name + "'.</p>",
+                title: game.i18n.localize("liber.suppr"),
+                content: "<p>"+game.i18n.localize("liber.conf")+ item.name + "'.</p>",
                 yes: () => item.delete(),
                 no: () => { },
                 defaultYes: false
@@ -535,38 +535,7 @@ export class LiberActorSheet extends ActorSheet {
         html.find('.encours').val(total);
         html.find('.barenc').css({"width":pourcentage+"%"});
 
-        /*Equipé*/
-        //tester pour arme a demain
-        var listedemain =['Rapière','Bâton','Espadon','Hallebarde','Fléaux d\'arme','Epée à deux main','Masse d\'arme','Hache de bataille','Faux de Guerre','Lance Lourde']
-        $('.maindroite').on('click',function(){
-            var objetaequipe=$(this).attr("name");
-            var degat=$(this).attr("degat");
-            var maing= html.find(".maingaucequi").val();
-            for (var i = listedemain.length - 1; i >= 0; i--) {
-                if(objetaequipe==listedemain[i] || maing == listedemain[i]){
-                    html.find(".maingaucequi").val('-');
-                    html.find(".degatg").val('-');
-                }
-            }
-            html.find(".maindroiequi").val(objetaequipe);
-            html.find(".degatd").val(degat);
-            
-            
-        });
-        $('.maingauche').on('click',function(){
-            var objetaequipe=$(this).attr("name");
-            var degat=$(this).attr("degat");
-            var maind= html.find(".maindroiequi").val();
-            for (var i = listedemain.length - 1; i >= 0; i--) {
-                if(objetaequipe==listedemain[i] || maind == listedemain[i]){
-                    html.find(".maindroiequi").val('-');
-                    html.find(".degatd").val('-');
-                }
-            }
-            html.find(".maingaucequi").val(objetaequipe);
-            html.find(".degatg").val(degat);
-
-        });
+        /*Equipé*/   
         $('.armor').on('click',function(){
             var objetaequipe=$(this).attr("name");
             html.find(".armurequi").val(objetaequipe);
@@ -577,14 +546,6 @@ export class LiberActorSheet extends ActorSheet {
         });
 
         /*desquipe*/
-        $('.mainddes').on('click',function(){
-            html.find(".maindroiequi").val('');
-            html.find(".degatd").val('');
-        });
-        $('.maingdes').on('click',function(){
-            html.find(".maingaucequi").val('');
-            html.find(".degatg").val('');
-        });
         $('.armordes').on('click',function(){
             html.find(".armurequi").val('');
         });
