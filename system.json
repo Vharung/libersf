@@ -2,7 +2,7 @@
     "name": "libersf",
     "title": "liber SF ",
     "description": "The libersf SF  system for FoundryVTT!",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "minimumCoreVersion": "0.9",
     "compatibleCoreVersion": "0.9",
     "templateVersion": 2,
@@ -17,7 +17,8 @@
           "system": "libersf",
           "path": "./pack/monstre.db",
           "entity": "Actor",
-          "type": "Actor"
+          "type": "Actor",
+          "private": true
         },
         {
           "name": "vehicule",
@@ -25,7 +26,8 @@
           "system": "libersf",
           "path": "./pack/vehicule.db",
           "entity": "Actor",
-          "type": "Actor"
+          "type": "Actor",
+          "private": true
         },
         {
           "name": "armure",
@@ -74,6 +76,15 @@
           "path": "./pack/Planete.db",
           "entity": "Item",
           "type": "Item"
+        },
+        {
+          "label": "Régles",
+          "type": "JournalEntry",
+          "name": "regles",
+          "path": "./pack/regles.db",
+          "system": "libersf",
+          "entity": "JournalEntry",
+          "private": false
         }
     ],
     "languages": [
