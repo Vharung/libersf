@@ -99,7 +99,7 @@
     "primaryTokenAttribute": "hp",
     "secondaryTokenAttribute": "psy",
     "url": "https://github.com/Vharung/libersfsf",
-    "manifest": "https://github.com/Vharung/libersf/blob/main/system.json",
+    "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
     "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
     "license": "LICENSE.txt"
 }
