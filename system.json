@@ -2,7 +2,7 @@
     "name": "libersf",
     "title": "liber SF ",
     "description": "The libersf SF  system for FoundryVTT!",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "minimumCoreVersion": "0.9",
     "compatibleCoreVersion": "0.9",
     "templateVersion": 2,
@@ -71,7 +71,7 @@
         },
         {
           "name": "planete",
-          "label": "planete",
+          "label": "Planete",
           "system": "libersf",
           "path": "./pack/planete.db",
           "entity": "Item",
