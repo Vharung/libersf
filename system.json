@@ -73,7 +73,7 @@
           "name": "planete",
           "label": "planete",
           "system": "libersf",
-          "path": "./pack/Planete.db",
+          "path": "./pack/planete.db",
           "entity": "Item",
           "type": "Item"
         },
