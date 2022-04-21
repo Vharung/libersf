@@ -10,7 +10,8 @@ form.Liber{display: table-cell;}
 .Liber .head,.Liber main,.Liber .autres,.Liber .autre{width: 595px;display:block;}
 .Liber .autre{float: left;}
 .Liber .head{background: #09141a;height: 120px;border-radius:60px 0 0 60px;}
-.Liber .head img.avatar {height: 120px;width: 120px; border-radius:60px;float: left;background:#000}
+.Liber .head .avatar img{height: 100%;max-width: none}
+.Liber .head .avatar{height: 120px; width: 120px;border-radius: 50%; display:inline-block;overflow: hidden;float: left}
 /*.Liber .head span.post {height: 20px;width: 20px;display: inline-block; float: right; margin-right: 10px}*/
 .Liber .head input{color:#fff}
 .Liber .head input.nomperso{text-transform: uppercase;height: 20px; display: block; font-size: 1.2em;width:calc(100% - 130px);}
@@ -20,13 +21,14 @@ form.Liber{display: table-cell;}
 .Liber .head .rexrow input.religion {width: 59px}
 .Liber .head .rexrow input.avantagerace {width: 186px}
 .Liber .head .rexrow input.niveau {width: 44px}
+.Liber option {background: none}
 .grid-2col,.grid-3col,.grid-9col {float:left;}
 .grid-2col {width:50%;}.grid-3col {width:33.33%;}.grid-9col {width:11%;}
 .Liber .sheet nav.sheet-tabs {border:none}
 /*.Liber .head .separator{width:calc(100% - 10px);height: 0px; border-top: 1px solid #fff;margin:27px 5px 7px 5px;}*/
 .Liber button.aucune,.Liber button.focus,.Liber button.defensif,.Liber button.offensif{width: 20px;height: 20px;display: inline-block;border: none;float:right;}
 .Liber input[type="text"].solit{background: url(../assets/icon/solitude.png)left center no-repeat;background-size: contain;margin-left: 10px}
-.Liber input[type="text"].solit,.Liber .armcl,.Liber .boucl{color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
+.Liber input[type="text"].solit,.Liber .armcl,.Liber .boucl{color: #fff;padding-left: 80px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
 .Liber main{background: #253745; height: 628px; margin-top: 5px;color:#fff;}
 .Liber .autres{background: #253745; height: 753px; margin-left: 5px;}
 .Liber h2 {width:100%; background:#09141a;color: #fff;font-size: 1em;padding: 5px;border-bottom: 0;}
@@ -125,7 +127,7 @@ form.Liber{display: table-cell;}
 .Liber .etoile{text-align: center;}
 .Liber .anciente{cursor: pointer;}
 .Liber .armcl,.Liber .boucl,.Liber .viecl{margin-left: 10px;padding-top: 15px;}
-.Liber .armcl{background: url("../assets/icon/armure.png")no-repeat left center; }
-.Liber .boucl{background: url("../assets/icon/bouclier.png")no-repeat left center; }
+.Liber .armcl{background: url("../assets/icon/armure.png")no-repeat left center;background-size: contain; }
+.Liber .boucl{background: url("../assets/icon/bouclier.png")no-repeat left center; background-size: contain;}
 .Liber .viecl{background: url("../assets/icon/vie.png")no-repeat left center;color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
 .Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}

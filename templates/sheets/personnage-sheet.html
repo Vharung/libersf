@@ -4,18 +4,20 @@
 	<div style="width: 592px;float: left;display: inline-block;">
 		<div class="sheet-header flexcol" id="pj-titre" style="flex: 0 0 515px;">
 			<div class="head">
-				<img class="avatar" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+				<div class="avatar"> 
+					<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+				</div>
 				<div class="headtext">
 					<input class="nomperso" name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
 					<div class="rexrow">
 						<div class="grid-3col">			
-							<p>{{localize 'libersf.race'}} : <input class="race" name="data.race" type="text" value="{{data.data.race}}" placeholder="Race"/></p>
+							<p>{{localize 'libersf.race'}} : <input class="race" type="text" value="{{data.data.race}}" placeholder="Race" readonly /></p>
 						</div>
 						<div class="grid-3col">
-							<p>{{localize 'libersf.metier'}} : <input class="metier" name="data.metier" type="text" value="{{data.data.metier}}" placeholder="Clan"/></p>
+							<p>{{localize 'libersf.metier'}} : <input class="metier" type="text" value="{{data.data.metier}}" placeholder="Clan" readonly /></p>
 						</div>
 						<div class="grid-3col">
-							<p>{{localize 'libersf.faction'}} : <input class="faction" name="data.religion" type="text" value="{{data.data.religion}}" placeholder="Faction  - Religion"/></p>
+							<p>{{localize 'libersf.faction'}} : <input class="faction" type="text" value="{{data.data.religion}}" placeholder="Faction  - Religion" readonly /></p>
 						</div>
 						<!--div class="separator"></div-->
 						<p>{{localize 'libersf.bonus'}} : <input name="data.bonusrace" type="text" value="{{data.data.bonusrace}}" placeholder="Bonus" style="width: 158px"/> <input name="data.bonusmetier" type="text" value="{{data.data.bonusmetier}}" placeholder="bonusmetier" style="width: 158px"/>{{localize 'libersf.level'}} : <input class="niveau" name="data.level" type="text" value="{{data.data.level}}" placeholder="1"/></p>
@@ -352,38 +354,44 @@
 				{{!-- Lab Tab --}}
 				<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
 					<h2 style="margin-top: 20px">{{localize 'libersf.race'}}</h2>
-					<SELECT class="raceliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
-	                    <option>{{localize 'libersf.humain'}}</option>
-	                    <option>{{localize 'libersf.pleiadiens'}}</option>
-	                    <option>{{localize 'libersf.artu'}}</option>
-	                    <option>{{localize 'libersf.yor'}}</option>
-	                    <option>{{localize 'libersf.dragon'}}</option>
-	                    <option>{{localize 'libersf.elf'}}</option>
-	                    <option>{{localize 'libersf.machine'}}</option>
-	                    <option>{{localize 'libersf.orqu'}}</option>
+					<SELECT class="raceliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.race">
+						{{#select data.data.race}}
+		                    <option value="{{localize 'libersf.humain'}}">{{localize 'libersf.humain'}}</option>
+		                    <option value="{{localize 'libersf.pleiadiens'}}">{{localize 'libersf.pleiadiens'}}</option>
+		                    <option value="{{localize 'libersf.artu'}}">{{localize 'libersf.artu'}}</option>
+		                    <option value="{{localize 'libersf.yor'}}">{{localize 'libersf.yor'}}</option>
+		                    <option value="{{localize 'libersf.dragon'}}">{{localize 'libersf.dragon'}}</option>
+		                    <option value="{{localize 'libersf.elf'}}">{{localize 'libersf.elf'}}</option>
+		                    <option value="{{localize 'libersf.machine'}}">{{localize 'libersf.machine'}}</option>
+		                    <option value="{{localize 'libersf.orqu'}}">{{localize 'libersf.orqu'}}</option>
+	                    {{/select}}
 	                </SELECT>
 	                <input type="button" value="{{localize 'libersf.choisir'}}" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
 	                <h2 style="margin-top: 20px">{{localize 'libersf.faction'}}</h2>
-					<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
-	                    <option>{{localize 'libersf.empire'}}</option>
-	                    <option>{{localize 'libersf.pleide'}}</option>
-	                    <option>{{localize 'libersf.omc'}}</option>
-	                    <option>{{localize 'libersf.fede'}}</option>
-	                    <option>{{localize 'libersf.rebel'}}</option>
-	                    <option>{{localize 'libersf.fan'}}</option>
+					<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.religion">
+	                    {{#select data.data.religion}}
+		                    <option value="{{localize 'libersf.empire'}}">{{localize 'libersf.empire'}}</option>
+		                    <option value="{{localize 'libersf.pleide'}}">{{localize 'libersf.pleide'}}</option>
+		                    <option value="{{localize 'libersf.omc'}}">{{localize 'libersf.omc'}}</option>
+		                    <option value="{{localize 'libersf.fede'}}">{{localize 'libersf.fede'}}</option>
+		                    <option value="{{localize 'libersf.rebel'}}">{{localize 'libersf.rebel'}}</option>
+		                    <option value="{{localize 'libersf.fan'}}">{{localize 'libersf.fan'}}</option>
+		                {{/select}}
 	                </SELECT>
 	                <input type="button" value="{{localize 'libersf.choisir'}}" class="factionchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
 	                <h2 style="margin-top: 20px">{{localize 'libersf.metier'}}</h2>
-					<SELECT class="metierliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
-	                    <option>{localize 'libersf.metier1'}}</option>
-	                    <option>{localize 'libersf.metier2'}}</option>
-	                    <option>{localize 'libersf.metier3'}}</option>
-	                    <option>{localize 'libersf.metier4'}}</option>
-	                    <option>{localize 'libersf.metier5'}}</option>
-	                    <option>{localize 'libersf.metier6'}}</option>
-	                    <option>{localize 'libersf.metier7'}}</option>
-	                    <option>{localize 'libersf.metier8'}}</option>
-	                    <option>{localize 'libersf.metier9'}}</option>
+					<SELECT class="metierliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.metier">
+	                    {{#select data.data.metier}}
+		                    <option value="{{localize 'libersf.metier1'}}">{{localize 'libersf.metier1'}}</option>
+		                    <option value="{{localize 'libersf.metier2'}}">{{localize 'libersf.metier2'}}</option>
+		                    <option value="{{localize 'libersf.metier3'}}">{{localize 'libersf.metier3'}}</option>
+		                    <option value="{{localize 'libersf.metier4'}}">{{localize 'libersf.metier4'}}</option>
+		                    <option value="{{localize 'libersf.metier5'}}">{{localize 'libersf.metier5'}}</option>
+		                    <option value="{{localize 'libersf.metier6'}}">{{localize 'libersf.metier6'}}</option>
+		                    <option value="{{localize 'libersf.metier7'}}">{{localize 'libersf.metier7'}}</option>
+		                    <option value="{{localize 'libersf.metier8'}}">{{localize 'libersf.metier8'}}</option>
+		                    <option value="{{localize 'libersf.metier9'}}">{{localize 'libersf.metier9'}}</option>
+		                {{/select}}
 	                </SELECT>
 	                <input type="button" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
 						
