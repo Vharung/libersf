@@ -1,0 +1,446 @@
+<form class="{{cssClass}} liber flexcol" autocomplete="off">
+	{{!-- Sheet Header --}}
+	<header class="sheet-header flexcol" id="pj-titre" style="flex: 0 0 515px;">
+		<h1><input class="nomperso" name="name" type="text" value="{{actor.name}}" placeholder="Name" style="height:50px"/></h1>
+		<div class="flexrow">
+			<div class="grid-3col">
+				<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" style="display: inline-block; height: 173px; width: 264px; margin-top: 20px"/>
+				<div class="viecl">: {{data.data.hp.value}}</div>
+				<div class="armcl">: <span class="ptarm"></span></div>
+				<div class="boucl">: <span class="ptbou"></span></div>
+			</div>
+			<div class="grid-3col">
+				<h2>Race</h2>
+				<input class="race" name="data.race" type="text" value="{{data.data.race}}" placeholder="Race"/>
+				<SELECT class="raceliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
+                    <option>Humain</option>
+                    <option>Pleiadiens</option>
+                    <option>Arthuriens</option>
+                    <option>Yoribiens</option>
+                    <option>Alpha Draconiens</option>
+                    <option>Elfen</option>
+                    <option>Machine</option>
+                    <option>Orquanien</option>
+                </SELECT>
+                <input type="button" value="Choisir" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+				<h2>Bonus de race</h2>
+				<input name="data.bonusrace" type="text" value="{{data.data.bonusrace}}" placeholder="Bonus"/>
+				<h2>Faction</h2>
+				<input class="faction" name="data.religion" type="text" value="{{data.data.religion}}" placeholder="Faction  - Religion"/>
+				<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
+                    <option>L'empire</option>
+                    <option>La Pléide</option>
+                    <option>OMC</option>
+                    <option>La fédération</option>
+                    <option>La rébellion</option>
+                    <option>Les fanatiques</option>
+                </SELECT>
+                <input type="button" value="Choisir" class="factionchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+
+			</div>
+			<div class="grid-3col">
+				<h2>Métier</h2>
+				<input class="metier" name="data.metier" type="text" value="{{data.data.metier}}" placeholder="Clan"/>
+				<SELECT class="metierliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;">
+                    <option>Artisans</option>
+                    <option>Commerce</option>
+                    <option>Colons</option>
+                    <option>Intellect.</option>
+                    <option>Malandrins</option>
+                    <option>Pilote</option>
+                    <option>Medecin</option>
+                    <option>Militaire</option>
+                    <option>Mécanicien</option>
+                </SELECT>
+                <input type="button" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+				<h2>Bonus Métier</h2>
+				<input name="data.bonusmetier" type="text" value="{{data.data.bonusmetier}}" placeholder="bonusmetier"/>
+				<h2>Level</h2>
+				<input name="data.level" type="text" value="{{data.data.level}}" placeholder="1"/>
+				
+			</div>
+		</div>
+
+		<div class="separator"></div>
+		<div class="flexrow">
+			<div class="grid-5col" style="min-width: 150px;">
+				PV <input class="hp" name="data.hp.value" type="text" value="{{data.data.hp.value}}" placeholder="10" style="width: 40px;"/> /
+				<input class="hpmax" name="data.hp.max" type="text" value="{{data.data.hp.max}}" placeholder="10" style="width: 40px;"/>
+			</div> 		
+			<div class="grid-5col" style="min-width: 150px;">
+				PV Arm <input class="actarm" name="data.armure.value" type="text" value="{{data.data.armure.value}}" placeholder="0" style="width: 60px;"/>  /
+				<input name="data.armure.max" type="text" value="{{data.data.armure.max}}" placeholder="0" style="width: 60px;"/> 
+			</div>
+			<div class="grid-5col" style="min-width: 150px;">
+				PV Bou <input class="actbou" name="data.protections.value" type="text" value="{{data.data.protections.value}}" placeholder="0" style="width: 60px;"/> /
+				<input name="data.protections.max" type="text" value="{{data.data.protections.max}}" placeholder="0" style="width: 60px;"/> 
+			</div>
+			<div class="grid-5col" style="min-width: 150px;">
+				Enc <input class="encours" name="data.encombrement.value" type="text" value="{{data.data.encombrement.value}}" placeholder="0" style="width: 40px;" readonly=""/> / 
+				<input class="enc" name="data.encombrement.max" type="text" value="{{data.data.encombrement.max}}" placeholder="0" style="width: 40px;" readonly="" /> Kg
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="flexrow">
+			<div class="etat">
+				<input class="solit" name="data.solit" type="text" value="{{data.data.solit}}" placeholder="0"/>
+				<!--input class="avant" name="data.avantage" type="text" value="{{data.data.avantage}}" placeholder="0"/>
+				<input class="desan" name="data.desavantage" type="text" value="{{data.data.desavantage}}" placeholder="0"/-->
+			</div>
+			<div class="etat" style="margin-top: -10px;margin-left: -50px;">
+				<button class="etat0"></button>
+				<button class="etat1"></button>
+				<button class="etat2"></button>
+				<button class="etat3"></button>
+				<button class="etat4"></button>
+				<button class="etat5"></button>
+				<button class="etat6"></button>
+				<button class="etat7"></button>
+				<button class="etat8"></button>
+				<button class="etat9"></button>
+				<button class="etat10"></button>
+				<button class="etat11"></button>
+				<button class="etat12"></button>
+				<input class="etats" name="data.etat" type="text" value="{{data.data.etat}}" style="display:none"/>
+
+			</div>				
+				
+		</div>
+		
+
+	</header>
+	
+	{{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="carac">Caractère</a>
+        <a class="item" data-tab="features">Capacité</a>
+        <a class="item" data-tab="items">Inventaire</a>
+        <a class="item" data-tab="sante">Sante</a>
+    </nav>
+
+	{{!-- Sheet Body --}}
+	<section class="sheet-body">
+		{{!-- Biography Tab --}}
+	    <div id="description" class="tab description" data-group="primary" data-tab="description">
+	    	<h2>Histoire</h2>
+				<textarea class="histoire" name="data.histoire">{{data.data.histoire}}</textarea>
+				<input type="button" value="Histoire aléatoire" class="generator"  style="width:100%; margin-right:5px;margin-left:0px;">
+		</div>
+
+		{{!-- Carac Tab --}}
+		<div id="carac" class="tab carac" data-group="primary" data-tab="carac">
+			<h2>Caractère</h2>
+			<div class="flexrow">
+				<div class="grid-2col">
+		            <p><b>Résidence :</b><input class="residence" name="data.caractere.residence" type="text" value="{{data.data.caractere.residence}}" placeholder="Résidence"/><br>
+		            <b>Famille de sang :</b><input class="sang" name="data.caractere.sang" type="text" value="{{data.data.caractere.sang}}" placeholder="Famille de sang"/><br>
+		            <b>Famille politique /secte :</b><input class="secte" name="data.caractere.politique" type="text" value="{{data.data.caractere.politique}}" placeholder="politique"/><br>
+		            <b>Groupe d interets :</b><input class="interet" name="data.caractere.interets" type="text" value="{{data.data.caractere.interets}}" placeholder="interets"/><br>
+		            <b>Deces d'un proche :</b><input class="proche" name="data.caractere.deces" type="text" value="{{data.data.caractere.deces}}" placeholder="deces"/><br>
+		            <b>Sens Moral/valeur :</b><input class="moral" name="data.caractere.moral" type="text" value="{{data.data.caractere.moral}}" placeholder="moral"/><br>
+		            <b>Amour :</b><input class="amour" name="data.caractere.amour" type="text" value="{{data.data.caractere.amour}}" placeholder="amour"/><br>
+		            <b>Amitie :</b><input class="amitie" name="data.caractere.amitie" type="text" value="{{data.data.caractere.amitie}}" placeholder="amitie"/><br>
+		            <b>Haine :</b><input class="haine" name="data.caractere.haine" type="text" value="{{data.data.caractere.haine}}" placeholder="haine"/><br>
+		            <b>Activite principale :</b><input class="principale" name="data.caractere.principale" type="text" value="{{data.data.caractere.principale}}" placeholder="principale"/></p>
+		        </div>
+		        <div class="grid-2col">
+		            <p><b>Activite secondaire :</b><input class="secondaire" name="data.caractere.secondaire" type="text" value="{{data.data.caractere.secondaire}}" placeholder="secondaire"/><br>
+		            <b>Passion :</b><input class="passion" name="data.caractere.passion" type="text" value="{{data.data.caractere.passion}}" placeholder="passion"/><br>
+		            <b>Caractere :</b><input class="caractere" name="data.caractere.caract" type="text" value="{{data.data.caractere.caract}}" placeholder="caractere"/><br>
+		            <b>Personnalite :</b><input class="personnalite" name="data.caractere.personnalite" type="text" value="{{data.data.caractere.personnalite}}" placeholder="personnalite"/><br>
+		            <b>Perception du monde :</b><input class="monde" name="data.caractere.perception" type="text" value="{{data.data.caractere.perception}}" placeholder="perception"/><br>
+		            <b>Objectif :</b><input class="objectif" name="data.caractere.objectif" type="text" value="{{data.data.caractere.objectif}}" placeholder="objectif"/><br>
+		            <b>Rancunier :</b><input class="rancunier" name="data.caractere.rancunier" type="text" value="{{data.data.caractere.rancunier}}" placeholder="rancunier"/><br>
+		            <b>Tare mentale :</b><input class="tare" name="data.caractere.tare" type="text" value="{{data.data.caractere.tare}}" placeholder="tare"/><br>
+		            <b>Obsession :</b><input class="obsession" name="data.caractere.obsession" type="text" value="{{data.data.caractere.obsession}}" placeholder="obsession"/><br>
+		            <b>Distingue le bien du mal :</b><input class="distingue" name="data.caractere.distingue" type="text" value="{{data.data.caractere.distingue}}" placeholder="distingue"/></p>
+		        </div>       
+		    </div>
+		    <input type="button" value="Générer" class="caractergen" style="width: 40%;padding: 3px;float: right;margin: 3px;">
+		</div>
+
+		
+			
+
+		{{!-- Features Tab --}}
+		<div id="features" class="tab features"  data-group="primary" data-tab="features">
+			<h2>Capacité</h2>
+				<div class="flexrow">
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Agilité}}">Agilité</label></p>
+					<input class="cpt0" name="data.Agilité" type="text" value="{{data.data.Agilité}}" placeholder="{{data.data.Agilité}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Artisanat" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Artisanat}}">Artisanat</label></p>
+					<input class="cpt1" name="data.Artisanat" type="text" value="{{data.data.Artisanat}}" placeholder="{{data.data.Artisanat}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Balistique" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Balistique}}">Balistique</label></p>
+					<input class="cpt2" name="data.Balistique" type="text" value="{{data.data.Balistique}}" placeholder="{{data.data.Balistique}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Combat" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Combat}}">Combat</label></p>
+					<input class="cpt3" name="data.Combat" type="text" value="{{data.data.Combat}}" placeholder="{{data.data.Combat}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="ConGén" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.ConGén}}">ConGén</label></p>
+					<input class="cpt4" name="data.ConGén" type="text" value="{{data.data.ConGén}}" placeholder="{{data.data.ConGén}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.ConSpécif}}">ConSpécif</label></p>
+					<input class="cpt5" name="data.ConSpécif" type="text" value="{{data.data.ConSpécif}}" placeholder="{{data.data.ConSpécif}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Dextérité" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Dextérité}}">Dextérité</label></p>
+					<input class="cpt6" name="data.Dextérité" type="text" value="{{data.data.Dextérité}}" placeholder="{{data.data.Dextérité}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Diplomatie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Diplomatie}}">Diplomatie</label></p>
+					<input class="cpt7" name="data.Diplomatie" type="text" value="{{data.data.Diplomatie}}" placeholder="{{data.data.Diplomatie}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Discrétion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Discrétion}}">Discrétion</label></p>
+					<input class="cpt8" name="data.Discrétion" type="text" value="{{data.data.Discrétion}}" placeholder="{{data.data.Discrétion}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Force" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Force}}">Force</label></p>
+					<input class="cpt9" name="data.Force" type="text" value="{{data.data.Force}}" placeholder="{{data.data.Force}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Investigation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Investigation}}">Investigation</label></p>
+					<input class="cpt10" name="data.Investigation" type="text" value="{{data.data.Investigation}}" placeholder="{{data.data.Investigation}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Jeu" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Jeu}}">Jeu</label></p>
+					<input class="cpt11" name="data.Jeu" type="text" value="{{data.data.Jeu}}" placeholder="{{data.data.Jeu}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Mécanique" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Mécanique}}">Mécanique</label></p>
+					<input class="cpt12" name="data.Mécanique" type="text" value="{{data.data.Mécanique}}" placeholder="{{data.data.Mécanique}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Médecine" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Médecine}}">Médecine</label></p>
+					<input class="cpt13" name="data.Médecine" type="text" value="{{data.data.Médecine}}" placeholder="{{data.data.Médecine}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Natation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Natation}}">Natation</label></p>
+					<input class="cpt14" name="data.Natation" type="text" value="{{data.data.Natation}}" placeholder="{{data.data.Natation}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Navigation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Navigation}}">Navigation</label></p>
+					<input class="cpt15" name="data.Navigation" type="text" value="{{data.data.Navigation}}" placeholder="{{data.data.Navigation}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Négociation" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Négociation}}">Négociation</label></p>
+					<input class="cpt16" name="data.Négociation" type="text" value="{{data.data.Négociation}}" placeholder="{{data.data.Négociation}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Perception" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Perception}}">Perception</label></p>
+					<input class="cpt17" name="data.Perception" type="text" value="{{data.data.Perception}}" placeholder="{{data.data.Perception}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Pilotage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Pilotage}}">Pilotage</label></p>
+					<input class="cpt18" name="data.Pilotage" type="text" value="{{data.data.Pilotage}}" placeholder="{{data.data.Pilotage}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Piratage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Piratage}}">Piratage</label></p>
+					<input class="cpt19" name="data.Piratage" type="text" value="{{data.data.Piratage}}" placeholder="{{data.data.Piratage}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Pistage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Pistage}}">Pistage</label></p>
+					<input class="cpt20" name="data.Pistage" type="text" value="{{data.data.Pistage}}" placeholder="{{data.data.Pistage}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Religion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Religion}}">Religion</label></p>
+					<input class="cpt21" name="data.Religion" type="text" value="{{data.data.Religion}}" placeholder="{{data.data.Religion}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Science" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Science}}">Science</label></p>
+					<input class="cpt22" name="data.Science" type="text" value="{{data.data.Science}}" placeholder="{{data.data.Science}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Survie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Survie}}">Survie</label></p>
+					<input class="cpt23" name="data.Survie" type="text" value="{{data.data.Survie}}" placeholder="{{data.data.Survie}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Tir}}">Tir</label></p>
+					<input class="cpt24" name="data.Tir" type="text" value="{{data.data.Tir}}" placeholder="{{data.data.Tir}}" style="text-align: center"/>
+					</div>
+					<div class="grid-4col"><p style="text-align: center"><label class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Visée}}">Visée</label></p>
+					<input class="cpt25" name="data.Visée" type="text" value="{{data.data.Visée}}" placeholder="{{data.data.Visée}}" style="text-align: center"/>
+					</div>
+				</div>
+				<div class="flexrow">
+					<div class="grid-3col">
+						<h2>Point restant</h2>
+						<input class="pointrestant" type="text" style="width:calc(100% - 40px)" value="" readonly/>
+					</div>
+					<div class="grid-3col">
+					</div>
+					<div class="grid-3col">
+						<h2>Bonus Compétence</h2>
+							<input class="bonusactor" name="data.bonus" type="text" value="{{data.data.bonus}}" placeholder="0" style="width:calc(100% - 40px)" /><button class="desequi resetbonus">🗑</button>
+					</div>
+				</div>
+				                    	    
+		</div>
+
+		
+
+		{{!-- Items Tab --}}
+		<div id="items" class="tab items" data-group="primary" data-tab="items">
+			<h2>Armes équipé</h2>
+			<div class="flexrow">
+				<div class="col2" style="text-align: center" class="unemain">
+					<h3>Main gauche</h3>
+					<input class="maingaucequi" name="data.armeg" type="text" value="{{data.data.armeg}}" placeholder="Main Gauche" readonly="" /><button class="desequi maingdes">🗑</button>
+					<input class="degatg" name="data.degatg" type="text" data-name="{{data.data.armeg}}" value="{{data.data.degatg}}" data-dice="{{data.data.degatg}}" placeholder="Dégat" readonly="" />
+					<h2>Armure</h2>
+					<input  class="armurequi" name="data.prog" type="text" value="{{data.data.prog}}" placeholder="Armure" readonly="" /><button class="desequi armordes">🗑</button>
+				</div>
+				<div class="col2" style="text-align: center">
+					<h3 class="deuxmains">Main droite</h3>
+					<input class="maindroiequi" name="data.armed" type="text" value="{{data.data.armed}}" placeholder="Main droite" readonly="" /><button class="desequi mainddes">🗑</button>
+					<input class="degatd" name="data.degatd" type="text" data-name="{{data.data.armed}}" value="{{data.data.degatd}}" data-dice="{{data.data.degatd}}" placeholder="Dégat" readonly="" />
+					<h2>Bouclier</h2>
+					<input  class="bouclierqui" name="data.prod" type="text" value="{{data.data.prod}}" placeholder="Armure" readonly="" /><button class="desequi bouclierdes">🗑</button>
+				</div>
+			</div>
+			<h2>Armes</h2>
+			<table>
+				<ol class="items-list">
+	                <li class="item flexrow item-header">
+	                  <div class="item-image"></div>
+	                  <div class="item-name">Nom</div>
+	                  <div class="item-name">Type</div>
+	                  <div class="item-description">Description</div>               
+	                  <div class="item-portee">Portée</div>
+	                  <div class="item-dommage">Dommage</div>
+	                  <div class="item-poids">Poids</div>
+	                  <div class="item-valeur">Valeur</div>
+	                  <div class="item-hand">Techno</div>
+	                  <div class="item-qty">Quantite</div>
+	                  <div class="item-hand">Equipé</div>	                  
+	                  <div class="item-controls">
+	                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+	                  </div>
+	                </li>
+	            {{#each actor.arme as |item id|}}
+	                <li class="item flexrow" data-item-id="{{item._id}}">
+	                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+	                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+	                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
+	                    <h4 class="item-description" title="{{item.data.description}}">{{item.data.description}}</h4>
+	                    <h4 class="item-portee">{{item.data.portee}}</h4>
+	                    <!--h4 class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.data.degat}}">{{item.data.degats}}</h4-->
+	                    <h4 class="item-dommage">{{item.data.degats}}</h4>
+	                    <h4 class="item-poid">{{item.data.poids}}</h4>
+	                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
+	                    <h4 class="item-techno">{{item.data.techno}}</h4>
+	                    <h4 class="item-qt">{{item.data.quantite}}</h4>
+	                    <h4 class="item-hand"><span class="maingauche" title="main gauche" name="{{item.name}}" degat="{{item.data.degats}}"></span><span class="maindroite" title="main droite" name="{{item.name}}" degat="{{item.data.degats}}"></span></h4>
+	                    <div class="item-controls">
+
+	                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+	                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+	                    </div>
+	                </li>
+	            {{/each}}
+        		</ol>
+		    </table>
+
+		    <h2>Armures</h2>
+			<table>
+				<ol class="items-list">
+	                <li class="item flexrow item-header">
+	                  <div class="item-image"></div>
+	                  <div class="item-name">Nom</div>
+	                  <div class="item-name">Type</div>
+	                  <div class="item-description">Description</div>               
+	                  <div class="item-resitance">Resistance</div>
+	                  <div class="item-hpmax">PV</div>
+	                  <div class="item-poids">Poids</div>
+	                  <div class="item-valeur">Valeur</div>
+	                  <div class="item-techno">Techno</div>
+	                  <div class="item-qty">Quantite</div>
+	                  <div class="item-hand">Equipé</div>
+	                  <div class="item-controls">
+	                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+	                  </div>
+	                </li>
+	            {{#each actor.armure as |item id|}}
+	                <li class="item flexrow" data-item-id="{{item._id}}">
+	                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+	                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+	                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
+	                    <h4 class="item-description" title="{{item.data.description}}">{{item.data.description}}</h4>
+	                    <h4 class="item-resitance">{{item.data.resitance}}</h4>
+	                    <!--h4 class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.data.degat}}">{{item.data.degats}}</h4-->
+	                    <h4 class="item-hpmax">{{item.data.hp.max}}</h4>
+	                    <h4 class="item-poid">{{item.data.poids}}</h4>
+	                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
+	                    <h4 class="item-techno">{{item.data.techno}}</h4>
+	                    <h4 class="item-qt">{{item.data.quantite}}</h4>
+	                    <h4 class="item-hand">
+	                    	<span class="armor" title="Armure" name="{{item.name}}" ></span>
+	                    	<span class="boucl" title="Bouclier" name="{{item.name}}" ></span></h4>
+	                    <div class="item-controls">
+
+	                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+	                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+	                    </div>
+	                </li>
+	            {{/each}}
+        		</ol>
+		    </table>
+
+
+			<h2>Inventaire</h2>
+			<table>
+				<ol class="items-list">
+	                <li class="item flexrow item-header">
+	                  <div class="item-image"></div>
+	                  <div class="item-name">Nom</div>
+	                  <div class="item-name">Type</div>
+	                  <div class="item-description">Description</div>               
+	                  <div class="item-poids">Poids</div>
+	                  <div class="item-valeur">Valeur</div>
+	                  <div class="item-techno">Techno</div>
+	                  <div class="item-qty">Quantite</div>
+	                  <div class="item-controls">
+	                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+	                  </div>
+	                </li>
+	            {{#each actor.inventaire as |item id|}}
+	                <li class="item flexrow" data-item-id="{{item._id}}">
+	                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+	                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+	                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
+	                    <h4 class="item-description" title="{{item.data.description}}">{{item.data.description}}</h4>
+	                    <h4 class="item-poid">{{item.data.poids}}</h4>
+	                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
+	                    <h4 class="item-techno">{{item.data.techno}}</h4>
+	                    <h4 class="item-qt">{{item.data.quantite}}</h4>
+	                    <div class="item-controls">
+
+	                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+	                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+	                    </div>
+	                </li>
+	            {{/each}}
+        		</ol>
+		    </table>
+		</div>
+
+		{{!-- Sante Tab --}}
+		<div id="sante" class="tab sante" data-group="primary" data-tab="sante">
+			<h1 style="text-align: center;">Dégâts subits par zone</h1>
+			<div class="santes">
+				<div class="zone tete">
+					<div class="bar" style="width:calc(120px - {{data.data.tete}}0px); background:green;"></div>
+					<input name="data.tete" type="text" value="{{data.data.tete}}" placeholder="Tete"/>
+				</div>
+				<div class="zone bd">
+					<div class="bar" style="width:calc(120px - {{data.data.bd}}0px); background:green;"></div>
+					<input name="data.bd" type="text" value="{{data.data.bd}}" placeholder="bd" style=""/>
+				</div>
+				<div class="zone torse">
+					<div class="bar" style="width:calc(120px - {{data.data.torse}}0px); background:green;"></div>
+					<input name="data.torse" type="text" value="{{data.data.torse}}" placeholder="torse"/>
+				</div>
+				<div class="zone bg">
+					<div class="bar" style="width:calc(120px - {{data.data.bg}}0px); background:green;"></div>
+					<input name="data.bg" type="text" value="{{data.data.bg}}" placeholder="bg"/>
+				</div>
+				<div class="zone jd">
+					<div class="bar" style="width:calc(120px - {{data.data.jd}}0px); background:green;"></div>
+					<input name="data.jd" type="text" value="{{data.data.jd}}" placeholder="jb"/>
+				</div>
+				<div class="zone jg">
+					<div class="bar" style="width:calc(120px - {{data.data.jg}}0px); background:green;"></div>
+					<input name="data.jg" type="text" value="{{data.data.jg}}" placeholder="jg"/>
+				</div>
+			</div>
+			<div style="position: relative;width: 200px; height: 50px;float: right;top: -400px;">
+				<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="width:100%">
+			</div>
+		</div>
+
+	</section>
+</form>

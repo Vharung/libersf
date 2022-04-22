@@ -23,12 +23,12 @@
                 "avantage":0,
                 "desavantage":0,
                 "solit":0,
-                "tete":100,
-                "bd":100,
-                "torse":100,
-                "bg":100,
-                "jd":100,
-                "jg":100,
+                "tete":0,
+                "bd":0,
+                "torse":0,
+                "bg":0,
+                "jd":0,
+                "jg":0,
                 "encombrement": {
                   "value": 0,
                   "max": 0
@@ -146,7 +146,8 @@
             "bouclier",
             "objet",
             "piece",
-            "planete"
+            "planete",
+            "argent"
         ],
         "arme": {
             "description": "",
@@ -191,6 +192,11 @@
             "techno":"☆ ☆ ☆ ☆ ☆",
             "valeur":"10",
             "quantite":"1"
+        },
+        "argent": {
+            "poids":"0",
+            "valeur":"1",
+            "quantite":"0"
         },
         "piece": {
             "description": "",

@@ -1,0 +1,24 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div id="pj-titre" class="objet">
+        <div class="flexrow">
+            <div class="grid-2col" style="max-width: 134px;">
+                <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="128" width="128"/>
+            </div>
+            <div class="grid-2col">
+                <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+            </div>
+        </div>
+    </div>  
+    <div class="flexrow objet">
+        <div class="grid-2col">
+            <label>Valeur
+                <input name="data.valeur" type="text" value="{{data.data.valeur}}" placeholder="Valeur" readonly="" />
+            </label>
+        </div>
+        <div class="grid-2col">
+            <label>Quantité
+                <input name="data.quantite" type="text" value="{{data.data.quantite}}" placeholder="Valeur"/>
+            </label>
+        </div>
+    </div>
+</form>
