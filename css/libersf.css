@@ -129,5 +129,5 @@ form.Liber{display: table-cell;}
 .Liber .armcl,.Liber .boucl,.Liber .viecl{margin-left: 10px;padding-top: 15px;}
 .Liber .armcl{background: url("../assets/icon/armure.png")no-repeat left center;background-size: contain; }
 .Liber .boucl{background: url("../assets/icon/bouclier.png")no-repeat left center; background-size: contain;}
-.Liber .viecl{background: url("../assets/icon/vie.png")no-repeat left center;color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
+.Liber .viecl{background: url("../assets/icon/vie.png")no-repeat left center;background-size: contain;color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
 .Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}

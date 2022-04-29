@@ -96,12 +96,19 @@ export class LiberActorSheet extends ActorSheet {
             li.slideUp(200, () => this.render(false));
         });
 
+        html.find('.item-create').click(ev => {
+            event.preventDefault();
+            const dataType=$(ev.currentTarget).data('type');
+            const name = `New ${dataType.capitalize()}`;
+            this.actor.createEmbeddedDocuments('Item', [{ name: name, type: dataType }], { renderSheet: true })
+        });
+
 
         var actarm=html.find('.actarm').val();
         var actbou=html.find('.actbou').val();
         actarm=Math.floor(parseInt(actarm)/2);
         actbou=Math.floor(parseInt(actbou)/2);
-        console.log('ptarm:'+actarm);
+        //console.log('ptarm:'+actarm);
         html.find('.ptarm').html(actarm);
         html.find('.ptbou').html(actbou);
 
@@ -200,7 +207,8 @@ export class LiberActorSheet extends ActorSheet {
         var metier=html.find('.metier').val();
         var race=html.find('.race').val();
         var ptrestant=html.find('.pointrestant').val();
-        var resultat=-20;
+        var level=html.find('.niveau').val();
+        var resultat=-20-((parseInt(level)-1)*10);
         for(i=0;i<26;i++){
             if(race=="Humain" && i==6){
                 var controle= html.find('.cpt'+i).val();
@@ -592,7 +600,7 @@ export class LiberActorSheet extends ActorSheet {
 
         html.find( ".compt input" ).each(function() {
               var valor= $( this ).val();
-              console.log(valor)
+              //console.log(valor)
               if(valor==0){
                 $( this ).css({"background":"transparent","color": "#fff"});
               }else if(valor>0){
@@ -690,7 +698,7 @@ export class LiberActorSheet extends ActorSheet {
 
         let monJetDeDes = event.target.dataset["dice"];
         const name = event.target.dataset["name"];
-        console.log(monJetDeDes);
+        //console.log(monJetDeDes);
         let r = new Roll(monJetDeDes);
         var roll=r.evaluate({"async": false});;
         const texte = "Utilise " + name + " : " + monJetDeDes;
