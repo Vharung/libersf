@@ -108,7 +108,7 @@
 					<div class="compt"><button class="jetdedes" data-name="Diplomatie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Diplomatie}}">{{localize 'libersf.dipl'}}</button>
 					<input class="cpt7" name="data.Diplomatie" type="text" value="{{data.data.Diplomatie}}" placeholder="{{data.data.Diplomatie}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Discrétion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Discrétion}}">{{localize 'libersf.a'}}Discrétion</button>
+					<div class="compt"><button class="jetdedes" data-name="Discrétion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Discrétion}}">{{localize 'libersf.disc'}}</button>
 					<input class="cpt8" name="data.Discrétion" type="text" value="{{data.data.Discrétion}}" placeholder="{{data.data.Discrétion}}" style="text-align: center"/>
 					</div>
 					<div class="compt"><button class="jetdedes" data-name="Force" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Force}}">{{localize 'libersf.forc'}}</button>
@@ -147,10 +147,10 @@
 					<div class="compt"><button class="jetdedes" data-name="Pistage" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Pistage}}">{{localize 'libersf.pist'}}</button>
 					<input class="cpt20" name="data.Pistage" type="text" value="{{data.data.Pistage}}" placeholder="{{data.data.Pistage}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Religion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Religion}}">{{localize 'libersf.a'}}Religion</button>
+					<div class="compt"><button class="jetdedes" data-name="Religion" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Religion}}">{{localize 'libersf.reli'}}</button>
 					<input class="cpt21" name="data.Religion" type="text" value="{{data.data.Religion}}" placeholder="{{data.data.Religion}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Science" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Science}}">{{localize 'libersf.a'}}Science</button>
+					<div class="compt"><button class="jetdedes" data-name="Science" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Science}}">{{localize 'libersf.scie'}}</button>
 					<input class="cpt22" name="data.Science" type="text" value="{{data.data.Science}}" placeholder="{{data.data.Science}}" style="text-align: center"/>
 					</div>
 					<div class="compt"><button class="jetdedes" data-name="Survie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Survie}}">{{localize 'libersf.surv'}}</button>
@@ -210,6 +210,25 @@
 							<input  class="bouclierqui" name="data.prod" type="text" value="{{data.data.prod}}" placeholder="Armure" readonly="" /><button class="desequi bouclierdes">🗑</button>
 						</div>
 					</div>
+					<ol class="items-list">
+					{{#each actor.argent as |item id|}}
+			                <li class="item rexrow" data-item-id="{{item._id}}">
+			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+			                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+			                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
+			                    <h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4>
+			                    <h4 class="item-poid">{{item.data.poids}}</h4>
+			                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
+			                    <h4 class="item-techno">{{item.data.techno}}</h4>
+			                    <h4 class="item-qt">{{item.data.quantite}}</h4>
+			                    <div class="item-controls">
+
+			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+			                    </div>
+			                </li>
+			            {{/each}}
+			        </ol>    
 					<div style="overflow: auto;height: 610px;">
 						<h2 style="margin-top: 20px">{{localize 'libersf.armes'}}</h2>
 						<ol class="items-list">
