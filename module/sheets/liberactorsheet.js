@@ -20,15 +20,15 @@ export class LiberActorSheet extends ActorSheet {
         var poidsactor='';
         data.dtypes = ["String", "Number", "Boolean"];
         console.log(data);        
-		if (this.actor.data.type == 'personnage' || this.actor.data.type == 'pnj' || this.actor.data.type == 'monstre' | this.actor.data.type == 'vehicule') {
-			this._prepareCharacterItems(data);
-		}
+        if (this.actor.data.type == 'personnage' || this.actor.data.type == 'pnj' || this.actor.data.type == 'monstre' | this.actor.data.type == 'vehicule') {
+            this._prepareCharacterItems(data);
+        }
         console.log(data);
         return data;
     }
 
    
-	_prepareCharacterItems(sheetData) {
+    _prepareCharacterItems(sheetData) {
         const actorData = sheetData.actor;
 
         // Initialize containers.
@@ -118,7 +118,7 @@ export class LiberActorSheet extends ActorSheet {
             var metierliste=html.find('.metierliste').val();
             var metier=html.find('.metier').val();
             var race=html.find('.race').val();
-            for(i=0;i<26;i++){
+            for(i=0;i<27;i++){
                 html.find('.cpt'+i).val(0);
                 html.find('.cpt'+i).css({"background":"transparent","color": "white"});
             }
@@ -164,7 +164,7 @@ export class LiberActorSheet extends ActorSheet {
                 html.find('.cpt'+i).css({"background":"transparent","color": "#000"});
             }
 
-            if(clanliste=="Humain"){html.find('.cpt6').val(10);}
+            /*if(clanliste=="Humain"){html.find('.cpt6').val(10);}
             else if(clanliste=="Arthuriens"){html.find('.cpt4').val(10);}
             else if(clanliste=="Alpha Draconiens"){html.find('.cpt9').val(10);}
             else if(clanliste=="Machine"){html.find('.cpt19').val(10);}
@@ -182,7 +182,7 @@ export class LiberActorSheet extends ActorSheet {
             else if(metier=="Médecin"){html.find('.cpt13').val(10);}
             else if(metier=="Militaire"){html.find('.cpt24').val(10);}
             else if(metier=="Mécanicien"){html.find('.cpt12').val(10);}
-            html.find('.metier').val(metierliste);
+            html.find('.metier').val(metierliste);*/
             
             $( ".features input" ).each(function( index ) {
               var valor= $( this ).val();
@@ -209,92 +209,93 @@ export class LiberActorSheet extends ActorSheet {
         var ptrestant=html.find('.pointrestant').val();
         var level=html.find('.niveau').val();
         var resultat=-20-((parseInt(level)-1)*10);
+        var min=-20;
         for(i=0;i<26;i++){
             if(race=="Humain" && i==6){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(race=="Arthuriens" && i==4){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(race=="Alpha Draconiens" && i==9){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(race=="Machine" && i==19){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(race=="Pleiadiens" && i==20){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(race=="Yoribiens" && i==17){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(race=="Elfen" && i==0){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(race=="Orquanien" && i==3){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }
             if(metier=="Artisans" && i==1){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Commerce" && i==16){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Colon" && i==23){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Intellectuel" && i==10){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Malandrins" && i==8){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Pilote" && i==18){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Médecin" && i==13){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Militaire" && i==24){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }else if(metier=="Mécanicien" && i==12){
                 var controle= html.find('.cpt'+i).val();
-                if(controle<10){
-                    html.find('.cpt'+i).val(10);
+                if(controle<min){
+                    html.find('.cpt'+i).val(min);
                 }
             }
             var valor=parseInt(html.find('.cpt'+i).val());
@@ -581,6 +582,12 @@ export class LiberActorSheet extends ActorSheet {
         var blindage=html.find(".blindagemax").val();
         var pourcent=parseInt(blind)*100/parseInt(blindage);
         html.find(".blinder .bar").css({'width':pourcent+'%'});
+        var andro=html.find('.andomedes').val();
+        if(andro=='oui'){
+            html.find(".andromede").css({'display':'block'});
+        }else{
+            html.find(".andromede").css({'display':'none'});
+        }
         html.find(".blindage").val(blind);
         for (var i=0; i<4; i++) {
             var min=html.find(".min"+i).val();
@@ -647,11 +654,11 @@ export class LiberActorSheet extends ActorSheet {
 
         var critique=5;
         if(bonus=='' || bonus ==undefined){
-	       	bonus=0;
-	    }
+            bonus=0;
+        }
         let inforesult=parseInt(maxstat)+parseInt(bonus)+30;
         if(inforesult>95){
-       		inforesult=95;
+            inforesult=95;
         }
 
 
@@ -659,29 +666,29 @@ export class LiberActorSheet extends ActorSheet {
         var roll=r.evaluate({"async": false});;
         let retour=r.result; var succes="";
         if(name=="Tir"){
-        	if(retour>95){
-        		succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Arme Inutilisable</h4>";
-        	}else if(retour>(inforesult+20)){
-        		succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>L'arme est enrayé pour 1 tour</h4>";
-        	}else if(retour>inforesult){
-        		succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Raté</h4>";
-        	}else if(retour>(inforesult-20)){
-        		succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>La cible est touché</h4>";
-        	}else if(retour>critique){
-        		succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x1.5</h4>";
-        	}else if(retour<=critique){
-        		succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x2</h4>";
-        	}
+            if(retour>95){
+                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Arme Inutilisable</h4>";
+            }else if(retour>(inforesult+20)){
+                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>L'arme est enrayé pour 1 tour</h4>";
+            }else if(retour>inforesult){
+                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Raté</h4>";
+            }else if(retour>(inforesult-20)){
+                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>La cible est touché</h4>";
+            }else if(retour>critique){
+                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x1.5</h4>";
+            }else if(retour<=critique){
+                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x2</h4>";
+            }
         }else {
-        	if(retour>95){
-	            succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec critique</h4>";
-	        }else if(retour<=critique){
-	            succes="<h4 class='result' style='background:#7dff33;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Réussite critique</h4>";
-	        }else if(retour<=inforesult){
-	            succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Réussite</h4>";
-	        }else{
-	            succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec</h4>";
-	        }
+            if(retour>95){
+                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec critique</h4>";
+            }else if(retour<=critique){
+                succes="<h4 class='result' style='background:#7dff33;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Réussite critique</h4>";
+            }else if(retour<=inforesult){
+                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Réussite</h4>";
+            }else{
+                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec</h4>";
+            }
         }
         
         if(inforesult<=0){

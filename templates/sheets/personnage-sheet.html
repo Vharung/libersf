@@ -33,6 +33,7 @@
 			<div class="rexrow stat">
 				<div class="grid-2col">
 					<p><span class="deno">❤ {{localize 'libersf.vie'}}</span><input class="hp" name="data.hp.value" type="text" value="{{data.data.hp.value}}" placeholder="10" style="width: 40px;"/><input class="hpmax" name="data.hp.max" type="text" value="{{data.data.hp.max}}" placeholder="10" style="width: 40px;"/>
+					<span class="deno andromede">☀ {{localize 'libersf.psy'}}</span><input class="psy andromede" name="data.psy.value" type="text" value="{{data.data.psy.value}}" placeholder="10" style="width: 40px;"/><input class="psymax andromede" name="data.hp.psy" type="text" value="{{data.data.hp.psy}}" placeholder="10" style="width: 40px;"/></p>
 				</div>
 				<div class="grid-2col">
 					<p><span class="deno">⛉ {{localize 'libersf.armure'}}</span><input class="actarm" name="data.armure.value" type="text" value="{{data.data.armure.value}}" placeholder="0"/><input class="actarmmax" name="data.armure.max" type="text" value="{{data.data.armure.max}}" placeholder="0"/>
@@ -53,6 +54,7 @@
 					<button class="etat10"></button>
 					<button class="etat11"></button>
 					<button class="etat12"></button>
+					<button class="etat13"></button>
 					<input class="etats" name="data.etat" type="text" value="{{data.data.etat}}" style="display:none"/>
 
 				</div>
@@ -161,6 +163,9 @@
 					</div>
 					<div class="compt"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Visée}}">{{localize 'libersf.vise'}}</button>
 					<input class="cpt25" name="data.Visée" type="text" value="{{data.data.Visée}}" placeholder="{{data.data.Visée}}" style="text-align: center"/>
+					</div>
+					<div class="compt  andromede"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Visée}}">{{localize 'libersf.psy'}}</button>
+					<input class="cpt26" name="data.magie" type="text" value="{{data.data.magie}}" placeholder="{{data.data.magie}}" style="text-align: center"/>
 					</div>
 					<div class="clear"></div>
 					<div class="grid-2col" style="margin-top: 20px">
@@ -413,7 +418,13 @@
 		                {{/select}}
 	                </SELECT>
 	                <input type="button" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
-						
+	                <h2 style="margin-top: 20px">Andomède</h2>
+					<SELECT class="andomedes" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.andomedes">
+	                    {{#select data.data.andomedes}}
+		                    <option value="non">Non</option>
+		                    <option value="oui">oui</option>
+		                {{/select}}
+	                </SELECT>					
 					
 				</div>
 			</section>

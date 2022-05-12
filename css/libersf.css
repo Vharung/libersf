@@ -92,7 +92,7 @@ form.Liber{display: table-cell;}
 .Liber input.insoin{background:url("../assets/icon/pvi.png")left center no-repeat;background-size: contain;}
 .Liber input.avant{background:url("../assets/icon/avantage.png")left center no-repeat;background-size: contain;}
 .Liber input.desan{background:url("../assets/icon/avantage-2.png")left center no-repeat;background-size: contain;}
-.Liber .etat button{width: 37px;height: 37px;border:none;opacity: 0.5;margin-top: 20px;margin-bottom: 20px}
+.Liber .etat button{width: 35px;height: 35px;border:none;opacity: 0.5;margin-top: 20px;margin-bottom: 20px}
 .Liber .etat0 {background: url(" ../assets/icon/etat-0.png");background-size: cover;margin-left: 20px;}
 .Liber .etat1 {background: url(" ../assets/icon/etat-1.png");background-size: cover;}
 .Liber .etat2 {background: url(" ../assets/icon/etat-2.png");background-size: cover;}
@@ -106,6 +106,7 @@ form.Liber{display: table-cell;}
 .Liber .etat10 {background: url(" ../assets/icon/etat-10.png");background-size: cover;}
 .Liber .etat11 {background: url(" ../assets/icon/etat-11.png");background-size: cover;}
 .Liber .etat12 {background: url(" ../assets/icon/aucune.png");background-size: cover;}
+.Liber .etat13 {background: url(" ../assets/icon/etat-12.png");background-size: cover;}
 .Liber .maindroite,.Liber .maingauche,.Liber .armor{width: 20px; height: 20px; display: inline-block;cursor: pointer;}
 .Liber .maindroite {background: url(" ../assets/icon/hand.png");background-size: cover;}
 .Liber .maingauche {background: url(" ../assets/icon/hand2.png");background-size: cover;}
