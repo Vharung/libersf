@@ -2,7 +2,7 @@
     "name": "libersf",
     "title": "liber SF ",
     "description": "The libersf SF  system for FoundryVTT!",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "minimumCoreVersion": "0.9",
     "compatibleCoreVersion": "0.9",
     "templateVersion": 2,
@@ -21,10 +21,37 @@
           "private": true
         },
         {
-          "name": "vehicule",
-          "label": "Véhicule",
+          "name": "vehicule_empire",
+          "label": "Véhicule Empire",
           "system": "libersf",
-          "path": "./pack/vehicule.db",
+          "path": "./pack/vehicules-empire.db",
+          "entity": "Actor",
+          "type": "Actor",
+          "private": true
+        },
+        {
+          "name": "vehicule_federation",
+          "label": "Véhicule Fédération",
+          "system": "libersf",
+          "path": "./pack/vehicule-federation.db",
+          "entity": "Actor",
+          "type": "Actor",
+          "private": true
+        },
+        {
+          "name": "vehicule_mafia",
+          "label": "Véhicule Mafia",
+          "system": "libersf",
+          "path": "./pack/vehicules-mafia.db",
+          "entity": "Actor",
+          "type": "Actor",
+          "private": true
+        },
+        {
+          "name": "vehicule_omc",
+          "label": "Véhicule OMC",
+          "system": "libersf",
+          "path": "./pack/vehicules-omc.db",
           "entity": "Actor",
           "type": "Actor",
           "private": true
