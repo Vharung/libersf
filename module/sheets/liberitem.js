@@ -75,4 +75,13 @@ export class LiberItem extends Item {
     //this._prepareCharacterData(itemData);
     //this._prepareNpcData(itemData);
   }
+
+  MunMoins(){
+    let itemData = this.data;
+    console.log(itemData)
+    let qty=itemData.data.quantite;
+    qty--;
+    console.log('qty'+qty)
+    this.update({'data.quantite':qty});
+  }
 }

@@ -693,55 +693,59 @@ export class LiberActorSheet extends ActorSheet {
             inforesult=95;
         }
 
-
+        if(name=="Tir"){
+            var arme = event.target.dataset["armed"];
+            var chargeur=this.actor.data.items.filter(i=>i.name == "Mun. "+arme);           
+            
+            if(chargeur.length === 0){
+                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Pas de chargeur !</h4>";
+                ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                    flavor: succes
+                  });
+                return;
+            }else if(munition<=0){
+                var munition=chargeur[0].data.data.quantite;
+                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Plus de munition !</h4>";
+                ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                    flavor: succes
+                  });
+                return;
+            } 
+        }
         let r = new Roll("1d100");
         var roll=r.evaluate({"async": false});;
         let retour=r.result; var succes="";
         if(name=="Tir"){
             var arme = event.target.dataset["armed"];
-            //game.actors.getName('BRENDON HADDOX (COPY)').items.filter(i=>i.name == "Photo")
-            var chargeur=this.actor.data.items.filter(i=>i.name == "Mun. "+arme);
             name+=" avec "+arme;
-            if(chargeur.length === 0){
-                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Plus de munition</h4>";
-            }else{
-                if(retour>95){
-                    succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Arme Inutilisable</h4>";
-                }else if(retour>(inforesult+20)){
-                    succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>L'arme est enrayé pour 1 tour</h4>";
-                }else if(retour>inforesult){
-                    succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Raté</h4>";
-                }else if(retour>(inforesult-20)){
-                    succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>La cible est touché</h4>";
-                }else if(retour>critique){
-                    succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x1.5</h4>";
-                }else if(retour<=critique){
-                    succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x2</h4>";
-                } 
+            var perte=0;
+            if(retour>95){
+                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Arme Inutilisable</h4>";
+            }else if(retour>(inforesult+20)){
+                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>L'arme est enrayé pour 1 tour</h4>";
+            }else if(retour>inforesult){
+                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Raté</h4>";
+            }else if(retour>(inforesult-20)){
+                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>La cible est touché</h4>";
+                perte=1;
+            }else if(retour>critique){
+                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x1.5</h4>";
+                perte=1;
+            }else if(retour<=critique){
+                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x2</h4>";
+                perte=1;
+            } 
+            if(perte==1){
+                let itemData= this.actor.data.items.filter(i=>i.name == "Mun. "+arme); 
+                var iditem= itemData[0].id;
+                var qty = itemData[0].data.data.quantite;
+                itemData[0].MunMoins()
             }
-            /*var json = [{"_id":"NAUreXFTBXm1MKje","name":"Pistolet léger","type":"arme","img":"systems/libersf/assets/icon/c1.jpg","data":{"description":"C par C (uniquement) - imprimante 3d possible","genre":"C","degats":"10","portee":"30","poids":"0.5","techno":"★ ☆ ☆ ☆ ☆","valeur":"50","quantite":"0","type":"C","reduc":"","hp":{"value":"","max":""}},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"exportSource":{"world":"libersf","system":"libersf","coreVersion":"0.8.9","systemVersion":"0.0.1"},"core":{"sourceId":"Compendium.world.armes.rb4mYWDdAuLEh0sz"}}},{"_id":"86hNF35vn9HUC7Fy","name":"Chargeur pour pistolet léger","type":"objet","img":"systems/libersf/assets/icon/cm.jpg","data":{"description":"","genre":"C","poids":"0.5","techno":"★ ☆ ☆ ☆ ☆","valeur":"5","quantite":"18"},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"core":{"sourceId":"Item.F0Zk8aTnAuKcrJF2"},"exportSource":{"world":"libersf","system":"libersf","coreVersion":"0.8.9","systemVersion":"0.0.1"}}},{"_id":"Kvizel97uMxcgN6o","name":"Armure légere","type":"armure","img":"systems/libersf/assets/icon/a1.jpg","data":{"description":"Peut-être équipé d'un module extra véhiculaire (spatial) pour 200Cr supplémentaire.","genre":"Armure","resitance":"6","hp":{"value":0,"max":"12"},"poids":"8","techno":"★ ★ ☆ ☆ ☆","valeur":"180","quantite":"1","protection":2},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"core":{"sourceId":"Item.p7eowYnlTbmTOah6"}}},{"_id":"q1xohZSwyPmalMQK","name":"Photo holographique","type":"objet","img":"icons/svg/item-bag.svg","data":{"description":"","genre":"","poids":"1","techno":"☆ ☆ ☆ ☆ ☆","valeur":"10","quantite":"1"},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"core":{"sourceId":"Item.0GHSaQT5gmnHXToI"}}},{"_id":"sepGp57Gzdi5A0Dm","name":"Crédit","type":"argent","img":"systems/libersf/assets/icon/o48.jpg","data":{"poids":"0","valeur":"1","quantite":"4880"},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"core":{"sourceId":"Item.WZcLLGsFZLpY9PQT"}}},{"_id":"d5jZqrfldJnigqyT","name":"Mitrailleuse Lourde","type":"arme","img":"systems/libersf/assets/icon/c8.jpg","data":{"description":"Automatique-Raflale-C par C - lourd","genre":"C","degats":"25","portee":"150","poids":"6","techno":"★ ☆ ☆ ☆ ☆","valeur":"250","quantite":"1","type":"C","reduc":"","hp":{"value":"","max":""}},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"exportSource":{"world":"libersf","system":"libersf","coreVersion":"0.8.9","systemVersion":"0.0.1"},"core":{"sourceId":"Compendium.libersf.arme.4sngFFnmSj0xNW5G"}}},{"_id":"FqTnruCAUoEKvdn9","name":"Téléporteur","type":"objet","img":"systems/libersf/assets/icon/o98.jpg","data":{"description":"Permet de se déplacer autour de soin - d'environ 200m","genre":"","poids":"3","techno":"★ ★ ☆ ☆ ☆","valeur":"20","quantite":"1"},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"core":{"sourceId":"Item.F0Zk8aTnAuKcrJF2"},"exportSource":{"world":"libersf","system":"libersf","coreVersion":"0.8.9","systemVersion":"0.0.1"}}},{"_id":"0SQE5HCtc0Ida86B","name":"Champ de force moyen","type":"bouclier","img":"systems/libersf/assets/icon/a7.jpg","data":{"description":"","genre":"Champ de force","resitance":"12","hp":{"value":0,"max":"24"},"poids":"1","techno":"★ ★ ★ ★ ☆","valeur":"360","quantite":"1","protection":2},"effects":[],"folder":null,"sort":0,"permission":{"default":0,"MTr7CmX80d565mou":3},"flags":{"core":{"sourceId":"Item.ZCKo8uH8IrS0Kkq8"}}}];
+        
 
-$.each(json, function(i, obj) {
- console.log(obj);
-});
-            var itemlist =this.actor.data.items;
-            console.log(itemlist)
-            for (var i = this.actor.data.items.length - 1; i >= 0; i--) {
-                console.log(this.actor.data.items[i])
-            }
-            $.each(itemlist, function (i, elem) {
-                 console.log(i);
-                /*if (elem.kind === 'playlist') {
-                    $.each(elem.tracks, function (i, elem) {
-                        console.log(elem.value);
-                    });
-                }
-            });*/
-
-            /*if(charger arme == 0) -> pas de charger
-            if charger =0 ->plus de numition*/
-            
-            /*charger -1 si tir réussi*/
+       
         }else {
             if(retour>95){
                 succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec critique</h4>";
