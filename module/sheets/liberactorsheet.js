@@ -87,7 +87,7 @@ export class LiberActorSheet extends ActorSheet {
             if(genre=="arme"){
                 html.find(".armed").val(objetaequipe);
                 html.find(".armed").attr('title',objetaequipe);
-                html.find(".comptir").attr("armed",objetaequipe);//bug lent à changer pour le tir
+                html.find(".comptir").attr("data-armed",objetaequipe);//bug lent à changer pour le tir
             }else if(genre=="Armure"){
                 html.find(".armurequi").val(objetaequipe);
                 html.find(".armurequi").attr('title',objetaequipe);
@@ -103,7 +103,7 @@ export class LiberActorSheet extends ActorSheet {
             if(genre=="arme"){
                 html.find(".armed").val('');
                 html.find(".armed").attr('title','');
-                html.find(".comptir").attr("armed",'');
+                html.find(".comptir").attr("data-armed",'');
             }else if(genre=="armure"){
                 html.find(".armurequi").val('');
                 html.find(".armurequi").attr('title','');
@@ -704,8 +704,9 @@ export class LiberActorSheet extends ActorSheet {
                     flavor: succes
                   });
                 return;
-            }else if(munition<=0){
-                var munition=chargeur[0].data.data.quantite;
+            }
+            var munition=chargeur[0].data.data.quantite;
+            if(munition<=0){   
                 succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Plus de munition !</h4>";
                 ChatMessage.create({
                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -727,6 +728,7 @@ export class LiberActorSheet extends ActorSheet {
                 succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>L'arme est enrayé pour 1 tour</h4>";
             }else if(retour>inforesult){
                 succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Raté</h4>";
+                perte=1;
             }else if(retour>(inforesult-20)){
                 succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>La cible est touché</h4>";
                 perte=1;
