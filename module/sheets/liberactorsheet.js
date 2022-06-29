@@ -343,6 +343,9 @@ export class LiberActorSheet extends ActorSheet {
             $( this ).css({"background":"#a51b1b","color": "white"});
           }
         });
+        var hpmax=html.find('.hpmax').val();
+        var pointhp=(parseInt(hpmax)-20)*2;
+        resultat=resultat+pointhp;
         html.find('.pointrestant').val(resultat);
 
         /*Avantage*/
@@ -576,23 +579,7 @@ export class LiberActorSheet extends ActorSheet {
         html.find('.encours').val(total);
         html.find('.barenc').css({"width":pourcentage+"%"});
 
-        /*Equipé*/   
-        $('.armor').on('click',function(){
-            var objetaequipe=$(this).attr("name");
-            html.find(".armurequi").val(objetaequipe);
-        });
-        $('.boucl').on('click',function(){
-            var objetaequipe=$(this).attr("name");
-            html.find(".bouclierqui").val(objetaequipe);
-        });
-
-        /*desquipe*/
-        $('.armordes').on('click',function(){
-            html.find(".armurequi").val('');
-        });
-        $('.bouclierdes').on('click',function(){
-            html.find(".bouclierqui").val('');
-        });
+        
 
         /*Ajout Bonus*/
         $('.attribut').on('click',function(){
