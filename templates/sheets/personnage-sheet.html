@@ -84,7 +84,7 @@
 		<div class="autres">
 			{{!-- Sheet Tab Navigation --}}
 		    <nav class="sheet-tabs tabs" data-group="primary">
-		        <a class="item active" data-tab="features"><span>{{localize 'libersf.cpt'}}</span></a><a class="item" data-tab="carac"><span>{{localize 'libersf.cara'}}</span></a><a class="item" data-tab="items"><span>{{localize 'libersf.inv'}}</span></a><a class="item" data-tab="sante"><span>{{localize 'libersf.sante'}}</span></a><a class="item" data-tab="lab">⚙</a>
+		        <a class="item active" data-tab="features"><span>{{localize 'libersf.cpt'}}</span></a><a class="item" data-tab="carac"><span>{{localize 'libersf.cara'}}</span></a><a class="item" data-tab="items"><span>{{localize 'libersf.inv'}}</span></a><a class="item andromede" data-tab="magie"><span>{{localize 'libersf.magie'}}</span></a><a class="item" data-tab="sante"><span>{{localize 'libersf.sante'}}</span></a><a class="item" data-tab="lab">⚙</a>
 		    </nav>
 		    {{!-- Sheet Body --}}
 			<section class="sheet-body" style="overflow: hidden;height: 717px;">
@@ -229,7 +229,7 @@
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 			                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
 			                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
-			                    <h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4>
+			                    <!--h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4-->
 			                    <h4 class="item-poid">{{item.data.poids}}</h4>
 			                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
 			                    <h4 class="item-techno">{{item.data.techno}}</h4>
@@ -241,14 +241,14 @@
 			                </li>
 			            {{/each}}
 			        </ol>    
-					<div style="overflow: auto;height: 610px;">
+					<div style="overflow: auto;height: 554px;w">
 						<h2 style="margin-top: 20px">{{localize 'libersf.armes'}}</h2>
 						<ol class="items-list">
 			                <li class="item rexrow item-header">
 			                  <div class="item-image"></div>
 			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description">{{localize 'libersf.descri'}}</div>               
+			                  <!--div class="item-description">{{localize 'libersf.descri'}}</div-->               
 			                  <div class="item-portee">{{localize 'libersf.l1'}}</div>
 			                  <div class="item-dommage">{{localize 'libersf.l2'}}</div>
 			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
@@ -264,7 +264,6 @@
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 			                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
 			                    <div class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</div>
-			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                    <div class="item-portee">{{item.data.portee}}</div>
 			                    <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.data.degat}}">{{item.data.degats}}</div-->
 			                    <div class="item-dommage">{{item.data.degats}}</div>
@@ -274,9 +273,12 @@
 			                    <div class="item-qt">{{item.data.quantite}}</div>
 			                    <div class="item-controls">
 			                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}">+</span>
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 			                    </div>
+			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
+
 			                </li>
 			            {{/each}}
 		        		</ol>
@@ -286,7 +288,7 @@
 			                  <div class="item-image"></div>
 			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description">{{localize 'libersf.descri'}}</div>               
+			                  <!--div class="item-description">{{localize 'libersf.descri'}}</div-->               
 			                  <div class="item-resitance">{{localize 'libersf.l7'}}</div>
 			                  <div class="item-hpmax">{{localize 'libersf.l8'}}</div>
 			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
@@ -302,7 +304,6 @@
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 			                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
 			                    <div class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</div>
-			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                    <div class="item-resitance">{{item.data.resitance}}</div>
 			                    <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.data.degat}}">{{item.data.degats}}</div-->
 			                    <div class="item-hpmax">{{item.data.hp.max}}</div>
@@ -312,9 +313,12 @@
 			                    <div class="item-qt">{{item.data.quantite}}</div>
 			                    <div class="item-controls">
 			                    	<span class="item-equip" title="Equipé armure" genre="{{item.data.genre}}" name="{{item.name}}">+</span>
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 			                    </div>
+			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
+
 			                </li>
 			            {{/each}}
 		        		</ol>
@@ -322,9 +326,9 @@
 						<ol class="items-list">
 			                <li class="item rexrow item-header">
 			                  <div class="item-image"></div>
-			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
+			                  <div class="item-name2">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description2">{{localize 'libersf.descri'}}</div>               
+			                  <!--div class="item-description2">{{localize 'libersf.descri'}}</div-->               
 			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
 			                  <div class="item-valeur">{{localize 'libersf.l4'}}</div>
 			                  <div class="item-techno">{{localize 'libersf.l5'}}</div>
@@ -336,23 +340,74 @@
 			            {{#each actor.inventaire as |item id|}}
 			                <li class="item rexrow" data-item-id="{{item._id}}">
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-			                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+			                    <h4 class="item-name2" title="{{item.name}}">{{item.name}}</h4>
 			                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
-			                    <h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4>
 			                    <h4 class="item-poid">{{item.data.poids}}</h4>
 			                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
 			                    <h4 class="item-techno">{{item.data.techno}}</h4>
 			                    <h4 class="item-qt">{{item.data.quantite}}</h4>
 			                    <div class="item-controls">
-
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 			                    </div>
+			                    <h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4>
 			                </li>
 			            {{/each}}
 		        		</ol>
 		        	</div>
 				</div>
+
+				{{!-- Spell Tab --}}
+				<div id="magie" class="tab items " data-group="primary" data-tab="magie">   
+					<div style="overflow: auto;height: 554px;w">
+						<h2 style="margin-top: 20px">{{localize 'libersf.sort'}}</h2>
+						<ol class="items-list">
+			                <li class="item rexrow item-header">
+			                  <div class="item-image"></div>
+			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
+			                  <div class="item-genre"></div>
+			                  <!--div class="item-description">{{localize 'libersf.descri'}}</div-->               
+			                  <div class="item-portee">{{localize 'libersf.l1'}}</div>
+			                  <div class="item-dommage">{{localize 'libersf.l2'}}</div>
+			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
+			                  <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+			                  <div class="item-techno">{{localize 'libersf.l5'}}</div>
+			                  <div class="item-qty">{{localize 'libersf.l6'}}</div>
+			                  <div class="item-controls">
+			                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+			                  </div>
+			                </li>
+			            {{#each actor.sort as |item id|}}
+			                <li class="item rexrow" data-item-id="{{item._id}}">
+			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+			                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
+			                    <div class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</div>
+			                    <div class="item-portee">{{item.data.portee}}</div>
+			                    <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.data.degat}}">{{item.data.degats}}</div-->
+			                    <div class="item-dommage">{{item.data.degats}}</div>
+			                    <div class="item-poid">{{item.data.poids}}</div>
+			                    <div class="item-valeur">{{item.data.valeur}}</div>
+			                    <div class="item-techno">{{item.data.techno}}</div>
+			                    <div class="item-qt">{{item.data.quantite}}</div>
+			                    <div class="item-controls">
+			                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}">+</span>
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
+			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+			                    </div>
+			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
+
+			                </li>
+			            {{/each}}
+		        		</ol>
+		        	</div>
+				</div>
+
+
+
+
+
 				{{!-- Sante Tab --}}
 				<div id="sante" class="tab sante" data-group="primary" data-tab="sante">
 					<div class="santes">

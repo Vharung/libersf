@@ -37,6 +37,7 @@ export class LiberActorSheet extends ActorSheet {
         const armure = [];
         const piece = [];
         const argent = [];
+        const sort = [];
         
         // Iterate through items, allocating to containers
         // let totalWeight = 0;
@@ -61,6 +62,9 @@ export class LiberActorSheet extends ActorSheet {
           else if (i.type === 'argent') {
             argent.push(i);
           }
+          else if (i.type === 'sort') {
+            sort.push(i);
+          }
         }
 
         // Assign and return
@@ -69,6 +73,7 @@ export class LiberActorSheet extends ActorSheet {
         actorData.piece = piece;
         actorData.armure = armure;
         actorData.argent = argent;
+        actorData.sort = sort;
     }
 
 
@@ -133,6 +138,15 @@ export class LiberActorSheet extends ActorSheet {
             const dataType=$(ev.currentTarget).data('type');
             const name = `New ${dataType.capitalize()}`;
             this.actor.createEmbeddedDocuments('Item', [{ name: name, type: dataType }], { renderSheet: true })
+        });
+
+        html.find('.item-desc').on('click',function(){
+           var hauteur= $(this).parent().parent().css("height");
+           if(hauteur=='30px'){
+                $(this).parent().parent().css({"height":"auto"});
+            }else{
+                $(this).parent().parent().css({"height":"30px"});
+            }
         });
 
 

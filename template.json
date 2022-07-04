@@ -147,7 +147,8 @@
             "objet",
             "piece",
             "planete",
-            "argent"
+            "argent",
+            "sort"
         ],
         "arme": {
             "description": "",
@@ -221,6 +222,16 @@
             "pop_yoribiens":"",
             "pop_elfen":"",
             "pop_orquanien":""
+        },
+        "sort": {
+            "description": "",
+            "genre": "",
+            "degats": "",
+            "portee": "",
+            "poids":"1",
+            "techno":"☆ ☆ ☆ ☆ ☆",
+            "valeur":"1",
+            "quantite":"1"
         }
     }
 }
