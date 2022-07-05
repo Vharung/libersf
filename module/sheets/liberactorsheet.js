@@ -96,9 +96,13 @@ export class LiberActorSheet extends ActorSheet {
             }else if(genre=="Armure"){
                 html.find(".armurequi").val(objetaequipe);
                 html.find(".armurequi").attr('title',objetaequipe);
-            }else{
+            }else if(genre=="Champ de force"){
                 html.find(".bouclierqui").val(objetaequipe);
                 html.find(".bouclierqui").attr('title',objetaequipe);
+            }else{
+                html.find(".charged").val(objetaequipe);
+                html.find(".charged").attr('title',objetaequipe);
+                html.find(".comptir").attr("data-charged",objetaequipe);
             }
         });
         $('.desequi').on('click',function(){
@@ -112,9 +116,13 @@ export class LiberActorSheet extends ActorSheet {
             }else if(genre=="armure"){
                 html.find(".armurequi").val('');
                 html.find(".armurequi").attr('title','');
-            }else{
+            }else if(genre=="bouclier"){
                 html.find(".bouclierqui").val('');
                 html.find(".bouclierqui").attr('title','');
+            }else{
+                html.find(".charged").val('');
+                html.find(".charged").attr('title','');
+                html.find(".comptir").attr("data-charged",'');
             }
         });
 
@@ -682,8 +690,11 @@ export class LiberActorSheet extends ActorSheet {
         let maxstat = event.target.dataset["attdice"];
 
         var name = event.target.dataset["name"];
+        var arme ='';
+        var chargequi='';
         const jetdeDesFormule = "1d100";
         const bonus =this.actor.data.data.malus;
+                console.log(chargequi)
 
         var critique=5;
         if(bonus=='' || bonus ==undefined){
@@ -695,8 +706,14 @@ export class LiberActorSheet extends ActorSheet {
         }
 
         if(name=="Tir"){
-            var arme = event.target.dataset["armed"];
-            var chargeur=this.actor.data.items.filter(i=>i.name == "Mun. "+arme);           
+            arme = event.target.dataset["armed"];
+            chargequi=event.target.dataset["charged"];
+            if(chargequi=='' || chargequi== undefined){
+                 chargequi="Mun. "+arme
+            }
+            console.log(chargequi)
+            var chargeur=this.actor.data.items.filter(i=>i.name == chargequi); 
+                 
             
             if(chargeur.length === 0){
                 succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Pas de chargeur !</h4>";
@@ -741,7 +758,7 @@ export class LiberActorSheet extends ActorSheet {
                 perte=1;
             } 
             if(perte==1){
-                let itemData= this.actor.data.items.filter(i=>i.name == "Mun. "+arme); 
+                let itemData= this.actor.data.items.filter(i=>i.name == chargequi);                 
                 var iditem= itemData[0].id;
                 var qty = itemData[0].data.data.quantite;
                 itemData[0].MunMoins()

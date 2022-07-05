@@ -22,8 +22,8 @@ form.Liber{display: table-cell;}
 .Liber .head .rexrow input.avantagerace {width: 186px}
 .Liber .head .rexrow input.niveau {width: 44px}
 .Liber option {background: none}
-.grid-2col,.grid-3col,.grid-4col,.grid-9col {float:left;}
-.grid-2col {width:50%;}.grid-3col {width:33.33%;}.grid-4col {width:25%;}.grid-9col {width:11%;}
+.grid-2col,.grid-3col,.grid-3-2col,.grid-4col,.grid-9col {float:left;}
+.grid-2col {width:50%;}.grid-3col {width:33.33%;}.grid-3-2col {width:66.66%;}.grid-4col {width:25%;}.grid-9col {width:11%;}
 .Liber .sheet nav.sheet-tabs {border:none}
 /*.Liber .head .separator{width:calc(100% - 10px);height: 0px; border-top: 1px solid #fff;margin:27px 5px 7px 5px;}*/
 .Liber button.aucune,.Liber button.focus,.Liber button.defensif,.Liber button.offensif{width: 20px;height: 20px;display: inline-block;border: none;float:right;}
@@ -67,7 +67,7 @@ form.Liber{display: table-cell;}
 .Liber .items .encom p{width: 100%;margin-left: 5px;height: 28px;font-size: 0.8em;color: #fff;margin-top: -26px;}
 .Liber .items .barenc{width: 100%;background: #0080c0;height: 26px;display: block;}
 .Liber .items .encom input {border: none;background: none;color: #fff}
-.Liber .items input.armed,.Liber .items input.armurequi,.Liber .items input.bouclierqui{border:1px solid #6a7885;width:45%;background:#09141a;height: 30px;color: #fff;margin-bottom: 5px;}
+.Liber .items input.armed,.Liber .items input.charged,.Liber .items input.armurequi,.Liber .items input.bouclierqui{border:1px solid #6a7885;width:45%;background:#09141a;height: 30px;color: #fff;margin-bottom: 5px;}
 .Liber .items .desequi{float: right;background: #e13b23;border: none;color: #fff;width: 30px;height: 30px;font-size: 1em;cursor: pointer;margin-right: 10px;}
 .Liber .items .jetdedegat{float: right;background: #e13b23;border: none;color: #fff;width: 105px;height: 25px;font-size: 0.8em;cursor: pointer;margin: 3px;text-align: center;}
 .Liber .items-list {list-style: none;margin: 7px 0;padding: 0;overflow-y: auto;}
@@ -112,7 +112,11 @@ form.Liber{display: table-cell;}
 .Liber .maindroite {background: url(" ../assets/icon/hand.png");background-size: cover;}
 .Liber .maingauche {background: url(" ../assets/icon/hand2.png");background-size: cover;}
 .Liber .armor {background: url(" ../assets/icon/armor.png");background-size: cover;}
-
+.Liber .icongun,.Liber .iconcha,.Liber .iconarm,.Liber .iconbou{height: 25px;width: 25px;display: block;float: left;}
+.Liber .iconarm{background: url("../assets/icon/armure.png");background-size: cover;}
+.Liber .iconbou{background: url("../assets/icon/bouclier.png");background-size: cover;}
+.Liber .icongun{background: url(" ../assets/icon/pistol-gun.png");background-size: cover;}
+.Liber .iconcha{background: url(" ../assets/icon/machine-gun-magazine.png");background-size: cover;}
 .Liber .santes{height: 400px; background: url("../assets/icon/res3_silhouette.png") no-repeat center center;}
 .Liber .vaisseau{height: 400px; background: url("../assets/icon/vaisseau.png") no-repeat center center;background-size: contain}
 .Liber .zone{width: 120px;position: relative; text-align: center}

@@ -98,6 +98,7 @@
                 "obsession":"",
                 "distingue":""
             },
+            "charged":"",
             "armed":"",
             "armeg":"",
             "degatd":"",
@@ -107,6 +108,7 @@
         },
         "pnj":{
             "templates":["stat","attributs","background"],
+            "charged":"",
             "armed":"",
             "armeg":"",
             "degatd":"",
@@ -116,6 +118,7 @@
         },
         "monstre":{
             "templates":["stat","attributs","background"],
+            "charged":"",
             "armed":"",
             "armeg":"",
             "degatd":"",
