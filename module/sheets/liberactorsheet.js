@@ -89,11 +89,11 @@ export class LiberActorSheet extends ActorSheet {
             var objetaequipe=$(this).attr("name");
             var genre=$(this).attr("genre");
             console.log(objetaequipe);
-            if(genre=="arme"){
+            if(genre=="arme" ){
                 html.find(".armed").val(objetaequipe);
                 html.find(".armed").attr('title',objetaequipe);
                 html.find(".comptir").attr("data-armed",objetaequipe);//bug lent à changer pour le tir
-            }else if(genre=="Armure"){
+            }else if(genre=="Armure" || genre=="Combinaison"){
                 html.find(".armurequi").val(objetaequipe);
                 html.find(".armurequi").attr('title',objetaequipe);
             }else if(genre=="Champ de force"){
