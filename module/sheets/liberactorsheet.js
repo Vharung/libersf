@@ -176,8 +176,8 @@ export class LiberActorSheet extends ActorSheet {
             else if(clanliste=="Machine"){html.find('.bonusrace').val("10 Piratage et accès au réseau intermachine");}
             else if(clanliste=="Pleiadiens"){html.find('.bonusrace').val("10 Pistage et capacité de résurrection");}
             else if(clanliste=="Yoribiens"){html.find('.bonusrace').val("10 Perception et sixième sens");}
-            else if(clanliste=="Elfen"){html.find('.bonusrace').val("10 Agilité");}
-            else if(clanliste=="Orquanien"){html.find('.bonusrace').val("10 Combat");}
+            else if(clanliste=="Elfen"){html.find('.bonusrace').val("10 Agilité et polyglotte");}
+            else if(clanliste=="Orquanien"){html.find('.bonusrace').val("10 Combat et double arme");}
             /*for(i=0;i<27;i++){
                 html.find('.cpt'+i).val(0);
                 html.find('.cpt'+i).css({"background":"transparent","color": "white"});
