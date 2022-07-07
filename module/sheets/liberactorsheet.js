@@ -169,10 +169,16 @@ export class LiberActorSheet extends ActorSheet {
         //choix Race
         html.find('.racechoix').on('click',function(){ 
             var clanliste=html.find('.raceliste').val();
-            var metierliste=html.find('.metierliste').val();
-            var metier=html.find('.metier').val();
-            var race=html.find('.race').val();
-            for(i=0;i<27;i++){
+            console.log(clanliste)
+            if(clanliste=="Humains"){html.find('.bonusrace').val("10 Dextérité et solidarité entre humain");}
+            else if(clanliste=="Arthuriens"){html.find('.bonusrace').val("10 Connaissance générale et Kamikaze");}
+            else if(clanliste=="Alpha Draconiens"){html.find('.bonusrace').val("10 Force et récupération rapide (+5PV /jour)");}
+            else if(clanliste=="Machine"){html.find('.bonusrace').val("10 Piratage et accès au réseau intermachine");}
+            else if(clanliste=="Pleiadiens"){html.find('.bonusrace').val("10 Pistage et capacité de résurrection");}
+            else if(clanliste=="Yoribiens"){html.find('.bonusrace').val("10 Perception et sixième sens");}
+            else if(clanliste=="Elfen"){html.find('.bonusrace').val("10 Agilité");}
+            else if(clanliste=="Orquanien"){html.find('.bonusrace').val("10 Combat");}
+            /*for(i=0;i<27;i++){
                 html.find('.cpt'+i).val(0);
                 html.find('.cpt'+i).css({"background":"transparent","color": "white"});
             }
@@ -204,21 +210,28 @@ export class LiberActorSheet extends ActorSheet {
               }else if(valor<0){
                 $( this ).css({"background":"#a51b1b","color": "white"});
               }
-            });
+            });*/
         });
 
         //choix metier
         html.find('.metierchoix').on('click',function(){
-            var clanliste=html.find('.raceliste').val();
             var metierliste=html.find('.metierliste').val();
             var metier=html.find('.metier').val();
-            var race=html.find('.race').val();
-            for(i=0;i<26;i++){
+            if(metier=="Artisans"){html.find('.bonusmetier').val("10 Artisanat");}
+            else if(metier=="Commerce"){html.find('.bonusmetier').val("10 Négociation");}
+            else if(metier=="Colon"){html.find('.bonusmetier').val("10 Survie");}
+            else if(metier=="Intellectuel"){html.find('.bonusmetier').val("10 Investigation");}
+            else if(metier=="Malandrins"){html.find('.bonusmetier').val("10 Discrétion");}
+            else if(metier=="Pilote"){html.find('.bonusmetier').val("10 Pilote");}
+            else if(metier=="Médecin"){html.find('.bonusmetier').val("10 Médecine");}
+            else if(metier=="Militaire"){html.find('.bonusmetier').val("10 Tir");}
+            else if(metier=="Mécanicien"){html.find('.bonusmetier').val("10 Mécanique");}
+            /*for(i=0;i<26;i++){
                 html.find('.cpt'+i).val(0);
                 html.find('.cpt'+i).css({"background":"transparent","color": "#000"});
             }
 
-            /*if(clanliste=="Humain"){html.find('.cpt6').val(10);}
+            if(clanliste=="Humain"){html.find('.cpt6').val(10);}
             else if(clanliste=="Arthuriens"){html.find('.cpt4').val(10);}
             else if(clanliste=="Alpha Draconiens"){html.find('.cpt9').val(10);}
             else if(clanliste=="Machine"){html.find('.cpt19').val(10);}
@@ -236,7 +249,7 @@ export class LiberActorSheet extends ActorSheet {
             else if(metier=="Médecin"){html.find('.cpt13').val(10);}
             else if(metier=="Militaire"){html.find('.cpt24').val(10);}
             else if(metier=="Mécanicien"){html.find('.cpt12').val(10);}
-            html.find('.metier').val(metierliste);*/
+            html.find('.metier').val(metierliste);
             
             $( ".features input" ).each(function( index ) {
               var valor= $( this ).val();
@@ -245,7 +258,7 @@ export class LiberActorSheet extends ActorSheet {
               }else if(valor<0){
                 $( this ).css({"background":"#a51b1b","color": "white"});
               }
-            });
+            });*/
            
         });
 

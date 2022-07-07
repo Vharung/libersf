@@ -2,7 +2,7 @@
     "name": "libersf",
     "title": "liber SF ",
     "description": "The libersf SF  system for FoundryVTT!",
-    "version": "0.0.64",
+    "version": "0.0.65",
     "minimumCoreVersion": "0.9",
     "compatibleCoreVersion": "0.9",
     "templateVersion": 2,
