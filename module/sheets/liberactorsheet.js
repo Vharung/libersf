@@ -88,17 +88,22 @@ export class LiberActorSheet extends ActorSheet {
         $('.item-equip').on('click',function(){
             var objetaequipe=$(this).attr("name");
             var genre=$(this).attr("genre");
-            console.log(objetaequipe);
+            var degat=$(this).attr("degat");
+            var hpmax=$(this).attr("hpmax");
+            console.log(hpmax)
             if(genre=="arme" ){
                 html.find(".armed").val(objetaequipe);
                 html.find(".armed").attr('title',objetaequipe);
-                html.find(".comptir").attr("data-armed",objetaequipe);//bug lent à changer pour le tir
+                html.find(".comptir").attr("data-armed",objetaequipe);
+                html.find(".armed").attr("data-degat",degat);
             }else if(genre=="Armure" || genre=="Combinaison"){
                 html.find(".armurequi").val(objetaequipe);
                 html.find(".armurequi").attr('title',objetaequipe);
+                html.find(".actarmmax").val(hpmax);
             }else if(genre=="Champ de force"){
                 html.find(".bouclierqui").val(objetaequipe);
                 html.find(".bouclierqui").attr('title',objetaequipe);
+                html.find(".actarmmax").val(actboumax);
             }else{
                 html.find(".charged").val(objetaequipe);
                 html.find(".charged").attr('title',objetaequipe);
@@ -108,17 +113,20 @@ export class LiberActorSheet extends ActorSheet {
         $('.desequi').on('click',function(){
             var objetaequipe=$(this).attr("name");
             var genre=$(this).attr("genre");
-            console.log(objetaequipe);
+            var hpmax=0;
             if(genre=="arme"){
                 html.find(".armed").val('');
                 html.find(".armed").attr('title','');
                 html.find(".comptir").attr("data-armed",'');
+                html.find(".armed").attr("data-degat",'');
             }else if(genre=="armure"){
                 html.find(".armurequi").val('');
                 html.find(".armurequi").attr('title','');
+                html.find(".actarmmax").val(hpmax);
             }else if(genre=="bouclier"){
                 html.find(".bouclierqui").val('');
                 html.find(".bouclierqui").attr('title','');
+                html.find(".actarmmax").val(actboumax);
             }else{
                 html.find(".charged").val('');
                 html.find(".charged").attr('title','');
@@ -157,11 +165,11 @@ export class LiberActorSheet extends ActorSheet {
             }
         });
 
-
+        var modifarmure=1
         var actarm=html.find('.actarm').val();
         var actbou=html.find('.actbou').val();
-        actarm=Math.floor(parseInt(actarm)/2);
-        actbou=Math.floor(parseInt(actbou)/2);
+        actarm=Math.floor(parseInt(actarm)/modifarmure);
+        actbou=Math.floor(parseInt(actbou)/modifarmure);
         //console.log('ptarm:'+actarm);
         html.find('.ptarm').html(actarm);
         html.find('.ptbou').html(actbou);
@@ -170,96 +178,28 @@ export class LiberActorSheet extends ActorSheet {
         html.find('.racechoix').on('click',function(){ 
             var clanliste=html.find('.raceliste').val();
             console.log(clanliste)
-            if(clanliste=="Humains"){html.find('.bonusrace').val("10 Dextérité et solidarité entre humain");}
-            else if(clanliste=="Arthuriens"){html.find('.bonusrace').val("10 Connaissance générale et Kamikaze");}
-            else if(clanliste=="Alpha Draconiens"){html.find('.bonusrace').val("10 Force et récupération rapide (+5PV /jour)");}
-            else if(clanliste=="Machine"){html.find('.bonusrace').val("10 Piratage et accès au réseau intermachine");}
-            else if(clanliste=="Pleiadiens"){html.find('.bonusrace').val("10 Pistage et capacité de résurrection");}
-            else if(clanliste=="Yoribiens"){html.find('.bonusrace').val("10 Perception et sixième sens");}
-            else if(clanliste=="Elfen"){html.find('.bonusrace').val("10 Agilité et polyglotte");}
-            else if(clanliste=="Orquanien"){html.find('.bonusrace').val("10 Combat et double arme");}
-            /*for(i=0;i<27;i++){
-                html.find('.cpt'+i).val(0);
-                html.find('.cpt'+i).css({"background":"transparent","color": "white"});
-            }
-
-            if(clanliste=="Humain"){html.find('.cpt6').val(10);}
-            else if(clanliste=="Arthuriens"){html.find('.cpt4').val(10);}
-            else if(clanliste=="Alpha Draconiens"){html.find('.cpt9').val(10);}
-            else if(clanliste=="Machine"){html.find('.cpt19').val(10);}
-            else if(clanliste=="Pleiadiens"){html.find('.cpt20').val(10);}
-            else if(clanliste=="Yoribiens"){html.find('.cpt17').val(10);}
-            else if(clanliste=="Elfen"){html.find('.cpt0').val(10);}
-            else if(clanliste=="Orquanien"){html.find('.cpt3').val(10);}
-
-            if(metier=="Artisans"){html.find('.cpt1').val(10);}
-            else if(metier=="Commerce"){html.find('.cpt16').val(10);}
-            else if(metier=="Colon"){html.find('.cpt23').val(10);}
-            else if(metier=="Intellectuel"){html.find('.cpt10').val(10);}
-            else if(metier=="Malandrins"){html.find('.cpt8').val(10);}
-            else if(metier=="Pilote"){html.find('.cpt18').val(10);}
-            else if(metier=="Médecin"){html.find('.cpt13').val(10);}
-            else if(metier=="Militaire"){html.find('.cpt24').val(10);}
-            else if(metier=="Mécanicien"){html.find('.cpt12').val(10);}
-            html.find('.race').val(clanliste);
-            
-            $( ".features input" ).each(function( index ) {
-              var valor= $( this ).val();
-              if(valor>0){
-                $( this ).css({"background":"#56853b","color": "white"});
-              }else if(valor<0){
-                $( this ).css({"background":"#a51b1b","color": "white"});
-              }
-            });*/
+            if(clanliste==game.i18n.localize("liber.humain")){html.find('.bonusrace').val("10 Dextérité et solidarité entre humain");}
+            else if(clanliste==game.i18n.localize("liber.artu")){html.find('.bonusrace').val("10 Connaissance générale et Kamikaze");}
+            else if(clanliste==game.i18n.localize("liber.dragon")){html.find('.bonusrace').val("10 Force et récupération rapide (+5PV /jour)");}
+            else if(clanliste==game.i18n.localize("liber.machine")){html.find('.bonusrace').val("10 Piratage et accès au réseau intermachine");}
+            else if(clanliste==game.i18n.localize("liber.pleiadiens")){html.find('.bonusrace').val("10 Pistage et capacité de résurrection");}
+            else if(clanliste==game.i18n.localize("liber.yor")){html.find('.bonusrace').val("10 Perception et sixième sens");}
+            else if(clanliste==game.i18n.localize("liber.elf")){html.find('.bonusrace').val("10 Agilité et polyglotte");}
+            else if(clanliste==game.i18n.localize("liber.orqu")){html.find('.bonusrace').val("10 Combat et double arme");}
         });
-
         //choix metier
         html.find('.metierchoix').on('click',function(){
             var metierliste=html.find('.metierliste').val();
             var metier=html.find('.metier').val();
-            if(metier=="Artisans"){html.find('.bonusmetier').val("10 Artisanat");}
-            else if(metier=="Commerce"){html.find('.bonusmetier').val("10 Négociation");}
-            else if(metier=="Colon"){html.find('.bonusmetier').val("10 Survie");}
-            else if(metier=="Intellectuel"){html.find('.bonusmetier').val("10 Investigation");}
-            else if(metier=="Malandrins"){html.find('.bonusmetier').val("10 Discrétion");}
-            else if(metier=="Pilote"){html.find('.bonusmetier').val("10 Pilote");}
-            else if(metier=="Médecin"){html.find('.bonusmetier').val("10 Médecine");}
-            else if(metier=="Militaire"){html.find('.bonusmetier').val("10 Tir");}
-            else if(metier=="Mécanicien"){html.find('.bonusmetier').val("10 Mécanique");}
-            /*for(i=0;i<26;i++){
-                html.find('.cpt'+i).val(0);
-                html.find('.cpt'+i).css({"background":"transparent","color": "#000"});
-            }
-
-            if(clanliste=="Humain"){html.find('.cpt6').val(10);}
-            else if(clanliste=="Arthuriens"){html.find('.cpt4').val(10);}
-            else if(clanliste=="Alpha Draconiens"){html.find('.cpt9').val(10);}
-            else if(clanliste=="Machine"){html.find('.cpt19').val(10);}
-            else if(clanliste=="Pleiadiens"){html.find('.cpt20').val(10);}
-            else if(clanliste=="Yoribiens"){html.find('.cpt17').val(10);}
-            else if(clanliste=="Elfen"){html.find('.cpt0').val(10);}
-            else if(clanliste=="Orquanien"){html.find('.cpt3').val(10);}
-            
-            if(metier=="Artisans"){html.find('.cpt1').val(10);}
-            else if(metier=="Commerce"){html.find('.cpt16').val(10);}
-            else if(metier=="Colon"){html.find('.cpt23').val(10);}
-            else if(metier=="Intellectuel"){html.find('.cpt10').val(10);}
-            else if(metier=="Malandrins"){html.find('.cpt8').val(10);}
-            else if(metier=="Pilote"){html.find('.cpt18').val(10);}
-            else if(metier=="Médecin"){html.find('.cpt13').val(10);}
-            else if(metier=="Militaire"){html.find('.cpt24').val(10);}
-            else if(metier=="Mécanicien"){html.find('.cpt12').val(10);}
-            html.find('.metier').val(metierliste);
-            
-            $( ".features input" ).each(function( index ) {
-              var valor= $( this ).val();
-              if(valor>0){
-                $( this ).css({"background":"#56853b","color": "white"});
-              }else if(valor<0){
-                $( this ).css({"background":"#a51b1b","color": "white"});
-              }
-            });*/
-           
+            if(metier==game.i18n.localize("liber.metier1")){html.find('.bonusmetier').val("10 Artisanat");}
+            else if(metier==game.i18n.localize("liber.metier2")){html.find('.bonusmetier').val("10 Négociation");}
+            else if(metier==game.i18n.localize("liber.metier3")){html.find('.bonusmetier').val("10 Survie");}
+            else if(metier==game.i18n.localize("liber.metier4")){html.find('.bonusmetier').val("10 Investigation");}
+            else if(metier==game.i18n.localize("liber.metier5")){html.find('.bonusmetier').val("10 Discrétion");}
+            else if(metier==game.i18n.localize("liber.metier6")){html.find('.bonusmetier').val("10 Pilote");}
+            else if(metier==game.i18n.localize("liber.metier7")){html.find('.bonusmetier').val("10 Médecine");}
+            else if(metier==game.i18n.localize("liber.metier8")){html.find('.bonusmetier').val("10 Tir");}
+            else if(metier==game.i18n.localize("liber.metier9")){html.find('.bonusmetier').val("10 Mécanique");}           
         });
 
         //choix faction
@@ -751,6 +691,8 @@ export class LiberActorSheet extends ActorSheet {
         let retour=r.result; var succes="";
         if(name=="Tir"){
             var arme = event.target.dataset["armed"];
+            var degat = event.target.dataset["degat"];
+            console.log(degat)
             name+=" avec "+arme;
             var perte=0;
             if(retour>95){
@@ -762,13 +704,18 @@ export class LiberActorSheet extends ActorSheet {
                 perte=1;
             }else if(retour>(inforesult-20)){
                 succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>La cible est touché</h4>";
-                perte=1;
+                //succes+="La cible subit : "+degat;bug a voir
+                perte=1;                
             }else if(retour>critique){
                 succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x1.5</h4>";
+                degat=parseInt(degat)*1.5;
+                //succes+="La cible subit : "+degat;
                 perte=1;
             }else if(retour<=critique){
                 succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x2</h4>";
-                perte=1;
+                degat=parseInt(degat)*2;
+                //succes+="La cible subit : "+degat;
+                perte=1;                
             } 
             if(perte==1){
                 let itemData= this.actor.data.items.filter(i=>i.name == chargequi);                 
@@ -794,7 +741,7 @@ export class LiberActorSheet extends ActorSheet {
         if(inforesult<=0){
             succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec critique</h4>";
         }
-        const texte = "Jet de " + name + " : " + jetdeDesFormule +" - " + inforesult +succes;
+        const texte = "Jet de " + name + " : " + jetdeDesFormule +" - " + inforesult + '<br>'+ succes;
         //roll.roll().toMessage({
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),

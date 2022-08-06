@@ -11,16 +11,16 @@
 					<input class="nomperso" name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
 					<div class="rexrow">
 						<div class="grid-3col">			
-							<p>{{localize 'libersf.race'}} : <input class="race" type="text" value="{{data.data.race}}" placeholder="Race" /></p>
+							<p>{{localize 'libersf.race'}} : <input class="race" type="text" value="{{data.data.race}}" placeholder="Race" readonly /></p>
 						</div>
 						<div class="grid-3col">
-							<p>{{localize 'libersf.metier'}} : <input class="metier" type="text" value="{{data.data.metier}}" placeholder="Clan"/></p>
+							<p>{{localize 'libersf.metier'}} : <input class="metier" type="text" value="{{data.data.metier}}" placeholder="Clan" readonly /></p>
 						</div>
 						<div class="grid-3col">
-							<p>{{localize 'libersf.faction'}} : <input class="faction" type="text" value="{{data.data.religion}}" placeholder="Faction  - Religion" /></p>
+							<p>{{localize 'libersf.faction'}} : <input class="faction" type="text" value="{{data.data.religion}}" placeholder="Faction  - Religion" readonly /></p>
 						</div>
 						<!--div class="separator"></div-->
-						<p>{{localize 'libersf.bonus'}} : <input name="data.bonusrace" type="text" value="{{data.data.bonusrace}}" placeholder="Bonus" style="width: 158px"/> <input name="data.bonusmetier" type="text" value="{{data.data.bonusmetier}}" placeholder="bonusmetier" style="width: 158px"/>{{localize 'libersf.level'}} : <input class="niveau" name="data.level" type="text" value="{{data.data.level}}" placeholder="1"/></p>
+						<p>{{localize 'libersf.bonus'}} : <input class="bonusrace" title="{{data.data.bonusrace}}" name="data.bonusrace" type="text" value="{{data.data.bonusrace}}" placeholder="Bonus" style="width: 158px" readonly/> <input class="bonusmetier" title="{{data.data.bonusmetier}}" name="data.bonusmetier" type="text" value="{{data.data.bonusmetier}}" placeholder="bonusmetier" style="width: 158px" readonly />{{localize 'libersf.level'}} : <input class="niveau" name="data.level" type="text" value="{{data.data.level}}" placeholder="1"/></p>
 					</div>
 					
 				</div>
@@ -163,7 +163,7 @@
 					<div class="compt"><button class="jetdedes" data-name="Survie" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Survie}}">{{localize 'libersf.surv'}}</button>
 					<input class="cpt23" name="data.Survie" type="text" value="{{data.data.Survie}}" placeholder="{{data.data.Survie}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes comptir" data-name="Tir" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Tir}}" data-armed="{{data.data.armed}}">{{localize 'libersf.atir'}}</button>
+					<div class="compt"><button class="jetdedes comptir" data-name="Tir" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Tir}}" data-armed="{{data.data.armed}}" data-charged="{{data.data.charged}}">{{localize 'libersf.atir'}}</button>
 					<input class="cpt24" name="data.Tir" type="text" value="{{data.data.Tir}}" placeholder="{{data.data.Tir}}" style="text-align: center"/>
 					</div>
 					<div class="compt"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Visée}}">{{localize 'libersf.vise'}}</button>
@@ -214,33 +214,42 @@
 					</div>
 					<div class="flexrow">
 						<div class="grid-3col" style="text-align: center">
-							<input  class="armed" name="data.armed" type="text" value="{{data.data.armed}}" title="{{data.data.armed}}" placeholder="Arme" readonly="" /><button class="desequi" genre="arme">🗑</button>
+							<span class="icongun"></span><input  class="armed" name="data.armed" degat="data.degat" type="text" value="{{data.data.armed}}" title="{{data.data.armed}}" placeholder="Arme" readonly="" /><button class="desequi" genre="arme">🗑</button>
+							<div class="clear"></div>
+							<span class="iconcha"></span><input  class="charged" name="data.charged" type="text" value="{{data.data.charged}}" title="{{data.data.charged}}" placeholder="Chargeur" readonly="" /><button class="desequi" genre="chargeur">🗑</button>						
 						</div>
+							
 						<div class="grid-3col" style="text-align: center" class="unemain">
-							<input  class="armurequi" name="data.prog" type="text" value="{{data.data.prog}}" title="{{data.data.prog}}" placeholder="Armure" readonly="" /><button class="desequi" genre="armure">🗑</button>
+							<span class="iconarm"></span><input  class="armurequi" name="data.prog" type="text" value="{{data.data.prog}}" title="{{data.data.prog}}" placeholder="Armure" readonly="" /><button class="desequi" genre="armure">🗑</button>
+							
+
 						</div>
 						<div class="grid-3col" style="text-align: center">
-							<input  class="bouclierqui" name="data.prod" type="text" value="{{data.data.prod}}"  title="{{data.data.prod}}" placeholder="Bouclier" readonly="" /><button class="desequi" genre="bouclier">🗑</button>
+							<span class="iconbou"></span><input  class="bouclierqui" name="data.prod" type="text" value="{{data.data.prod}}"  title="{{data.data.prod}}" placeholder="Bouclier" readonly="" /><button class="desequi" genre="bouclier">🗑</button>
+							<ol class="items-list">
+							{{#each actor.argent as |item id|}}
+					                <li class="item rexrow" data-item-id="{{item._id}}">
+					                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+					                    <!--h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+					                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
+					                    <h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4>
+					                    <h4 class="item-poid">{{item.data.poids}}</h4>
+					                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
+					                    <h4 class="item-techno">{{item.data.techno}}</h4-->
+					                    <h4 class="item-qt" style="width:100px">{{item.data.quantite}}</h4>
+					                    <div class="item-controls">
+					                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+					                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+					                    </div>
+					                </li>
+					            {{/each}}
+					        </ol>
 						</div>
+
+						
+					
+							
 					</div>
-					<ol class="items-list">
-					{{#each actor.argent as |item id|}}
-			                <li class="item rexrow" data-item-id="{{item._id}}">
-			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-			                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
-			                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
-			                    <!--h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4-->
-			                    <h4 class="item-poid">{{item.data.poids}}</h4>
-			                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
-			                    <h4 class="item-techno">{{item.data.techno}}</h4>
-			                    <h4 class="item-qt">{{item.data.quantite}}</h4>
-			                    <div class="item-controls">
-			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-			                    </div>
-			                </li>
-			            {{/each}}
-			        </ol>    
 					<div style="overflow: auto;height: 554px;w">
 						<h2 style="margin-top: 20px">{{localize 'libersf.armes'}}</h2>
 						<ol class="items-list">
@@ -272,7 +281,7 @@
 			                    <div class="item-techno">{{item.data.techno}}</div>
 			                    <div class="item-qt">{{item.data.quantite}}</div>
 			                    <div class="item-controls">
-			                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}">+</span>
+			                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}" degat="{{item.data.degats}}">+</span>
 			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -312,7 +321,7 @@
 			                    <div class="item-techno">{{item.data.techno}}</div>
 			                    <div class="item-qt">{{item.data.quantite}}</div>
 			                    <div class="item-controls">
-			                    	<span class="item-equip" title="Equipé armure" genre="{{item.data.genre}}" name="{{item.name}}">+</span>
+			                    	<span class="item-equip" title="Equipé armure" genre="{{item.data.genre}}" name="{{item.name}}" hpmax="{{item.data.hp.max}}">+</span>
 			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -347,6 +356,7 @@
 			                    <h4 class="item-techno">{{item.data.techno}}</h4>
 			                    <h4 class="item-qt">{{item.data.quantite}}</h4>
 			                    <div class="item-controls">
+			                    	<span class="item-equip" title="Equipé armure" genre="{{item.data.genre}}" name="{{item.name}}">+</span>
 			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -412,31 +422,35 @@
 				<div id="sante" class="tab sante" data-group="primary" data-tab="sante">
 					<div class="santes">
 						<div class="zone tete">
-							<div class="bar" style="width:calc(120px - {{data.data.tete}}0px); background:green;"></div>
+							<div class="bar" style="width:calc(100px - {{data.data.tete}}0px); background:green;"></div>
 							<input name="data.tete" type="text" value="{{data.data.tete}}" placeholder="Tete"/>
 						</div>
 						<div class="zone bd">
-							<div class="bar" style="width:calc(120px - {{data.data.bd}}0px); background:green;"></div>
+							<div class="bar" style="width:calc(100px - {{data.data.bd}}0px); background:green;"></div>
 							<input name="data.bd" type="text" value="{{data.data.bd}}" placeholder="bd" style=""/>
 						</div>
 						<div class="zone torse">
-							<div class="bar" style="width:calc(120px - {{data.data.torse}}0px); background:green;"></div>
+							<div class="bar" style="width:calc(100px - {{data.data.torse}}0px); background:green;"></div>
 							<input name="data.torse" type="text" value="{{data.data.torse}}" placeholder="torse"/>
 						</div>
 						<div class="zone bg">
-							<div class="bar" style="width:calc(120px - {{data.data.bg}}0px); background:green;"></div>
+							<div class="bar" style="width:calc(100px - {{data.data.bg}}0px); background:green;"></div>
 							<input name="data.bg" type="text" value="{{data.data.bg}}" placeholder="bg"/>
 						</div>
 						<div class="zone jd">
-							<div class="bar" style="width:calc(120px - {{data.data.jd}}0px); background:green;"></div>
+							<div class="bar" style="width:calc(100px - {{data.data.jd}}0px); background:green;"></div>
 							<input name="data.jd" type="text" value="{{data.data.jd}}" placeholder="jb"/>
 						</div>
 						<div class="zone jg">
-							<div class="bar" style="width:calc(120px - {{data.data.jg}}0px); background:green;"></div>
+							<div class="bar" style="width:calc(100px - {{data.data.jg}}0px); background:green;"></div>
 							<input name="data.jg" type="text" value="{{data.data.jg}}" placeholder="jg"/>
 						</div>
 					</div>
 					<h2 style="text-align: center;">{{localize 'libersf.zone'}}</h2>
+					<p style="color:#fff; width: 45%; float:left; display: block;">1° Blessure => Dégat - point d'armure<br>2° Pv armure - Dégats <br><br>
+						Si PV=0 :<br>
+					sur D100 :
+					-Tête 0-10<br>-	Bras D 11-20<br>- Bras G 21-30<br>-	Torse 31- 70<br>- Jambe D 71-85<br>- Jambe G 86-100<br><br>Indiqué les dégats prient dans le shéma ci-dessus. Si plus de bar de santé la zone est morte.</p>
 					<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="width: 310px; height: auto;float: right;margin-top:10px">
 				</div>
 				{{!-- Lab Tab --}}
