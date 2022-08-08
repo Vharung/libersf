@@ -84,4 +84,12 @@ export class LiberItem extends Item {
     console.log('qty'+qty)
     this.update({'data.quantite':qty});
   }
+  NunsMoins(){
+    let itemData = this.data;
+    console.log(itemData)
+    let qty=itemData.data.quantite;
+    qty=qty-10;
+    console.log('qty'+qty)
+    this.update({'data.quantite':qty});
+  }
 }

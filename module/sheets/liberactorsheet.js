@@ -11,7 +11,6 @@ export class LiberActorSheet extends ActorSheet {
 
     get template() {
         console.log(`Liber | Récupération du fichier html ${this.actor.data.type}-sheet.`);
-
         return `systems/libersf/templates/sheets/${this.actor.data.type}-sheet.html`;
     }
 
@@ -23,7 +22,6 @@ export class LiberActorSheet extends ActorSheet {
         if (this.actor.data.type == 'personnage' || this.actor.data.type == 'pnj' || this.actor.data.type == 'monstre' | this.actor.data.type == 'vehicule') {
             this._prepareCharacterItems(data);
         }
-        console.log(data);
         return data;
     }
 
@@ -90,12 +88,11 @@ export class LiberActorSheet extends ActorSheet {
             var genre=$(this).attr("genre");
             var degat=$(this).attr("degat");
             var hpmax=$(this).attr("hpmax");
-            console.log(hpmax)
             if(genre=="arme" ){
                 html.find(".armed").val(objetaequipe);
                 html.find(".armed").attr('title',objetaequipe);
                 html.find(".comptir").attr("data-armed",objetaequipe);
-                html.find(".armed").attr("data-degat",degat);
+                html.find(".degatd").val(degat);
             }else if(genre=="Armure" || genre=="Combinaison"){
                 html.find(".armurequi").val(objetaequipe);
                 html.find(".armurequi").attr('title',objetaequipe);
@@ -118,7 +115,7 @@ export class LiberActorSheet extends ActorSheet {
                 html.find(".armed").val('');
                 html.find(".armed").attr('title','');
                 html.find(".comptir").attr("data-armed",'');
-                html.find(".armed").attr("data-degat",'');
+                html.find(".degatd").val(0);
             }else if(genre=="armure"){
                 html.find(".armurequi").val('');
                 html.find(".armurequi").attr('title','');
@@ -170,14 +167,12 @@ export class LiberActorSheet extends ActorSheet {
         var actbou=html.find('.actbou').val();
         actarm=Math.floor(parseInt(actarm)/modifarmure);
         actbou=Math.floor(parseInt(actbou)/modifarmure);
-        //console.log('ptarm:'+actarm);
         html.find('.ptarm').html(actarm);
         html.find('.ptbou').html(actbou);
 
         //choix Race
         html.find('.racechoix').on('click',function(){ 
             var clanliste=html.find('.raceliste').val();
-            console.log(clanliste)
             if(clanliste==game.i18n.localize("liber.humain")){html.find('.bonusrace').val("10 Dextérité et solidarité entre humain");}
             else if(clanliste==game.i18n.localize("liber.artu")){html.find('.bonusrace').val("10 Connaissance générale et Kamikaze");}
             else if(clanliste==game.i18n.localize("liber.dragon")){html.find('.bonusrace').val("10 Force et récupération rapide (+5PV /jour)");}
@@ -206,6 +201,12 @@ export class LiberActorSheet extends ActorSheet {
         html.find('.factionchoix').on('click',function(){ 
             var clanliste=html.find('.factionliste').val();
             html.find('.faction').val(clanliste);
+        });
+
+        //action couvert
+        html.find('.action6').on('click',function(){
+            html.find(".etats").val('aucun');
+            html.find(".etat12").css({"opacity": "1"});
         });
 
         //calcul point restant
@@ -594,14 +595,11 @@ export class LiberActorSheet extends ActorSheet {
             }else{
                 var color='blue';
             }
-                    //console.log(pou+'='+min+'*100/'+max);
-
             html.find(".bar"+i).css({'width':pou+'%','background':color});
         }
 
         html.find( ".compt input" ).each(function() {
               var valor= $( this ).val();
-              //console.log(valor)
               if(valor==0){
                 $( this ).css({"background":"transparent","color": "#fff"});
               }else if(valor>0){
@@ -628,7 +626,6 @@ export class LiberActorSheet extends ActorSheet {
 
     /*_onItemDelete(event){
         const item = this.getItemFromEvent(event);
-        console.log(item._id);
         let d = Dialog.confirm({
             title: "Suppression d'élément",
             content: "<p>Confirmer la suppression de '" + item.name + "'.</p>",
@@ -646,11 +643,10 @@ export class LiberActorSheet extends ActorSheet {
         var arme ='';
         var chargequi='';
         const jetdeDesFormule = "1d100";
-        const bonus =this.actor.data.data.malus;
-                console.log(chargequi)
-
+        var bonus =this.actor.data.data.malus;
         var critique=5;
-        if(bonus=='' || bonus ==undefined){
+        var conf="auto";
+        if(bonus=='' || bonus ==undefined || bonus==null){
             bonus=0;
         }
         let inforesult=parseInt(maxstat)+parseInt(bonus)+30;
@@ -658,18 +654,18 @@ export class LiberActorSheet extends ActorSheet {
             inforesult=95;
         }
 
-        if(name=="Tir"){
+        if(name=="Tir" || name=="Tircouv"){
+            if(name=="Tir"){var conf="none";}
             arme = event.target.dataset["armed"];
             chargequi=event.target.dataset["charged"];
             if(chargequi=='' || chargequi== undefined){
                  chargequi="Mun. "+arme
             }
-            console.log(chargequi)
             var chargeur=this.actor.data.items.filter(i=>i.name == chargequi); 
                  
             
             if(chargeur.length === 0){
-                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Pas de chargeur !</h4>";
+                succes="<h4 class='result' style='background:#ff3333;'>Pas de chargeur !</h4>";
                 ChatMessage.create({
                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                     flavor: succes
@@ -677,8 +673,8 @@ export class LiberActorSheet extends ActorSheet {
                 return;
             }
             var munition=chargeur[0].data.data.quantite;
-            if(munition<=0){   
-                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Plus de munition !</h4>";
+            if(munition<=0 || name=="Tircouv" && munition<=10 ){   
+                succes="<h4 class='result' style='background:#ff3333;'>Plus de munition !</h4>";
                 ChatMessage.create({
                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                     flavor: succes
@@ -687,61 +683,82 @@ export class LiberActorSheet extends ActorSheet {
             } 
         }
         let r = new Roll("1d100");
-        var roll=r.evaluate({"async": false});;
+        var roll=r.evaluate({"async": false});
+        var deg='';
+        var perte=0;
         let retour=r.result; var succes="";
-        if(name=="Tir"){
+        if(name=="Tircouv"){
+            var arme = event.target.dataset["armed"];
+            perte=10;
+            if(retour>95){
+                succes="<h4 class='resultat' style='background:#ff3333;'>Action raté</h4>";
+            }else if(retour>(inforesult+20)){
+                succes="<h4 class='resultat' style='background:#ff5733;'>Malus de 15 aux ennemis</h4>";
+            }else if(retour>inforesult){
+                succes="<h4 class='resultat' style='background:#ff5733;'>Malus de 15 aux ennemis</h4>";
+            }else if(retour>(inforesult-20)){
+                succes="<h4 class='resultat' style='background:#78be50;'>Malus de 30 aux ennemis</h4>";              
+            }else if(retour>critique){
+                succes="<h4 class='resultat' style='background:#78be50;'>Malus de 30 aux ennemis</h4>";
+            }else if(retour<=critique){
+                succes="<h4 class='resultat' style='background:#78be50;'>Annule le prochain tour des ennmis</h4>";;                
+            }  
+        }else if(name=="Tir"){
             var arme = event.target.dataset["armed"];
             var degat = event.target.dataset["degat"];
-            console.log(degat)
-            name+=" avec "+arme;
-            var perte=0;
+            name+=" avec "+arme;       
             if(retour>95){
-                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Arme Inutilisable</h4>";
+                succes="<h4 class='resultat' style='background:#ff3333;'>Arme Inutilisable</h4>";
+                deg='<h4 class="resultdeg3"></h4>';
             }else if(retour>(inforesult+20)){
-                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>L'arme est enrayé pour 1 tour</h4>";
+                succes="<h4 class='resultat' style='background:#ff5733;'>L'arme est enrayé pour 1 tour</h4>";
+                deg='<h4 class="resultdeg2"></h4>';
             }else if(retour>inforesult){
-                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Raté</h4>";
+                succes="<h4 class='resultat' style='background:#ff5733;'>Raté</h4>";
+                deg='<h4 class="resultdeg4"></h4>';
                 perte=1;
             }else if(retour>(inforesult-20)){
-                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>La cible est touché</h4>";
-                //succes+="La cible subit : "+degat;bug a voir
+                succes="<h4 class='resultat' style='background:#78be50;'>La cible est touché</h4>";
+                deg='<h4 class="resultdeg">'+degat+'</h4>';
                 perte=1;                
             }else if(retour>critique){
-                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x1.5</h4>";
+                succes="<h4 class='resultat' style='background:#78be50;'>Dégât x1.5</h4>";
                 degat=parseInt(degat)*1.5;
-                //succes+="La cible subit : "+degat;
+                deg='<h4 class="resultdeg">'+degat+'</h4>';
                 perte=1;
             }else if(retour<=critique){
-                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Dégât x2</h4>";
+                succes="<h4 class='resultat' style='background:#78be50;'>Dégât x2</h4>";
                 degat=parseInt(degat)*2;
-                //succes+="La cible subit : "+degat;
+                deg='<h4 class="resultdeg">'+degat+'</h4>';
                 perte=1;                
-            } 
-            if(perte==1){
-                let itemData= this.actor.data.items.filter(i=>i.name == chargequi);                 
-                var iditem= itemData[0].id;
-                var qty = itemData[0].data.data.quantite;
-                itemData[0].MunMoins()
-            }
-        
-
-       
+            }       
         }else {
             if(retour>95){
-                succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec critique</h4>";
+                succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
             }else if(retour<=critique){
-                succes="<h4 class='result' style='background:#7dff33;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Réussite critique</h4>";
+                succes="<h4 class='resultat' style='background:#7dff33;'>Réussite critique</h4>";
             }else if(retour<=inforesult){
-                succes="<h4 class='result' style='background:#78be50;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Réussite</h4>";
+                succes="<h4 class='resultat' style='background:#78be50;'>Réussite</h4>";
             }else{
-                succes="<h4 class='result' style='background:#ff5733;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec</h4>";
+                succes="<h4 class='resultat' style='background:#ff5733;'>Echec</h4>";
             }
         }
-        
+        if(perte==1 || perte==10){
+            console.log('perte'+perte)
+            let itemData= this.actor.data.items.filter(i=>i.name == chargequi);                 
+            var iditem= itemData[0].id;
+            var qty = itemData[0].data.data.quantite;
+            if(perte==10){
+                itemData[0].NunsMoins();
+            }else{
+                itemData[0].MunMoins();
+            }
+        } 
+    
         if(inforesult<=0){
-            succes="<h4 class='result' style='background:#ff3333;text-align: center;color: #fff;padding: 5px;border: 1px solid #999;'>Echec critique</h4>";
+            succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
         }
-        const texte = "Jet de " + name + " : " + jetdeDesFormule +" - " + inforesult + '<br>'+ succes;
+        const texte = '<span style="flex:'+conf+'"><p>Jet de ' + name + " : " + jetdeDesFormule +" - " + inforesult + '</p>'+ succes+'</span>'+deg;
         //roll.roll().toMessage({
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -752,7 +769,6 @@ export class LiberActorSheet extends ActorSheet {
 
         let monJetDeDes = event.target.dataset["dice"];
         const name = event.target.dataset["name"];
-        //console.log(monJetDeDes);
         let r = new Roll(monJetDeDes);
         var roll=r.evaluate({"async": false});;
         const texte = "Utilise " + name + " : " + monJetDeDes;

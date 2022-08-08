@@ -1,4 +1,13 @@
 {
+  "libersf.action": "Action",
+  "libersf.tircouv": "Tir de couverture",
+  "libersf.commun": "Action commune",
+  "libersf.soutien": "Action de soutien",
+  "libersf.raffale": "Tir (Second tir possible pour arme cinétique/laser, Tir en Raffale)",
+  "libersf.marche": "Se déplacer",
+  "libersf.run": "Courrir / Déplacement rapide (Prend 2 actions)",
+  "libersf.horsmap": "Tir Hors Map",
+  "libersf.couver": "Se mettre à couvert",
   "libersf.descri": "Description",
   "libersf.type": "Type",
   "libersf.degat": "Dégâts",

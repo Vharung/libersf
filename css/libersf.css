@@ -95,18 +95,18 @@ form.Liber{display: table-cell;}
 .Liber input.desan{background:url("../assets/icon/avantage-2.png")left center no-repeat;background-size: contain;}
 .Liber .etat button{width: 35px;height: 35px;border:none;opacity: 0.5;margin-top: 20px;margin-bottom: 20px}
 .Liber .etat0 {background: url(" ../assets/icon/etat-0.png");background-size: cover;margin-left: 20px;}
-.Liber .etat1 {background: url(" ../assets/icon/etat-1.png");background-size: cover;}
-.Liber .etat2 {background: url(" ../assets/icon/etat-2.png");background-size: cover;}
-.Liber .etat3 {background: url(" ../assets/icon/etat-3.png");background-size: cover;}
-.Liber .etat4 {background: url(" ../assets/icon/etat-4.png");background-size: cover;}
-.Liber .etat5 {background: url(" ../assets/icon/etat-5.png");background-size: cover;}
-.Liber .etat6 {background: url(" ../assets/icon/etat-6.png");background-size: cover;}
-.Liber .etat7 {background: url(" ../assets/icon/etat-7.png");background-size: cover;}
-.Liber .etat8 {background: url(" ../assets/icon/etat-8.png");background-size: cover;}
-.Liber .etat9 {background: url(" ../assets/icon/etat-9.png");background-size: cover;}
-.Liber .etat10 {background: url(" ../assets/icon/etat-10.png");background-size: cover;}
-.Liber .etat11 {background: url(" ../assets/icon/etat-11.png");background-size: cover;}
-.Liber .etat12 {background: url(" ../assets/icon/aucune.png");background-size: cover;}
+.Liber .etat1 {background: url(" ../assets/icon/etat-1.png");background-size: cover;cursor: pointer}
+.Liber .etat2 {background: url(" ../assets/icon/etat-2.png");background-size: cover;cursor: pointer}
+.Liber .etat3 {background: url(" ../assets/icon/etat-3.png");background-size: cover;cursor: pointer}
+.Liber .etat4 {background: url(" ../assets/icon/etat-4.png");background-size: cover;cursor: pointer}
+.Liber .etat5 {background: url(" ../assets/icon/etat-5.png");background-size: cover;cursor: pointer}
+.Liber .etat6 {background: url(" ../assets/icon/etat-6.png");background-size: cover;cursor: pointer}
+.Liber .etat7 {background: url(" ../assets/icon/etat-7.png");background-size: cover;cursor: pointer}
+.Liber .etat8 {background: url(" ../assets/icon/etat-8.png");background-size: cover;cursor: pointer}
+.Liber .etat9 {background: url(" ../assets/icon/etat-9.png");background-size: cover;cursor: pointer}
+.Liber .etat10 {background: url(" ../assets/icon/etat-10.png");background-size: cover;cursor: pointer}
+.Liber .etat11 {background: url(" ../assets/icon/etat-11.png");background-size: cover;cursor: pointer}
+.Liber .etat12 {background: url(" ../assets/icon/aucune.png");background-size: cover;cursor: pointer}
 .Liber .etat13 {background: url(" ../assets/icon/etat-12.png");background-size: cover;}
 .Liber .maindroite,.Liber .maingauche,.Liber .armor{width: 20px; height: 20px; display: inline-block;cursor: pointer;}
 .Liber .maindroite {background: url(" ../assets/icon/hand.png");background-size: cover;}
@@ -137,3 +137,19 @@ form.Liber{display: table-cell;}
 .Liber .boucl{background: url("../assets/icon/bouclier.png")no-repeat left center; background-size: contain;}
 .Liber .viecl{background: url("../assets/icon/vie.png")no-repeat left center;background-size: contain;color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
 .Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}
+.resultat{text-align: center;color: #fff;padding: 5px;border: 1px solid #999;}
+.resultdeg,.resultdeg2,.resultdeg3,.resultdeg4{width: 60px;height: 60px;margin: 5px;}
+.resultdeg{font-size: 4em;text-align: center;line-height: normal;background: darkgrey url(../assets/icon/gunshot.png) center center no-repeat;background-size: contain;}
+.resultdeg2{background: darkgrey url(../assets/icon/backward-time.png) center center no-repeat;background-size: contain;}
+.resultdeg3{background: darkgrey url(../assets/icon/spiky-explosion.png) center center no-repeat;background-size: contain;}
+.resultdeg4{background: darkgrey url(../assets/icon/shrug.png) center center no-repeat;background-size: contain;}
+.action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6{display: inline-block;width: 59px;height: 59px;margin: 5px;}
+.action0{background: darkgrey url(../assets/icon/walk.png) center center no-repeat;background-size: contain;}
+.action0b{background: darkgrey url(../assets/icon/run.png) center center no-repeat;background-size: contain;}
+.action1{background: darkgrey url(../assets/icon/hydra-shot.png) center center no-repeat;background-size: contain;cursor: pointer}
+.action2{background: darkgrey url(../assets/icon/commun.png) center center no-repeat;background-size: contain;}
+.action3{background: darkgrey url(../assets/icon/soutien.png) center center no-repeat;background-size: contain;}
+.action4{background: darkgrey url(../assets/icon/change.png) center center no-repeat;background-size: contain;cursor: pointer}
+.action5{background: darkgrey url(../assets/icon/horsmap.png) center center no-repeat;background-size: contain;cursor: pointer}
+.action6{background: darkgrey url(../assets/icon/couvert.png) center center no-repeat;background-size: contain;cursor: pointer}
+.jetdedes,.item-equip{cursor: pointer}
