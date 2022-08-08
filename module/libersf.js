@@ -10,8 +10,9 @@ Hooks.once("init", async function() {
     CONFIG.Item.documentClass = LiberItem;
 
     CONFIG.Combat.initiative = {
-	    formula: "1d6",
-	    decimals: 2
+        //formula: "1d6",
+	    formula: "30+@Perception",
+	    decimals: 3
 	};
 
     Items.unregisterSheet("core", ItemSheet);

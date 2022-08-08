@@ -754,6 +754,7 @@ export class LiberActorSheet extends ActorSheet {
                 itemData[0].MunMoins();
             }
         } 
+        
     
         if(inforesult<=0){
             succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
