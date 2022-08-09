@@ -82,6 +82,22 @@ export class LiberActorSheet extends ActorSheet {
 
         /*edition items*/
         html.find('.item-edit').click(this._onItemEdit.bind(this));
+
+        // Delete Inventory Item
+        html.find('.item-delete').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            let d = Dialog.confirm({
+                title: game.i18n.localize("liber.suppr"),
+                content: "<p>"+game.i18n.localize("liber.conf")+ item.name + "'.</p>",
+                yes: () => item.delete(),
+                no: () => { },
+                defaultYes: false
+            });
+            //item.delete();
+            li.slideUp(200, () => this.render(false));
+        });
+
         //html.find('.item-delete').click(this._onItemDelete.bind(this));
         $('.item-equip').on('click',function(){
             var objetaequipe=$(this).attr("name");
@@ -131,20 +147,7 @@ export class LiberActorSheet extends ActorSheet {
             }
         });
 
-        // Delete Inventory Item
-        html.find('.item-delete').click(ev => {
-            const li = $(ev.currentTarget).parents(".item");
-            const item = this.actor.items.get(li.data("itemId"));
-            let d = Dialog.confirm({
-                title: game.i18n.localize("liber.suppr"),
-                content: "<p>"+game.i18n.localize("liber.conf")+ item.name + "'.</p>",
-                yes: () => item.delete(),
-                no: () => { },
-                defaultYes: false
-            });
-            //item.delete();
-            li.slideUp(200, () => this.render(false));
-        });
+        
 
         html.find('.item-create').click(ev => {
             event.preventDefault();
@@ -624,17 +627,6 @@ export class LiberActorSheet extends ActorSheet {
         item.sheet.render(true);
     }
 
-    /*_onItemDelete(event){
-        const item = this.getItemFromEvent(event);
-        let d = Dialog.confirm({
-            title: "Suppression d'élément",
-            content: "<p>Confirmer la suppression de '" + item.name + "'.</p>",
-            yes: () => this.actor.deleteEmbeddedDocuments(item._id),
-            no: () => { },
-            defaultYes: false
-        });
-    }*/
-
     _onRoll(event){
 
         let maxstat = event.target.dataset["attdice"];
@@ -655,7 +647,7 @@ export class LiberActorSheet extends ActorSheet {
         }
 
         if(name=="Tir" || name=="Tircouv"){
-            if(name=="Tir"){var conf="none";}
+            if(name=="Tir"){var conf="none;width: 200px;";}
             arme = event.target.dataset["armed"];
             chargequi=event.target.dataset["charged"];
             if(chargequi=='' || chargequi== undefined){
@@ -665,7 +657,7 @@ export class LiberActorSheet extends ActorSheet {
                  
             
             if(chargeur.length === 0){
-                succes="<h4 class='result' style='background:#ff3333;'>Pas de chargeur !</h4>";
+                succes="<h4 class='resultat' style='background:#ff3333;'>Pas de chargeur !</h4>";
                 ChatMessage.create({
                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                     flavor: succes
@@ -674,7 +666,7 @@ export class LiberActorSheet extends ActorSheet {
             }
             var munition=chargeur[0].data.data.quantite;
             if(munition<=0 || name=="Tircouv" && munition<=10 ){   
-                succes="<h4 class='result' style='background:#ff3333;'>Plus de munition !</h4>";
+                succes="<h4 class='resultat' style='background:#ff3333;'>Plus de munition !</h4>";
                 ChatMessage.create({
                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                     flavor: succes
@@ -759,7 +751,7 @@ export class LiberActorSheet extends ActorSheet {
         if(inforesult<=0){
             succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
         }
-        const texte = '<span style="flex:'+conf+'"><p>Jet de ' + name + " : " + jetdeDesFormule +" - " + inforesult + '</p>'+ succes+'</span>'+deg;
+        const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #6a7885;padding: 5px;color: white;">Jet de ' + name + " : " + jetdeDesFormule +" - " + inforesult + '</p>'+ succes+'</span>'+deg;
         //roll.roll().toMessage({
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
