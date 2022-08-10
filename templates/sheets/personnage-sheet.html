@@ -433,7 +433,7 @@
 
 				{{!-- Sante Tab --}}
 				<div id="sante" class="tab sante" data-group="primary" data-tab="sante">
-					<div class="santes">
+					<div class="santes">// a modif (mettre en orange si <50% et colorier la zone sur le dessin)
 						<div class="zone tete">
 							<div class="bar" style="width:calc(100px - {{data.data.tete}}0px); background:green;"></div>
 							<input name="data.tete" type="text" value="{{data.data.tete}}" placeholder="Tete"/>
@@ -463,7 +463,7 @@
 					<p style="color:#fff; width: 45%; float:left; display: block;">1° Blessure => Dégat - point d'armure<br>2° Pv armure - Dégats <br><br>
 						Si PV=0 :<br>
 					sur D100 :
-					-Tête 0-10<br>-	Bras D 11-20<br>- Bras G 21-30<br>-	Torse 31- 70<br>- Jambe D 71-85<br>- Jambe G 86-100<br><br>Indiqué les dégats prient dans le shéma ci-dessus. Si plus de bar de santé la zone est morte.</p>
+					-Tête 0-10<br>-	Bras D 11-20<br>- Bras G 21-30<br>-	Torse 31- 70<br>- Jambe D 71-85<br>- Jambe G 86-100<br><br>Indiqué les dégats prient dans le shéma ci-dessus. Si plus de bar de santé est à 0 la zone est morte.</p>
 					<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="width: 310px; height: auto;float: right;margin-top:10px">
 				</div>
 				{{!-- Lab Tab --}}
