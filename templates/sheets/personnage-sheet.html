@@ -101,7 +101,7 @@
 					<div class="action6" title="{{localize 'libersf.couver'}}"></div>
 					<div class="clear"></div>
 
-					<h2 style="text-align: center;">Jet D100 sur Base 30</h2>
+					<h2 style="text-align: center;">{{localize 'libersf.base30'}}</h2>
 					<div class="compt"><button class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Agilité}}">{{localize 'libersf.agil'}}</button>
 					<input class="cpt0" name="data.Agilité" type="text" value="{{data.data.Agilité}}" placeholder="{{data.data.Agilité}}" style="text-align: center"/>
 					</div>
@@ -184,7 +184,7 @@
 					<input class="cpt26" name="data.magie" type="text" value="{{data.data.magie}}" placeholder="{{data.data.magie}}" style="text-align: center"/>
 					</div>
 					<div class="clear"></div>
-					<p style="color: #f0f0e0;font-size: 0.9em;font-style: italic;">*Attention : si la technologie a plus ★ que de dizaine, un malus de 10 sera appliqué par ★ de différence</p>
+					<p style="color: #f0f0e0;font-size: 0.9em;font-style: italic;">{{localize 'libersf.caution'}}</p>
 					
 					<div class="grid-2col" style="margin-top: 20px">
 						<h2 style="text-align:center">{{localize 'libersf.restant'}}</h2>
@@ -471,10 +471,7 @@
 					</div>
 					
 					<h2 style="text-align: center;">{{localize 'libersf.zone'}}</h2>
-					<p style="color:#fff; width: 45%; float:left; display: block;">1° Blessure => Dégat - point d'armure<br>2° Pv armure - Dégats <br><br>
-						Si PV=0 :<br>
-					sur D100 :
-					-Tête 0-10<br>-	Bras D 11-20<br>- Bras G 21-30<br>-	Torse 31- 70<br>- Jambe D 71-85<br>- Jambe G 86-100<br><br>Indiqué les dégats prient dans le shéma ci-dessus. Si plus de bar de santé est à 0 la zone est morte.</p>
+					<p style="color:#fff; width: 45%; float:left; display: block;">{{localize 'libersf.regle'}}<br>{{localize 'libersf.regle2'}}<br><br>{{localize 'libersf.regle3'}}<br>{{localize 'libersf.regle5'}}<br>{{localize 'libersf.regle6'}}<br>{{localize 'libersf.regle7'}}<br>{{localize 'libersf.regle8'}}<br>{{localize 'libersf.regle9'}}<br>{{localize 'libersf.regle10'}}<br><br>{{localize 'libersf.regle11'}}</p>
 					<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="width: 310px; height: auto;float: right;margin-top:10px">
 				</div>
 				{{!-- Lab Tab --}}
@@ -524,7 +521,7 @@
 					<SELECT class="andomedes" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.andomedes">
 	                    {{#select data.data.andomedes}}
 		                    <option value="non">Non</option>
-		                    <option value="oui">oui</option>
+		                    <option value="oui">Oui</option>
 		                {{/select}}
 	                </SELECT>					
 					

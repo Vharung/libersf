@@ -281,6 +281,7 @@ export class LiberActorSheet extends ActorSheet {
         //caractere aléatoire
         html.find('.generator').click(this._onStory2.bind(this));
         html.find('.caractergen').click(this._onStory.bind(this))
+        html.find('.aleatoire').click(this._onAleatoire.bind(this))
 
         /*Ancienté*/
         var ancien=html.find('.model').val();
@@ -403,7 +404,7 @@ export class LiberActorSheet extends ActorSheet {
             $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'2.png) center center no-repeat'});
           }else if(pc<=0){
             $('.zone.'+name+' .bar').css({'background':'black','width':pc+'%'});
-            $('.z'+z).css({'background':'none'});
+            $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'0.png) center center no-repeat'});
           }else{
             $('.zone.'+name+' .bar').css({'background':'red','width':pc+'%'});
             $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'3.png) center center no-repeat'});
@@ -837,5 +838,36 @@ export class LiberActorSheet extends ActorSheet {
             let itemData2= this.actor.data.items.filter(i=>i.name == bouname);                 
             itemData2[0].DegatArm(bou,boumax);
         }
+    }
+
+    _onAleatoire(event){
+        var race=["Chien","Serpent","Vermine","Ourse","Sangsue","Lézard","Oiseau","Araignée","Chimère","Grenouille"]
+        var carc=["féroce","sombre","immense","redoutable","inquiétante","étrange","rouge","invisible","invinsible"]
+        var lieu=["des enfers","des ombres","d'outre tombe"]
+        var type=["volant","sous terrain","marin"]
+        var effe=["paralyse","empoisonne","detecte sur l'infra-rouge","detecte l'odeur de","detecte la chaleur de","detecte l'énergie de","crahe","lance des épines","se camoufle de","prend l'apparence de"]
+        var img='systems/libersf/assets/icon/monstre.jpg';
+        var nom= race[Math.floor(Math.random()*race.length)];
+        var o=Math.random()*100;
+        if(o>50){
+            nom+=' '+carc[Math.floor(Math.random()*carc.length)];
+        }
+        o=Math.random()*100;
+        if(o>50){
+            nom+=' '+lieu[Math.floor(Math.random()*lieu.length)];
+        }
+        var t= type[Math.floor(Math.random()*type.length)];
+        var e= effe[Math.floor(Math.random()*effe.length)];
+        var dgt=Math.floor((Math.random()*5)*10);
+        var ar=Math.floor((Math.random()*5)*10);
+        var pv=Math.floor((Math.random()*5+1)*10);
+        var desc=nom+' est un animal '+t+' qui '+e+' ses ennemis. Il inflige '+dgt+' et à une armure de '+ar+' et à '+pv+'PV'
+        var cpt=[]
+        var valeur=[-30,-20,-10,0,10,20,30,40]
+        for (var i =0; i < 26; i++) {
+            var v= valeur[Math.floor(Math.random()*valeur.length)];
+            cpt.push(v);
+        }
+        this.actor.update({'name':nom,'img':img,'data.histoire':desc,'data.hp.value': pv,'data.hp.max': pv,'data.degatd': dgt,'data.armed':'Attaque','data.armure.value': ar,'data.armure.max': ar,'data.ptarm': ar,'data.prog':'Armure Naturel','data.Agilité':cpt[0],'data.Artisanat':cpt[1],'data.Balistique':cpt[2],'data.Combat':cpt[3],'data.ConGén':cpt=[4],'data.ConSpécif':cpt=[5],'data.Dextérité':cpt=[6],'data.Diplomatie':cpt=[7],'data.Discrétion':cpt=[8],'data.Force':cpt=[9],'data.Investigation':cpt=[10],'data.Jeu':cpt=[11],'data.Mécanique':cpt=[12],'data.Médecine':cpt=[13],'data.Natation':cpt=[14],'data.Navigation':cpt=[15],'data.Négociation':cpt=[16],'data.Perception':cpt=[17],'data.Pilotage':cpt=[18],'data.Piratage':cpt=[19],'data.Pistage':cpt=[20],'data.Religion':cpt=[21],'data.Science':cpt=[22],'data.Survie':cpt=[23],'data.Tir':cpt=[24],'data.Visée':cpt=[25]});
     }
 }

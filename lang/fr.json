@@ -142,6 +142,19 @@
   "libersf.v9": "Futuriste",
   "libersf.v10": "Prototype",
   "libersf.supp": "Suppression d'élément",
-  "libersf.conf": "Confirmer la suppression de "
+  "libersf.conf": "Confirmer la suppression de ",
+  "libersf.aleatoire": "Générer un monstre aléatoire ",
+  "libersf.base30": "Jet D100 sur Base 30",
+  "libersf.caution": "*Attention : si la technologie a plus ★ que de dizaine, un malus de 10 sera appliqué par ★ de différence",
+  "libersf.regle": "1° Blessure => Dégat - point d'armure",
+  "libersf.regle2": "2° Pv armure - Dégats",
+  "libersf.regle3": "Si PV=0 Effectuer un jet de survie :",
+  "libersf.regle5": "-Tête 0-10",
+  "libersf.regle6": "- Bras D 11-20",
+  "libersf.regle7": "- Bras G 21-30",
+  "libersf.regle8": "- Torse 31- 70",
+  "libersf.regle9": "- Jambe D 71-85",
+  "libersf.regle10": "- Jambe G 86-100",
+  "libersf.regle11": "Indiqué les dégats prient dans le shéma ci-dessus. Si plus de bar de santé est à 0 la zone est morte."
 
 }
