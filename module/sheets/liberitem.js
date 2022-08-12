@@ -78,18 +78,19 @@ export class LiberItem extends Item {
 
   MunMoins(){
     let itemData = this.data;
-    console.log(itemData)
     let qty=itemData.data.quantite;
     qty--;
-    console.log('qty'+qty)
     this.update({'data.quantite':qty});
   }
   NunsMoins(){
     let itemData = this.data;
-    console.log(itemData)
     let qty=itemData.data.quantite;
     qty=qty-10;
-    console.log('qty'+qty)
     this.update({'data.quantite':qty});
+  }
+  DegatArm(hp,hpmax){
+    console.log('DegatArm'+hp)
+    let itemData = this.data;
+    this.update({'data.resitance':hp,'data.hp.max':hpmax});
   }
 }

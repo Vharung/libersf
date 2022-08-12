@@ -1,5 +1,5 @@
 {
-  "libersf.action": "Action",
+  "libersf.action": "2 Action / tour",
   "libersf.tircouv": "Tir de couverture",
   "libersf.commun": "Action commune",
   "libersf.soutien": "Action de soutien",
@@ -74,7 +74,7 @@
   "libersf.dipl": "Diplomatie",
   "libersf.forc": "Force",
   "libersf.inve": "Investigation",
-  "libersf.ajeu": "Jeu",
+  "libersf.ajeu": "Jeu / Refléction",
   "libersf.meca": "Mécanique",
   "libersf.mede": "Médecine",
   "libersf.nata": "Natation",
