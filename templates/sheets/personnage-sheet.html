@@ -41,22 +41,20 @@
 				</div>
 				<div class="clear"></div>
 				<div class="etat">
-					<button class="etat0"></button>
-					<button class="etat1"></button>
-					<button class="etat2"></button>
-					<button class="etat3"></button>
-					<button class="etat4"></button>
-					<button class="etat5"></button>
-					<button class="etat6"></button>
-					<button class="etat7"></button>
-					<button class="etat8"></button>
-					<button class="etat9"></button>
-					<button class="etat10"></button>
-					<button class="etat11"></button>
-					<button class="etat12"></button>
-					<button class="etat13"></button>
-					<input class="etats" name="data.etat" type="text" value="{{data.data.etat}}" style="display:none"/>
-
+					<button class="etat0 chnget" data-etat="0" style="opacity: {{data.data.etat.a}};"></button>
+					<button class="etat1 chnget" data-etat="1" style="opacity: {{data.data.etat.b}};"></button>
+					<button class="etat2 chnget" data-etat="2" style="opacity: {{data.data.etat.c}};"></button>
+					<button class="etat3 chnget" data-etat="3" style="opacity: {{data.data.etat.d}};"></button>
+					<button class="etat4 chnget" data-etat="4" style="opacity: {{data.data.etat.e}};"></button>
+					<button class="etat5 chnget" data-etat="5" style="opacity: {{data.data.etat.f}};"></button>
+					<button class="etat6 chnget" data-etat="6" style="opacity: {{data.data.etat.g}};"></button>
+					<button class="etat7 chnget" data-etat="7" style="opacity: {{data.data.etat.h}};"></button>
+					<button class="etat8 chnget" data-etat="8" style="opacity: {{data.data.etat.i}};"></button>
+					<button class="etat9 chnget" data-etat="9" style="opacity: {{data.data.etat.j}};"></button>
+					<button class="etat10 chnget" data-etat="10" style="opacity: {{data.data.etat.k}};"></button>
+					<button class="etat11 chnget" data-etat="11" style="opacity: {{data.data.etat.l}};"></button>
+					<button class="etat12 chnget" data-etat="12" style="opacity: {{data.data.etat.m}};"></button>
+					<button class="etat13 chnget" data-etat="13" style="opacity: {{data.data.etat.n}};"></button>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -98,7 +96,7 @@
 					<div class="action3" title="{{localize 'libersf.soutien'}}"></div>
 					<div class="action4 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Tir}}" data-armed="{{data.data.armed}}" data-degat="{{data.data.degatd}}" data-charged="{{data.data.charged}}" title="{{localize 'libersf.raffale'}}"></div>
 					<div class="action5" data-name="Tir" data-dice="1d" data-actionvalue="{{data.data.bonus}}" data-attDice="{{data.data.Tir}}" data-armed="{{data.data.armed}}" data-degat="{{data.data.degatd}}" data-charged="{{data.data.charged}}" title="{{localize 'libersf.horsmap'}}"></div>
-					<div class="action6" title="{{localize 'libersf.couver'}}"></div>
+					<div class="action6" title="{{localize 'libersf.couver'}}" data-etat="12"></div>
 					<div class="clear"></div>
 
 					<h2 style="text-align: center;">{{localize 'libersf.base30'}}</h2>

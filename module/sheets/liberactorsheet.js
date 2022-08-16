@@ -137,11 +137,8 @@ export class LiberActorSheet extends ActorSheet {
             html.find('.faction').val(clanliste);
         });
 
-        //action couvert
-        html.find('.action6').on('click',function(){
-            html.find(".etats").val('aucun');
-            html.find(".etat12").css({"opacity": "1"});
-        });
+        
+
 
         //calcul point restant
         var clanliste=html.find('.raceliste').val();
@@ -304,14 +301,16 @@ export class LiberActorSheet extends ActorSheet {
         });
 
         /*Etat*/
-        var etats=['inconsient','invisible','blesse','mort','empoisonné','prie','attache','fort','faible','concentre','brule','mordu','aucun']
-        var actoretat=html.find('.etats').val();
-        for (var i = 0; i <= 13; i++) {
-            if(actoretat==etats[i]){
-                html.find('.etat'+i).css("opacity", "1");
-            }
-        }
-        $('.etat0').on('click',function(){
+        //action couvert
+        /*html.find('.action6').on('click',function(){
+            html.find(".etats").val('aucun');
+            //html.find(".etat12").css({"opacity": "1"});
+        });*/
+        html.find('.action6').click(this._onCouv.bind(this));
+        html.find('.chnget').click(this._onCouv.bind(this));
+
+        
+        /*$('.etat0').on('click',function(){
             $(this).parent().children("button").css({"opacity": "0.5"});
             //$(this).css("opacity", "1");
             $(this).parent().find(".etats").val('inconsient');
@@ -374,8 +373,8 @@ export class LiberActorSheet extends ActorSheet {
         $('.etat12').on('click',function(){
             $(this).parent().children("button").css({"opacity": "0.5"});
             //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('aucun');
-        });
+            $(this).parent().find(".etats").val('couvert');
+        });*/
 
         //couleur bar
         html.find( ".refbar" ).each(function( index ) {
@@ -869,5 +868,111 @@ export class LiberActorSheet extends ActorSheet {
             cpt.push(v);
         }
         this.actor.update({'name':nom,'img':img,'data.histoire':desc,'data.hp.value': pv,'data.hp.max': pv,'data.degatd': dgt,'data.armed':'Attaque','data.armure.value': ar,'data.armure.max': ar,'data.ptarm': ar,'data.prog':'Armure Naturel','data.Agilité':cpt[0],'data.Artisanat':cpt[1],'data.Balistique':cpt[2],'data.Combat':cpt[3],'data.ConGén':cpt=[4],'data.ConSpécif':cpt=[5],'data.Dextérité':cpt=[6],'data.Diplomatie':cpt=[7],'data.Discrétion':cpt=[8],'data.Force':cpt=[9],'data.Investigation':cpt=[10],'data.Jeu':cpt=[11],'data.Mécanique':cpt=[12],'data.Médecine':cpt=[13],'data.Natation':cpt=[14],'data.Navigation':cpt=[15],'data.Négociation':cpt=[16],'data.Perception':cpt=[17],'data.Pilotage':cpt=[18],'data.Piratage':cpt=[19],'data.Pistage':cpt=[20],'data.Religion':cpt=[21],'data.Science':cpt=[22],'data.Survie':cpt=[23],'data.Tir':cpt=[24],'data.Visée':cpt=[25]});
+    }
+
+    _onCouv(event){
+        var etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
+    
+        var chnget=event.target.dataset["etat"];console.log('etats'+etats[chnget])
+        var et=etats[chnget];
+        if(et=='a'){
+            var etat=this.actor.data.data.etat.a;
+            if(etat==1){
+                this.actor.update({"data.etat.a":0.5});    
+            }else {
+                this.actor.update({"data.etat.a":1});      
+            }
+        }else if(et=='b'){
+            var etat=this.actor.data.data.etat.b;
+            if(etat==1){
+                this.actor.update({"data.etat.b":0.5});    
+            }else {
+                this.actor.update({"data.etat.b":1});      
+            }
+        }else if(et=='c'){
+            var etat=this.actor.data.data.etat.c;
+            if(etat==1){
+                this.actor.update({"data.etat.c":0.5});    
+            }else {
+                this.actor.update({"data.etat.c":1});      
+            }
+        }else if(et=='d'){
+            var etat=this.actor.data.data.etat.d;
+            if(etat==1){
+                this.actor.update({"data.etat.d":0.5});    
+            }else {
+                this.actor.update({"data.etat.d":1});      
+            }
+        }else if(et=='e'){
+            var etat=this.actor.data.data.etat.e;
+            if(etat==1){
+                this.actor.update({"data.etat.e":0.5});    
+            }else {
+                this.actor.update({"data.etat.e":1});      
+            }
+        }else if(et=='f'){
+            var etat=this.actor.data.data.etat.f;
+            if(etat==1){
+                this.actor.update({"data.etat.f":0.5});    
+            }else {
+                this.actor.update({"data.etat.f":1});      
+            }
+        }else if(et=='g'){
+            var etat=this.actor.data.data.etat.g;
+            if(etat==1){
+                this.actor.update({"data.etat.g":0.5});    
+            }else {
+                this.actor.update({"data.etat.g":1});      
+            }
+        }else if(et=='h'){
+            var etat=this.actor.data.data.etat.h;
+            if(etat==1){
+                this.actor.update({"data.etat.h":0.5});    
+            }else {
+                this.actor.update({"data.etat.h":1});      
+            }
+        }else if(et=='i'){
+            var etat=this.actor.data.data.etat.i;
+            if(etat==1){
+                this.actor.update({"data.etat.i":0.5});    
+            }else {
+                this.actor.update({"data.etat.i":1});      
+            }
+        }else if(et=='j'){
+            var etat=this.actor.data.data.etat.j;
+            if(etat==1){
+                this.actor.update({"data.etat.j":0.5});    
+            }else {
+                this.actor.update({"data.etat.j":1});      
+            }
+        }else if(et=='k'){
+            var etat=this.actor.data.data.etat.k;
+            if(etat==1){
+                this.actor.update({"data.etat.k":0.5});    
+            }else {
+                this.actor.update({"data.etat.k":1});      
+            }
+        }else if(et=='l'){
+            var etat=this.actor.data.data.etat.l;
+            if(etat==1){
+                this.actor.update({"data.etat.l":0.5});    
+            }else {
+                this.actor.update({"data.etat.l":1});      
+            }
+        }else if(et=='m'){
+            var etat=this.actor.data.data.etat.m;
+            if(etat==1){
+                this.actor.update({"data.etat.m":0.5});    
+            }else {
+                this.actor.update({"data.etat.m":1});      
+            }
+        }else if(et=='n'){
+            var etat=this.actor.data.data.etat.n;
+            if(etat==1){
+                this.actor.update({"data.etat.n":0.5});    
+            }else {
+                this.actor.update({"data.etat.n":1});      
+            }
+        }
     }
 }
