@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.Liber .items-list .item-description,.Liber .items-list .item-description2,.Liber .items input.armed,.Liber .items input.charged,.Liber .items input.armurequi,.Liber .items input.bouclierqui,.Liber .talentliste,.Liber .faiblesseliste,.Liber .carac input[type="text"].talent,.Liber .carac input[type="text"].faiblesse,.Liber .tabs,.Liber a.item.Liber .stat input,.Liber .stat2 input,.Liber .features input,.Liber .head,.Liber header,.Liber h2  {background:#091a0a}/*titre #09141a*/
+.Liber a.active,.Liber a.item.active:hover,.Liber textarea,.Liber main,.Liber .head .rexrow{background:#1c3830;}/*font  #253745*/
+.Liber .autres{background:#1c3830 url(font.png) bottom right no-repeat;}
+.Liber a.item:hover{background:#40675c;color:#fff;transition: 0.5s;}
 /*@font-face {font-family: "abnes";src: url('abnes.otf'); }*/
 .Liber.window-app .window-content{background-image: none;overflow:hidden }
 .Liber .fiche{display: block;height: 800px;width: 1200px;}
-.Liber header {background:#09141a;color: #fff};
+.Liber header {color: #fff};
 .Liber .col2{display: block;height: 752px;float: left;width: 590px;}
 .Liber{width:1196px;height: 800px;font-family: 'Roboto', sans-serif;display: block;overflow: hidden;}
 form.Liber{display: table-cell;}
@@ -10,14 +14,14 @@ form.Liber{display: table-cell;}
 .Liber .head input[type="text"]{background:none; border:none;}
 .Liber .head,.Liber main,.Liber .autres,.Liber .autre{width: 595px;display:block;}
 .Liber .autre{float: left;}
-.Liber .head{background: #09141a;height: 120px;border-radius:60px 0 0 60px;}
+.Liber .head{height: 120px;border-radius:60px 0 0 60px;}
 .Liber .head .avatar img{height: 100%;max-width: none}
 .Liber .head .avatar{height: 120px; width: 120px;border-radius: 50%; display:inline-block;overflow: hidden;float: left}
 /*.Liber .head span.post {height: 20px;width: 20px;display: inline-block; float: right; margin-right: 10px}*/
 .Liber .head input{color:#fff}
 .Liber .head input.nomperso{text-transform: uppercase;height: 20px; display: block; font-size: 1.2em;width:calc(100% - 130px);}
 .Liber .headtext{ padding:5px;}
-.Liber .head .rexrow{margin-top: 10px;color: #fff;background: #253745;height: 80px;width:590px;padding: 5px 5px 5px 130px;border-radius: 60px 0 0 60px;display: block;}
+.Liber .head .rexrow{margin-top: 10px;color: #fff;height: 80px;width:590px;padding: 5px 5px 5px 130px;border-radius: 60px 0 0 60px;display: block;}
 .Liber .head .rexrow input{border-bottom:solid 1px #6a7885;width:96px;}
 .Liber .head .rexrow input.religion {width: 59px}
 .Liber .head .rexrow input.avantagerace {width: 186px}
@@ -31,27 +35,25 @@ form.Liber{display: table-cell;}
 .Liber input[type="text"].team{background: url(../assets/icon/revolt.png)left center no-repeat;background-size: contain;margin-left: 10px}
 .Liber input[type="text"].solit{background: url(../assets/icon/solitude.png)left center no-repeat;background-size: contain;margin-left: 10px}
 .Liber input[type="text"].team,.Liber input[type="text"].solit,.Liber .armcl,.Liber .boucl{color: #fff;padding-left: 80px;border: none;width: 140px;height: 71px;font-size: 2.5em;}
-.Liber main{background: #253745; height: 628px; margin-top: 5px;color:#fff;}
-.Liber .autres{background: #253745; height: 753px; margin-left: 5px;}
-.Liber h2 {width:100%; background:#09141a;color: #fff;font-size: 1em;padding: 5px;border-bottom: 0;}
+.Liber main{height: 628px; margin-top: 5px;color:#fff;}
+.Liber .autres{height: 753px; margin-left: 5px;}
+.Liber h2 {width:100%;color: #fff;font-size: 1em;padding: 5px;border-bottom: 0;}
 .Liber .deno{width: 175px;border-bottom: 1px solid #6a7885;padding: 0px;display: block;margin: 0 5px 5px 5px;height: 28px;float: left;}
-.Liber .stat input,.Liber .stat2 input,.Liber .features input{background:#09141a; margin:0;display: inline-block;float: left;height: 28px;width: 40px;color:#fff;text-align: center;}
+.Liber .stat input,.Liber .stat2 input,.Liber .features input{margin:0;display: inline-block;float: left;height: 28px;width: 40px;color:#fff;text-align: center;}
 .Liber .stat input.hp,.Liber .stat input.actarm, .Liber .stat input.actbou, .Liber .stat input.protection, .Liber .stat2 input{border: 1px solid #6a7885;}
 .Liber .stat input.hpmax,.Liber .stat input.actarmmax,.Liber .stat input.actboumax{border-top: 1px solid #6a7885;border-bottom:1px solid #6a7885;border-right: 1px solid #6a7885; border-left:none}
 .Liber .second{padding-top: 5px}
 .Liber .stat2 input,.Liber .stat2 label{margin-left:calc(50% - 20px);margin-top: 0}
 .Liber .stat2 p{text-align: center;margin-bottom: 0}
 .Liber .stat2 label{width:40px;display: block;}
-.Liber textarea{width: 100%;height: 255px;background: #253745;color:#fff;border:none;resize: none;}
+.Liber textarea{width: 100%;height: 255px;color:#fff;border:none;resize: none;}
 .Liber input[type="button"],.Liber .stat2 label{background:#e13b23;border:none;color:#fff;padding: 5px;font-weight: bold;cursor: pointer}
 .Liber .clear{clear: both}.Liber .center{text-align: center;}
 .Liber .coutmax,.Liber .maxsort {width:100%;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;}
 .Liber .modif button.desequi{float: right;background: #e13b23;border: none;color: #fff;width: 50px;height: 50px;font-size: 2em;cursor: pointer}
-.Liber a.item{display: inline-block;color:#6f727b;background:#09141a;width:20%;padding: 9px 2px;margin: 0;text-align: center;/*font-family: 'abnes';*/}
+.Liber a.item{display: inline-block;color:#6f727b;width:20%;padding: 9px 2px;margin: 0;text-align: center;/*font-family: 'abnes';*/}
 .Liber a.item span{width: 103%;/*border-right:1px solid #6a7885;*/ height: 20px;display: block}
-.Liber a.active,.Liber a.item.active:hover{background:#253745;color:#fff;}
-.Liber a.item:hover{background:#516778;color:#fff;transition: 0.5s;}
-.Liber .tabs{background: #09141a;}
+.Liber a.active,.Liber a.item.active:hover{color:#fff;}
 .Liber .tab{padding: 20px 8px 0 5px;}
 .Liber .features button{float: left;width: 142px;height: 28px;font-weight: normal;text-align: left;border-bottom: 1px solid #6a7885;border:none;border-bottom:#6a7885 solid 1px;color:#6a7885;background: none;margin-right: 5px;}
 .Liber .features button:hover{color:#fff}
@@ -63,13 +65,13 @@ form.Liber{display: table-cell;}
 .Liber .carac span{width:calc(30% - 5px);display: inline-block;margin-right: 5px;color:#6a7885;font-size: 0.8em;text-align: right;}
 .Liber .carac input[type="text"]{width: 70%;display: inline-block;border:none;border-bottom: 1px solid #6a7885;color:#fff;background: none}
 .Liber .carac input[type="button"]{float: right;background: #e13b23;border: none;color: #fff;width: 100px;height: 30px;font-size: 1em;cursor: pointer; margin:3px;}
-.Liber .carac input[type="text"].talent,.Liber .carac input[type="text"].faiblesse{border:1px solid #6a7885;width:64%;background:#09141a;height: 30px;}
-.Liber .talentliste,.Liber .faiblesseliste{width: 56%;display: inline-block;height: 30px;margin-top: 3px;border: none;background: #09141a;color: #fff;}
+.Liber .carac input[type="text"].talent,.Liber .carac input[type="text"].faiblesse{border:1px solid #6a7885;width:64%;height: 30px;}
+.Liber .talentliste,.Liber .faiblesseliste{width: 56%;display: inline-block;height: 30px;margin-top: 3px;border: none;color: #fff;}
 .Liber .items .encom{width: 100%;border: 1px solid #6a7885; height: 28px;margin-bottom: 20px}
 .Liber .items .encom p{width: 100%;margin-left: 5px;height: 28px;font-size: 0.8em;color: #fff;margin-top: -26px;}
 .Liber .items .barenc{width: 100%;background: #0080c0;height: 26px;display: block;}
 .Liber .items .encom input {border: none;background: none;color: #fff}
-.Liber .items input.armed,.Liber .items input.charged,.Liber .items input.armurequi,.Liber .items input.bouclierqui{border:1px solid #6a7885;width:45%;background:#09141a;height: 30px;color: #fff;margin-bottom: 5px;}
+.Liber .items input.armed,.Liber .items input.charged,.Liber .items input.armurequi,.Liber .items input.bouclierqui{border:1px solid #6a7885;width:45%;height: 30px;color: #fff;margin-bottom: 5px;}
 .Liber .items .desequi{float: right;background: #e13b23;border: none;color: #fff;width: 30px;height: 30px;font-size: 1em;cursor: pointer;margin-right: 10px;}
 .Liber .items .jetdedegat{float: right;background: #e13b23;border: none;color: #fff;width: 105px;height: 25px;font-size: 0.8em;cursor: pointer;margin: 3px;text-align: center;}
 .Liber .items-list {list-style: none;margin: 7px 0;padding: 0;overflow-y: auto;}
@@ -81,7 +83,7 @@ form.Liber{display: table-cell;}
 .Liber .items-list .item-resitance,.Liber .items-list .item-hpmax,.Liber .items-list .item-genre,.Liber .items-list .item-techno,.Liber .items-list .item-duree,.Liber .items-list .item-classe,.Liber .items-list .item-controls,.Liber .items-list .item-image,.Liber .items-list .item-name,.Liber .items-list .item-description,.Liber .items-list .item-description2,.Liber .items-list .item-portee,.Liber .items-list .item-dommage,.Liber .items-list .item-poids,.Liber .items-list .item-poids,.Liber .items-list .item-valeur,.Liber .items-list .item-qt,.Liber .items-list .item-qty,.Liber .items-list .item-hand{display:block;height:25px;float: left;overflow: hidden;}
 .Liber .items-list .item-name {margin: 0;width: 220px;float: left;}
 .Liber .items-list .item-name2 {margin: 0;width: 280px;float: left;}
-.Liber .items-list .item-description,.Liber .items-list .item-description2{width: calc(100% - 20px);height: auto;margin: 10px;background: #09141a;padding: 5px;display: block;}
+.Liber .items-list .item-description,.Liber .items-list .item-description2{width: calc(100% - 20px);height: auto;margin: 10px;padding: 5px;display: block;}
 .Liber .items-list .item-genre{width: 20px;float: left; text-align: center}
 .Liber .items-list .item-classe{width: 50px;float: left}
 .Liber .items-list .item-duree{width: 72px;float: left}
