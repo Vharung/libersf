@@ -420,6 +420,8 @@ export class LiberActorSheet extends ActorSheet {
         html.find( ".item-qt" ).each(function( index ) {
           quantite.push($( this ).text());
         });
+
+
         for (var i = 1;i < poids.length ; i++) {
            total=total+parseFloat(poids[i])*parseFloat(quantite[i]);
         }
