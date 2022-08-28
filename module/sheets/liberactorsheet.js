@@ -119,13 +119,7 @@ export class LiberActorSheet extends ActorSheet {
             }
         });
 
-        /*var modifarmure=1
-        var actarm=html.find('.actarm').val();
-        var actbou=html.find('.actbou').val();
-        actarm=Math.floor(parseInt(actarm)/modifarmure);
-        actbou=Math.floor(parseInt(actbou)/modifarmure);
-        html.find('.ptarm').html(actarm);
-        html.find('.ptbou').html(actbou);*/
+
 
         //choix Race
         html.find('.racechoix').click(this._onAvantageRace.bind(this));
@@ -147,7 +141,12 @@ export class LiberActorSheet extends ActorSheet {
         var race=html.find('.race').val();
         var ptrestant=html.find('.pointrestant').val();
         var level=html.find('.niveau').val();
-        var resultat=-20-((parseInt(level)-1)*10);
+        if(level==undefined){
+            var ptrestant2=html.find('.pointrestant2').val();
+            var resultat=parseInt(ptrestant2);
+        }else {
+            var resultat=-20-((parseInt(level)-1)*10); 
+        }
         var min=-20;
         for(i=0;i<26;i++){
             if(race=="Humain" && i==6){
@@ -239,6 +238,7 @@ export class LiberActorSheet extends ActorSheet {
             }
             var valor=parseInt(html.find('.cpt'+i).val());
             resultat=resultat+valor;
+            console.log(resultat)
         }
         $( ".features input" ).each(function( index ) {
           var valor= $( this ).val();
@@ -250,9 +250,14 @@ export class LiberActorSheet extends ActorSheet {
             $( this ).css({"background":"#a51b1b","color": "white"});
           }
         });
-        var hpmax=html.find('.hpmax').val();
-        var pointhp=(parseInt(hpmax)-20)*2;
-        resultat=resultat+pointhp;
+        if(level==undefined){
+            resultat=resultat;
+        }else {
+            var hpmax=html.find('.hpmax').val();
+            var pointhp=(parseInt(hpmax)-20)*2;
+            resultat=resultat+pointhp; 
+        }
+        
         html.find('.pointrestant').val(resultat);
 
         /*Avantage*/
@@ -295,86 +300,19 @@ export class LiberActorSheet extends ActorSheet {
         else if(ancien=="Prototype : ★ ★ ★ ★ ★"){etoile="★ ★ ★ ★ ★"}
         html.find('.etoile').html(etoile);
 
-        html.find('.ancienete').on('click',function(){
-            var texte=$(this).html();
-            html.find('.model').val(texte);
-        });
 
         /*Etat*/
-        //action couvert
-        /*html.find('.action6').on('click',function(){
-            html.find(".etats").val('aucun');
-            //html.find(".etat12").css({"opacity": "1"});
-        });*/
         html.find('.action6').click(this._onCouv.bind(this));
         html.find('.chnget').click(this._onCouv.bind(this));
+        html.find('.vehichoix').click(this._onVehi.bind(this));
 
-        
-        /*$('.etat0').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('inconsient');
-        });
-        $('.etat1').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('invisible');
-        });
-        $('.etat2').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('blesse');
-        });
-        $('.etat3').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('mort');
-        });
-        $('.etat4').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('empoisonné');
-        });
-        $('.etat5').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('prie');
-        });
-        $('.etat6').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('attache');
-        });
-        $('.etat7').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('fort');
-        });
-        $('.etat8').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('faible');
-        });
-        $('.etat9').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('concentre');
-        });
-        $('.etat10').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('brule');
-        });
-        $('.etat11').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('mordu');
-        });
-        $('.etat12').on('click',function(){
-            $(this).parent().children("button").css({"opacity": "0.5"});
-            //$(this).css("opacity", "1");
-            $(this).parent().find(".etats").val('couvert');
-        });*/
+
+        //+1 action si dext et agilité >30
+        var agi=html.find('.cpt0').val();
+        var dex=html.find('.cpt6').val();
+        if(agi >=30 && dex >=30){
+            html.find('.titreaction').html(game.i18n.localize("libersf.action2"))
+        }
 
         //couleur bar
         html.find( ".refbar" ).each(function( index ) {
@@ -799,8 +737,10 @@ export class LiberActorSheet extends ActorSheet {
             var hp=event.target.dataset["hp"]; 
             var hpmax=event.target.dataset["hpmax"]; 
             this.actor.update({'data.protections.value': hp,'data.protections.max': hpmax,'data.prod':objetaequipe});
-        }else{
+        }else if(genre=="Chargeur"){
             this.actor.update({'data.charged':objetaequipe});
+        }else{
+            this.actor.update({'data.autre':objetaequipe});
         } 
     }
     _onDesArmor(event){
@@ -813,6 +753,8 @@ export class LiberActorSheet extends ActorSheet {
             this.actor.update({'data.protections.value': 0,'data.protections.max': 0,'data.prod':''});
         }else if(genre=='chargeur'){
             this.actor.update({'data.charged':''});
+        }else if(genre=='autre'){
+            this.actor.update({'data.autre':''});
         } 
     }
 
@@ -976,5 +918,81 @@ export class LiberActorSheet extends ActorSheet {
                 this.actor.update({"data.etat.n":1});      
             }
         }
+    }
+
+    _onVehi(event){
+        var type=this.actor.data.data.type;
+        var tail=this.actor.data.data.taille;
+        var ia=this.actor.data.data.ia;
+        var mote=this.actor.data.data.moteur;
+        var blin=this.actor.data.data.blindage;
+        var prix=0;var pv=350;var nbequi=2;var nbpiece=0;var types="";var tailles="";
+        console.log(ia+' '+mote+' '+blin)
+        if(type==1){
+            prix=650;types=game.i18n.localize("libersf.type1");
+        }else if(type==2){
+            prix=350;types=game.i18n.localize("libersf.type2");
+        }else if(type==3){
+            prix=850;types=game.i18n.localize("libersf.type3");
+        }else if(type==4){
+            prix=5500;types=game.i18n.localize("libersf.type4");
+        }
+        if(tail==1){
+            prix=prix+prix*(parseInt(ia)+parseInt(mote)+parseInt(blin));tailles=game.i18n.localize("libersf.taille1");
+        }else if(tail==2){
+            prix=prix+prix*(2+parseInt(ia)+parseInt(mote)+parseInt(blin));pv=pv*2;nbequi=nbequi*2;nbpiece=nbpiece+2;tailles=game.i18n.localize("libersf.taille2");
+        }else if(tail==3){
+            prix=prix+prix*(3+parseInt(ia)+parseInt(mote)+parseInt(blin));pv=pv*4;nbequi=nbequi*3;nbpiece=nbpiece+4;tailles=game.i18n.localize("libersf.taille3");
+        }else if(tail==4){
+            prix=prix+prix*(100+parseInt(ia)+parseInt(mote)+parseInt(blin));pv=pv*8;nbequi=nbequi=100;nbpiece=100;tailles=game.i18n.localize("libersf.taille4");
+        }
+        var ptrestant=0;
+        if(ia=="0.5"){
+            ptrestant=760;
+        }else if(ia=="1"){
+            ptrestant=608;
+        }else if(ia=="1.5"){
+            ptrestant=456;
+        }else if(ia=="2"){
+            ptrestant=304;
+        }else if(ia=="2.5"){
+            ptrestant=152;
+        }else if(ia=="3"){
+            ptrestant=-152;
+        }else if(ia=="3.5"){
+            ptrestant=-304;
+        }else if(ia=="4"){
+            ptrestant=-456;
+        }else if(ia=="4.5"){
+            ptrestant=-608;
+        }else if(ia=="5"){
+            ptrestant=-760;
+        }
+        var blindage=100*blin;
+        var bouclier=100*mote;
+        var moyen=(ia+blin+mote)/3;var etoile="";
+        if(moyen<=0.5){
+            etoile="✬ ☆ ☆ ☆ ☆";
+        }else if(moyen<=1){
+            etoile="★ ☆ ☆ ☆ ☆";
+        }else if(moyen<=1.5){
+            etoile="★ ✬ ☆ ☆ ☆";
+        }else if(moyen<=2){
+            etoile="★ ★ ☆ ☆ ☆";
+        }else if(moyen<=2.5){
+            etoile="★ ★ ✬ ☆ ☆";
+        }else if(moyen<=3){
+            etoile="★ ★ ★ ☆ ☆";
+        }else if(moyen<=3.5){
+            etoile="★ ★ ★ ✬ ☆";
+        }else if(moyen<=4){
+            etoile="★ ★ ★ ★ ☆";
+        }else if(moyen<=4.5){
+            etoile="★ ★ ★ ★ ✬";
+        }else{
+            etoile="★ ★ ★ ★ ★";
+        }
+        console.log('indiquer '+ptrestant)
+        this.actor.update({"data.model":etoile,"data.tailles":tailles,"data.types":types,"data.prix":prix,"data.equi":nbequi,"data.piece":nbpiece,"data.hp.value":pv,"data.hp.max":pv,"data.pointrestant2":ptrestant,"data.armure.value":blindage,"data.armure.max":blindage,"data.protections.value":bouclier,"data.protections.max":bouclier}); 
     }
 }

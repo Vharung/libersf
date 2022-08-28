@@ -152,7 +152,12 @@
             "tehnologie":0,
             "prix":0,
             "model":"",
-            "ordre":""
+            "ordre":"",
+            "moteur":0.5,
+            "type":1,
+            "types":"",
+            "taille":1,
+            "tailles":""
         }
 
         

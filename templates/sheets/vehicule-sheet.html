@@ -18,7 +18,7 @@
 						<div class="grid-3col">
 							<p>{{localize 'libersf.faction'}} <input  name="data.faction" type="text" value="{{data.data.faction}}" placeholder="Faction"/></p>
 						</div>
-						<p><input class="metier" name="data.modelle" type="text" value="{{data.data.modelle}}" placeholder="Spatial"/> <input name="data.type" type="text" value="{{data.data.type}}" placeholder="Leger" style="width: 158px"/>{{localize 'libersf.l9'}} <input class="niveau" name="data.level" type="text" value="{{data.data.piece}}" placeholder="1"/><input  name="data.prix" type="text" value="{{data.data.prix}}" placeholder="{{data.data.prix}}" style="text-align: right;width: 90px;margin-left: 10px;"/> Cr</p>
+						<p><input class="metier" name="data.types" type="text" value="{{data.data.types}}" placeholder="Type" style="width: 172px" readonly /> <input name="data.tailles" type="text" value="{{data.data.tailles}}" placeholder="Leger" style="width: 158px" readonly /> <input  name="data.prix" type="text" value="{{data.data.prix}}" placeholder="{{data.data.prix}}" style="text-align: right;width: 90px;margin-left: 10px;"/> Cr</p>
 					</div>
 				</div>		
 			</div>
@@ -62,7 +62,7 @@
 				</div>
 				<div class="grid-3col">
 					<h2>{{localize 'libersf.ptarmor'}}</h2>
-					<div class="armcl">{{data.data.armure.max}}</div>
+					<div class="armcl">{{data.data.armure.value}}</div>
 				</div>
 				<div class="grid-3col">
 					<h2>{{localize 'libersf.ptboucl'}}</h2>
@@ -161,25 +161,25 @@
 					<input class="cpt25" name="data.Visée" type="text" value="{{data.data.Visée}}" placeholder="{{data.data.Visée}}" style="text-align: center"/>
 					</div>
 					<div class="clear"></div>
-					<!--div class="grid-2col" style="margin-top: 20px">
+					<div class="grid-2col" style="margin-top: 20px">
 						<h2 style="text-align:center">Point restant</h2>
 						<input class="pointrestant" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" type="text" value="0" readonly/>
+						<input class="pointrestant2" name="data.pointrestant2" style="display:none" type="text" value="{{data.data.pointrestant2}}" readonly/>
 					</div>
 					<div class="grid-2col" style="margin-top: 20px"-->
 						<h2 style="text-align:center">{{localize 'libersf.bonusmj'}}</h2>
 						<input class="malussactor" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" name="data.malus" type="text" value="{{data.data.malus}}" placeholder="0"/>
-					<!--/div-->
+					</div>
 				</div>
 				{{!-- Items Tab --}}
 				<div id="items" class="tab items" data-group="primary" data-tab="items">
 					<div style="overflow: auto;height: 694px;">
-						<h2 style="margin-top: 20px">Armes</h2>
+						<h2 style="margin-top: 20px">{{data.data.equi}} Armes</h2>
 						<ol class="items-list">
 			                <li class="item rexrow item-header">
 			                  <div class="item-image"></div>
 			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description">{{localize 'libersf.descri'}}</div>               
 			                  <div class="item-portee">{{localize 'libersf.l1'}}</div>
 			                  <div class="item-dommage">{{localize 'libersf.l2'}}</div>
 			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
@@ -195,7 +195,6 @@
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 			                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
 			                    <div class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</div>
-			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                    <div class="item-portee">{{item.data.portee}}</div>
 			                    <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.data.degat}}">{{item.data.degats}}</div-->
 			                    <div class="item-dommage">{{item.data.degats}}</div>
@@ -204,9 +203,11 @@
 			                    <div class="item-techno">{{item.data.techno}}</div>
 			                    <div class="item-qt">{{item.data.quantite}}</div>
 			                    <div class="item-controls">
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 			                    </div>
+			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                </li>
 			            {{/each}}
 		        		</ol>
@@ -216,7 +217,6 @@
 			                  <div class="item-image"></div>
 			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description">{{localize 'libersf.descri'}}</div>               
 			                  <div class="item-resitance">{{localize 'libersf.l7'}}</div>
 			                  <div class="item-hpmax">{{localize 'libersf.l8'}}</div>
 			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
@@ -232,7 +232,6 @@
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 			                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
 			                    <div class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</div>
-			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                    <div class="item-resitance">{{item.data.resitance}}</div>
 			                    <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.data.degat}}">{{item.data.degats}}</div-->
 			                    <div class="item-hpmax">{{item.data.hp.max}}</div>
@@ -241,19 +240,20 @@
 			                    <div class="item-techno">{{item.data.techno}}</div>
 			                    <div class="item-qt">{{item.data.quantite}}</div>
 			                    <div class="item-controls">
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 			                    </div>
+			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                </li>
 			            {{/each}}
 		        		</ol>
-				    	<h2 style="margin-top: 20px">Pièce</h2>
+				    	<h2 style="margin-top: 20px">{{data.data.piece}} Pièce</h2>
 						<ol class="items-list">
 			                <li class="item flexrow item-header">
 			                  <div class="item-image"></div>
 			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-name">{{localize 'libersf.type'}}</div>
-			                  <div class="item-description">{{localize 'libersf.descri'}}</div>               
 			                  <div class="item-poids">{{localize 'libersf.ods'}}</div>
 			                  <div class="item-valeur">{{localize 'libersf.valeur'}}</div>
 			                  <div class="item-techno">{{localize 'libersf.l5'}}</div>
@@ -267,15 +267,16 @@
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 			                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
 			                    <div class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</div>
-			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                    <div class="item-poids">{{item.data.poids}}</div>
 			                    <div class="item-valeur">{{item.data.valeur}}</div>
 			                    <div class="item-techno">{{item.data.techno}}</div>
 			                    <div class="item-qty">{{item.data.quantite}}</div>
 			                    <div class="item-controls">
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 			                    </div>
+			                    <div class="item-description" title="{{item.data.description}}">{{item.data.description}}</div>
 			                </li>
 			            {{/each}}
 		        		</ol>
@@ -285,7 +286,6 @@
 			                  <div class="item-image"></div>
 			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
 			                  <div class="item-genre"></div>
-			                  <div class="item-description2">{{localize 'libersf.descri'}}</div>               
 			                  <div class="item-poids">{{localize 'libersf.l3'}}Pds</div>
 			                  <div class="item-valeur">{{localize 'libersf.l4'}}Cr</div>
 			                  <div class="item-techno">{{localize 'libersf.l5'}}Techno</div>
@@ -297,18 +297,19 @@
 			            {{#each actor.inventaire as |item id|}}
 			                <li class="item rexrow" data-item-id="{{item._id}}">
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-			                    <h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+			                    <h4 class="item-name2" title="{{item.name}}">{{item.name}}</h4>
 			                    <h4 class="item-genre" title="{{item.data.genre}}">{{item.data.genre}}</h4>
-			                    <h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4>
 			                    <h4 class="item-poid">{{item.data.poids}}</h4>
 			                    <h4 class="item-valeur">{{item.data.valeur}}</h4>
 			                    <h4 class="item-techno">{{item.data.techno}}</h4>
 			                    <h4 class="item-qt">{{item.data.quantite}}</h4>
 			                    <div class="item-controls">
-
+			                    	<span class="item-equip" title="Equipé Chargeur" genre="{{item.data.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.data.genre}}">+</span>
+			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 			                    </div>
+			                    <h4 class="item-description2" title="{{item.data.description}}">{{item.data.description}}</h4>
 			                </li>
 			            {{/each}}
 		        		</ol>
@@ -341,6 +342,80 @@
 				</div>
 				{{!-- Lab Tab --}}
 				<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
+					<h2 style="margin-top: 20px">{{localize 'libersf.type'}}</h2>
+					<SELECT class="typeliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.type">
+	                    {{#select data.data.type}}
+		                    <option value="1">{{localize 'libersf.type1'}}</option>
+		                    <option value="2">{{localize 'libersf.type2'}}</option>
+		                    <option value="3">{{localize 'libersf.type3'}}</option>
+		                    <option value="4">{{localize 'libersf.type4'}}</option>
+		                {{/select}}
+	                </SELECT>
+	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+
+					<h2 style="margin-top: 20px">{{localize 'libersf.taille'}}</h2>
+					<SELECT class="tailleliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.taille">
+	                    {{#select data.data.taille}}
+		                    <option value="1">{{localize 'libersf.taille1'}}</option>
+		                    <option value="2">{{localize 'libersf.taille2'}}</option>
+		                    <option value="3">{{localize 'libersf.taille3'}}</option>
+		                    <option value="4">{{localize 'libersf.taille4'}}</option>
+		                {{/select}}
+	                </SELECT>
+	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+
+					<h2 style="margin-top: 20px">{{localize 'libersf.ia'}}</h2>
+					<SELECT class="ialiste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.ia">
+	                    {{#select data.data.ia}}
+		                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
+		                    <option value="1">★ ☆ ☆ ☆ ☆</option>
+		                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
+		                    <option value="2">★ ★ ☆ ☆ ☆</option>
+		                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
+		                    <option value="3">★ ★ ★ ☆ ☆</option>
+		                    <option value="3.5">★ ★ ★ ✬ ☆</option>
+		                    <option value="4">★ ★ ★ ★ ☆</option>
+		                    <option value="4.5">★ ★ ★ ★ ✬</option>
+		                    <option value="5">★ ★ ★ ★ ★</option>
+		                {{/select}}
+	                </SELECT>
+	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+
+	                <h2 style="margin-top: 20px">{{localize 'libersf.moteur'}}</h2>
+					<SELECT class="moteurliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.moteur">
+	                    {{#select data.data.moteur}}
+		                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
+		                    <option value="1">★ ☆ ☆ ☆ ☆</option>
+		                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
+		                    <option value="2">★ ★ ☆ ☆ ☆</option>
+		                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
+		                    <option value="3">★ ★ ★ ☆ ☆</option>
+		                    <option value="3.5">★ ★ ★ ✬ ☆</option>
+		                    <option value="4">★ ★ ★ ★ ☆</option>
+		                    <option value="4.5">★ ★ ★ ★ ✬</option>
+		                    <option value="5">★ ★ ★ ★ ★</option>
+		                {{/select}}
+	                </SELECT>
+	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+
+	                <h2 style="margin-top: 20px">{{localize 'libersf.blindage'}}</h2>
+					<SELECT class="blindageliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="data.blindage">
+	                    {{#select data.data.blindage}}
+		                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
+		                    <option value="1">★ ☆ ☆ ☆ ☆</option>
+		                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
+		                    <option value="2">★ ★ ☆ ☆ ☆</option>
+		                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
+		                    <option value="3">★ ★ ★ ☆ ☆</option>
+		                    <option value="3.5">★ ★ ★ ✬ ☆</option>
+		                    <option value="4">★ ★ ★ ★ ☆</option>
+		                    <option value="4.5">★ ★ ★ ★ ✬</option>
+		                    <option value="5">★ ★ ★ ★ ★</option>
+		                {{/select}}
+	                </SELECT>
+	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #782e22;color:#ddd;">
+
+	                <h2 style="margin-top: 20px">{{localize 'libersf.info'}}</h2>
 					<p style="column-count: 5;padding: 5px;color: #fff;">
 					{{localize 'libersf.v1'}} : <br><span class="ancienete">✬ ☆ ☆ ☆ ☆</span><br><br>
 		            {{localize 'libersf.v2'}} : <br><span class="ancienete">★ ☆ ☆ ☆ ☆</span><br><br>
@@ -352,7 +427,6 @@
 		            {{localize 'libersf.v8'}} : <br><span class="ancienete">★ ★ ★ ★ ☆</span><br><br>
 		            {{localize 'libersf.v9'}} : <br><span class="ancienete">★ ★ ★ ★ ✬</span><br><br>
 		            {{localize 'libersf.v10'}} : <br><span class="ancienete">★ ★ ★ ★ ★</span><br></p>
-
 				</div>
 			</section>
 		</div>
