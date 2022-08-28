@@ -940,11 +940,11 @@ export class LiberActorSheet extends ActorSheet {
         if(tail==1){
             prix=prix+prix*(parseInt(ia)+parseInt(mote)+parseInt(blin));tailles=game.i18n.localize("libersf.taille1");
         }else if(tail==2){
-            prix=prix+prix*(2+parseInt(ia)+parseInt(mote)+parseInt(blin));pv=pv*2;nbequi=nbequi*2;nbpiece=nbpiece+2;tailles=game.i18n.localize("libersf.taille2");
+            prix=prix+prix*(2+parseInt(ia)*2+parseInt(mote)*2+parseInt(blin)*2);pv=pv*2;nbequi=nbequi*2;nbpiece=nbpiece+2;tailles=game.i18n.localize("libersf.taille2");
         }else if(tail==3){
-            prix=prix+prix*(3+parseInt(ia)+parseInt(mote)+parseInt(blin));pv=pv*4;nbequi=nbequi*3;nbpiece=nbpiece+4;tailles=game.i18n.localize("libersf.taille3");
+            prix=prix+prix*(3+parseInt(ia)*3+parseInt(mote)*3+parseInt(blin)*3);pv=pv*4;nbequi=nbequi*3;nbpiece=nbpiece+4;tailles=game.i18n.localize("libersf.taille3");
         }else if(tail==4){
-            prix=prix+prix*(100+parseInt(ia)+parseInt(mote)+parseInt(blin));pv=pv*8;nbequi=nbequi=100;nbpiece=100;tailles=game.i18n.localize("libersf.taille4");
+            prix=prix+prix*(100+parseInt(ia)*5+parseInt(mote)*5+parseInt(blin)*5);pv=pv*8;nbequi=nbequi=100;nbpiece=100;tailles=game.i18n.localize("libersf.taille4");
         }
         var ptrestant=0;
         if(ia=="0.5"){
