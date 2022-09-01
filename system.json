@@ -1,31 +1,29 @@
 {
-    "name": "libersf",
+    "id": "libersf",
     "title": "liber SF ",
     "description": "The libersf SF  system for FoundryVTT!",
-    "version": "0.1.2",
-    "minimumCoreVersion": "0.9",
-    "compatibleCoreVersion": "0.9",
+    "version": "0.1.3",
+    "compatibility": {
+      "minimum": "10",
+      "verified": "10.283",
+      "maximum": "10"
+    },
     "templateVersion": 2,
-    "author": "Vharung",
+    "authors": [
+      {
+        "name": "Vharung",
+        "url": "https://foundryvtt.com"
+      }
+    ],
     "esmodules": ["module/libersf.js"],
     "styles": ["css/libersf.css"],
     "scripts": [],
     "packs": [
         {
-          "name": "monstre",
-          "label": "Monstres",
-          "system": "libersf",
-          "path": "./pack/monstre.db",
-          "entity": "Actor",
-          "type": "Actor",
-          "private": true
-        },
-        {
           "name": "vehicule_empire",
           "label": "Véhicule Empire",
           "system": "libersf",
           "path": "./pack/vehicules-empire.db",
-          "entity": "Actor",
           "type": "Actor",
           "private": true
         },
@@ -34,7 +32,6 @@
           "label": "Véhicule Fédération",
           "system": "libersf",
           "path": "./pack/vehicule-federation.db",
-          "entity": "Actor",
           "type": "Actor",
           "private": true
         },
@@ -43,7 +40,6 @@
           "label": "Véhicule Mafia",
           "system": "libersf",
           "path": "./pack/vehicules-mafia.db",
-          "entity": "Actor",
           "type": "Actor",
           "private": true
         },
@@ -52,7 +48,6 @@
           "label": "Véhicule OMC",
           "system": "libersf",
           "path": "./pack/vehicules-omc.db",
-          "entity": "Actor",
           "type": "Actor",
           "private": true
         },
@@ -61,7 +56,6 @@
           "label": "Armure",
           "system": "libersf",
           "path": "./pack/armurebouclier.db",
-          "entity": "Item",
           "type": "Item"
         },
         {
@@ -69,7 +63,6 @@
           "label": "Arme",
           "system": "libersf",
           "path": "./pack/armes.db",
-          "entity": "Item",
           "type": "Item"
         },
         {
@@ -77,7 +70,6 @@
           "label": "Chargeur",
           "system": "libersf",
           "path": "./pack/chargeur.db",
-          "entity": "Item",
           "type": "Item"
         },
         {
@@ -85,7 +77,6 @@
           "label": "Objet",
           "system": "libersf",
           "path": "./pack/objet.db",
-          "entity": "Item",
           "type": "Item"
         },
         {
@@ -93,7 +84,6 @@
           "label": "Pieces",
           "system": "libersf",
           "path": "./pack/pieces.db",
-          "entity": "Item",
           "type": "Item"
         },
         {
@@ -101,7 +91,6 @@
           "label": "Planete",
           "system": "libersf",
           "path": "./pack/planete.db",
-          "entity": "Item",
           "type": "Item"
         },
         {
@@ -109,7 +98,6 @@
           "label": "Magie",
           "system": "libersf",
           "path": "./pack/magie.db",
-          "entity": "Item",
           "type": "Item"
         },
         {
@@ -118,7 +106,6 @@
           "name": "regles",
           "path": "./pack/regles.db",
           "system": "libersf",
-          "entity": "JournalEntry",
           "private": false
         }
     ],
@@ -136,5 +123,6 @@
     "url": "https://github.com/Vharung/libersfsf",
     "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
     "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
-    "license": "LICENSE.txt"
+    "license": "LICENSE.txt",
+    "relationships.requires":""
 }

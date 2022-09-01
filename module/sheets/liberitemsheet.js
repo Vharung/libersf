@@ -1,8 +1,8 @@
 export class LiberItemSheet extends ItemSheet{
     get template(){
-        console.log(`Liber | Récupération du fichier html ${this.item.data.type}-sheet.`);
+        console.log(`Liber | Récupération du fichier html ${this.item.type}-sheet.`);
 
-        return `systems/libersf/templates/sheets/${this.item.data.type}-sheet.html`;
+        return `systems/libersf/templates/sheets/${this.item.type}-sheet.html`;
     }
 
     getData(){

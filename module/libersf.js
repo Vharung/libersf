@@ -10,7 +10,6 @@ Hooks.once("init", async function() {
     CONFIG.Item.documentClass = LiberItem;
 
     CONFIG.Combat.initiative = {
-        //formula: "1d6",
 	    formula: "30+@Perception",
 	    decimals: 3
 	};
