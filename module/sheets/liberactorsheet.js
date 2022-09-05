@@ -26,6 +26,9 @@
         if (this.actor.type == 'personnage' || this.actor.type == 'pnj' || this.actor.type == 'monstre' | this.actor.type == 'vehicule') {
             this._prepareCharacterItems(data);
         }
+        if (this.actor.type == 'personnage' || this.actor.type == 'pnj' ) {
+            this._onEncom(data);
+        }
         return data;
     }
 
@@ -79,8 +82,8 @@
     }
 
 
-    activateListeners(html){
-        super.activateListeners(html);
+    psy= (html){
+        super.psy= (html);
         /*jet de dés*/
         //html.find('.jetdedes').click(this._onRoll.bind(this));
 
@@ -997,5 +1000,12 @@
         }
         console.log('indiquer '+ptrestant)
         this.actor.update({"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.hp.value":pv,"system.hp.max":pv,"system.pointrestant2":ptrestant,"system.armure.value":blindage,"system.armure.max":blindage,"system.protections.value":bouclier,"system.protections.max":bouclier}); 
+    }
+
+    _onEncom(data){
+        const adata = data.actor;
+        var enc=adata.system.encombrement.max=parseInt(adata.system.force) /2 + 35; 
+        console.log('Encombrement:'+enc)
+        this.actor.update({"system.encombrement.max":enc});
     }
 }
