@@ -82,8 +82,8 @@
     }
 
 
-    psy= (html){
-        super.psy= (html);
+    activateListeners(html){
+        super.activateListeners(html);
         /*jet de dés*/
         //html.find('.jetdedes').click(this._onRoll.bind(this));
 
@@ -1004,7 +1004,7 @@
 
     _onEncom(data){
         const adata = data.actor;
-        var enc=adata.system.encombrement.max=parseInt(adata.system.force) /2 + 35; 
+        var enc=parseInt(adata.system.Force) /2 + 35; 
         console.log('Encombrement:'+enc)
         this.actor.update({"system.encombrement.max":enc});
     }
