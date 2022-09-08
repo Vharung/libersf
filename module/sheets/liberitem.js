@@ -36,13 +36,13 @@ export class LiberItem extends Item {
 
   MunMoins(){
     let itemData = this.system;
-    let qty=itemData.system.quantite;
+    let qty=itemData.quantite;
     qty--;
     this.update({'system.quantite':qty});
   }
   NunsMoins(){
     let itemData = this.system;
-    let qty=itemData.system.quantite;
+    let qty=itemData.quantite;
     qty=qty-10;
     this.update({'system.quantite':qty});
   }

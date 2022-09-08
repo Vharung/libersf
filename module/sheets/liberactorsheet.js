@@ -826,98 +826,98 @@
         var chnget=event.target.dataset["etat"];console.log('etats'+etats[chnget])
         var et=etats[chnget];
         if(et=='a'){
-            var etat=this.actor.etat.a;
+            var etat=this.actor.system.etat.a;
             if(etat==1){
                 this.actor.update({"system.etat.a":0.5});    
             }else {
                 this.actor.update({"system.etat.a":1});      
             }
         }else if(et=='b'){
-            var etat=this.actor.etat.b;
+            var etat=this.actor.system.etat.b;
             if(etat==1){
                 this.actor.update({"system.etat.b":0.5});    
             }else {
                 this.actor.update({"system.etat.b":1});      
             }
         }else if(et=='c'){
-            var etat=this.actor.etat.c;
+            var etat=this.actor.system.etat.c;
             if(etat==1){
                 this.actor.update({"system.etat.c":0.5});    
             }else {
                 this.actor.update({"system.etat.c":1});      
             }
         }else if(et=='d'){
-            var etat=this.actor.etat.d;
+            var etat=this.actor.system.etat.d;
             if(etat==1){
                 this.actor.update({"system.etat.d":0.5});    
             }else {
                 this.actor.update({"system.etat.d":1});      
             }
         }else if(et=='e'){
-            var etat=this.actor.etat.e;
+            var etat=this.actor.system.etat.e;
             if(etat==1){
                 this.actor.update({"system.etat.e":0.5});    
             }else {
                 this.actor.update({"system.etat.e":1});      
             }
         }else if(et=='f'){
-            var etat=this.actor.etat.f;
+            var etat=this.actor.system.etat.f;
             if(etat==1){
                 this.actor.update({"system.etat.f":0.5});    
             }else {
                 this.actor.update({"system.etat.f":1});      
             }
         }else if(et=='g'){
-            var etat=this.actor.etat.g;
+            var etat=this.actor.system.etat.g;
             if(etat==1){
                 this.actor.update({"system.etat.g":0.5});    
             }else {
                 this.actor.update({"system.etat.g":1});      
             }
         }else if(et=='h'){
-            var etat=this.actor.etat.h;
+            var etat=this.actor.system.etat.h;
             if(etat==1){
                 this.actor.update({"system.etat.h":0.5});    
             }else {
                 this.actor.update({"system.etat.h":1});      
             }
         }else if(et=='i'){
-            var etat=this.actor.etat.i;
+            var etat=this.actor.system.etat.i;
             if(etat==1){
                 this.actor.update({"system.etat.i":0.5});    
             }else {
                 this.actor.update({"system.etat.i":1});      
             }
         }else if(et=='j'){
-            var etat=this.actor.etat.j;
+            var etat=this.actor.system.etat.j;
             if(etat==1){
                 this.actor.update({"system.etat.j":0.5});    
             }else {
                 this.actor.update({"system.etat.j":1});      
             }
         }else if(et=='k'){
-            var etat=this.actor.etat.k;
+            var etat=this.actor.system.etat.k;
             if(etat==1){
                 this.actor.update({"system.etat.k":0.5});    
             }else {
                 this.actor.update({"system.etat.k":1});      
             }
         }else if(et=='l'){
-            var etat=this.actor.etat.l;
+            var etat=this.actor.system.etat.l;
             if(etat==1){
                 this.actor.update({"system.etat.l":0.5});    
             }else {
                 this.actor.update({"system.etat.l":1});      
             }
         }else if(et=='m'){
-            var etat=this.actor.etat.m;
+            var etat=this.actor.system.etat.m;
             if(etat==1){
                 this.actor.update({"system.etat.m":0.5});    
             }else {
                 this.actor.update({"system.etat.m":1});      
             }
         }else if(et=='n'){
-            var etat=this.actor.etat.n;
+            var etat=this.actor.system.etat.n;
             if(etat==1){
                 this.actor.update({"system.etat.n":0.5});    
             }else {
