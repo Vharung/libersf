@@ -14,8 +14,8 @@ export class LiberActor extends Actor {
     const actorData = this.system;
     const data = actorData;
     const flags = actorData.flags;
-  	//preparation dépendant du type de personnage (
-  	if (actorData.type === 'personnage') this._preparePJData(actorData);
+    //preparation dépendant du type de personnage (
+    if (actorData.type === 'personnage') this._preparePJData(actorData);
   }
 
 
@@ -23,13 +23,23 @@ export class LiberActor extends Actor {
    * Prepare Character type specific data
    */
   _preparePJData(actorData) {
-    const data = actorData;
-  
-    
+    const data = actorData;    
   }
+
   prepareBaseData() {
   }
 
   prepareDerivedData() {
   }
+
+  /*static async loadCompendiumData(compendium) {
+    const pack = game.packs.get(compendium)
+    return await pack?.getDocuments() ?? []
+  }
+
+  static async loadCompendium(compendium, filter = item => true) {
+    let compendiumData = await CrucibleUtility.loadCompendiumData(compendium)
+    return compendiumData.filter(filter)
+  }*/
 }
+
