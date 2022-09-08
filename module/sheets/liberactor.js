@@ -32,14 +32,6 @@ export class LiberActor extends Actor {
   prepareDerivedData() {
   }
 
-  /*static async loadCompendiumData(compendium) {
-    const pack = game.packs.get(compendium)
-    return await pack?.getDocuments() ?? []
-  }
 
-  static async loadCompendium(compendium, filter = item => true) {
-    let compendiumData = await CrucibleUtility.loadCompendiumData(compendium)
-    return compendiumData.filter(filter)
-  }*/
 }
 
