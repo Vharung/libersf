@@ -5,7 +5,7 @@
 
 .window-app .window-content{color:#fff}
 .editable,.editable input,.editable textarea{color: #fff}
-button,form.tiles button{background: #a10001;border:none;color: #fff;}
+button,form button{background: #a10001;border:none;color: #fff;}
 .directory .directory-header .header-search input ,.dialog-content input,select{background: #013635;border: none;color: #fff;}
 .compendium-sidebar li.compendium-pack .status-icons {color: #fff;}
 
