@@ -340,16 +340,16 @@
           }
           pc=(10-parseInt(pc))*10;
           if(pc>'60'){
-            $('.zone.'+name+' .bar').css({'background':'green','width':pc+'%'});
+            $('.zone.'+name+' .bar').css({'background':'#00abab','width':pc+'%'});
             $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'1.png) center center no-repeat'});
           }else if(pc>'30'){
-            $('.zone.'+name+' .bar').css({'background':'orange','width':pc+'%'});
+            $('.zone.'+name+' .bar').css({'background':'#c9984b','width':pc+'%'});
             $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'2.png) center center no-repeat'});
           }else if(pc<=0){
-            $('.zone.'+name+' .bar').css({'background':'black','width':pc+'%'});
+            $('.zone.'+name+' .bar').css({'background':'#460000','width':pc+'%'});
             $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'0.png) center center no-repeat'});
           }else{
-            $('.zone.'+name+' .bar').css({'background':'red','width':pc+'%'});
+            $('.zone.'+name+' .bar').css({'background':'#a10001','width':pc+'%'});
             $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'3.png) center center no-repeat'});
           }
         });
@@ -374,15 +374,15 @@
         var pourcentage= total*100/enc;
 
         if(pourcentage<50){
-            html.find('.barenc').css({"background":'green'})
+            html.find('.barenc').css({"background":'#00abab'})
         }else if(pourcentage<75){
-            html.find('.barenc').css({"background":'orange'})
+            html.find('.barenc').css({"background":'#c9984b'})
         }else if(pourcentage<100){
-            html.find('.barenc').css({"background":'red'})
+            html.find('.barenc').css({"background":'#a10001'})
         }else if(pourcentage<120){
             html.find('.barenc').css({"background":'#660000'})
         }else{
-            html.find('.barenc').css({"background":'black'})
+            html.find('.barenc').css({"background":'#460000'})
         }
         if(pourcentage>100){
             pourcentage=100;
@@ -438,11 +438,15 @@
               if(valor==0){
                 $( this ).css({"background":"transparent","color": "#fff"});
               }else if(valor>0){
-                $( this ).css({"background":"#56853b","color": "white"});
+                $( this ).css({"background":"#00abab","color": "white"});
               }else if(valor<0){
-                $( this ).css({"background":"#a51b1b","color": "white"});
+                $( this ).css({"background":"#a10001","color": "white"});
               }
             });
+        var hp= html.find('.hp').val();
+        if(hp<=0){
+            html.find('.autres').css({"background":"url(systems/libersf/css/ecran2.jpg)",'background-size': 'cover'});
+        }
             
 
 
