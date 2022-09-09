@@ -8,10 +8,12 @@
 button,form button{background: #a10001;border:none;color: #fff;}
 .directory .directory-header .header-search input ,.dialog-content input,select{background: #013635;border: none;color: #fff;}
 .compendium-sidebar li.compendium-pack .status-icons {color: #fff;}
-
 .filepicker .current-dir input[name="target"],.filepicker .filter-dir input,input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"], input[type="search"]  {color: #fff;background: #013635;}
 .filepicker .display-modes a.active {background: #a10001;}
 .filepicker .display-modes {background: ##00abab;}
+
+option, optgroup,#chat-controls .roll-type-select{background: #013635;}
+
 
 .editable input,.editable textarea,.editable h1,.editable h2{border: none;background: #013635}
 .editable h1,.editable h2{border-bottom: none;}
