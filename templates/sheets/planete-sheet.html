@@ -1,70 +1,325 @@
-<form class="{{cssClass}}" autocomplete="off">
-    <div id="pj-titre" class="objet">
-        <div class="flexrow">
-            <div class="grid-2col" style="max-width: 134px;">
-                <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="128" width="128"/>
+<form class="{{cssClass}} Liber flexcol" autocomplete="off">
+<div class="fiche">
+    {{!-- Sheet Header --}}
+    <div style="width: 592px;float: left;display: inline-block;">
+        <div class="sheet-header flexcol" id="pj-titre" style="flex: 0 0 515px;">
+            <div class="head">
+                <div class="avatar"> 
+                    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+                </div>
+                <div class="headtext">
+                    <input class="nomperso" name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+                    <div class="rexrow">
+
+                
+
+                        <div class="grid-3col" style="width: 300px;">         
+                            <p>Surnom : <input name="system.surnom" type="text" value="{{data.system.surnom}}" placeholder="Surnom" style="width: 200px;"/></p>
+                        </div>
+                        <div class="grid-3col">
+                            <p>{{localize 'libersf.faction'}} : <input class="model" name="system.domination" type="text" value="{{data.system.domination}}" placeholder="Controlée par :" style="font-size: 1.2em;text-align: right;"/></p>
+                        </div>
+                        <div class="grid-3col">
+                            <p>&nbsp;</p>
+                        </div>
+                        <!--div class="separator"></div-->
+                        
+                    </div>
+                    
+                </div>
             </div>
+        </div>
+        <main>
+            <h2>{{localize 'libersf.histoire'}}</h2>
+                <textarea class="histoire" name="system.description" style="background: none">{{data.system.description}}</textarea>
             <div class="grid-2col">
-                <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-                <h1><input name="surname" type="text" value="{{data.system.surnom}}" placeholder="Surnom"/></h1>
-                <h2>{{localize 'libersf.descri'}}</h2>
-                <textarea name="system.description" style="min-height: 80px">{{data.system.description}}</textarea>
-                <input class="model" name="system.domination" type="text" value="{{data.system.domination}}" placeholder="Controlée par :" style="font-size: 1.2em;text-align: right;"/>
+                            <label>{{localize 'libersf.arme'}}
+                                <input name="system.niveau_arme" type="text" value="{{data.system.niveau_arme}}" placeholder="Arme"/>
+                            </label>
+                            <label>{{localize 'libersf.crime'}}
+                                <input name="system.niveau_crime" type="text" value="{{data.system.niveau_crime}}" placeholder="Crime"/>
+                            </label>
+                        </div>
+                        <div class="grid-2col">
+                            <label>{{localize 'libersf.secu'}}
+                                <input name="system.niveau_secu" type="text" value="{{data.system.niveau_secu}}" placeholder="Sécurité"/>
+                            </label>
+                            <label>{{localize 'libersf.techno'}}
+                                <input name="system.niveau_tech" type="text" value="{{data.system.niveau_tech}}" placeholder="Technologie"/>
+                            </label>
+                        </div>
+            <div class="rexrow stat">
+                <div class="grid-2col">
+                    <p><span class="deno">❤ {{localize 'libersf.vie'}}</span>
+                    <span class="deno andromede">☀ {{localize 'libersf.psy'}}</span>
+                    <span class="deno">⛉ {{localize 'libersf.armure'}}</span>
+                    <span class="deno">⛉ {{localize 'libersf.bouclier'}}</span></p>
+                </div>
+                <div class="grid-2col">
+                    <p>
+                    <input class="hp" name="system.hp.value" type="text" value="{{data.system.hp.value}}" placeholder="10" style="width: 50%;"/><input class="hpmax" name="system.hp.max" type="text" value="{{data.system.hp.max}}" placeholder="10" style="width: 50%;margin-bottom:5px"/>
+                    <input class="psy andromede" name="system.psy.value" type="text" value="{{data.system.psy.value}}" placeholder="10" style="width: 50%;"/><input class="psymax andromede" name="system.psy.max" type="text" value="{{data.system.psy.max}}" placeholder="10" style="width: 50%;margin-bottom:5px"/>
+                    <input style="width: 50%;" class="actarm" name="system.armure.value" type="text" value="{{data.system.armure.value}}" placeholder="0"/><input style="width: 50%;margin-bottom:5px" class="actarmmax" name="system.armure.max" type="text" value="{{data.system.armure.max}}" placeholder="0" />
+                    <input style="width: 50%;" class="actbou" name="system.protections.value" type="text" value="{{data.system.protections.value}}" placeholder="0"/><input style="width: 50%;margin-bottom:5px" class="actboumax" name="system.protections.max" type="text" value="{{data.system.protections.max}}" placeholder="0" />
+                </p>
+
+                </div>
+                
+                <div class="clear"></div>
             </div>
+            <div class="clear"></div>
+            
+        </main>
+    </div>
+    <div style="width: 592px;float: left;display: inline-block;">
+        <div class="autres">
+            {{!-- Sheet Tab Navigation --}}
+            <nav class="sheet-tabs tabs" data-group="primary">
+                <a class="item" data-tab="items"><span>{{localize 'libersf.inv'}}</span></a><a class="item andromede" data-tab="magie"><span>{{localize 'libersf.magie'}}</span></a>
+            </nav>
+            {{!-- Sheet Body --}}
+            <section class="sheet-body" style="overflow: hidden;height: 717px;">
+                
+                {{!-- Items Tab --}}
+                <div id="items" class="tab items" data-group="primary" data-tab="items">
+
+                        <label>{{localize 'libersf.pop'}} : <input name="system.pouplation" type="text" value="{{data.system.pouplation}}" placeholder="Nombre d'individu" style="width: 80%;float: right;"/>
+                        </label>
+                        <div class="clear"></div>
+                        <div class="flexrow objet">
+                            
+
+                            <div class="grid-4col">
+                                <label>{{localize 'libersf.humain'}}
+                                    <input name="system.pop_humain" type="text" value="{{data.system.pop_humain}}" placeholder="Humain"/>
+                                </label>
+                                <label>{{localize 'libersf.artu'}}
+                                    <input name="system.pop_arthuriens" type="text" value="{{data.system.pop_arthuriens}}" placeholder="Arthuriens"/>
+                                </label>
+                            </div>
+                            <div class="grid-4col">
+                                <label>{{localize 'libersf.dragon'}}
+                                    <input name="system.pop_draconiens" type="text" value="{{data.system.pop_draconiens}}" placeholder="Draconniens"/>
+                                </label>
+                                <label>{{localize 'libersf.machine'}}
+                                    <input name="system.pop_machine" type="text" value="{{data.system.pop_machine}}" placeholder="Machine"/>
+                                </label>
+                            </div>
+                            <div class="grid-4col">
+                                <label>{{localize 'libersf.pleiadiens'}}
+                                    <input name="system.pop_pleiadiens" type="text" value="{{data.system.pop_pleiadiens}}" placeholder="Pleiadiens"/>
+                                </label>
+                                <label>{{localize 'libersf.yor'}}
+                                    <input name="system.pop_yoribiens" type="text" value="{{data.system.pop_yoribiens}}" placeholder="Yoribiens"/>
+                                </label>
+                            </div>
+                            <div class="grid-4col">
+                                <label>{{localize 'libersf.elf'}}
+                                    <input name="system.pop_elfen" type="text" value="{{data.system.pop_elfen}}" placeholder="Elfen"/>
+                                </label>
+                                <label>{{localize 'libersf.orqu'}}
+                                    <input name="system.pop_orquanien" type="text" value="{{data.system.pop_orquanien}}" placeholder="Orquanien"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="grid-3col" style="text-align: center">
+                            <ol class="items-list">
+                            {{#each actor.argent as |item id|}}
+                                    <li class="item rexrow" data-item-id="{{item._id}}">
+                                        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                                        <!--h4 class="item-name" title="{{item.name}}">{{item.name}}</h4>
+                                        <h4 class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</h4>
+                                        <h4 class="item-description2" title="{{item.system.description}}">{{item.system.description}}</h4!-->
+                                        <h4 class="item-poid" style="display: none">0</h4>
+                                        <!--h4 class="item-valeur">{{item.system.valeur}}</h4>
+                                        <h4 class="item-techno">{{item.system.techno}}</h4-->
+                                        <h4 class="item-qt" style="width:100px">{{item.system.quantite}}</h4>
+                                        <div class="item-controls">
+                                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            </ol>
+                        </div>
+
+                        
+                    
+                            
+                    </div>
+                    <div style="overflow: auto;height: 554px;w">
+                        <h2 style="margin-top: 20px">{{localize 'libersf.armes'}}</h2>
+                        <ol class="items-list">
+                            <li class="item rexrow item-header">
+                              <div class="item-image"></div>
+                              <div class="item-name">{{localize 'libersf.nom'}}</div>
+                              <div class="item-genre"></div>
+                              <!--div class="item-description">{{localize 'libersf.descri'}}</div-->               
+                              <div class="item-portee">{{localize 'libersf.l1'}}</div>
+                              <div class="item-dommage">{{localize 'libersf.l2'}}</div>
+                              <div class="item-poids">{{localize 'libersf.l3'}}</div>
+                              <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+                              <div class="item-techno">{{localize 'libersf.l5'}}</div>
+                              <div class="item-qty">{{localize 'libersf.l6'}}</div>
+                              <div class="item-controls">
+                                <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+                              </div>
+                            </li>
+                        {{#each actor.arme as |item id|}}
+                            <li class="item rexrow" data-item-id="{{item._id}}">
+                                <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                                <div class="item-name" title="{{item.name}}">{{item.name}}</div>
+                                <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
+                                <div class="item-portee">{{item.system.portee}}</div>
+                                <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.system.degat}}">{{item.system.degats}}</div-->
+                                <div class="item-dommage">{{item.system.degats}}</div>
+                                <div class="item-poid">{{item.system.poids}}</div>
+                                <div class="item-valeur">{{item.system.valeur}}</div>
+                                <div class="item-techno">{{item.system.techno}}</div>
+                                <div class="item-qt">{{item.system.quantite}}</div>
+                                <div class="item-controls">
+                                    <span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}" data-genre="arme" data-name="{{item.name}}" data-degat="{{item.system.degats}}">+</span>
+                                    <a class="item-control item-desc" title="Desc Sort">&#128712;</a>
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                                <div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
+
+                            </li>
+                        {{/each}}
+                        </ol>
+                        <h2 style="margin-top: 20px">{{localize 'libersf.armures'}}</h2>
+                        <ol class="items-list">
+                            <li class="item rexrow item-header">
+                              <div class="item-image"></div>
+                              <div class="item-name">{{localize 'libersf.nom'}}</div>
+                              <div class="item-genre"></div>
+                              <!--div class="item-description">{{localize 'libersf.descri'}}</div-->               
+                              <div class="item-resitance">{{localize 'libersf.l7'}}</div>
+                              <div class="item-hpmax">{{localize 'libersf.l8'}}</div>
+                              <div class="item-poids">{{localize 'libersf.l3'}}</div>
+                              <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+                              <div class="item-techno">{{localize 'libersf.l5'}}</div>
+                              <div class="item-qty">{{localize 'libersf.l6'}}</div>
+                              <div class="item-controls">
+                                <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+                              </div>
+                            </li>
+                        {{#each actor.armure as |item id|}}
+                            <li class="item rexrow" data-item-id="{{item._id}}">
+                                <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                                <div class="item-name" title="{{item.name}}">{{item.name}}</div>
+                                <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
+                                <div class="item-resitance">{{item.system.resitance}}</div>
+                                <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.system.degat}}">{{item.system.degats}}</div-->
+                                <div class="item-hpmax">{{item.system.hp.max}}</div>
+                                <div class="item-poid">{{item.system.poids}}</div>
+                                <div class="item-valeur">{{item.system.valeur}}</div>
+                                <div class="item-techno">{{item.system.techno}}</div>
+                                <div class="item-qt">{{item.system.quantite}}</div>
+                                <div class="item-controls">
+                                    <span class="item-equip" title="Equipé armure" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}"  data-name="{{item.name}}" data-hpmax="{{item.system.hp.max}}" data-hp="{{item.system.resitance}}">+</span>
+                                    <a class="item-control item-desc" title="Desc Sort">&#128712;</a>
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                                <div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
+
+                            </li>
+                        {{/each}}
+                        </ol>
+                        <h2 style="margin-top: 20px">{{localize 'libersf.inv'}} <a class="item-control item-create" title="Create Item" data-type="objet" style="float: right;"><i class="fas fa-plus"></i></a></h2>
+                        <ol class="items-list">
+                            <li class="item rexrow item-header">
+                              <div class="item-image"></div>
+                              <div class="item-name2">{{localize 'libersf.nom'}}</div>
+                              <div class="item-genre"></div>
+                              <!--div class="item-description2">{{localize 'libersf.descri'}}</div-->               
+                              <div class="item-poids">{{localize 'libersf.l3'}}</div>
+                              <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+                              <div class="item-techno">{{localize 'libersf.l5'}}</div>
+                              <div class="item-qty">{{localize 'libersf.l6'}}</div>
+                              <div class="item-controls">
+                                <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+                              </div>
+                            </li>
+                        {{#each actor.inventaire as |item id|}}
+                            <li class="item rexrow" data-item-id="{{item._id}}">
+                                <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                                <h4 class="item-name2" title="{{item.name}}">{{item.name}}</h4>
+                                <h4 class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</h4>
+                                <h4 class="item-poid">{{item.system.poids}}</h4>
+                                <h4 class="item-valeur">{{item.system.valeur}}</h4>
+                                <h4 class="item-techno">{{item.system.techno}}</h4>
+                                <h4 class="item-qt">{{item.system.quantite}}</h4>
+                                <div class="item-controls">
+                                    <span class="item-equip" title="Equipé Chargeur" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}">+</span>
+                                    <a class="item-control item-desc" title="Desc Sort">&#128712;</a>
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                                <h4 class="item-description2" title="{{item.system.description}}">{{item.system.description}}</h4>
+                            </li>
+                        {{/each}}
+                        </ol>
+                        <!--select class="listcompi">en dev</select-->
+                    </div>
+                </div>
+
+                {{!-- Spell Tab --}}
+                <div id="magie" class="tab items " data-group="primary" data-tab="magie">   
+                    <div style="overflow: auto;height: 554px;w">
+                        <h2 style="margin-top: 20px">{{localize 'libersf.sort'}}</h2>
+                        <ol class="items-list">
+                            <li class="item rexrow item-header">
+                              <div class="item-image"></div>
+                              <div class="item-name">{{localize 'libersf.nom'}}</div>
+                              <div class="item-genre"></div>
+                              <!--div class="item-description">{{localize 'libersf.descri'}}</div-->               
+                              <div class="item-portee">{{localize 'libersf.l1'}}</div>
+                              <div class="item-dommage">{{localize 'libersf.l2'}}</div>
+                              <div class="item-poids">{{localize 'libersf.l3'}}</div>
+                              <div class="item-valeur">{{localize 'libersf.l4'}}</div>
+                              <div class="item-techno">{{localize 'libersf.l5'}}</div>
+                              <div class="item-qty">{{localize 'libersf.l6'}}</div>
+                              <div class="item-controls">
+                                <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
+                              </div>
+                            </li>
+                        {{#each actor.sort as |item id|}}
+                            <li class="item rexrow" data-item-id="{{item._id}}">
+                                <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                                <div class="item-name" title="{{item.name}}">{{item.name}}</div>
+                                <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
+                                <div class="item-portee">{{item.system.portee}}</div>
+                                <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.system.degat}}">{{item.system.degats}}</div-->
+                                <div class="item-dommage">{{item.system.degats}}</div>
+                                <div class="item-poid">{{item.system.poids}}</div>
+                                <div class="item-valeur">{{item.system.valeur}}</div>
+                                <div class="item-techno">{{item.system.techno}}</div>
+                                <div class="item-qt">{{item.system.quantite}}</div>
+                                <div class="item-controls">
+                                    <span class="item-equip" title="Equipé arme" genre="arme" data-genre="arme" name="{{item.name}}" data-name="{{item.name}}">+</span>
+                                    <a class="item-control item-desc" title="Desc Sort">&#128712;</a>
+                                    <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                                    <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                                </div>
+                                <div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
+
+                            </li>
+                        {{/each}}
+                        </ol>
+                    </div>
+                </div>
+
+
+
+
+
+                
+                
+            </section>
         </div>
     </div>  
-    <h2>Niveau :</h2>
-    <div class="flexrow objet">
-        <div class="grid-2col">
-            <label>{{localize 'libersf.arme'}}
-                <input name="system.niveau_arme" type="text" value="{{data.system.niveau_arme}}" placeholder="Arme"/>
-            </label>
-            <label>{{localize 'libersf.crime'}}
-                <input name="system.niveau_crime" type="text" value="{{data.system.niveau_crime}}" placeholder="Crime"/>
-            </label>
-        </div>
-        <div class="grid-2col">
-            <label>{{localize 'libersf.secu'}}
-                <input name="system.niveau_secu" type="text" value="{{data.system.niveau_secu}}" placeholder="Sécurité"/>
-            </label>
-            <label>{{localize 'libersf.techno'}}
-                <input name="system.niveau_tech" type="text" value="{{data.system.niveau_tech}}" placeholder="Technologie"/>
-            </label>
-        </div>
-    </div>
-    <h2>{{localize 'libersf.pop'}} :</h2>
-    <label>
-        <input name="system.pouplation" type="text" value="{{data.system.pouplation}}" placeholder="Nombre d'individu"/>
-    </label>
-    <div class="flexrow objet">
-        
-        <div class="grid-2col">
-            <label>{{localize 'libersf.humain'}}
-                <input name="system.pop_humain" type="text" value="{{data.system.pop_humain}}" placeholder="Humain"/>
-            </label>
-            <label>{{localize 'libersf.arthu'}}
-                <input name="system.pop_arthuriens" type="text" value="{{data.system.pop_arthuriens}}" placeholder="Arthuriens"/>
-            </label>
-            <label>{{localize 'libersf.dragon'}}
-                <input name="system.pop_draconiens" type="text" value="{{data.system.pop_draconiens}}" placeholder="Draconniens"/>
-            </label>
-            <label>{{localize 'libersf.machinev'}}
-                <input name="system.pop_machine" type="text" value="{{data.system.pop_machine}}" placeholder="Machine"/>
-            </label>
-        </div>
-        <div class="grid-2col">
-            <label>{{localize 'libersf.pleiadiens'}}
-                <input name="system.pop_pleiadiens" type="text" value="{{data.system.pop_pleiadiens}}" placeholder="Pleiadiens"/>
-            </label>
-            <label>{{localize 'libersf.yor'}}
-                <input name="system.pop_yoribiens" type="text" value="{{data.system.pop_yoribiens}}" placeholder="Yoribiens"/>
-            </label>
-            <label>{{localize 'libersf.elf'}}
-                <input name="system.pop_elfen" type="text" value="{{data.system.pop_elfen}}" placeholder="Elfen"/>
-            </label>
-            <label>{{localize 'libersf.orqu'}}
-                <input name="system.pop_orquanien" type="text" value="{{data.system.pop_orquanien}}" placeholder="Orquanien"/>
-            </label>
-        </div>
-    </div>
+</div>
 </form>

@@ -91,7 +91,7 @@
           "label": "Planete",
           "system": "libersf",
           "path": "./pack/planete.db",
-          "type": "Item"
+          "type": "Actor"
         },
         {
           "name": "magie",

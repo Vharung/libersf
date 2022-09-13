@@ -4,7 +4,8 @@
             "personnage",
             "pnj",
             "monstre",
-            "vehicule"
+            "vehicule",
+            "planete"
         ],
         "templates":{
             "stat":{
@@ -158,6 +159,24 @@
             "types":"",
             "taille":1,
             "tailles":""
+        },
+        "planete":{
+            "surnom": "",
+            "domination":"",
+            "pouplation":"",
+            "description": "",
+            "niveau_arme":"",
+            "niveau_crime":"", 
+            "niveau_secu":"", 
+            "niveau_tech":"", 
+            "pop_humain":"",
+            "pop_arthuriens":"",
+            "pop_draconiens":"",
+            "pop_machine":"",
+            "pop_pleiadiens":"",
+            "pop_yoribiens":"",
+            "pop_elfen":"",
+            "pop_orquanien":""
         }
 
         
@@ -169,7 +188,6 @@
             "bouclier",
             "objet",
             "piece",
-            "planete",
             "argent",
             "sort"
         ],
@@ -227,24 +245,6 @@
             "techno":"☆ ☆ ☆ ☆ ☆",
             "quantite":"1",
             "valeur": "" 
-        },
-        "planete": {
-            "surnom": "",
-            "domination":"",
-            "pouplation":"",
-            "description": "",
-            "niveau_arme":"",
-            "niveau_crime":"", 
-            "niveau_secu":"", 
-            "niveau_tech":"", 
-            "pop_humain":"",
-            "pop_arthuriens":"",
-            "pop_draconiens":"",
-            "pop_machine":"",
-            "pop_pleiadiens":"",
-            "pop_yoribiens":"",
-            "pop_elfen":"",
-            "pop_orquanien":""
         },
         "sort": {
             "description": "",
