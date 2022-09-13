@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 .Liber .items-list .item-description,.Liber .items-list .item-description2,.Liber .items input.armed,.Liber .items input.charged,.Liber .items input.autrequi,.Liber .items input.armurequi,.Liber .items input.bouclierqui,.Liber .talentliste,.Liber .faiblesseliste,.Liber .carac input[type="text"].talent,.Liber .carac input[type="text"].faiblesse,.Liber .tabs,.Liber a.item.Liber .stat input,.Liber .stat2 input,.Liber .features input,.Liber .head,.Liber header,.Liber h2  {background:#013635}/*titre #09141a*/
 .Liber a.active,.Liber a.item.active:hover,.Liber .head .rexrow{background:url(ecran.jpg);}/*font  #253745*/
-.Liber .autres,.editable,#sidebar,.window-app .window-content{background:url(ecran.jpg);background-size: cover;}
+.Liber .autres,.editable,#sidebar,.window-app .window-content,.sheet.journal-entry .journal-entry-content{background:url(ecran.jpg);background-size: cover;}
 
 .window-app .window-content{color:#fff}
 .editable,.editable input,.editable textarea{color: #fff}
