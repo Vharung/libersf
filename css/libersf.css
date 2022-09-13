@@ -10,8 +10,10 @@ button,form button{background: #a10001;border:none;color: #fff;}
 .compendium-sidebar li.compendium-pack .status-icons {color: #fff;}
 .filepicker .current-dir input[name="target"],.filepicker .filter-dir input,input[type="text"], input[type="number"], input[type="password"], input[type="date"], input[type="time"], input[type="search"]  {color: #fff;background: #013635;}
 .filepicker .display-modes a.active {background: #a10001;}
-.filepicker .display-modes {background: ##00abab;}
-
+.filepicker .display-modes {background: #00abab;}
+.chat-message{background: #013635;color: #fff;border: none;margin-bottom: 15px;}
+.chat-message .message-header{color: #fff}
+.chat-message.whisper,.chat-message.blind {background: #00abab;border: 2px solid #545469;}
 option, optgroup,#chat-controls .roll-type-select{background: #013635;}
 
 
