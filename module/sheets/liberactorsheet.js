@@ -84,11 +84,28 @@
 
     activateListeners(html){
         super.activateListeners(html);
-        /*jet de dés*/
-        //html.find('.jetdedes').click(this._onRoll.bind(this));
+        /*Jet de des*/
+        html.find('.jetdedes').click(this._onRoll.bind(this)); 
+        html.find('.jetdedegat').click(this._onRoll2.bind(this));
 
+        html.find('.item-equip').click(this._onArmor.bind(this));
+        html.find('.desequi').click(this._onDesArmor.bind(this));
+        html.find('.update').click(this._onNivArmor.bind(this))
+        //choix Race
+        html.find('.racechoix').click(this._onAvantageRace.bind(this));
+        html.find('.metierchoix').click(this._onAvantageJob.bind(this));
+        //caractere aléatoire
+        html.find('.genererp').click(this._onEarth.bind(this));
+        html.find('.generator').click(this._onStory2.bind(this));
+        html.find('.caractergen').click(this._onStory.bind(this));
+        html.find('.aleatoire').click(this._onAleatoire.bind(this));
+        /*Etat*/
+        html.find('.action6').click(this._onCouv.bind(this));
+        html.find('.chnget').click(this._onCouv.bind(this));
+        html.find('.vehichoix').click(this._onVehi.bind(this))
         /*edition items*/
         html.find('.item-edit').click(this._onItemEdit.bind(this));
+
 
         // Delete Inventory Item
         html.find('.item-delete').click(ev => {
@@ -105,9 +122,6 @@
             li.slideUp(200, () => this.render(false));
         });
 
-        html.find('.item-equip').click(this._onArmor.bind(this));
-        html.find('.desequi').click(this._onDesArmor.bind(this));
-        html.find('.update').click(this._onNivArmor.bind(this))
 
 
         html.find('.item-create').click(ev => {
@@ -125,12 +139,6 @@
                 $(this).parent().parent().css({"height":"30px"});
             }
         });
-
-
-
-        //choix Race
-        html.find('.racechoix').click(this._onAvantageRace.bind(this));
-        html.find('.metierchoix').click(this._onAvantageJob.bind(this));
 
         //choix faction
         html.find('.factionchoix').on('click',function(){ 
@@ -286,10 +294,7 @@
             html.find('.solit').css("opacity", "0.5");
         }
 
-        //caractere aléatoire
-        html.find('.generator').click(this._onStory2.bind(this));
-        html.find('.caractergen').click(this._onStory.bind(this))
-        html.find('.aleatoire').click(this._onAleatoire.bind(this))
+        
 
         /*Ancienté*/
         var ancien=html.find('.model').val();
@@ -307,10 +312,7 @@
         html.find('.etoile').html(etoile);
 
 
-        /*Etat*/
-        html.find('.action6').click(this._onCouv.bind(this));
-        html.find('.chnget').click(this._onCouv.bind(this));
-        html.find('.vehichoix').click(this._onVehi.bind(this));
+        ;
 
 
         //+1 action si dext et agilité >30
@@ -403,9 +405,7 @@
             html.find(".bonusactor").val('0');            
         });
 
-        /*Jet de des*/
-        html.find('.jetdedes').click(this._onRoll.bind(this)); 
-        html.find('.jetdedegat').click(this._onRoll2.bind(this)); 
+         
 
         //vh_blind
         var blind=html.find(".vh_blind").val();
@@ -1012,4 +1012,46 @@
         console.log('Encombrement:'+enc)
         this.actor.update({"system.encombrement.max":enc});
     }
+
+    _onEarth(event){
+        var fact=Math. round(Math.random() * 4);
+        var arme=Math. round(Math.random() * 11);
+        var secu=Math. round(Math.random() * 11);
+        var crim=Math. round(Math.random() * 11);
+        var tech=Math. round(Math.random() * 11);
+        var pv=Math. round(Math.random() * 1000)*1000000;
+        var pop=Math. round(Math.random() * 1000)*1000;
+        let faction=['Empire','OMC','Mafia','Fédération'];
+        let etoile=["☆ ☆ ☆ ☆ ☆","✬ ☆ ☆ ☆ ☆","★ ☆ ☆ ☆ ☆","★ ✬ ☆ ☆ ☆","★ ★ ☆ ☆ ☆","★ ★ ✬ ☆ ☆","★ ★ ★ ☆ ☆","★ ★ ★ ✬ ☆","★ ★ ★ ★ ☆","★ ★ ★ ★ ✬","★ ★ ★ ★ ★"]
+        var nom=['Noxaqum','Terioll','Kimabas','Kepler','Luyten','Gliese','HD']
+        var abc=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+        var surnom1=['Planète','Zone','Reine','Super','Naine','Nébuleuse','Perle']
+        var surnom2=['émeraude','saphir','infini','morte','géante','diamant','bleue','noire','rouge','mercure','rocailleuse']
+        var type=['une planète desertique','un super continent','une série d\'îles et d\'archipèle','une planète océan','une planète rocailleuse','une jungle luxuriante','une planète glacée']
+        var type2=['de nombreuse villes','des animaux dangereux','un faune rare','des volcans très actifs','une techtonique des plaques très active','de violents cyclones et tempêtes','des éruptions solaires fréquentes']
+        var huma=0; var drac=0;var plei=0;var elfe=0;var orqa=0;var artu=0;var mach=0;var yori=0;
+        if(fact==1){
+           huma=Math. round(Math.random() * 11);
+           drac=Math. round(Math.random() * (11-huma));
+           mach=10-huma-drac;
+        }else if(fact==2){
+           elfe=Math. round(Math.random() * 11);
+           plei=Math. round(Math.random() * (11-huma));
+           mach=10-elfe-plei;
+        }else if(fact==3){
+           orqa=Math. round(Math.random() * 11);
+           artu=Math. round(Math.random() * (11-huma));
+           mach=10-orqa-artu;
+        }else if(fact==4){
+           artu=Math. round(Math.random() * 11);
+           yori=Math. round(Math.random() * (11-huma));
+           mach=10-yori-artu;
+        }
+        var name=nom[Math. round(Math.random() * 7)]+'-'+Math. round(Math.random() * 1000)+abc[Math. round(Math.random() * 26)];
+        var surnom=surnom1[Math. round(Math.random() * surnom1.length)]+' '+surnom2[Math. round(Math.random() * surnom2.length)];
+        var histoire='C\'est '+type[Math. round(Math.random() * type.length)]+' avec '+type2[Math. round(Math.random() * type2.length)];
+        var img='systems/libersf/assets/planete/p'+Math. round(Math.random() * 16)+'.png';
+        this.actor.update({"system.description":histoire,"system.surnom":surnom,'name':name,'img':img,"system.pop_humain":etoile[huma],"system.pop_arthuriens":etoile[artu],"system.pop_draconiens":etoile[drac],"system.pop_machine":etoile[mach],"system.pop_pleiadiens":etoile[plei],"system.pop_yoribiens":etoile[yori],"system.pop_elfen":etoile[elfe],"system.pop_orquanien":etoile[orqa],"system.domination":faction[fact],"system.armure.value":pv,"system.armure.max":pv,"system.niveau_arme":etoile[arme],"system.niveau_crime":etoile[crim],"system.niveau_secu":etoile[secu],"system.niveau_tech":etoile[tech],"system.hp.value":pv,"system.hp.max":pv,"system.pouplation":pop});
+    }
+    
 }

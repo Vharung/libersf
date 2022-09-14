@@ -32,6 +32,7 @@
         <main>
             <h2>{{localize 'libersf.histoire'}}</h2>
                 <textarea class="histoire" name="system.description" style="background: none">{{data.system.description}}</textarea>
+            <h2>{{localize 'libersf.infop'}}</h2>
             <div class="grid-2col">
                             <label>{{localize 'libersf.arme'}}
                                 <input name="system.niveau_arme" type="text" value="{{data.system.niveau_arme}}" placeholder="Arme"/>
@@ -55,6 +56,7 @@
                     <span class="deno">⛉ {{localize 'libersf.armure'}}</span>
                     <span class="deno">⛉ {{localize 'libersf.bouclier'}}</span></p>
                 </div>
+
                 <div class="grid-2col">
                     <p>
                     <input class="hp" name="system.hp.value" type="text" value="{{data.system.hp.value}}" placeholder="10" style="width: 50%;"/><input class="hpmax" name="system.hp.max" type="text" value="{{data.system.hp.max}}" placeholder="10" style="width: 50%;margin-bottom:5px"/>
@@ -68,7 +70,7 @@
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
-            
+            <button class="genererp" style="margin-top: 50px;">{{localize 'libersf.gp'}}</button>
         </main>
     </div>
     <div style="width: 592px;float: left;display: inline-block;">
