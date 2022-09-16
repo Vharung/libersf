@@ -46,6 +46,8 @@
   "libersf.metier7": "Medecin",
   "libersf.metier8": "Militaire",
   "libersf.metier9": "Mécanicien",
+  "libersf.metier10": "Scientifique",
+  "libersf.metier11": "Magicien",
   "libersf.faction": "Faction",
   "libersf.bonus": "Bonus",
   "libersf.level": "Niv.",
@@ -174,6 +176,7 @@
   "libersf.regle10": "- Jambe G 86-100",
   "libersf.regle11": "Indiqué les dégats prient dans le shéma ci-dessus. Si plus de bar de santé est à 0 la zone est morte.",
   "libersf.infop": "Information technologique de la planète",
-  "libersf.gp": "Générer une planète"
+  "libersf.gp": "Générer une planète",
+  "libersf.autre": "Autre"
 
 }

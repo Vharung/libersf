@@ -20,7 +20,7 @@
 							<p>{{localize 'libersf.faction'}} : <input class="faction" type="text" value="{{data.system.religion}}" placeholder="Faction  - Religion" readonly /></p>
 						</div>
 						<!--div class="separator"></div-->
-						<p>{{localize 'libersf.bonus'}} : <input class="bonusrace" title="{{data.system.bonusrace}}" name="system.bonusrace" type="text" value="{{data.system.bonusrace}}" placeholder="Bonus" style="width: 158px" readonly/> <input class="bonusmetier" title="{{data.system.bonusmetier}}" name="system.bonusmetier" type="text" value="{{data.system.bonusmetier}}" placeholder="bonusmetier" style="width: 158px" readonly />{{localize 'libersf.level'}} : <input class="niveau" name="system.level" type="text" value="{{data.system.level}}" placeholder="1"/></p>
+						<p>{{localize 'libersf.bonus'}} : <input class="bonusrace" title="{{data.system.bonusrace}}" name="system.bonusrace" type="text" value="{{data.system.bonusrace}}" placeholder="Bonus" style="width: 158px"/> <input class="bonusmetier" title="{{data.system.bonusmetier}}" name="system.bonusmetier" type="text" value="{{data.system.bonusmetier}}" placeholder="bonusmetier" style="width: 158px" readonly />{{localize 'libersf.level'}} : <input class="niveau" name="system.level" type="text" value="{{data.system.level}}" placeholder="1"/></p>
 					</div>
 					
 				</div>
@@ -487,6 +487,7 @@
 		                    <option value="{{localize 'libersf.elf'}}">{{localize 'libersf.elf'}}</option>
 		                    <option value="{{localize 'libersf.machine'}}">{{localize 'libersf.machine'}}</option>
 		                    <option value="{{localize 'libersf.orqu'}}">{{localize 'libersf.orqu'}}</option>
+		                    <option value="{{localize 'libersf.autre'}}">{{localize 'libersf.autre'}}</option>
 	                    {{/select}}
 	                </SELECT>
 	                <input type="button" value="{{localize 'libersf.choisir'}}" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
@@ -514,6 +515,8 @@
 		                    <option value="{{localize 'libersf.metier7'}}">{{localize 'libersf.metier7'}}</option>
 		                    <option value="{{localize 'libersf.metier8'}}">{{localize 'libersf.metier8'}}</option>
 		                    <option value="{{localize 'libersf.metier9'}}">{{localize 'libersf.metier9'}}</option>
+		                    <option value="{{localize 'libersf.metier10'}}">{{localize 'libersf.metier10'}}</option>
+		                    <option class="andromede" value="{{localize 'libersf.metier11'}}">{{localize 'libersf.metier11'}}</option>
 		                {{/select}}
 	                </SELECT>
 	                <input type="button" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">

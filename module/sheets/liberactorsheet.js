@@ -14,8 +14,13 @@
     }
 
     get template() {
+        if (this.actor.type == 'personnage' || this.actor.type == 'pnj' ) {
+            return `systems/libersf/templates/sheets/personnage-sheet.html`;
+        }else {
+            return `systems/libersf/templates/sheets/${this.actor.type}-sheet.html`;
+        }
         console.log(`Liber | Récupération du fichier html ${this.actor.type}-sheet.`);
-        return `systems/libersf/templates/sheets/${this.actor.type}-sheet.html`;
+        
     }
 
     getData(){
@@ -687,7 +692,7 @@
     }
 
     _onAvantageRace(event){
-        var clanliste=this.actor.race;
+        var clanliste=this.actor.system.race;
 
         var bonusrace='';
         if(clanliste==game.i18n.localize("libersf.humain")){
@@ -706,11 +711,14 @@
             bonusrace="10 Agilité et polyglotte";
         }else if(clanliste==game.i18n.localize("libersf.orqu")){
             bonusrace="10 Combat et double arme";
+        }else {
+            bonusrace="";
         }
         this.actor.update({'system.bonusrace': bonusrace});
     }
     _onAvantageJob(event){
-        var metierliste=this.actor.metier;
+        var metierliste=this.actor.system.metier;
+        console.log(metierliste)
         var metier='';
         if(metierliste==game.i18n.localize("libersf.metier1")){
             metier="10 Artisanat";
@@ -730,7 +738,12 @@
             metier="10 Tir";
         }else if(metierliste==game.i18n.localize("libersf.metier9")){
             metier="10 Mécanique";
+        }else if(metierliste==game.i18n.localize("libersf.metier10")){
+            metier="10 Science";
+        }else if(metierliste==game.i18n.localize("libersf.metier11")){
+            metier="10 Magie";
         }
+        console.log(metier)
         this.actor.update({'system.bonusmetier': metier});
     }
     _onArmor(event){
