@@ -749,7 +749,6 @@
     _onArmor(event){
         var genre=event.target.dataset["genre"];
         var objetaequipe=event.target.dataset["name"]; 
-        console.log(genre)
         if(genre=="arme" ){
             var degat=event.target.dataset["degat"]; 
             this.actor.update({'system.degatd': degat,'system.armed':objetaequipe});
