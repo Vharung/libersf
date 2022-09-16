@@ -749,6 +749,7 @@
     _onArmor(event){
         var genre=event.target.dataset["genre"];
         var objetaequipe=event.target.dataset["name"]; 
+        console.log(genre)
         if(genre=="arme" ){
             var degat=event.target.dataset["degat"]; 
             this.actor.update({'system.degatd': degat,'system.armed':objetaequipe});
@@ -782,12 +783,12 @@
     }
 
     _onNivArmor(event){
-        var arm=this.actor.armure.value;
-        var armmax=this.actor.armure.max;
-        var bou=this.actor.protections.value;
-        var boumax=this.actor.protections.max;
-        var armname=this.actor.prog;
-        var bouname=this.actor.prod;
+        var arm=this.actor.system.armure.value;
+        var armmax=this.actor.system.armure.max;
+        var bou=this.actor.system.protections.value;
+        var boumax=this.actor.system.protections.max;
+        var armname=this.actor.system.prog;
+        var bouname=this.actor.system.prod;
         if(arm==''){arm=0}
         if(armmax==''){armmax=0}
         if(bou==''){bou=0}
