@@ -559,7 +559,7 @@
                 perte=1;                
             }else if(retour>critique){
                 succes="<h4 class='resultat' style='background:#78be50;'>Dégât x1.5</h4>";
-                degat=parseInt(degat)*1.5;
+                degat=Math.round(parseInt(degat)*1.5);
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
                 perte=1;
             }else if(retour<=critique){
