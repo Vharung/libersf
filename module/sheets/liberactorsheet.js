@@ -365,6 +365,7 @@
         var poids=[];
         var quantite=[];
         var total=0;
+        //var exo=html.find('.armurequi').val()
         html.find( ".item-poid" ).each(function( index ) {
           poids.push($( this ).text());
         });
@@ -376,6 +377,9 @@
         for (var i = 1;i < poids.length ; i++) {
            total=total+parseFloat(poids[i])*parseFloat(quantite[i]);
         }
+        /*if(exo=="Exosquelette"){
+            enc=enc*2;
+        }*/
         var enc=html.find('.enc').val();
         var enc=parseFloat(enc);
         var pourcentage= total*100/enc;
@@ -1021,7 +1025,11 @@
 
     _onEncom(data){
         const adata = data.actor;
+        var  exo = adata.system.prog;
         var enc=parseInt(adata.system.Force) /2 + 35; 
+        if(exo=='Exosquelette'){
+           enc=enc*2; 
+        }
         console.log('Encombrement:'+enc)
         this.actor.update({"system.encombrement.max":enc});
     }

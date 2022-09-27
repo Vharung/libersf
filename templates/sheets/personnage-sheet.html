@@ -115,7 +115,7 @@
 					<div class="compt"><button class="jetdedes" data-name="ConGén" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.ConGén}}">{{localize 'libersf.cong'}}</button>
 					<input class="cpt4" name="system.ConGén" type="text" value="{{data.system.ConGén}}" placeholder="{{data.system.ConGén}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.ConSpécif}}">{{localize 'libersf.comp'}}</button>
+					<div class="compt"><button class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.ConSpécif}}">{{data.system.nomcomp}}</button>
 					<input class="cpt5" name="system.ConSpécif" type="text" value="{{data.system.ConSpécif}}" placeholder="{{data.system.ConSpécif}}" style="text-align: center"/>
 					</div>
 					<div class="compt"><button class="jetdedes" data-name="Dextérité" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Dextérité}}">{{localize 'libersf.dext'}}</button>
@@ -520,6 +520,9 @@
 		                {{/select}}
 	                </SELECT>
 	                <input type="button" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
+	                <h2 style="margin-top: 20px">{{localize 'libersf.comp'}}</h2>
+	                <input type="text" name="system.nomcomp" value="{{data.system.nomcomp}}" placeholder="Con. Spec." style="float: left;background: #0d0d0d;">
+	                <div class="clear"></div>
 	                <h2 style="margin-top: 20px">Andromède</h2>
 					<SELECT class="andomedes" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.andomedes">
 	                    {{#select data.system.andomedes}}

@@ -88,7 +88,8 @@
                     "m":0.5,  
                     "n":0.5 
                 } 
-            }
+            },
+            "nomcomp":""
         },
         "personnage":{
             "templates":["stat","attributs","background"], 
