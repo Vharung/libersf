@@ -11,11 +11,11 @@ export class LiberActor extends Actor {
     // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
     // prepareDerivedData().
     super.prepareData();
-    const actorData = this.system;
+    const actorData = this;
     const data = actorData;
     const flags = actorData.flags;
     //preparation dépendant du type de personnage (
-    if (actorData.type === 'personnage') this._preparePJData(actorData);
+    if (actorData.type === 'personnage') this._preparePJData(actorData.system);
   }
 
 
