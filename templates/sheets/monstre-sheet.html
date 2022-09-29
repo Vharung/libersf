@@ -11,16 +11,16 @@
 					<input class="nomperso" name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
 					<div class="rexrow">
 						<div class="grid-3col">			
-							<p>{{localize 'libersf.race'}} : <input class="race" type="text" value="{{data.system.race}}" placeholder="Race"/></p>
+							<p>{{localize 'libersf.race'}} : <input class="race" type="text" value="{{actor.system.race}}" placeholder="Race"/></p>
 						</div>
 						<div class="grid-3col">
-							<p>{{localize 'libersf.metier'}} : <input class="metier" type="text" value="{{data.system.metier}}" placeholder="Clan"/></p>
+							<p>{{localize 'libersf.metier'}} : <input class="metier" type="text" value="{{actor.system.metier}}" placeholder="Clan"/></p>
 						</div>
 						<div class="grid-3col">
-							<p>{{localize 'libersf.faction'}} : <input class="faction" type="text" value="{{data.system.religion}}" placeholder="Faction  - Religion"/></p>
+							<p>{{localize 'libersf.faction'}} : <input class="faction" type="text" value="{{actor.system.religion}}" placeholder="Faction  - Religion"/></p>
 						</div>
 						<!--div class="separator"></div-->
-						<p>{{localize 'libersf.bonus'}} : <input class="bonusrace" title="{{data.system.bonusrace}}" name="system.bonusrace" type="text" value="{{data.system.bonusrace}}" placeholder="Bonus" style="width: 158px"/> <input class="bonusmetier" title="{{data.system.bonusmetier}}" name="system.bonusmetier" type="text" value="{{data.system.bonusmetier}}" placeholder="bonusmetier" style="width: 158px"/>{{localize 'libersf.level'}} : <input class="niveau" name="system.level" type="text" value="{{data.system.level}}" placeholder="1"/></p>
+						<p>{{localize 'libersf.bonus'}} : <input class="bonusrace" title="{{actor.system.bonusrace}}" name="system.bonusrace" type="text" value="{{actor.system.bonusrace}}" placeholder="Bonus" style="width: 158px"/> <input class="bonusmetier" title="{{actor.system.bonusmetier}}" name="system.bonusmetier" type="text" value="{{actor.system.bonusmetier}}" placeholder="bonusmetier" style="width: 158px"/>{{localize 'libersf.level'}} : <input class="niveau" name="system.level" type="text" value="{{actor.system.level}}" placeholder="1"/></p>
 					</div>
 					
 				</div>
@@ -28,52 +28,52 @@
 		</div>
 		<main>
 			<h2>{{localize 'libersf.histoire'}}</h2>
-				<textarea class="histoire" name="system.histoire" style="background: none">{{data.system.histoire}}</textarea>
+				<textarea class="histoire" name="system.histoire" style="background: none">{{actor.system.histoire}}</textarea>
 			<h2>{{localize 'libersf.etat'}}</h2>
 			<div class="rexrow stat">
 				<div class="grid-2col">
-					<p><span class="deno">❤ {{localize 'libersf.vie'}}</span><input class="hp" name="system.hp.value" type="text" value="{{data.system.hp.value}}" placeholder="10" style="width: 40px;"/><input class="hpmax" name="system.hp.max" type="text" value="{{data.system.hp.max}}" placeholder="10" style="width: 40px;"/>
-					<span class="deno andromede">☀ {{localize 'libersf.psy'}}</span><input class="psy andromede" name="system.psy.value" type="text" value="{{data.system.psy.value}}" placeholder="10" style="width: 40px;"/><input class="psymax andromede" name="system.psy.max" type="text" value="{{data.system.psy.max}}" placeholder="10" style="width: 40px;"/></p>
+					<p><span class="deno">❤ {{localize 'libersf.vie'}}</span><input class="hp" name="system.hp.value" type="text" value="{{actor.system.hp.value}}" placeholder="10" style="width: 40px;"/><input class="hpmax" name="system.hp.max" type="text" value="{{actor.system.hp.max}}" placeholder="10" style="width: 40px;"/>
+					<span class="deno andromede">☀ {{localize 'libersf.psy'}}</span><input class="psy andromede" name="system.psy.value" type="text" value="{{actor.system.psy.value}}" placeholder="10" style="width: 40px;"/><input class="psymax andromede" name="system.psy.max" type="text" value="{{actor.system.psy.max}}" placeholder="10" style="width: 40px;"/></p>
 				</div>
 				<div class="grid-2col">
-					<p><span class="deno">⛉ {{localize 'libersf.armure'}}</span><input class="actarm" name="system.armure.value" type="text" value="{{data.system.armure.value}}" placeholder="0"/><input class="actarmmax" name="system.armure.max" type="text" value="{{data.system.armure.max}}" placeholder="0" readonly/><span class="update">&#128472;</span>
-					<span class="deno">⛉ {{localize 'libersf.bouclier'}}</span><input class="actbou" name="system.protections.value" type="text" value="{{data.system.protections.value}}" placeholder="0"/><input  class="actboumax" name="system.protections.max" type="text" value="{{data.system.protections.max}}" placeholder="0" readonly/><span class="update">&#128472;</span></p>
+					<p><span class="deno">⛉ {{localize 'libersf.armure'}}</span><input class="actarm" name="system.armure.value" type="text" value="{{actor.system.armure.value}}" placeholder="0"/><input class="actarmmax" name="system.armure.max" type="text" value="{{actor.system.armure.max}}" placeholder="0" readonly/><span class="update">&#128472;</span>
+					<span class="deno">⛉ {{localize 'libersf.bouclier'}}</span><input class="actbou" name="system.protections.value" type="text" value="{{actor.system.protections.value}}" placeholder="0"/><input  class="actboumax" name="system.protections.max" type="text" value="{{actor.system.protections.max}}" placeholder="0" readonly/><span class="update">&#128472;</span></p>
 				</div>
 				<div class="clear"></div>
 				<div class="etat">
-					<button class="etat0 chnget" data-etat="0" style="opacity: {{data.system.etat.a}};"></button>
-					<button class="etat1 chnget" data-etat="1" style="opacity: {{data.system.etat.b}};"></button>
-					<button class="etat2 chnget" data-etat="2" style="opacity: {{data.system.etat.c}};"></button>
-					<button class="etat3 chnget" data-etat="3" style="opacity: {{data.system.etat.d}};"></button>
-					<button class="etat4 chnget" data-etat="4" style="opacity: {{data.system.etat.e}};"></button>
-					<button class="etat5 chnget" data-etat="5" style="opacity: {{data.system.etat.f}};"></button>
-					<button class="etat6 chnget" data-etat="6" style="opacity: {{data.system.etat.g}};"></button>
-					<button class="etat7 chnget" data-etat="7" style="opacity: {{data.system.etat.h}};"></button>
-					<button class="etat8 chnget" data-etat="8" style="opacity: {{data.system.etat.i}};"></button>
-					<button class="etat9 chnget" data-etat="9" style="opacity: {{data.system.etat.j}};"></button>
-					<button class="etat10 chnget" data-etat="10" style="opacity: {{data.system.etat.k}};"></button>
-					<button class="etat11 chnget" data-etat="11" style="opacity: {{data.system.etat.l}};"></button>
-					<button class="etat12 chnget" data-etat="12" style="opacity: {{data.system.etat.m}};"></button>
-					<button class="etat13 chnget" data-etat="13" style="opacity: {{data.system.etat.n}};"></button>
+					<button class="etat0 chnget" data-etat="0" style="opacity: {{actor.system.etat.a}};"></button>
+					<button class="etat1 chnget" data-etat="1" style="opacity: {{actor.system.etat.b}};"></button>
+					<button class="etat2 chnget" data-etat="2" style="opacity: {{actor.system.etat.c}};"></button>
+					<button class="etat3 chnget" data-etat="3" style="opacity: {{actor.system.etat.d}};"></button>
+					<button class="etat4 chnget" data-etat="4" style="opacity: {{actor.system.etat.e}};"></button>
+					<button class="etat5 chnget" data-etat="5" style="opacity: {{actor.system.etat.f}};"></button>
+					<button class="etat6 chnget" data-etat="6" style="opacity: {{actor.system.etat.g}};"></button>
+					<button class="etat7 chnget" data-etat="7" style="opacity: {{actor.system.etat.h}};"></button>
+					<button class="etat8 chnget" data-etat="8" style="opacity: {{actor.system.etat.i}};"></button>
+					<button class="etat9 chnget" data-etat="9" style="opacity: {{actor.system.etat.j}};"></button>
+					<button class="etat10 chnget" data-etat="10" style="opacity: {{actor.system.etat.k}};"></button>
+					<button class="etat11 chnget" data-etat="11" style="opacity: {{actor.system.etat.l}};"></button>
+					<button class="etat12 chnget" data-etat="12" style="opacity: {{actor.system.etat.m}};"></button>
+					<button class="etat13 chnget" data-etat="13" style="opacity: {{actor.system.etat.n}};"></button>
 				</div>
 			</div>
 			<div class="clear"></div>
 			<div class="rexrow modif">
 				<div class="grid-4col">
 					<h2>{{localize 'libersf.team'}}</h2>
-					<input class="team" name="system.team" type="text" value="{{data.system.team}}" placeholder="0"/>
+					<input class="team" name="system.team" type="text" value="{{actor.system.team}}" placeholder="0"/>
 				</div>
 				<div class="grid-4col">
 					<h2>{{localize 'libersf.solitude'}}</h2>
-					<input class="solit" name="system.solit" type="text" value="{{data.system.solit}}" placeholder="0"/>
+					<input class="solit" name="system.solit" type="text" value="{{actor.system.solit}}" placeholder="0"/>
 				</div>
 				<div class="grid-4col">
 					<h2>{{localize 'libersf.ptarmor'}}</h2>
-					<div class="armcl"><span class="ptarm">{{data.system.ptarm}}</span></div>
+					<div class="armcl"><span class="ptarm">{{actor.system.ptarm}}</span></div>
 				</div>
 				<div class="grid-4col">
 					<h2>{{localize 'libersf.ptboucl'}}</h2>
-					<div class="boucl"><span class="ptbou">{{data.system.ptbou}}</span></div>
+					<div class="boucl"><span class="ptbou">{{actor.system.ptbou}}</span></div>
 				</div>
 			</div>
 		</main>
@@ -91,95 +91,95 @@
 					<h2 style="text-align:center">{{localize 'libersf.action'}}</h2>
 					<div class="action0" title="{{localize 'libersf.marche'}}"></div>
 					<div class="action0b" title="{{localize 'libersf.run'}}"></div>
-					<div class="action1 jetdedes" data-name="Tircouv" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Tir}}" data-armed="{{data.system.armed}}" data-degat="{{data.system.degatd}}" data-charged="{{data.system.charged}}" title="{{localize 'libersf.tircouv'}}"></div>
+					<div class="action1 jetdedes" data-name="Tircouv" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.tircouv'}}"></div>
 					<div class="action2" title="{{localize 'libersf.commun'}}"></div>
 					<div class="action3" title="{{localize 'libersf.soutien'}}"></div>
-					<div class="action4 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Tir}}" data-armed="{{data.system.armed}}" data-degat="{{data.system.degatd}}" data-charged="{{data.system.charged}}" title="{{localize 'libersf.raffale'}}"></div>
-					<div class="action5" data-name="Tir" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Tir}}" data-armed="{{data.system.armed}}" data-degat="{{data.system.degatd}}" data-charged="{{data.system.charged}}" title="{{localize 'libersf.horsmap'}}"></div>
+					<div class="action4 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.raffale'}}"></div>
+					<div class="action5" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.horsmap'}}"></div>
 					<div class="action6" title="{{localize 'libersf.couver'}}" data-etat="12"></div>
 					<div class="clear"></div>
 
 					<h2 style="text-align: center;">Jet D100 sur Base 30</h2>
-					<div class="compt"><button class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Agilité}}">{{localize 'libersf.agil'}}</button>
-					<input class="cpt0" name="system.Agilité" type="text" value="{{data.system.Agilité}}" placeholder="{{data.system.Agilité}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Agilité}}">{{localize 'libersf.agil'}}</button>
+					<input class="cpt0" name="system.Agilité" type="text" value="{{actor.system.Agilité}}" placeholder="{{actor.system.Agilité}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Artisanat" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Artisanat}}" title="Construire / Réparer Objet">{{localize 'libersf.arti'}}</button>
-					<input class="cpt1" name="system.Artisanat" type="text" value="{{data.system.Artisanat}}" placeholder="{{data.system.Artisanat}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Artisanat" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Artisanat}}" title="Construire / Réparer Objet">{{localize 'libersf.arti'}}</button>
+					<input class="cpt1" name="system.Artisanat" type="text" value="{{actor.system.Artisanat}}" placeholder="{{actor.system.Artisanat}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Balistique" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Balistique}}" title="Réparer les armes / Fabriquer munition">{{localize 'libersf.bali'}}</button>
-					<input class="cpt2" name="system.Balistique" type="text" value="{{data.system.Balistique}}" placeholder="{{data.system.Balistique}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Balistique" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Balistique}}" title="Réparer les armes / Fabriquer munition">{{localize 'libersf.bali'}}</button>
+					<input class="cpt2" name="system.Balistique" type="text" value="{{actor.system.Balistique}}" placeholder="{{actor.system.Balistique}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Combat" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Combat}}">{{localize 'libersf.comb'}}</button>
-					<input class="cpt3" name="system.Combat" type="text" value="{{data.system.Combat}}" placeholder="{{data.system.Combat}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Combat" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Combat}}">{{localize 'libersf.comb'}}</button>
+					<input class="cpt3" name="system.Combat" type="text" value="{{actor.system.Combat}}" placeholder="{{actor.system.Combat}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="ConGén" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.ConGén}}">{{localize 'libersf.cong'}}</button>
-					<input class="cpt4" name="system.ConGén" type="text" value="{{data.system.ConGén}}" placeholder="{{data.system.ConGén}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="ConGén" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.ConGén}}">{{localize 'libersf.cong'}}</button>
+					<input class="cpt4" name="system.ConGén" type="text" value="{{actor.system.ConGén}}" placeholder="{{actor.system.ConGén}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.ConSpécif}}">{{localize 'libersf.comp'}}</button>
-					<input class="cpt5" name="system.ConSpécif" type="text" value="{{data.system.ConSpécif}}" placeholder="{{data.system.ConSpécif}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.ConSpécif}}">{{localize 'libersf.comp'}}</button>
+					<input class="cpt5" name="system.ConSpécif" type="text" value="{{actor.system.ConSpécif}}" placeholder="{{actor.system.ConSpécif}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Dextérité" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Dextérité}}">{{localize 'libersf.dext'}}</button>
-					<input class="cpt6" name="system.Dextérité" type="text" value="{{data.system.Dextérité}}" placeholder="{{data.system.Dextérité}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Dextérité" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Dextérité}}">{{localize 'libersf.dext'}}</button>
+					<input class="cpt6" name="system.Dextérité" type="text" value="{{actor.system.Dextérité}}" placeholder="{{actor.system.Dextérité}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Diplomatie" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Diplomatie}}">{{localize 'libersf.dipl'}}</button>
-					<input class="cpt7" name="system.Diplomatie" type="text" value="{{data.system.Diplomatie}}" placeholder="{{data.system.Diplomatie}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Diplomatie" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Diplomatie}}">{{localize 'libersf.dipl'}}</button>
+					<input class="cpt7" name="system.Diplomatie" type="text" value="{{actor.system.Diplomatie}}" placeholder="{{actor.system.Diplomatie}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Discrétion" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Discrétion}}">{{localize 'libersf.disc'}}</button>
-					<input class="cpt8" name="system.Discrétion" type="text" value="{{data.system.Discrétion}}" placeholder="{{data.system.Discrétion}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Discrétion" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Discrétion}}">{{localize 'libersf.disc'}}</button>
+					<input class="cpt8" name="system.Discrétion" type="text" value="{{actor.system.Discrétion}}" placeholder="{{actor.system.Discrétion}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Force" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Force}}">{{localize 'libersf.forc'}}</button>
-					<input class="cpt9" name="system.Force" type="text" value="{{data.system.Force}}" placeholder="{{data.system.Force}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Force" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Force}}">{{localize 'libersf.forc'}}</button>
+					<input class="cpt9" name="system.Force" type="text" value="{{actor.system.Force}}" placeholder="{{actor.system.Force}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Investigation" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Investigation}}">{{localize 'libersf.inve'}}</button>
-					<input class="cpt10" name="system.Investigation" type="text" value="{{data.system.Investigation}}" placeholder="{{data.system.Investigation}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Investigation" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Investigation}}">{{localize 'libersf.inve'}}</button>
+					<input class="cpt10" name="system.Investigation" type="text" value="{{actor.system.Investigation}}" placeholder="{{actor.system.Investigation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Jeu" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Jeu}}">{{localize 'libersf.ajeu'}}</button>
-					<input class="cpt11" name="system.Jeu" type="text" value="{{data.system.Jeu}}" placeholder="{{data.system.Jeu}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Jeu" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Jeu}}">{{localize 'libersf.ajeu'}}</button>
+					<input class="cpt11" name="system.Jeu" type="text" value="{{actor.system.Jeu}}" placeholder="{{actor.system.Jeu}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Mécanique" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Mécanique}}" title="Réparer Véhicule">{{localize 'libersf.meca'}}</button>
-					<input class="cpt12" name="system.Mécanique" type="text" value="{{data.system.Mécanique}}" placeholder="{{data.system.Mécanique}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Mécanique" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Mécanique}}" title="Réparer Véhicule">{{localize 'libersf.meca'}}</button>
+					<input class="cpt12" name="system.Mécanique" type="text" value="{{actor.system.Mécanique}}" placeholder="{{actor.system.Mécanique}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Médecine" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Médecine}}">{{localize 'libersf.mede'}}</button>
-					<input class="cpt13" name="system.Médecine" type="text" value="{{data.system.Médecine}}" placeholder="{{data.system.Médecine}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Médecine" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Médecine}}">{{localize 'libersf.mede'}}</button>
+					<input class="cpt13" name="system.Médecine" type="text" value="{{actor.system.Médecine}}" placeholder="{{actor.system.Médecine}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Natation" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Natation}}">{{localize 'libersf.nata'}}</button>
-					<input class="cpt14" name="system.Natation" type="text" value="{{data.system.Natation}}" placeholder="{{data.system.Natation}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Natation" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Natation}}">{{localize 'libersf.nata'}}</button>
+					<input class="cpt14" name="system.Natation" type="text" value="{{actor.system.Natation}}" placeholder="{{actor.system.Natation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Navigation" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Navigation}}">{{localize 'libersf.navi'}}</button>
-					<input class="cpt15" name="system.Navigation" type="text" value="{{data.system.Navigation}}" placeholder="{{data.system.Navigation}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Navigation" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Navigation}}">{{localize 'libersf.navi'}}</button>
+					<input class="cpt15" name="system.Navigation" type="text" value="{{actor.system.Navigation}}" placeholder="{{actor.system.Navigation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Négociation" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Négociation}}">{{localize 'libersf.nego'}}</button>
-					<input class="cpt16" name="system.Négociation" type="text" value="{{data.system.Négociation}}" placeholder="{{data.system.Négociation}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Négociation" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Négociation}}">{{localize 'libersf.nego'}}</button>
+					<input class="cpt16" name="system.Négociation" type="text" value="{{actor.system.Négociation}}" placeholder="{{actor.system.Négociation}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Perception" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Perception}}">{{localize 'libersf.perc'}}</button>
-					<input class="cpt17" name="system.Perception" type="text" value="{{data.system.Perception}}" placeholder="{{data.system.Perception}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Perception" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Perception}}">{{localize 'libersf.perc'}}</button>
+					<input class="cpt17" name="system.Perception" type="text" value="{{actor.system.Perception}}" placeholder="{{actor.system.Perception}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Pilotage" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Pilotage}}">{{localize 'libersf.pilo'}}</button>
-					<input class="cpt18" name="system.Pilotage" type="text" value="{{data.system.Pilotage}}" placeholder="{{data.system.Pilotage}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Pilotage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Pilotage}}">{{localize 'libersf.pilo'}}</button>
+					<input class="cpt18" name="system.Pilotage" type="text" value="{{actor.system.Pilotage}}" placeholder="{{actor.system.Pilotage}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Piratage" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Piratage}}">{{localize 'libersf.pira'}}</button>
-					<input class="cpt19" name="system.Piratage" type="text" value="{{data.system.Piratage}}" placeholder="{{data.system.Piratage}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Piratage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Piratage}}">{{localize 'libersf.pira'}}</button>
+					<input class="cpt19" name="system.Piratage" type="text" value="{{actor.system.Piratage}}" placeholder="{{actor.system.Piratage}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Pistage" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Pistage}}">{{localize 'libersf.pist'}}</button>
-					<input class="cpt20" name="system.Pistage" type="text" value="{{data.system.Pistage}}" placeholder="{{data.system.Pistage}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Pistage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Pistage}}">{{localize 'libersf.pist'}}</button>
+					<input class="cpt20" name="system.Pistage" type="text" value="{{actor.system.Pistage}}" placeholder="{{actor.system.Pistage}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Religion" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Religion}}">{{localize 'libersf.reli'}}</button>
-					<input class="cpt21" name="system.Religion" type="text" value="{{data.system.Religion}}" placeholder="{{data.system.Religion}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Religion" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Religion}}">{{localize 'libersf.reli'}}</button>
+					<input class="cpt21" name="system.Religion" type="text" value="{{actor.system.Religion}}" placeholder="{{actor.system.Religion}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Science" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Science}}">{{localize 'libersf.scie'}}</button>
-					<input class="cpt22" name="system.Science" type="text" value="{{data.system.Science}}" placeholder="{{data.system.Science}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Science" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Science}}">{{localize 'libersf.scie'}}</button>
+					<input class="cpt22" name="system.Science" type="text" value="{{actor.system.Science}}" placeholder="{{actor.system.Science}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Survie" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Survie}}">{{localize 'libersf.surv'}}</button>
-					<input class="cpt23" name="system.Survie" type="text" value="{{data.system.Survie}}" placeholder="{{data.system.Survie}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Survie" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Survie}}">{{localize 'libersf.surv'}}</button>
+					<input class="cpt23" name="system.Survie" type="text" value="{{actor.system.Survie}}" placeholder="{{actor.system.Survie}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes comptir" data-name="Tir" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Tir}}" data-armed="{{data.system.armed}}" data-degat="{{data.system.degatd}}" data-charged="{{data.system.charged}}">{{localize 'libersf.atir'}}</button>
-					<input class="cpt24" name="system.Tir" type="text" value="{{data.system.Tir}}" placeholder="{{data.system.Tir}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes comptir" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}">{{localize 'libersf.atir'}}</button>
+					<input class="cpt24" name="system.Tir" type="text" value="{{actor.system.Tir}}" placeholder="{{actor.system.Tir}}" style="text-align: center"/>
 					</div>
-					<div class="compt"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Visée}}">{{localize 'libersf.vise'}}</button>
-					<input class="cpt25" name="system.Visée" type="text" value="{{data.system.Visée}}" placeholder="{{data.system.Visée}}" style="text-align: center"/>
+					<div class="compt"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Visée}}">{{localize 'libersf.vise'}}</button>
+					<input class="cpt25" name="system.Visée" type="text" value="{{actor.system.Visée}}" placeholder="{{actor.system.Visée}}" style="text-align: center"/>
 					</div>
-					<div class="compt  andromede"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{data.system.bonus}}" data-attDice="{{data.system.Visée}}">{{localize 'libersf.psy'}}</button>
-					<input class="cpt26" name="system.magie" type="text" value="{{data.system.magie}}" placeholder="{{data.system.magie}}" style="text-align: center"/>
+					<div class="compt  andromede"><button class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Visée}}">{{localize 'libersf.psy'}}</button>
+					<input class="cpt26" name="system.magie" type="text" value="{{actor.system.magie}}" placeholder="{{actor.system.magie}}" style="text-align: center"/>
 					</div>
 					<div class="clear"></div>
 					
@@ -188,30 +188,30 @@
 					</div>
 					<div class="grid-2col" style="margin-top: 20px">
 						<h2 style="text-align:center">{{localize 'libersf.bonusmj'}}</h2>
-						<input class="malussactor" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" name="system.malus" type="text" value="{{data.system.malus}}" placeholder="0"/>
+						<input class="malussactor" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" name="system.malus" type="text" value="{{actor.system.malus}}" placeholder="0"/>
 					</div>
 					
 				</div>
 				{{!-- Items Tab --}}
 				<div id="items" class="tab items" data-group="primary" data-tab="items">
 					<div class="encom"><div class="barenc"></div>
-						<p>{{localize 'libersf.encombrement'}} <input class="encours" name="system.encombrement.value" type="text" value="{{data.system.encombrement.value}}" placeholder="0" style="width: 40px;" readonly=""/> / 
-						<input class="enc" name="system.encombrement.max" type="text" value="{{data.system.encombrement.max}}" placeholder="0" style="width: 40px;" readonly="" /> {{localize 'libersf.kg'}}</p>
+						<p>{{localize 'libersf.encombrement'}} <input class="encours" name="system.encombrement.value" type="text" value="{{actor.system.encombrement.value}}" placeholder="0" style="width: 40px;" readonly=""/> / 
+						<input class="enc" name="system.encombrement.max" type="text" value="{{actor.system.encombrement.max}}" placeholder="0" style="width: 40px;" readonly="" /> {{localize 'libersf.kg'}}</p>
 					</div>
 					<div class="flexrow">
 						<div class="grid-3col" style="text-align: center">
-							<span class="icongun"></span><input  class="armed" name="system.armed" type="text" value="{{data.system.armed}}" title="{{data.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{data.system.degatd}}" readonly="" style="display: none;"/><button class="desequi" data-genre="arme">🗑</button>
+							<span class="icongun"></span><input  class="armed" name="system.armed" type="text" value="{{actor.system.armed}}" title="{{actor.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{actor.system.degatd}}" readonly="" style="display: none;"/><button class="desequi" data-genre="arme">🗑</button>
 							<div class="clear"></div>
-							<span class="iconcha"></span><input  class="charged" name="system.charged" type="text" value="{{data.system.charged}}" title="{{data.system.charged}}" placeholder="Chargeur" readonly="" /><button class="desequi" data-genre="chargeur">🗑</button>				
+							<span class="iconcha"></span><input  class="charged" name="system.charged" type="text" value="{{actor.system.charged}}" title="{{actor.system.charged}}" placeholder="Chargeur" readonly="" /><button class="desequi" data-genre="chargeur">🗑</button>				
 						</div>
 							
 						<div class="grid-3col" style="text-align: center" class="unemain">
-							<span class="iconarm"></span><input  class="armurequi" name="system.prog" type="text" value="{{data.system.prog}}" title="{{data.system.prog}}" placeholder="Armure" readonly="" /><button class="desequi" data-genre="armure">🗑</button>
+							<span class="iconarm"></span><input  class="armurequi" name="system.prog" type="text" value="{{actor.system.prog}}" title="{{actor.system.prog}}" placeholder="Armure" readonly="" /><button class="desequi" data-genre="armure">🗑</button>
 							
 
 						</div>
 						<div class="grid-3col" style="text-align: center">
-							<span class="iconbou"></span><input  class="bouclierqui" name="system.prod" type="text" value="{{data.system.prod}}"  title="{{data.system.prod}}" placeholder="Bouclier" readonly="" /><button class="desequi" data-genre="bouclier">🗑</button>
+							<span class="iconbou"></span><input  class="bouclierqui" name="system.prod" type="text" value="{{actor.system.prod}}"  title="{{actor.system.prod}}" placeholder="Bouclier" readonly="" /><button class="desequi" data-genre="bouclier">🗑</button>
 							<ol class="items-list">
 							{{#each actor.argent as |item id|}}
 					                <li class="item rexrow" data-item-id="{{item._id}}">
@@ -418,27 +418,27 @@
 					<div class="santes">
 						<div class="zone tete">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="tete" name="system.tete" type="text" value="{{data.system.tete}}" placeholder="Tete"/>
+							<input class="refbar" data-zone="tete" name="system.tete" type="text" value="{{actor.system.tete}}" placeholder="Tete"/>
 						</div>
 						<div class="zone bd">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="bd" name="system.bd" type="text" value="{{data.system.bd}}" placeholder="bd" style=""/>
+							<input class="refbar" data-zone="bd" name="system.bd" type="text" value="{{actor.system.bd}}" placeholder="bd" style=""/>
 						</div>
 						<div class="zone torse">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="torse" name="system.torse" type="text" value="{{data.system.torse}}" placeholder="torse"/>
+							<input class="refbar" data-zone="torse" name="system.torse" type="text" value="{{actor.system.torse}}" placeholder="torse"/>
 						</div>
 						<div class="zone bg">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="bg" name="system.bg" type="text" value="{{data.system.bg}}" placeholder="bg"/>
+							<input class="refbar" data-zone="bg" name="system.bg" type="text" value="{{actor.system.bg}}" placeholder="bg"/>
 						</div>
 						<div class="zone jd">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="jd" name="system.jd" type="text" value="{{data.system.jd}}" placeholder="jb"/>
+							<input class="refbar" data-zone="jd" name="system.jd" type="text" value="{{actor.system.jd}}" placeholder="jb"/>
 						</div>
 						<div class="zone jg">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="jg" name="system.jg" type="text" value="{{data.system.jg}}" placeholder="jg"/>
+							<input class="refbar" data-zone="jg" name="system.jg" type="text" value="{{actor.system.jg}}" placeholder="jg"/>
 						</div>
 					</div>
 					

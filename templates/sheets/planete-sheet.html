@@ -14,10 +14,10 @@
                 
 
                         <div class="grid-3col" style="width: 300px;">         
-                            <p>Surnom : <input name="system.surnom" type="text" value="{{data.system.surnom}}" placeholder="Surnom" style="width: 200px;"/></p>
+                            <p>Surnom : <input name="system.surnom" type="text" value="{{actor.system.surnom}}" placeholder="Surnom" style="width: 200px;"/></p>
                         </div>
                         <div class="grid-3col">
-                            <p>{{localize 'libersf.faction'}} : <input class="model" name="system.domination" type="text" value="{{data.system.domination}}" placeholder="Controlée par :" style="font-size: 1.2em;text-align: right;"/></p>
+                            <p>{{localize 'libersf.faction'}} : <input class="model" name="system.domination" type="text" value="{{actor.system.domination}}" placeholder="Controlée par :" style="font-size: 1.2em;text-align: right;"/></p>
                         </div>
                         <div class="grid-3col">
                             <p>&nbsp;</p>
@@ -31,22 +31,22 @@
         </div>
         <main>
             <h2>{{localize 'libersf.histoire'}}</h2>
-                <textarea class="histoire" name="system.description" style="background: none">{{data.system.description}}</textarea>
+                <textarea class="histoire" name="system.description" style="background: none">{{actor.system.description}}</textarea>
             <h2>{{localize 'libersf.infop'}}</h2>
             <div class="grid-2col">
                             <label>{{localize 'libersf.arme'}}
-                                <input name="system.niveau_arme" type="text" value="{{data.system.niveau_arme}}" placeholder="Arme"/>
+                                <input name="system.niveau_arme" type="text" value="{{actor.system.niveau_arme}}" placeholder="Arme"/>
                             </label>
                             <label>{{localize 'libersf.crime'}}
-                                <input name="system.niveau_crime" type="text" value="{{data.system.niveau_crime}}" placeholder="Crime"/>
+                                <input name="system.niveau_crime" type="text" value="{{actor.system.niveau_crime}}" placeholder="Crime"/>
                             </label>
                         </div>
                         <div class="grid-2col">
                             <label>{{localize 'libersf.secu'}}
-                                <input name="system.niveau_secu" type="text" value="{{data.system.niveau_secu}}" placeholder="Sécurité"/>
+                                <input name="system.niveau_secu" type="text" value="{{actor.system.niveau_secu}}" placeholder="Sécurité"/>
                             </label>
                             <label>{{localize 'libersf.techno'}}
-                                <input name="system.niveau_tech" type="text" value="{{data.system.niveau_tech}}" placeholder="Technologie"/>
+                                <input name="system.niveau_tech" type="text" value="{{actor.system.niveau_tech}}" placeholder="Technologie"/>
                             </label>
                         </div>
             <div class="rexrow stat">
@@ -59,10 +59,10 @@
 
                 <div class="grid-2col">
                     <p>
-                    <input class="hp" name="system.hp.value" type="text" value="{{data.system.hp.value}}" placeholder="10" style="width: 50%;"/><input class="hpmax" name="system.hp.max" type="text" value="{{data.system.hp.max}}" placeholder="10" style="width: 50%;margin-bottom:5px"/>
-                    <input class="psy andromede" name="system.psy.value" type="text" value="{{data.system.psy.value}}" placeholder="10" style="width: 50%;"/><input class="psymax andromede" name="system.psy.max" type="text" value="{{data.system.psy.max}}" placeholder="10" style="width: 50%;margin-bottom:5px"/>
-                    <input style="width: 50%;" class="actarm" name="system.armure.value" type="text" value="{{data.system.armure.value}}" placeholder="0"/><input style="width: 50%;margin-bottom:5px" class="actarmmax" name="system.armure.max" type="text" value="{{data.system.armure.max}}" placeholder="0" />
-                    <input style="width: 50%;" class="actbou" name="system.protections.value" type="text" value="{{data.system.protections.value}}" placeholder="0"/><input style="width: 50%;margin-bottom:5px" class="actboumax" name="system.protections.max" type="text" value="{{data.system.protections.max}}" placeholder="0" />
+                    <input class="hp" name="system.hp.value" type="text" value="{{actor.system.hp.value}}" placeholder="10" style="width: 50%;"/><input class="hpmax" name="system.hp.max" type="text" value="{{actor.system.hp.max}}" placeholder="10" style="width: 50%;margin-bottom:5px"/>
+                    <input class="psy andromede" name="system.psy.value" type="text" value="{{actor.system.psy.value}}" placeholder="10" style="width: 50%;"/><input class="psymax andromede" name="system.psy.max" type="text" value="{{actor.system.psy.max}}" placeholder="10" style="width: 50%;margin-bottom:5px"/>
+                    <input style="width: 50%;" class="actarm" name="system.armure.value" type="text" value="{{actor.system.armure.value}}" placeholder="0"/><input style="width: 50%;margin-bottom:5px" class="actarmmax" name="system.armure.max" type="text" value="{{actor.system.armure.max}}" placeholder="0" />
+                    <input style="width: 50%;" class="actbou" name="system.protections.value" type="text" value="{{actor.system.protections.value}}" placeholder="0"/><input style="width: 50%;margin-bottom:5px" class="actboumax" name="system.protections.max" type="text" value="{{actor.system.protections.max}}" placeholder="0" />
                 </p>
 
                 </div>
@@ -85,7 +85,7 @@
                 {{!-- Items Tab --}}
                 <div id="items" class="tab items" data-group="primary" data-tab="items">
 
-                        <label>{{localize 'libersf.pop'}} : <input name="system.pouplation" type="text" value="{{data.system.pouplation}}" placeholder="Nombre d'individu" style="width: 80%;float: right;"/>
+                        <label>{{localize 'libersf.pop'}} : <input name="system.pouplation" type="text" value="{{actor.system.pouplation}}" placeholder="Nombre d'individu" style="width: 80%;float: right;"/>
                         </label>
                         <div class="clear"></div>
                         <div class="flexrow objet">
@@ -93,34 +93,34 @@
 
                             <div class="grid-4col">
                                 <label>{{localize 'libersf.humain'}}
-                                    <input name="system.pop_humain" type="text" value="{{data.system.pop_humain}}" placeholder="Humain"/>
+                                    <input name="system.pop_humain" type="text" value="{{actor.system.pop_humain}}" placeholder="Humain"/>
                                 </label>
                                 <label>{{localize 'libersf.artu'}}
-                                    <input name="system.pop_arthuriens" type="text" value="{{data.system.pop_arthuriens}}" placeholder="Arthuriens"/>
+                                    <input name="system.pop_arthuriens" type="text" value="{{actor.system.pop_arthuriens}}" placeholder="Arthuriens"/>
                                 </label>
                             </div>
                             <div class="grid-4col">
                                 <label>{{localize 'libersf.dragon'}}
-                                    <input name="system.pop_draconiens" type="text" value="{{data.system.pop_draconiens}}" placeholder="Draconniens"/>
+                                    <input name="system.pop_draconiens" type="text" value="{{actor.system.pop_draconiens}}" placeholder="Draconniens"/>
                                 </label>
                                 <label>{{localize 'libersf.machine'}}
-                                    <input name="system.pop_machine" type="text" value="{{data.system.pop_machine}}" placeholder="Machine"/>
+                                    <input name="system.pop_machine" type="text" value="{{actor.system.pop_machine}}" placeholder="Machine"/>
                                 </label>
                             </div>
                             <div class="grid-4col">
                                 <label>{{localize 'libersf.pleiadiens'}}
-                                    <input name="system.pop_pleiadiens" type="text" value="{{data.system.pop_pleiadiens}}" placeholder="Pleiadiens"/>
+                                    <input name="system.pop_pleiadiens" type="text" value="{{actor.system.pop_pleiadiens}}" placeholder="Pleiadiens"/>
                                 </label>
                                 <label>{{localize 'libersf.yor'}}
-                                    <input name="system.pop_yoribiens" type="text" value="{{data.system.pop_yoribiens}}" placeholder="Yoribiens"/>
+                                    <input name="system.pop_yoribiens" type="text" value="{{actor.system.pop_yoribiens}}" placeholder="Yoribiens"/>
                                 </label>
                             </div>
                             <div class="grid-4col">
                                 <label>{{localize 'libersf.elf'}}
-                                    <input name="system.pop_elfen" type="text" value="{{data.system.pop_elfen}}" placeholder="Elfen"/>
+                                    <input name="system.pop_elfen" type="text" value="{{actor.system.pop_elfen}}" placeholder="Elfen"/>
                                 </label>
                                 <label>{{localize 'libersf.orqu'}}
-                                    <input name="system.pop_orquanien" type="text" value="{{data.system.pop_orquanien}}" placeholder="Orquanien"/>
+                                    <input name="system.pop_orquanien" type="text" value="{{actor.system.pop_orquanien}}" placeholder="Orquanien"/>
                                 </label>
                             </div>
                         </div>
