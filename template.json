@@ -121,7 +121,8 @@
             "degatd":"",
             "degatg":"",
             "prod":"",
-            "prog":""
+            "prog":"",
+            "mutation":"Non"
         },
         "pnj":{
             "templates":["stat","attributs","background"],

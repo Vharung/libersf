@@ -478,7 +478,7 @@
 				<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
 					<h2 style="margin-top: 20px">{{localize 'libersf.race'}}</h2>
 					<SELECT class="raceliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.race">
-						{{#select data.system.race}}
+						{{#select actor.system.race}}
 		                    <option value="{{localize 'libersf.humain'}}">{{localize 'libersf.humain'}}</option>
 		                    <option value="{{localize 'libersf.pleiadiens'}}">{{localize 'libersf.pleiadiens'}}</option>
 		                    <option value="{{localize 'libersf.artu'}}">{{localize 'libersf.artu'}}</option>
@@ -493,7 +493,7 @@
 	                <input type="button" value="{{localize 'libersf.choisir'}}" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
 	                <h2 style="margin-top: 20px">{{localize 'libersf.faction'}}</h2>
 					<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.religion">
-	                    {{#select data.system.religion}}
+	                    {{#select actor.system.religion}}
 		                    <option value="{{localize 'libersf.empire'}}">{{localize 'libersf.empire'}}</option>
 		                    <option value="{{localize 'libersf.pleide'}}">{{localize 'libersf.pleide'}}</option>
 		                    <option value="{{localize 'libersf.omc'}}">{{localize 'libersf.omc'}}</option>
@@ -505,7 +505,7 @@
 	                <input type="button" value="{{localize 'libersf.choisir'}}" class="factionchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
 	                <h2 style="margin-top: 20px">{{localize 'libersf.metier'}}</h2>
 					<SELECT class="metierliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.metier">
-	                    {{#select data.system.metier}}
+	                    {{#select actor.system.metier}}
 		                    <option value="{{localize 'libersf.metier1'}}">{{localize 'libersf.metier1'}}</option>
 		                    <option value="{{localize 'libersf.metier2'}}">{{localize 'libersf.metier2'}}</option>
 		                    <option value="{{localize 'libersf.metier3'}}">{{localize 'libersf.metier3'}}</option>
@@ -520,14 +520,25 @@
 		                {{/select}}
 	                </SELECT>
 	                <input type="button" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
-	                <h2 style="margin-top: 20px">{{localize 'libersf.comp'}}</h2>
-	                <input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec." style="float: left;background: #0d0d0d;">
+	                <div class="grid-2col">
+	                	<h2 style="margin-top: 20px">{{localize 'libersf.comp'}}</h2>
+	                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec." style="float: left;background: #0d0d0d;">
+	                </div>
+	                <div class="grid-2col">
+	                	<h2 style="margin-top: 18px">{{localize 'libersf.mut'}}</h2>
+	                	<SELECT class="mutation" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.mutation">
+		                	{{#select actor.system.mutation}}
+			                    <option value="non">Non</option>
+			                    <option value="oui">Oui</option>
+			                {{/select}}
+		            	</SELECT>
+	                </div>
 	                <div class="clear"></div>
 	                <h2 style="margin-top: 20px">Andromède</h2>
 					<SELECT class="andomedes" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.andomedes">
-	                    {{#select data.system.andomedes}}
-		                    <option value="non">Non</option>
-		                    <option value="oui">Oui</option>
+	                    {{#select actor.system.andomedes}}
+		                    <option value="non">{{localize 'libersf.non'}}</option>
+		                    <option value="oui">{{localize 'libersf.oui'}}</option>
 		                {{/select}}
 	                </SELECT>					
 					

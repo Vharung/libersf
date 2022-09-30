@@ -453,7 +453,15 @@
               }
             });
         var hp= html.find('.hp').val();
+        var mut= html.find('.mutation').val();
+        if(mut=="oui"){
+            html.find('.autres').css({"background":"url(systems/libersf/css/ecran3.jpg)",'background-size': 'cover'});
+            html.find('main').css({"background":"url(systems/libersf/css/ecran3.jpg) bottom",'background-size': 'cover'});
+            html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran3.jpg)",'background-size': 'cover'});
+        }
         if(hp<=0){
+            html.find('main').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'});
+            html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'})
             html.find('.autres').css({"background":"url(systems/libersf/css/ecran2.jpg)",'background-size': 'cover'});
         }
             

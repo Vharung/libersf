@@ -177,6 +177,9 @@
   "libersf.regle11": "Indiqué les dégats prient dans le shéma ci-dessus. Si plus de bar de santé est à 0 la zone est morte.",
   "libersf.infop": "Information technologique de la planète",
   "libersf.gp": "Générer une planète",
+  "libersf.oui": "Oui",
+  "libersf.non": "Non",
+  "libersf.mut": "Mutation",
   "libersf.autre": "Autre"
 
 }
