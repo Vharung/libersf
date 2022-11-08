@@ -155,129 +155,182 @@
 
 
         //calcul point restant
-        var clanliste=html.find('.raceliste').val();
-        var metierliste=html.find('.metierliste').val();
-        var metier=html.find('.metier').val();
-        var race=html.find('.race').val();
-        var ptrestant=html.find('.pointrestant').val();
-        var level=html.find('.niveau').val();
-        if(level==undefined){
-            var ptrestant2=html.find('.pointrestant2').val();
-            var resultat=parseInt(ptrestant2);
-        }else {
-            var resultat=-20-((parseInt(level)-1)*10); 
-        }
-        var min=-20;
-        for(i=0;i<26;i++){
-            if(race=="Humain" && i==6){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(race=="Arthuriens" && i==4){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(race=="Alpha Draconiens" && i==9){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(race=="Machine" && i==19){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(race=="Pleiadiens" && i==20){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(race=="Yoribiens" && i==17){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(race=="Elfen" && i==0){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(race=="Orquanien" && i==3){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
+        if(this.actor.type=="vehicule"){
+            var type=this.actor.system.type;
+            var tail=this.actor.system.taille;
+            var ptfixe=this.actor.system.pointrestant2;
+            if(type==1){
+                html.find('.types').val(game.i18n.localize("libersf.type1"));
+            }else if(type==2){
+                html.find('.types').val(game.i18n.localize("libersf.type2"));
+            }else if(type==3){ 
+                html.find('.types').val(game.i18n.localize("libersf.type3"));
+            }else if(type==4){
+                html.find('.types').val(game.i18n.localize("libersf.type4"));
             }
-            if(metier=="Artisans" && i==1){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Commerce" && i==16){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Colon" && i==23){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Intellectuel" && i==10){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Malandrins" && i==8){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Pilote" && i==18){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Médecin" && i==13){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Militaire" && i==24){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
-            }else if(metier=="Mécanicien" && i==12){
-                var controle= html.find('.cpt'+i).val();
-                if(controle<min){
-                    html.find('.cpt'+i).val(min);
-                }
+            if(tail==1){
+                html.find('.tailles').val(game.i18n.localize("libersf.taille1"));
+            }else if(tail==2){
+                html.find('.tailles').val(game.i18n.localize("libersf.taille2"));
+            }else if(tail==3){
+                html.find('.tailles').val(game.i18n.localize("libersf.taille3"));
+            }else if(tail==4){
+                html.find('.tailles').val(game.i18n.localize("libersf.taille4"));
             }
-            var valor=parseInt(html.find('.cpt'+i).val());
-            resultat=resultat+valor;
+
+            var prix=[];
+            var quantite=[];
+            var total=this.actor.system.prixbase;
+            //var exo=html.find('.armurequi').val()
+            html.find( ".item-valeur" ).each(function( index ) {
+                if($( this ).text()!=game.i18n.localize('libersf.l4')){
+                    prix.push($( this ).text());
+                }
+                
+            });
+            console.log(prix)
+            html.find( ".item-qt" ).each(function( index ) {
+                if($( this ).text()!=game.i18n.localize('libersf.l6')){
+                    quantite.push($( this ).text());
+                }
+            });
+            console.log(quantite)
+
+            for (var i = 1;i < prix.length ; i++) {
+               total=total+parseFloat(prix[i])*parseFloat(quantite[i]);
+            }
+            console.log(total)
+            this.actor.update({'system.prix': total});
         }
-        $( ".features input" ).each(function( index ) {
-          var valor= $( this ).val();
-          if(valor==0){
-            $( this ).css({"background":"transparent","color": "#fff"});
-          }else if(valor>0){
-            $( this ).css({"background":"#56853b","color": "white"});
-          }else if(valor<0){
-            $( this ).css({"background":"#a51b1b","color": "white"});
-          }
-        });
-        if(level==undefined){
-            resultat=resultat;
-        }else {
-            var hpmax=html.find('.hpmax').val();
-            var pointhp=(parseInt(hpmax)-20)*2;
-            resultat=resultat+pointhp; 
-        }
+
+            var clanliste=html.find('.raceliste').val();
+            var metierliste=html.find('.metierliste').val();
+            var metier=html.find('.metier').val();
+            var race=html.find('.race').val();
+            var ptrestant=html.find('.pointrestant').val();
+            var level=html.find('.niveau').val();
+            if(this.actor.type=="vehicule"){
+                var ptrestant2=this.actor.system.pointrestant2;
+                var resultat=parseInt(ptrestant2);
+            }else {
+                var resultat=-20-((parseInt(level)-1)*10); 
+            }
+            var min=-20;
+            for(i=0;i<26;i++){
+                if(race=="Humain" && i==6){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(race=="Arthuriens" && i==4){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(race=="Alpha Draconiens" && i==9){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(race=="Machine" && i==19){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(race=="Pleiadiens" && i==20){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(race=="Yoribiens" && i==17){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(race=="Elfen" && i==0){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(race=="Orquanien" && i==3){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }
+                if(metier=="Artisans" && i==1){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Commerce" && i==16){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Colon" && i==23){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Intellectuel" && i==10){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Malandrins" && i==8){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Pilote" && i==18){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Médecin" && i==13){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Militaire" && i==24){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }else if(metier=="Mécanicien" && i==12){
+                    var controle= html.find('.cpt'+i).val();
+                    if(controle<min){
+                        html.find('.cpt'+i).val(min);
+                    }
+                }
+                var valor=parseInt(html.find('.cpt'+i).val());
+                resultat=resultat+valor;
+            }
+            $( ".features input" ).each(function( index ) {
+              var valor= $( this ).val();
+              if(valor==0){
+                $( this ).css({"background":"transparent","color": "#fff"});
+              }else if(valor>0){
+                $( this ).css({"background":"#56853b","color": "white"});
+              }else if(valor<0){
+                $( this ).css({"background":"#a51b1b","color": "white"});
+              }
+            });
+            if(level==undefined){
+                resultat=resultat;
+            }else {
+                var hpmax=html.find('.hpmax').val();
+                var pointhp=(parseInt(hpmax)-20)*2;
+                resultat=resultat+pointhp; 
+            }
+            
+            html.find('.pointrestant').val(resultat); //bug vaisseau
         
-        html.find('.pointrestant').val(resultat);
+
+        
+
+
 
         /*Avantage*/
         var avant=html.find('.avant').val();
@@ -463,8 +516,7 @@
             html.find('main').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'});
             html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'})
             html.find('.autres').css({"background":"url(systems/libersf/css/ecran2.jpg)",'background-size': 'cover'});
-        }
-            
+        }        
 
 
     }
@@ -482,7 +534,6 @@
 
     _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
-
         var name = event.target.dataset["name"];
         var arme ='';
         var chargequi='';
@@ -497,7 +548,6 @@
         if(inforesult>95){
             inforesult=95;
         }
-
         if(name=="Tir" || name=="Tircouv"){
             if(name=="Tir"){var conf="none;width: 200px;";}
             arme = event.target.dataset["armed"];
@@ -956,11 +1006,11 @@
     }
 
     _onVehi(event){
-        var type=this.actor.type;
-        var tail=this.actor.taille;
-        var ia=this.actor.ia;
-        var mote=this.actor.moteur;
-        var blin=this.actor.blindage;
+        var type=this.actor.system.type;
+        var tail=this.actor.system.taille;
+        var ia=this.actor.system.ia;
+        var mote=this.actor.system.moteur;
+        var blin=this.actor.system.blindage;
         var prix=0;var pv=350;var nbequi=2;var nbpiece=0;var types="";var tailles="";
         console.log(ia+' '+mote+' '+blin)
         if(type==1){
@@ -1028,7 +1078,7 @@
             etoile="★ ★ ★ ★ ★";
         }
         console.log('indiquer '+ptrestant)
-        this.actor.update({"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.hp.value":pv,"system.hp.max":pv,"system.pointrestant2":ptrestant,"system.armure.value":blindage,"system.armure.max":blindage,"system.protections.value":bouclier,"system.protections.max":bouclier}); 
+        this.actor.update({"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.prixbase":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.hp.value":pv,"system.hp.max":pv,"system.pointrestant2":ptrestant,"system.armure.value":blindage,"system.armure.max":blindage,"system.protections.value":bouclier,"system.protections.max":bouclier}); 
     }
 
     _onEncom(data){

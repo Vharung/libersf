@@ -154,6 +154,7 @@
             "bouclier":0,
             "tehnologie":0,
             "prix":0,
+            "prixbase":0,
             "model":"",
             "ordre":"",
             "moteur":0.5,

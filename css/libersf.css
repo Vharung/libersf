@@ -106,7 +106,7 @@ form.Liber{display: table-cell;}
 .Liber .items-list .item-classe{width: 50px;float: left}
 .Liber .items-list .item-duree{width: 72px;float: left}
 .Liber .items-list .item-techno{width: 82px;float: left;text-align: center;}
-.Liber .items-list .item-resitance,.Liber .items-list .item-hpmax,.Liber .items-list .item-portee,.Liber .items-list .item-dommage,.Liber .items-list .item-poids,.Liber .items-list .item-poid,.Liber .items-list .item-valeur,.Liber .items-list .item-qty,.Liber .items-list .item-qt{width: 30px;float: left;text-align: center}
+.Liber .items-list .item-resitance,.Liber .items-list .item-hpmax,.Liber .items-prix,.Liber .items-list .item-portee,.Liber .items-list .item-dommage,.Liber .items-list .item-poids,.Liber .items-list .item-poid,.Liber .items-list .item-valeur,.Liber .items-list .item-qty,.Liber .items-list .item-qt{width: 30px;float: left;text-align: center}
 .Liber .items-list .item-hand{width: 62px;float: left;filter: invert(1);}
 .Liber .items-list .item-controls{-webkit-box-flex: 0;-ms-flex: 0 0 86px;flex: 0 0 86px;text-align: right;width: 61px;}
 .Liber .stats select{border: none;height: 30px;width: 50%; margin: 3px;background: #0d0d0d;color: #fff;}
@@ -170,7 +170,7 @@ form.Liber{display: table-cell;}
 .Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}
 .resultat{text-align: center;color: #fff;padding: 5px;border: 1px solid #999;}
 .resultdeg,.resultdeg2,.resultdeg3,.resultdeg4{width: 60px;height: 60px;margin: 5px;}
-.resultdeg{font-size: 4em;text-align: center;line-height: normal;background: darkgrey url(../assets/icon/gunshot.png) center center no-repeat;background-size: contain;}
+.resultdeg{color: #040404;width: 96%;font-size: 4em;text-align: center;line-height: normal;background: darkgrey url(../assets/icon/gunshot.png) center center no-repeat;background-size: contain;}
 .resultdeg2{background: darkgrey url(../assets/icon/backward-time.png) center center no-repeat;background-size: contain;}
 .resultdeg3{background: darkgrey url(../assets/icon/spiky-explosion.png) center center no-repeat;background-size: contain;}
 .resultdeg4{background: darkgrey url(../assets/icon/shrug.png) center center no-repeat;background-size: contain;}
