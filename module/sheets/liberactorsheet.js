@@ -481,14 +481,17 @@
             html.find(".andromede").css({'display':'none'});
         }
         html.find(".blindage").val(blind);
-        for (var i=0; i<4; i++) {
+        for (var i=0; i<5; i++) {
             var min=html.find(".min"+i).val();
             var max=html.find(".max"+i).val();
             var pou=parseInt(min)*100/parseInt(max);
+            console.log(pou)
             if(pou<20){
                 var color='red';
             }else if(pou<60){
                 var color='orange';
+            }else if(i==4){
+                var color='green';
             }else{
                 var color='blue';
             }
@@ -538,7 +541,7 @@
         var arme ='';
         var chargequi='';
         const jetdeDesFormule = "1d100";
-        var bonus =this.actor.malus;
+        var bonus =this.actor.system.malus;
         var critique=5;
         var conf="auto";
         if(bonus=='' || bonus ==undefined || bonus==null){

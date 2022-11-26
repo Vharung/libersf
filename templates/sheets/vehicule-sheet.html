@@ -332,11 +332,13 @@
 							<input class="min1" name="system.bd" type="text" value="{{actor.system.bd}}" placeholder="0" style="width:50px"/><input class="max1" name="system.bd2" type="text" value="{{actor.system.bd2}}" placeholder="0" style="width:50px"/>
 						</div>
 						<div class="zone blinder">
-							<div class="bar bar2" style="width:100%; background:green;"></div>
-							<input class="vh_blind" name="system.torse" type="text" value="{{actor.system.torse}}"placeholder="0"/>
+							<!--div class="bar" style="width:100%; background:green;"></div>
+							<input class="vh_blind" name="system.torse" type="text" value="{{actor.system.torse}}"placeholder="0"/-->
+							<div class="bar bar4" style="width:{{actor.system.bd}}%; background:blue;"></div>
+							<input class="min4" name="system.torse" type="text" value="{{actor.system.torse}}" placeholder="0" style="width:50px"/><input class="max4" name="system.torse2" type="text" value="{{actor.system.torse2}}" placeholder="0" style="width:50px"/>
 						</div>
 						<div class="zone bg">
-							<div class="bar" style="width:{{actor.system.bg}}%; background:blue;"></div>
+							<div class="bar bar2" style="width:{{actor.system.bg}}%; background:blue;"></div>
 							<input class="min2" name="system.bg" type="text" value="{{actor.system.bg}}" placeholder="0" style="width:50px"/><input class="max2" name="system.bg2" type="text" value="{{actor.system.bg2}}" placeholder="0" style="width:50px"/>
 						</div>
 						<div class="zone poupe">
@@ -347,79 +349,88 @@
 				</div>
 				{{!-- Lab Tab --}}
 				<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
-					<h2 style="margin-top: 20px">{{localize 'libersf.type'}}</h2>
-					<SELECT class="typeliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.type">
-	                    {{#select data.system.type}}
-		                    <option value="1">{{localize 'libersf.type1'}}</option>
-		                    <option value="2">{{localize 'libersf.type2'}}</option>
-		                    <option value="3">{{localize 'libersf.type3'}}</option>
-		                    <option value="4">{{localize 'libersf.type4'}}</option>
-		                {{/select}}
-	                </SELECT>
+					<div class="grid-2col">
+						<h2 style="margin-top: 20px">{{localize 'libersf.type'}}</h2>
+						<SELECT class="typeliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.type">
+		                    {{#select data.system.type}}
+			                    <option value="1">{{localize 'libersf.type1'}}</option>
+			                    <option value="2">{{localize 'libersf.type2'}}</option>
+			                    <option value="3">{{localize 'libersf.type3'}}</option>
+			                    <option value="4">{{localize 'libersf.type4'}}</option>
+			                {{/select}}
+		                </SELECT>
+		            </div>
+		            <div class="grid-2col">
+		            	<h2 style="margin-top: 20px">{{localize 'libersf.taille'}}</h2>
+						<SELECT class="tailleliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.taille">
+		                    {{#select data.system.taille}}
+			                    <option value="1">{{localize 'libersf.taille1'}}</option>
+			                    <option value="2">{{localize 'libersf.taille2'}}</option>
+			                    <option value="3">{{localize 'libersf.taille3'}}</option>
+			                    <option value="4">{{localize 'libersf.taille4'}}</option>
+			                {{/select}}
+		                </SELECT>
+		            </div>
+		            <div class="grid-2col">
+		            	<h2 style="margin-top: 20px">{{localize 'libersf.ia'}}</h2>
+						<SELECT class="ialiste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.ia">
+		                    {{#select data.system.ia}}
+			                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
+			                    <option value="1">★ ☆ ☆ ☆ ☆</option>
+			                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
+			                    <option value="2">★ ★ ☆ ☆ ☆</option>
+			                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
+			                    <option value="3">★ ★ ★ ☆ ☆</option>
+			                    <option value="3.5">★ ★ ★ ✬ ☆</option>
+			                    <option value="4">★ ★ ★ ★ ☆</option>
+			                    <option value="4.5">★ ★ ★ ★ ✬</option>
+			                    <option value="5">★ ★ ★ ★ ★</option>
+			                {{/select}}
+		                </SELECT>
+		            </div>
+					<div class="grid-2col">
+						<h2 style="margin-top: 20px">{{localize 'libersf.moteur'}}</h2>
+						<SELECT class="moteurliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.moteur">
+		                    {{#select data.system.moteur}}
+			                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
+			                    <option value="1">★ ☆ ☆ ☆ ☆</option>
+			                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
+			                    <option value="2">★ ★ ☆ ☆ ☆</option>
+			                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
+			                    <option value="3">★ ★ ★ ☆ ☆</option>
+			                    <option value="3.5">★ ★ ★ ✬ ☆</option>
+			                    <option value="4">★ ★ ★ ★ ☆</option>
+			                    <option value="4.5">★ ★ ★ ★ ✬</option>
+			                    <option value="5">★ ★ ★ ★ ★</option>
+			                {{/select}}
+		                </SELECT>
+					</div>
+					<div class="grid-2col">
+						<h2 style="margin-top: 20px">{{localize 'libersf.blindage'}}</h2>
+						<SELECT class="blindageliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.blindage">
+		                    {{#select data.system.blindage}}
+			                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
+			                    <option value="1">★ ☆ ☆ ☆ ☆</option>
+			                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
+			                    <option value="2">★ ★ ☆ ☆ ☆</option>
+			                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
+			                    <option value="3">★ ★ ★ ☆ ☆</option>
+			                    <option value="3.5">★ ★ ★ ✬ ☆</option>
+			                    <option value="4">★ ★ ★ ★ ☆</option>
+			                    <option value="4.5">★ ★ ★ ★ ✬</option>
+			                    <option value="5">★ ★ ★ ★ ★</option>
+			                {{/select}}
+		                </SELECT>
+					</div>
+					<div class="grid-2col">
+						<h2 style="margin-top: 20px">{{localize 'libersf.comp'}}</h2>
+	                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec." style="float: left;background: #0d0d0d;">
+					</div>	                
 	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
 
-					<h2 style="margin-top: 20px">{{localize 'libersf.taille'}}</h2>
-					<SELECT class="tailleliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.taille">
-	                    {{#select data.system.taille}}
-		                    <option value="1">{{localize 'libersf.taille1'}}</option>
-		                    <option value="2">{{localize 'libersf.taille2'}}</option>
-		                    <option value="3">{{localize 'libersf.taille3'}}</option>
-		                    <option value="4">{{localize 'libersf.taille4'}}</option>
-		                {{/select}}
-	                </SELECT>
-	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
+	                
 
-					<h2 style="margin-top: 20px">{{localize 'libersf.ia'}}</h2>
-					<SELECT class="ialiste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.ia">
-	                    {{#select data.system.ia}}
-		                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
-		                    <option value="1">★ ☆ ☆ ☆ ☆</option>
-		                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
-		                    <option value="2">★ ★ ☆ ☆ ☆</option>
-		                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
-		                    <option value="3">★ ★ ★ ☆ ☆</option>
-		                    <option value="3.5">★ ★ ★ ✬ ☆</option>
-		                    <option value="4">★ ★ ★ ★ ☆</option>
-		                    <option value="4.5">★ ★ ★ ★ ✬</option>
-		                    <option value="5">★ ★ ★ ★ ★</option>
-		                {{/select}}
-	                </SELECT>
-	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
-
-	                <h2 style="margin-top: 20px">{{localize 'libersf.moteur'}}</h2>
-					<SELECT class="moteurliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.moteur">
-	                    {{#select data.system.moteur}}
-		                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
-		                    <option value="1">★ ☆ ☆ ☆ ☆</option>
-		                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
-		                    <option value="2">★ ★ ☆ ☆ ☆</option>
-		                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
-		                    <option value="3">★ ★ ★ ☆ ☆</option>
-		                    <option value="3.5">★ ★ ★ ✬ ☆</option>
-		                    <option value="4">★ ★ ★ ★ ☆</option>
-		                    <option value="4.5">★ ★ ★ ★ ✬</option>
-		                    <option value="5">★ ★ ★ ★ ★</option>
-		                {{/select}}
-	                </SELECT>
-	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
-
-	                <h2 style="margin-top: 20px">{{localize 'libersf.blindage'}}</h2>
-					<SELECT class="blindageliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.blindage">
-	                    {{#select data.system.blindage}}
-		                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
-		                    <option value="1">★ ☆ ☆ ☆ ☆</option>
-		                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
-		                    <option value="2">★ ★ ☆ ☆ ☆</option>
-		                    <option value="2.5">★ ★ ✬ ☆ ☆</option>
-		                    <option value="3">★ ★ ★ ☆ ☆</option>
-		                    <option value="3.5">★ ★ ★ ✬ ☆</option>
-		                    <option value="4">★ ★ ★ ★ ☆</option>
-		                    <option value="4.5">★ ★ ★ ★ ✬</option>
-		                    <option value="5">★ ★ ★ ★ ★</option>
-		                {{/select}}
-	                </SELECT>
-	                <input type="button" value="{{localize 'libersf.choisir'}}" class="vehichoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
-
+					<div class="clear"></div>
 	                <h2 style="margin-top: 20px">{{localize 'libersf.info'}}</h2>
 					<p style="column-count: 5;padding: 5px;color: #fff;">
 					{{localize 'libersf.v1'}} : <br><span class="ancienete">✬ ☆ ☆ ☆ ☆</span><br><br>
@@ -432,6 +443,8 @@
 		            {{localize 'libersf.v8'}} : <br><span class="ancienete">★ ★ ★ ★ ☆</span><br><br>
 		            {{localize 'libersf.v9'}} : <br><span class="ancienete">★ ★ ★ ★ ✬</span><br><br>
 		            {{localize 'libersf.v10'}} : <br><span class="ancienete">★ ★ ★ ★ ★</span><br></p>
+
+		            
 				</div>
 			</section>
 		</div>
