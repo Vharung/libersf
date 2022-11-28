@@ -188,13 +188,13 @@
                 }
                 
             });
-            console.log(prix)
+            //console.log(prix)
             html.find( ".item-qt" ).each(function( index ) {
                 if($( this ).text()!=game.i18n.localize('libersf.l6')){
                     quantite.push($( this ).text());
                 }
             });
-            console.log(quantite)
+            //console.log(quantite)
 
             for (var i = 1;i < prix.length ; i++) {
                total=total+parseFloat(prix[i])*parseFloat(quantite[i]);
@@ -325,7 +325,9 @@
                 resultat=resultat+pointhp; 
             }
             
-            html.find('.pointrestant').val(resultat); //bug vaisseau
+            html.find('.pointrestant').val(resultat); 
+
+
         
 
         
@@ -481,11 +483,14 @@
             html.find(".andromede").css({'display':'none'});
         }
         html.find(".blindage").val(blind);
+        var maxblind=0;
+        var actboumax=html.find(".actboumax").val();
         for (var i=0; i<5; i++) {
             var min=html.find(".min"+i).val();
             var max=html.find(".max"+i).val();
+            if(i<4){maxblind=parseInt(maxblind)+parseInt(max)};
             var pou=parseInt(min)*100/parseInt(max);
-            console.log(pou)
+            //console.log(pou)
             if(pou<20){
                 var color='red';
             }else if(pou<60){
@@ -497,6 +502,16 @@
             }
             html.find(".bar"+i).css({'width':pou+'%','background':color});
         }
+
+            if(maxblind<actboumax){
+                var diff=actboumax - maxblind
+                html.find('.ptrestbar').html("il reste :"+diff+" d'énergie à utiliser")
+            }else if(maxblind>actboumax){
+                var diff=maxblind -actboumax 
+                html.find('.ptrestbar').html(diff+" d'énergie est en trop")
+            }else{
+                html.find('.ptrestbar').html("Tous les points d'armure sont répartis sur les zones.")
+            }
 
         html.find( ".compt input" ).each(function() {
               var valor= $( this ).val();

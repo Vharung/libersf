@@ -202,7 +202,8 @@
             "poids":"1",
             "techno":"☆ ☆ ☆ ☆ ☆",
             "valeur":"10",
-            "quantite":"1"
+            "quantite":"1",
+            "used":false
         },
         "armure": {
             "description": "",

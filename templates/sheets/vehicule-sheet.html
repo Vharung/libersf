@@ -346,13 +346,18 @@
 							<input class="min3" name="system.jd" type="text" value="{{actor.system.jd}}" placeholder="0" style="width:50px"/><input class="max3" name="system.jd2" type="text" value="{{actor.system.jd2}}" placeholder="0" style="width:50px"/>
 						</div>
 					</div>
+					<div>
+						<h2 class="ptrestbar" style="text-align: center;"></h2>
+						<p style="color:#fff; width: 45%; float:left; display: block;">{{localize 'libersf.regle1'}}<br>{{localize 'libersf.regle3a'}}<br>{{localize 'libersf.regle12'}}<br>{{localize 'libersf.regle13'}}<br>{{localize 'libersf.regle14'}}<br>{{localize 'libersf.regle15'}}<br>{{localize 'libersf.regle16'}}<br>{{localize 'libersf.regle17'}}<br><br>{{localize 'libersf.regle18'}}</p>
+					<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="width: 310px; height: auto;float: right;margin-top:10px">
+					</div>
 				</div>
 				{{!-- Lab Tab --}}
 				<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
 					<div class="grid-2col">
 						<h2 style="margin-top: 20px">{{localize 'libersf.type'}}</h2>
 						<SELECT class="typeliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.type">
-		                    {{#select data.system.type}}
+		                    {{#select actor.system.type}}
 			                    <option value="1">{{localize 'libersf.type1'}}</option>
 			                    <option value="2">{{localize 'libersf.type2'}}</option>
 			                    <option value="3">{{localize 'libersf.type3'}}</option>
@@ -363,7 +368,7 @@
 		            <div class="grid-2col">
 		            	<h2 style="margin-top: 20px">{{localize 'libersf.taille'}}</h2>
 						<SELECT class="tailleliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.taille">
-		                    {{#select data.system.taille}}
+		                    {{#select actor.system.taille}}
 			                    <option value="1">{{localize 'libersf.taille1'}}</option>
 			                    <option value="2">{{localize 'libersf.taille2'}}</option>
 			                    <option value="3">{{localize 'libersf.taille3'}}</option>
@@ -374,7 +379,7 @@
 		            <div class="grid-2col">
 		            	<h2 style="margin-top: 20px">{{localize 'libersf.ia'}}</h2>
 						<SELECT class="ialiste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.ia">
-		                    {{#select data.system.ia}}
+		                    {{#select actor.system.ia}}
 			                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
 			                    <option value="1">★ ☆ ☆ ☆ ☆</option>
 			                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
@@ -391,7 +396,7 @@
 					<div class="grid-2col">
 						<h2 style="margin-top: 20px">{{localize 'libersf.moteur'}}</h2>
 						<SELECT class="moteurliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.moteur">
-		                    {{#select data.system.moteur}}
+		                    {{#select actor.system.moteur}}
 			                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
 			                    <option value="1">★ ☆ ☆ ☆ ☆</option>
 			                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
@@ -408,7 +413,7 @@
 					<div class="grid-2col">
 						<h2 style="margin-top: 20px">{{localize 'libersf.blindage'}}</h2>
 						<SELECT class="blindageliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.blindage">
-		                    {{#select data.system.blindage}}
+		                    {{#select actor.system.blindage}}
 			                    <option value="0.5">✬ ☆ ☆ ☆ ☆</option>
 			                    <option value="1">★ ☆ ☆ ☆ ☆</option>
 			                    <option value="1.5">★ ✬ ☆ ☆ ☆</option>
