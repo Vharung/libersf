@@ -29,7 +29,7 @@
         data.dtypes = ["String", "Number", "Boolean"];
         console.log(data);        
         if (this.actor.type == 'personnage' || this.actor.type == 'pnj' || this.actor.type == 'monstre' | this.actor.type == 'vehicule') {
-            this._prepareCharacterItems(data);
+            this._prepareCharacterItems(data);this._onStatM(data);
         }
         if (this.actor.type == 'personnage' || this.actor.type == 'pnj' ) {
             this._onEncom(data);
@@ -91,7 +91,6 @@
         super.activateListeners(html);
         /*Jet de des*/
         html.find('.jetdedes').click(this._onRoll.bind(this)); 
-        html.find('.jetdedegat').click(this._onRoll2.bind(this));
 
         html.find('.item-equip').click(this._onArmor.bind(this));
         html.find('.desequi').click(this._onDesArmor.bind(this));
@@ -549,7 +548,79 @@
         const item = this.getItemFromEvent(event);
         item.sheet.render(true);
     }
+/*_onRoll(event){ //lancer de dés
+    
+        
+    //Jet de dégât
+        if(type=="jetdedegat" || type=="auto"){
+            if(desc==""){var info='';}
+            else {var info='</span><span class="desctchat" style="display:block;">'+desc+'</span>';}
+            if(degats>0 || type=="jetdedegat"){
+                let r = new Roll(monJetDeDes);
+                roll=r.evaluate({"async": false});  
+            }
+            if(type=="auto"){
+                game.user.targets.forEach(i => {
+                    console.log(i)
+                    nom=i.document.name;
+                    hp = i.document._actor.system.hp.value;
+                    var armor=i.document.actor.system.protection
+                    var armormag=i.document.actor.system.protectionmagique;
+                    var perce=["Dague","Masse d'arme","Masse Lourd","Arbalète"]
+                    var passe=0;
+                    for (var j = perce.length - 1; j >= 0; j--) {
+                        if(nam==perce[j]){
+                            passe=1
+                        }
+                    }
+                    if(passe==0){
+                        var degat=parseInt(roll.total)-parseInt(armor)-parseInt(armormag)
+                    }else{
+                        var degat=parseInt(roll.total)-parseInt(armormag)
+                    }   
 
+                    if(degat>0){
+                        hp=parseInt(hp)-degat;
+                        if(hp<0){
+                            console.log(i)
+                            hp=0;//mort automatique 
+                            i.actor.createEmbeddedDocuments("ActiveEffect", [
+                              {label: 'Mort', icon: 'icons/svg/skull.svg', flags: { core: { statusId: 'dead' } } }
+                            ]);
+                            console.log(i)
+
+                        }
+                        i.actor.update({'system.hp.value': hp});
+                    } 
+                })  
+
+            }
+            if(degats>0 || type=="jetdedegat"){
+                texte = '<span style="flex:auto"><p class="resultatp"><img src="'+img+'"  width="24" height="24"/>&nbsp;Utilise ' + name + '<p>'+info;
+        
+                //info Tchat    
+                roll.toMessage({
+                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                    flavor: texte
+                });  
+            }
+            
+        } 
+        
+    
+    // Mort de la cible
+        if(hp==0 && type=="auto") {
+            var tuer=['Vient de tuer ','A massacrer ','A occis ',"N'a pas eu de pitier pour ","A oté la vie de ","A trucidé "];
+            var d=Math. round(Math.random() * tuer.length);
+            texte = "<span style='flex:auto'><p class='resultatp'>"+tuer[d]+"&nbsp; <span style='text-transform:uppercase;font-weight: bold;'> "+nom+"</span></span></span>";
+            let chatData = {
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: texte
+            };
+            ChatMessage.create(chatData, {});
+        }
+    }*/ //dev
+    //fusion les deux roll et ajoute target
     _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
         var name = event.target.dataset["name"];
@@ -618,6 +689,7 @@
         }else if(name=="Tir"){
             var arme = event.target.dataset["armed"];
             var degat = event.target.dataset["degat"];
+            var bles=0;
             name+=" avec "+arme;       
             if(retour>95){
                 succes="<h4 class='resultat' style='background:#ff3333;'>Arme Inutilisable</h4>";
@@ -632,18 +704,53 @@
             }else if(retour>(inforesult-20)){
                 succes="<h4 class='resultat' style='background:#78be50;'>La cible est touché</h4>";
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
-                perte=1;                
+                perte=1;bles=1;                
             }else if(retour>critique){
                 succes="<h4 class='resultat' style='background:#78be50;'>Dégât x1.5</h4>";
                 degat=Math.round(parseInt(degat)*1.5);
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
-                perte=1;
+                perte=1;bles=1;
             }else if(retour<=critique){
                 succes="<h4 class='resultat' style='background:#78be50;'>Dégât x2</h4>";
                 degat=parseInt(degat)*2;
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
-                perte=1;                
-            }       
+                perte=1;bles=1;               
+            } 
+            //degat auto
+            /*game.user.targets.forEach(i => {
+                    var nom=i.document.name;
+                    var hp = i.document._actor.system.hp.value;
+                    var armor=i.document.actor.system.protection
+                    var armormag=i.document.actor.system.protectionmagique;
+                    /*var perce=["Dague","Masse d'arme","Masse Lourd","Arbalète"]
+                    var passe=0;
+                    for (var j = perce.length - 1; j >= 0; j--) {
+                        if(nam==perce[j]){
+                            passe=1
+                        }
+                    }
+                    if(passe==0){
+                        var degat=parseInt(roll.total)-parseInt(armor)-parseInt(armormag)
+                    }else{
+                        var degat=parseInt(roll.total)-parseInt(armormag)
+                    } 
+                    //diminier les armures et boucliers en fonction type d'arme
+                    // retirer HP
+                    degat=parseInt(degat)-parseInt(armor)-parseInt(armormag)
+                    if(bles>0){
+                        hp=parseInt(hp)-degat;
+                        if(hp<0){
+                            console.log(i)
+                            hp=0; 
+                            i.actor.createEmbeddedDocuments("ActiveEffect", [
+                              {label: 'Mort', icon: 'icons/svg/skull.svg', flags: { core: { statusId: 'dead' } } }
+                            ]);
+                            console.log(i)
+
+                        }
+                        i.actor.update({'system.hp.value': hp});
+                    } 
+                }) */     
         }else {
             if(retour>95){
                 succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
@@ -678,18 +785,7 @@
             flavor: texte
         });
     }
-    _onRoll2(event){
 
-        let monJetDeDes = event.target.dataset["dice"];
-        const name = event.target.dataset["name"];
-        let r = new Roll(monJetDeDes);
-        var roll=r.evaluate({"async": false});;
-        const texte = "Utilise " + name + " : " + monJetDeDes;
-        roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            flavor: texte
-        });
-    }
 
     _onStory(event){
         var demeure = ["Maison","Hotel","Chez un ami","demeure","Sous un pont","Sur un Bateau","Ferme","Auberge","Commerce / Négociation","Forge","Villa","Cabane"];
@@ -918,7 +1014,40 @@
     }
 
     _onCouv(event){
-        var etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
+        let idn=event.target.dataset["lettre"];  //recupére l'id du bouton
+        let etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
+        var active=[this.actor.system.etat.a, this.actor.system.etat.b, this.actor.system.etat.c, this.actor.system.etat.d, this.actor.system.etat.e, this.actor.system.etat.f, this.actor.system.etat.g, this.actor.system.etat.h, this.actor.system.etat.i, this.actor.system.etat.j, this.actor.system.etat.k, this.actor.system.etat.l, this.actor.system.etat.m, this.actor.system.etat.n]
+        let lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort']
+        let icon=['sleep','daze','blind','deaf','silenced','terror','fire','frozen','invisible','angel','poison','blood','unconscious','dead']
+        if(idn==13){
+            var etat=this.actor.system.etat.n;
+            if(etat==1){
+                this.actor.update({"system.etat.n":0.5});    
+            }else {
+                this.actor.update({"system.etat.n":1});      
+            }
+        }else {
+            let effet=this.actor.effects;
+            var ids=null;
+            let etat=active[idn];
+            if(etat==0.5){
+                this.actor.createEmbeddedDocuments("ActiveEffect", [
+                  {label: lists[idn], icon: 'icons/svg/'+icon[idn]+'.svg', flags: { core: { statusId: icon[idn] } } }
+                ]);
+                this.actor.update({[`system.etat.${etats[idn]}`]:1});
+            }else {
+                
+                effet.forEach(function(item, index, array) {
+                    if(item.label==lists[idn]){
+                        ids=item.id;
+                    }
+                });            
+                this.actor.deleteEmbeddedDocuments("ActiveEffect", [ids]);
+                this.actor.update({[`system.etat.${etats[idn]}`]:0.5});
+            }
+        }
+        
+        /*var etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
     
         var chnget=event.target.dataset["etat"];console.log('etats'+etats[chnget])
         var et=etats[chnget];
@@ -1014,13 +1143,8 @@
                 this.actor.update({"system.etat.m":1});      
             }
         }else if(et=='n'){
-            var etat=this.actor.system.etat.n;
-            if(etat==1){
-                this.actor.update({"system.etat.n":0.5});    
-            }else {
-                this.actor.update({"system.etat.n":1});      
-            }
-        }
+            
+        }*/
     }
 
     _onVehi(event){
@@ -1150,5 +1274,29 @@
         var img='systems/libersf/assets/planete/p'+Math. round(Math.random() * 16)+'.png';
         this.actor.update({"system.description":histoire,"system.surnom":surnom,'name':name,'img':img,"system.pop_humain":etoile[huma],"system.pop_arthuriens":etoile[artu],"system.pop_draconiens":etoile[drac],"system.pop_machine":etoile[mach],"system.pop_pleiadiens":etoile[plei],"system.pop_yoribiens":etoile[yori],"system.pop_elfen":etoile[elfe],"system.pop_orquanien":etoile[orqa],"system.domination":faction[fact],"system.armure.value":pv,"system.armure.max":pv,"system.niveau_arme":etoile[arme],"system.niveau_crime":etoile[crim],"system.niveau_secu":etoile[secu],"system.niveau_tech":etoile[tech],"system.hp.value":pv,"system.hp.max":pv,"system.pouplation":pop});
     }
-    
+    async _onStatM(event){
+
+        //activer les effets
+        let effet=this.actor.effects;
+        var effets=[];
+        //var etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
+        var active=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+        var lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort']
+        effet.forEach(function(item, index, array) {
+            if(item.label!=''){
+                effets.push(item.label);
+            }
+        });
+
+        for(var i=0; i<lists.length; i++){
+            for (var j=0; j < effets.length; j++) {
+                if(lists[i]== effets[j]){
+                    active[i]=1;
+                    console.log(i+' : '+effets[j]) 
+                }
+            }
+        }
+
+        this.actor.update({"system.etat.a":active[0],"system.etat.b":active[1],"system.etat.c":active[2],"system.etat.d":active[3],"system.etat.e":active[4],"system.etat.f":active[5],"system.etat.g":active[6],"system.etat.h":active[7],"system.etat.i":active[8],"system.etat.j":active[9],"system.etat.k":active[10],"system.etat.l":active[11],"system.etat.m":active[12]});        
+    }
 }
