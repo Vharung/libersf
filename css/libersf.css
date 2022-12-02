@@ -16,21 +16,21 @@ button,form button{background: #a10001;border:none;color: #fff;}
 .chat-message.whisper,.chat-message.blind {background: #00abab;border: 2px solid #545469;}
 option, optgroup,#chat-controls .roll-type-select{background: #013635;}
 
-
+.sheet nav.sheet-tabs{border:none;margin: 0}
 .editable input,.editable textarea,.editable h1,.editable h2{border: none;background: #013635}
 .editable h1,.editable h2{border-bottom: none;}
 .Liber main{background:url(ecran.jpg) bottom;}
 .Liber a.item:hover{background:#40675c;color:#fff;transition: 0.5s;}
 /*@font-face {font-family: "abnes";src: url('abnes.otf'); }*/
-.Liber.window-app .window-content,.Liber .editable{background: none;overflow:hidden }
-.Liber .fiche{display: block;height: 800px;width: 1200px;}
+.Liber.window-app .window-content,.Liber .editable{background: none;}
+.Liber.window-app .window-content{background: none;overflow:auto;height: 773px;flex-direction: row;}
+.Liber .colonne{width:600px;float: left;display:flex;flex-direction: column;flex:1;flex-grow: initial;padding-right: 5px;}
 .Liber header {color: #fff};
 .Liber .col2{display: block;height: 752px;float: left;width: 590px;}
-.Liber{width:1196px;height: 800px;font-family: 'Roboto', sans-serif;display: block;overflow: hidden;}
+.Liber{font-family: 'Roboto', sans-serif;display: flex;flex-direction: row;flex-flow: row wrap;}
 form.Liber{display: table-cell;}
-.Liber .fiche nav.sheet-tabs{margin:0px;border-top:none;border-bottom:none;padding:0px 0;height: 35px;}
-.Liber .head input[type="text"]{background:none; border:none;}
-.Liber .head,.Liber main,.Liber .autres,.Liber .autre{width: 595px;display:block;}
+.Liber .window-header {flex: 100%;text-align: right;}
+.Liber .window-header h4 {float: left;}
 .Liber .autre{float: left;}
 .Liber .head{height: 120px;border-radius:60px 0 0 60px;}
 .Liber .head .avatar img{height: 100%;max-width: none}
@@ -73,10 +73,10 @@ form.Liber{display: table-cell;}
 .Liber a.item span{width: 103%;/*border-right:1px solid #f2f2f29e;*/ height: 20px;display: block}
 .Liber a.active,.Liber a.item.active:hover{color:#fff;}
 .Liber .tab{padding: 20px 8px 0 5px;}
-.Liber .features button{float: left;width: 142px;height: 28px;font-weight: normal;text-align: left;border-bottom: 1px solid #f2f2f29e;border:none;border-bottom:#f2f2f29esolid 1px;color:#f2f2f29e;background: none;margin-right: 5px;}
+.Liber .features button{float: left;width: 115px;height: 28px;font-weight: normal;text-align: left;border-bottom: 1px solid #f2f2f29e;border:none;border-bottom:#f2f2f29esolid 1px;color:#f2f2f29e;background: none;margin-right: 5px;}
 .Liber .features button:hover{color:#fff}
 .Liber .features input{border: 1px solid #f2f2f29e;}
-.Liber .features .compt{width: 188px; float: left; margin: 3px}
+.Liber .features .compt{width: 185px; float: left; margin: 3px}
 .Liber .features .compt p{color:#f2f2f29e;font-size: 0.8em}
 .Liber .features input.restant{border:none;background: none;text-align: center;font-size: 1.4em;}
 .Liber .carac .compt{width: 100%;display: block}
