@@ -77,7 +77,12 @@
 			</div>
 		</main>
 	</div>
-	<div class="colonne">
+	<div class="colonne bg">
+		<div class="cont">
+			<div class="ring"></div>
+			<div class="ring"></div>
+			<div class="ring"></div>
+		</div>
 		<div class="autres">
 			{{!-- Sheet Tab Navigation --}}
 		    <nav class="sheet-tabs tabs" data-group="primary">
@@ -226,7 +231,7 @@
 					</div>
 					<div class="flexrow">
 						<div class="grid-3col" style="text-align: center">
-							<span class="icongun"></span><input  class="armed" name="system.armed" type="text" value="{{actor.system.armed}}" title="{{actor.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{actor.system.degatd}}" readonly="" style="display: none;"/><button class="desequi" data-genre="arme">🗑</button>
+							<button class="icongun jetdedes" data-name="Tir"></button><input  class="armed" name="system.armed" type="text" value="{{actor.system.armed}}" title="{{actor.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{actor.system.degatd}}" readonly="" style="display: none;"/><button class="desequi" data-genre="arme">🗑</button>
 							<div class="clear"></div>
 							<span class="iconcha"></span><input  class="charged" name="system.charged" type="text" value="{{actor.system.charged}}" title="{{actor.system.charged}}" placeholder="Chargeur" readonly="" /><button class="desequi" data-genre="chargeur">🗑</button>						
 						</div>
@@ -294,7 +299,7 @@
 			                    <div class="item-techno">{{item.system.techno}}</div>
 			                    <div class="item-qt">{{item.system.quantite}}</div>
 			                    <div class="item-controls">
-			                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}" data-genre="arme" data-name="{{item.name}}" data-degat="{{item.system.degats}}">+</span>
+			                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}" data-genre="arme" data-name="{{item.name}}" data-degat="{{item.system.degats}}" data-type="{{item.system.type}}">+</span>
 			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

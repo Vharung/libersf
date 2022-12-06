@@ -525,14 +525,14 @@
         var hp= html.find('.hp').val();
         var mut= html.find('.mutation').val();
         if(mut=="oui"){
-            html.find('.autres').css({"background":"url(systems/libersf/css/ecran3.jpg)",'background-size': 'cover'});
+            html.find('.bg').css({"background":"url(systems/libersf/css/ecran3.jpg)",'background-size': 'cover'});
             html.find('main').css({"background":"url(systems/libersf/css/ecran3.jpg) bottom",'background-size': 'cover'});
             html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran3.jpg)",'background-size': 'cover'});
         }
         if(hp<=0){
             html.find('main').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'});
             html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'})
-            html.find('.autres').css({"background":"url(systems/libersf/css/ecran2.jpg)",'background-size': 'cover'});
+            html.find('.bg').css({"background":"url(systems/libersf/css/ecran2.jpg)",'background-size': 'cover'});
         }        
 
 
@@ -624,23 +624,32 @@
     _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
         var name = event.target.dataset["name"];
-        var arme ='';
-        var chargequi='';
+        var type = this.actor.system.typed;
+        var arme = this.actor.system.armed;
+        var chargequi = this.actor.system.charged;
+        var degat = this.actor.system.degatd;
+
         const jetdeDesFormule = "1d100";
         var bonus =this.actor.system.malus;
         var critique=5;
+        if(type=="C"){
+            critique=10;
+        }
+        var echec=95;
+        if(type=="P"){
+            echec=90;
+        }
+        
         var conf="auto";
         if(bonus=='' || bonus ==undefined || bonus==null){
             bonus=0;
         }
         let inforesult=parseInt(maxstat)+parseInt(bonus)+30;
-        if(inforesult>95){
-            inforesult=95;
+        if(inforesult>echec){
+            inforesult=echec;
         }
         if(name=="Tir" || name=="Tircouv"){
             if(name=="Tir"){var conf="none;width: 200px;";}
-            arme = event.target.dataset["armed"];
-            chargequi=event.target.dataset["charged"];
             if(chargequi=='' || chargequi== undefined){
                  chargequi="Mun. "+arme
             }
@@ -670,10 +679,29 @@
         var deg='';
         var perte=0;
         let retour=r.result; var succes="";
-        if(name=="Tircouv"){
-            var arme = event.target.dataset["armed"];
+        if(name=="Visée"){
+            if(retour>echec){
+                succes="<h4 class='resultat' style='background:#ff3333;'>Arme Inutilisable</h4>";
+                deg='<h4 class="resultdeg3"></h4>';
+            }else if(retour>(inforesult+20)){
+                succes="<h4 class='resultat' style='background:#ff5733;'>L'arme est enrayé pour 1 tour</h4>";
+                deg='<h4 class="resultdeg2"></h4>';
+            }else if(retour>inforesult){
+                succes="<h4 class='resultat' style='background:#ff5733;'>Raté</h4>";
+                deg='<h4 class="resultdeg4"></h4>';
+            }else if(retour>(inforesult-20)){
+                succes="<h4 class='resultat' style='background:#78be50;'>La cible est touché</h4>";
+                deg='<h4 class="resultdeg"></h4>';
+            }else if(retour>critique){
+                succes="<h4 class='resultat' style='background:#78be50;'>Dégât x1.5</h4>";
+                deg='<h4 class="resultdeg"></h4>';
+            }else if(retour<=critique){
+                succes="<h4 class='resultat' style='background:#78be50;'>Dégât x2</h4>";
+                deg='<h4 class="resultdeg"></h4>';
+            }
+        }else if(name=="Tircouv"){
             perte=10;
-            if(retour>95){
+            if(retour>echec){
                 succes="<h4 class='resultat' style='background:#ff3333;'>Action raté</h4>";
             }else if(retour>(inforesult+20)){
                 succes="<h4 class='resultat' style='background:#ff5733;'>Malus de 15 aux ennemis</h4>";
@@ -687,8 +715,6 @@
                 succes="<h4 class='resultat' style='background:#78be50;'>Annule le prochain tour des ennmis</h4>";;                
             }  
         }else if(name=="Tir"){
-            var arme = event.target.dataset["armed"];
-            var degat = event.target.dataset["degat"];
             var bles=0;
             name+=" avec "+arme;       
             if(retour>95){
@@ -717,26 +743,47 @@
                 perte=1;bles=1;               
             } 
             //degat auto
-            /*game.user.targets.forEach(i => {
+            if(bles==1){
+                game.user.targets.forEach(i => {
                     var nom=i.document.name;
                     var hp = i.document._actor.system.hp.value;
-                    var armor=i.document.actor.system.protection
-                    var armormag=i.document.actor.system.protectionmagique;
-                    /*var perce=["Dague","Masse d'arme","Masse Lourd","Arbalète"]
-                    var passe=0;
-                    for (var j = perce.length - 1; j >= 0; j--) {
-                        if(nam==perce[j]){
-                            passe=1
+                    var armure=i.document.actor.system.armure.value
+                    var boucli=i.document.actor.system.protections.value;
+                    if(type=="L"){
+                        boucli=parseInt(boucli)-parseInt(degat)
+                        degat=parseInt(degat)-parseInt(armure)
+                        if(armure<0){
+                            armure=0;
+                            hp=hp-parseInt(degat)
+                            console.log(hp+'='+degat+'-'+boucli+'-'+armure)
                         }
-                    }
-                    if(passe==0){
-                        var degat=parseInt(roll.total)-parseInt(armor)-parseInt(armormag)
+                    }else if(type=="F" || type=="E"){
+                        boucli=parseInt(boucli)-parseInt(degat)
+                        degat=parseInt(degat)-parseInt(boucli)
+                        if(boucli<0){
+                            boucli=0;
+                            hp=hp-parseInt(degat)
+                            console.log(hp+'='+degat+'-'+boucli+'-'+armure)
+                        } 
+                    }else if(type=="P" || type=="S"){
+                        hp=hp-parseInt(degat)
                     }else{
-                        var degat=parseInt(roll.total)-parseInt(armormag)
-                    } 
+                        boucli=parseInt(boucli)-parseInt(degat)
+                        degat=parseInt(degat)-parseInt(boucli)
+                        if(boucli<0){
+                            boucli=0;
+                            degat=parseInt(degat)-parseInt(armure)
+                            armure=parseInt(armure)-parseInt(degat)
+                            if(armure<0){
+                                armure=0;
+                                hp=hp-parseInt(degat)
+                                console.log(hp+'='+degat+'-'+boucli+'-'+armure)
+                            }
+                        }        
+                    }
+                    
                     //diminier les armures et boucliers en fonction type d'arme
                     // retirer HP
-                    degat=parseInt(degat)-parseInt(armor)-parseInt(armormag)
                     if(bles>0){
                         hp=parseInt(hp)-degat;
                         if(hp<0){
@@ -748,11 +795,13 @@
                             console.log(i)
 
                         }
-                        i.actor.update({'system.hp.value': hp});
+                        i.actor.update({'system.hp.value': hp,'system.armure.value': armure,'system.protections.value': boucli });
                     } 
-                }) */     
+                })
+            }
+           
         }else {
-            if(retour>95){
+            if(retour>echec){
                 succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
             }else if(retour<=critique){
                 succes="<h4 class='resultat' style='background:#7dff33;'>Réussite critique</h4>";
@@ -924,10 +973,12 @@
     }
     _onArmor(event){
         var genre=event.target.dataset["genre"];
-        var objetaequipe=event.target.dataset["name"]; 
+        var objetaequipe=event.target.dataset["name"];
+        var type=event.target.dataset["type"];
+
         if(genre=="arme" ){
             var degat=event.target.dataset["degat"]; 
-            this.actor.update({'system.degatd': degat,'system.armed':objetaequipe});
+            this.actor.update({'system.degatd': degat,'system.armed':objetaequipe,'system.typed':type});
         }else if(genre=="Armure"  || genre=="Combinaison"){
             var hp=event.target.dataset["hp"]; 
             var hpmax=event.target.dataset["hpmax"]; 
@@ -1046,105 +1097,6 @@
                 this.actor.update({[`system.etat.${etats[idn]}`]:0.5});
             }
         }
-        
-        /*var etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
-    
-        var chnget=event.target.dataset["etat"];console.log('etats'+etats[chnget])
-        var et=etats[chnget];
-        if(et=='a'){
-            var etat=this.actor.system.etat.a;
-            if(etat==1){
-                this.actor.update({"system.etat.a":0.5});    
-            }else {
-                this.actor.update({"system.etat.a":1});      
-            }
-        }else if(et=='b'){
-            var etat=this.actor.system.etat.b;
-            if(etat==1){
-                this.actor.update({"system.etat.b":0.5});    
-            }else {
-                this.actor.update({"system.etat.b":1});      
-            }
-        }else if(et=='c'){
-            var etat=this.actor.system.etat.c;
-            if(etat==1){
-                this.actor.update({"system.etat.c":0.5});    
-            }else {
-                this.actor.update({"system.etat.c":1});      
-            }
-        }else if(et=='d'){
-            var etat=this.actor.system.etat.d;
-            if(etat==1){
-                this.actor.update({"system.etat.d":0.5});    
-            }else {
-                this.actor.update({"system.etat.d":1});      
-            }
-        }else if(et=='e'){
-            var etat=this.actor.system.etat.e;
-            if(etat==1){
-                this.actor.update({"system.etat.e":0.5});    
-            }else {
-                this.actor.update({"system.etat.e":1});      
-            }
-        }else if(et=='f'){
-            var etat=this.actor.system.etat.f;
-            if(etat==1){
-                this.actor.update({"system.etat.f":0.5});    
-            }else {
-                this.actor.update({"system.etat.f":1});      
-            }
-        }else if(et=='g'){
-            var etat=this.actor.system.etat.g;
-            if(etat==1){
-                this.actor.update({"system.etat.g":0.5});    
-            }else {
-                this.actor.update({"system.etat.g":1});      
-            }
-        }else if(et=='h'){
-            var etat=this.actor.system.etat.h;
-            if(etat==1){
-                this.actor.update({"system.etat.h":0.5});    
-            }else {
-                this.actor.update({"system.etat.h":1});      
-            }
-        }else if(et=='i'){
-            var etat=this.actor.system.etat.i;
-            if(etat==1){
-                this.actor.update({"system.etat.i":0.5});    
-            }else {
-                this.actor.update({"system.etat.i":1});      
-            }
-        }else if(et=='j'){
-            var etat=this.actor.system.etat.j;
-            if(etat==1){
-                this.actor.update({"system.etat.j":0.5});    
-            }else {
-                this.actor.update({"system.etat.j":1});      
-            }
-        }else if(et=='k'){
-            var etat=this.actor.system.etat.k;
-            if(etat==1){
-                this.actor.update({"system.etat.k":0.5});    
-            }else {
-                this.actor.update({"system.etat.k":1});      
-            }
-        }else if(et=='l'){
-            var etat=this.actor.system.etat.l;
-            if(etat==1){
-                this.actor.update({"system.etat.l":0.5});    
-            }else {
-                this.actor.update({"system.etat.l":1});      
-            }
-        }else if(et=='m'){
-            var etat=this.actor.system.etat.m;
-            if(etat==1){
-                this.actor.update({"system.etat.m":0.5});    
-            }else {
-                this.actor.update({"system.etat.m":1});      
-            }
-        }else if(et=='n'){
-            
-        }*/
     }
 
     _onVehi(event){
