@@ -533,7 +533,7 @@
             html.find('main').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'});
             html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'})
             html.find('.bg').css({"background":"url(systems/libersf/css/ecran2.jpg)",'background-size': 'cover'});
-        }        
+        }       
 
 
     }
@@ -548,79 +548,7 @@
         const item = this.getItemFromEvent(event);
         item.sheet.render(true);
     }
-/*_onRoll(event){ //lancer de dés
-    
-        
-    //Jet de dégât
-        if(type=="jetdedegat" || type=="auto"){
-            if(desc==""){var info='';}
-            else {var info='</span><span class="desctchat" style="display:block;">'+desc+'</span>';}
-            if(degats>0 || type=="jetdedegat"){
-                let r = new Roll(monJetDeDes);
-                roll=r.evaluate({"async": false});  
-            }
-            if(type=="auto"){
-                game.user.targets.forEach(i => {
-                    console.log(i)
-                    nom=i.document.name;
-                    hp = i.document._actor.system.hp.value;
-                    var armor=i.document.actor.system.protection
-                    var armormag=i.document.actor.system.protectionmagique;
-                    var perce=["Dague","Masse d'arme","Masse Lourd","Arbalète"]
-                    var passe=0;
-                    for (var j = perce.length - 1; j >= 0; j--) {
-                        if(nam==perce[j]){
-                            passe=1
-                        }
-                    }
-                    if(passe==0){
-                        var degat=parseInt(roll.total)-parseInt(armor)-parseInt(armormag)
-                    }else{
-                        var degat=parseInt(roll.total)-parseInt(armormag)
-                    }   
-
-                    if(degat>0){
-                        hp=parseInt(hp)-degat;
-                        if(hp<0){
-                            console.log(i)
-                            hp=0;//mort automatique 
-                            i.actor.createEmbeddedDocuments("ActiveEffect", [
-                              {label: 'Mort', icon: 'icons/svg/skull.svg', flags: { core: { statusId: 'dead' } } }
-                            ]);
-                            console.log(i)
-
-                        }
-                        i.actor.update({'system.hp.value': hp});
-                    } 
-                })  
-
-            }
-            if(degats>0 || type=="jetdedegat"){
-                texte = '<span style="flex:auto"><p class="resultatp"><img src="'+img+'"  width="24" height="24"/>&nbsp;Utilise ' + name + '<p>'+info;
-        
-                //info Tchat    
-                roll.toMessage({
-                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                    flavor: texte
-                });  
-            }
-            
-        } 
-        
-    
-    // Mort de la cible
-        if(hp==0 && type=="auto") {
-            var tuer=['Vient de tuer ','A massacrer ','A occis ',"N'a pas eu de pitier pour ","A oté la vie de ","A trucidé "];
-            var d=Math. round(Math.random() * tuer.length);
-            texte = "<span style='flex:auto'><p class='resultatp'>"+tuer[d]+"&nbsp; <span style='text-transform:uppercase;font-weight: bold;'> "+nom+"</span></span></span>";
-            let chatData = {
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                content: texte
-            };
-            ChatMessage.create(chatData, {});
-        }
-    }*/ //dev
-    //fusion les deux roll et ajoute target
+gbtgbbbbbb                                                                                                                                
     _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
         var name = event.target.dataset["name"];
@@ -1106,7 +1034,7 @@
         var mote=this.actor.system.moteur;
         var blin=this.actor.system.blindage;
         var prix=0;var pv=350;var nbequi=2;var nbpiece=0;var types="";var tailles="";
-        console.log(ia+' '+mote+' '+blin)
+        var tete=0;var bd=0;var bg=0;var jd=0;var nav=0;var pil=0;var vis=0;var dis=0;var per=0;var med=0;var inv=0;var mec=0;var com=0;var pir=0;
         if(type==1){
             prix=650;types=game.i18n.localize("libersf.type1");
         }else if(type==2){
@@ -1127,28 +1055,80 @@
         }
         var ptrestant=0;
         if(ia=="0.5"){
-            ptrestant=760;
+            ptrestant=60;
+            nav=-20;pil=-20;vis=-20;
         }else if(ia=="1"){
-            ptrestant=608;
+            ptrestant=30;
+            nav=-10;pil=-10;vis=-10;
         }else if(ia=="1.5"){
-            ptrestant=456;
+            //ptrestant=400;
         }else if(ia=="2"){
-            ptrestant=304;
+            ptrestant=-30;
+            nav=10;pil=10;vis=10;
         }else if(ia=="2.5"){
-            ptrestant=152;
+            ptrestant=-60;
+            nav=20;pil=20;vis=20;
         }else if(ia=="3"){
-            ptrestant=-152;
+            ptrestant=-90;
+            nav=20;pil=20;vis=20;dis=10;per=10;med=10;
         }else if(ia=="3.5"){
-            ptrestant=-304;
+            ptrestant=-120;
+            nav=20;pil=20;vis=20;dis=20;per=20;med=20;   
         }else if(ia=="4"){
-            ptrestant=-456;
+            ptrestant=-150;
+            nav=20;pil=20;vis=20;dis=20;per=20;med=20;mec=10;com=10;pir=10;
         }else if(ia=="4.5"){
-            ptrestant=-608;
+            ptrestant=-180;
+            nav=20;pil=20;vis=20;dis=20;per=20;med=20;mec=20;com=20;pir=20;
         }else if(ia=="5"){
-            ptrestant=-760;
+            ptrestant=-210;
+            nav=30;pil=30;vis=30;dis=20;per=20;med=20;mec=20;com=20;pir=20;
         }
-        var blindage=100*blin;
-        var bouclier=100*mote;
+        var bouclier=0;
+        if(mote=="0.5"){
+            tete=50;bd=50;bg=50;jd=50;bouclier=200
+        }else if(mote=="1"){
+            tete=100;bd=100;bg=100;jd=100;bouclier=400
+        }else if(mote=="1.5"){
+            tete=200;bd=150;bg=150;jd=100;bouclier=600
+        }else if(mote=="2"){
+            tete=200;bd=200;bg=200;jd=200;bouclier=800
+        }else if(mote=="2.5"){
+            tete=300;bd=250;bg=250;jd=200;bouclier=1000
+        }else if(mote=="3"){
+            tete=300;bd=300;bg=300;jd=300;bouclier=1200
+        }else if(mote=="3.5"){
+            tete=400;bd=350;bg=350;jd=300;bouclier=1400 
+        }else if(mote=="4"){
+            tete=400;bd=400;bg=400;jd=400;bouclier=1600
+        }else if(mote=="4.5"){
+            tete=500;bd=450;bg=450;jd=400;bouclier=1800
+        }else if(mote=="5"){
+            tete=500;bd=500;bg=500;jd=500;bouclier=2000
+        }
+        var blindage=0;
+        if(blin=="0.5"){
+            blindage=200
+        }else if(blin=="1"){
+            blindage=400
+        }else if(blin=="1.5"){
+            blindage=600
+        }else if(blin=="2"){
+            blindage=800
+        }else if(blin=="2.5"){
+            blindage=1000
+        }else if(blin=="3"){
+            blindage=1200
+        }else if(blin=="3.5"){
+            blindage=1400 
+        }else if(blin=="4"){
+            blindage=1600
+        }else if(blin=="4.5"){
+            blindage=1800
+        }else if(blin=="5"){
+            blindage=2000
+        }
+       
         var moyen=(ia+blin+mote)/3;var etoile="";
         if(moyen<=0.5){
             etoile="✬ ☆ ☆ ☆ ☆";
@@ -1171,8 +1151,9 @@
         }else{
             etoile="★ ★ ★ ★ ★";
         }
-        console.log('indiquer '+ptrestant)
-        this.actor.update({"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.prixbase":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.hp.value":pv,"system.hp.max":pv,"system.pointrestant2":ptrestant,"system.armure.value":blindage,"system.armure.max":blindage,"system.protections.value":bouclier,"system.protections.max":bouclier}); 
+        
+        
+        this.actor.update({"system.Agilité":0,"system.Artisanat":0,"system.Balistique":0,"system.Combat":0,"system.ConGén":com,"system.Visée":vis,"system.ConSpécif":0,"system.Négociation":0,"system.Dextérité":0,"system.Diplomatie":0,"system.Discrétion":dis,"system.Force":0,"system.Investigation":inv,"system.Jeu":0,"system.Mécanique":mec,"system.Médecine":med,"system.Natation":0,"system.Navigation":nav,"system.Perception":per,"system.Pilotage":pil,"system.Piratage":pir,"system.Pistage":0,"system.Religion":0,"system.Science":0,"system.Survie":0,"system.Tir":0,"system.tete":tete,"system.tete2":tete,"system.bd":bd,"system.bd2":bd,"system.bg":bg,"system.bg2":bg,"system.jd":jd,"system.jd2":jd,"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.prixbase":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.hp.value":pv,"system.hp.max":pv,"system.pointrestant2":ptrestant,"system.armure.value":blindage,"system.armure.max":blindage,"system.protections.value":bouclier,"system.protections.max":bouclier}); 
     }
 
     _onEncom(data){

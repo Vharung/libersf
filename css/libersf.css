@@ -170,7 +170,7 @@ form.Liber{display: table-cell;}
 .Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}
 .resultat{text-align: center;color: #fff;padding: 5px;border: 1px solid #999;}
 .resultdeg,.resultdeg2,.resultdeg3,.resultdeg4{width: 60px;height: 60px;margin: 5px;}
-.resultdeg{color: #040404;width: 96%;font-size: 4em;text-align: center;line-height: normal;background: darkgrey url(../assets/icon/gunshot.png) center center no-repeat;background-size: contain;}
+.resultdeg{color: #040404;font-size: 4em;text-align: center;line-height: normal;background: darkgrey url(../assets/icon/gunshot.png) center center no-repeat;background-size: contain;}
 .resultdeg2{background: darkgrey url(../assets/icon/backward-time.png) center center no-repeat;background-size: contain;}
 .resultdeg3{background: darkgrey url(../assets/icon/spiky-explosion.png) center center no-repeat;background-size: contain;}
 .resultdeg4{background: darkgrey url(../assets/icon/shrug.png) center center no-repeat;background-size: contain;}

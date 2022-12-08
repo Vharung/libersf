@@ -1,8 +1,7 @@
 <form class="{{cssClass}} Liber flexcol" autocomplete="off">
-<div class="fiche">
-	{{!-- Sheet Header --}}
-	<div style="width: 592px;float: left;display: inline-block;">
-		<div class="sheet-header flexcol" id="pj-titre" style="flex: 0 0 515px;">
+{{!-- Sheet Header --}}
+	<div class="colonne">
+		<div class="sheet-header flexcol" id="pj-titre">
 			<div class="head">
 				<div class="avatar"> 
 					<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
@@ -71,7 +70,7 @@
 			</div>
 		</main>
 	</div>
-	<div style="width: 592px;float: left;display: inline-block;">
+	<div class="colonne bg">
 		<div class="autres">
 			{{!-- Sheet Tab Navigation --}}
 		    <nav class="sheet-tabs tabs" data-group="primary">
@@ -332,10 +331,8 @@
 							<input class="min1" name="system.bd" type="text" value="{{actor.system.bd}}" placeholder="0" style="width:50px"/><input class="max1" name="system.bd2" type="text" value="{{actor.system.bd2}}" placeholder="0" style="width:50px"/>
 						</div>
 						<div class="zone blinder">
-							<!--div class="bar" style="width:100%; background:green;"></div>
-							<input class="vh_blind" name="system.torse" type="text" value="{{actor.system.torse}}"placeholder="0"/-->
 							<div class="bar bar4" style="width:{{actor.system.bd}}%; background:blue;"></div>
-							<input class="min4" name="system.torse" type="text" value="{{actor.system.torse}}" placeholder="0" style="width:50px"/><input class="max4" name="system.torse2" type="text" value="{{actor.system.torse2}}" placeholder="0" style="width:50px"/>
+							<input class="min4" type="text" value="{{actor.system.armure.value}}" placeholder="0" style="width:50px" readonly/><input class="max4" type="text" value="{{actor.system.armure.max}}" placeholder="0" style="width:50px" readonly />
 						</div>
 						<div class="zone bg">
 							<div class="bar bar2" style="width:{{actor.system.bg}}%; background:blue;"></div>
@@ -453,6 +450,5 @@
 				</div>
 			</section>
 		</div>
-	</div>	
-</div>
+	</div>
 </form>
