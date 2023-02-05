@@ -76,7 +76,11 @@
             sort.push(i);
           }
         }
-
+        sort.sort((a, b) => a.system.cout - b.system.cout);
+        inventaire.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
+        arme.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
+        piece.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
+        armure.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         // Assign and return
         actorData.inventaire = inventaire;
         actorData.arme = arme;
