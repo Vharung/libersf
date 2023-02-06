@@ -32,7 +32,7 @@
 			<div class="rexrow stat">
 				<div class="grid-2col">
 					<p><span class="deno">❤ {{localize 'libersf.vie'}}</span><input class="hp" name="system.hp.value" type="text" value="{{actor.system.hp.value}}" placeholder="10" style="width: 40px;"/><input class="hpmax" name="system.hp.max" type="text" value="{{actor.system.hp.max}}" placeholder="10" style="width: 40px;"/>
-					<span class="deno andromede">☀ {{localize 'libersf.psy'}}</span><input class="psy andromede" name="system.psy.value" type="text" value="{{actor.system.psy.value}}" placeholder="10" style="width: 40px;"/><input class="psymax andromede" name="system.psy.max" type="text" value="{{actor.system.psy.max}}" placeholder="10" style="width: 40px;"/></p>
+					<span class="deno andromede">☀ {{localize 'libersf.psy'}}</span><input class="psy andromede" name="system.psy.value" type="text" value="{{actor.system.magie}}" placeholder="10" style="width: 40px;" readonly /><input class="psymax andromede" name="system.psy.max" type="text" value="{{actor.system.psy.max}}" placeholder="10" style="width: 40px;"/></p>
 				</div>
 				<div class="grid-2col">
 					<p><span class="deno">⛉ {{localize 'libersf.armure'}}</span><input class="actarm" name="system.armure.value" type="text" value="{{actor.system.armure.value}}" placeholder="0"/><input class="actarmmax" name="system.armure.max" type="text" value="{{actor.system.armure.max}}" placeholder="0" readonly/><span class="update">&#128472;</span>
@@ -394,15 +394,10 @@
 						<ol class="items-list">
 			                <li class="item rexrow item-header">
 			                  <div class="item-image"></div>
-			                  <div class="item-name">{{localize 'libersf.nom'}}</div>
-			                  <div class="item-genre"></div>
-			                  <!--div class="item-description">{{localize 'libersf.descri'}}</div-->               
-			                  <div class="item-portee">{{localize 'libersf.l1'}}</div>
-			                  <div class="item-dommage">{{localize 'libersf.l2'}}</div>
-			                  <div class="item-poids">{{localize 'libersf.l3'}}</div>
-			                  <div class="item-valeur">{{localize 'libersf.l4'}}</div>
-			                  <div class="item-techno">{{localize 'libersf.l5'}}</div>
-			                  <div class="item-qty">{{localize 'libersf.l6'}}</div>
+			                  <div class="item-name">{{localize 'libersf.nom'}}</div>              
+			                  <div class="item-type">{{localize 'libersf.type'}}</div>
+			                  <div class="item-techno">{{localize 'libersf.diff'}}</div>
+			                  <div class="item-qty">{{localize 'libersf.cout'}}</div>
 			                  <div class="item-controls">
 			                    <!--a class="item-control item-create" title="Create item" data-type="armes"><i class="fas fa-plus"></i> Add item</a-->
 			                  </div>
@@ -411,16 +406,10 @@
 			                <li class="item rexrow" data-item-id="{{item._id}}">
 			                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 			                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
-			                    <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
-			                    <div class="item-portee">{{item.system.portee}}</div>
-			                    <!--div class="item-dommage jetdedegat" data-name="{{item.name}}" data-dice="{{item.system.degat}}">{{item.system.degats}}</div-->
-			                    <div class="item-dommage">{{item.system.degats}}</div>
-			                    <div class="item-poid">{{item.system.poids}}</div>
-			                    <div class="item-valeur">{{item.system.valeur}}</div>
+			                    <div class="item-type" title="{{item.system.genre}}">{{item.system.genre}} - {{item.system.portee}}</div>
 			                    <div class="item-techno">{{item.system.techno}}</div>
 			                    <div class="item-qt">{{item.system.quantite}}</div>
 			                    <div class="item-controls">
-			                    	<span class="item-equip" title="Equipé arme" genre="arme" data-genre="arme" name="{{item.name}}" data-name="{{item.name}}">+</span>
 			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
