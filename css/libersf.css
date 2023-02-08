@@ -196,3 +196,23 @@ form.Liber{display: table-cell;}
 .Liber .cont .ring:nth-child(3)::before {content:'';position:absolute;top:initial;bottom:12px;width:15px;left:12px;border-radius: 50%; height: 15px;/*background: #e11cf8;box-shadow: 0 0 0 5px #e11cf833,0 0 0 10px #e11cf822, 0 0 0 20px #e11cf811, 0 0 20px #e11cf8, 0 0 50px #e11cf8*/}
 .Liber .cont .ring:nth-child(3) {animation: animate2 4s linear infinite;animation-delay: -3s;position:absolute;top:-66.66px ;border-left:4px solid #24ecff;border-top:4px solid transparent;}
 .Liber .cont .ring::before {content:'';position:absolute;top:12px;width:15px;right:12px;border-radius: 50%; height: 15px;background: #24ecff;box-shadow: 0 0 0 5px #24ecff33,0 0 0 10px #24ecff22, 0 0 0 20px #24ecff11, 0 0 20px #24ecff, 0 0 50px #24ecff}
+
+
+#sidebar a.item i{display: none}
+#sidebar a.item[data-tab="chat"]{background:url(" ../assets/icon/f1.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="combat"]{background:url(" ../assets/icon/f2.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="scenes"]{background:url(" ../assets/icon/f3.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="actors"]{background:url(" ../assets/icon/f4.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="items"]{background:url(" ../assets/icon/f5.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="journal"]{background:url(" ../assets/icon/f6.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="tables"]{background:url(" ../assets/icon/f7.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="cards"]{background:url(" ../assets/icon/f8.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="playlists"]{background:url(" ../assets/icon/f9.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="compendium"]{background:url(" ../assets/icon/f10.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item[data-tab="settings"]{background:url(" ../assets/icon/f11.png") no-repeat center center;background-size: 80%;}
+#sidebar a.item.active,#sidebar a.item.active:hover{filter:invert(100%);}
+#sidebar a.item:hover{filter:invert(80%); transition:0.5s}
+
+#sidebar-tabs { border-bottom: 1px solid #0ff;box-shadow: 0 0 10px #0178a2}
+#navigation #scene-list .scene.view, #navigation #scene-list .scene.context, #controls ol.control-tools > li.active, #controls ol.control-tools > li:hover{ border: 1px solid #0ff;box-shadow: 0 0 10px #0178a2}
+.directory .directory-item.context, .directory .directory-item.active {border-top: 1px solid #0ff;border-bottom: 1px solid #0ff;box-shadow: 0 0 10px #0178a2}
