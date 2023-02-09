@@ -15,6 +15,7 @@
 .chat-message .message-header{color: #fff}
 .chat-message.whisper,.chat-message.blind {background: #00abab;border: 2px solid #545469;}
 option, optgroup,#chat-controls .roll-type-select{background: #013635;}
+form button,.Liber button,.dialog .dialog-buttons button.default,.dialog .dialog-buttons button{background: rgb(165, 27, 27); border: none; color:#fff}
 
 .sheet nav.sheet-tabs{border:none;margin: 0}
 .editable input,.editable textarea,.editable h1,.editable h2{border: none;background: #013635}
