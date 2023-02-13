@@ -7,8 +7,8 @@
         return mergeObject(super.defaultOptions, {
           classes: ["Liber", "sheet", "actor"],
           //template: "systems/liber/templates/actor/personnage-sheet.html",
-          width: 1224,
-          height: 800,
+          width: 1245,
+          height: 820,
           tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
         });
     }
@@ -528,16 +528,14 @@
             });
         var hp= html.find('.hp').val();
         var mut= html.find('.mutation').val();
-        if(mut=="oui"){
-            html.find('.bg').css({"background":"url(systems/libersf/css/ecran3.jpg)",'background-size': 'cover'});
-            html.find('main').css({"background":"url(systems/libersf/css/ecran3.jpg) bottom",'background-size': 'cover'});
-            html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran3.jpg)",'background-size': 'cover'});
-        }
+        
         if(hp<=0){
-            html.find('main').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'});
-            html.find('.head .rexrow').css({"background":"url(systems/libersf/css/ecran.jpg)",'background-size': 'cover'})
-            html.find('.bg').css({"background":"url(systems/libersf/css/ecran2.jpg)",'background-size': 'cover'});
-        }       
+            html.find('.outer').css({"background": "linear-gradient(-45deg, transparent 12px, #ff0101 0) right,linear-gradient(135deg, transparent 12px, #ff0101 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+        }else if(mut=="oui"){
+            html.find('.outer').css({"background": "linear-gradient(-45deg, transparent 12px, #3ce47b 0) right,linear-gradient(135deg, transparent 12px, #3ce47b 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+        }else {
+            html.find('.outer').css({"background": "linear-gradient(-45deg, transparent 12px, #00FFFF 0) right,linear-gradient(135deg, transparent 12px, #00FFFF 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+        } 
 
 
     }
