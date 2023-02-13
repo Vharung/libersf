@@ -222,7 +222,7 @@ form.Liber{display: table-cell;}
 .Liber .etoile{text-align: center;}
 .Liber .anciente{cursor: pointer;}
 .Liber .update{width: 27px;cursor: pointer;font-size: 1.4em;background: #a10001;float: right;border-radius: 2px;margin-right: -5px;border-radius: 50%;text-align: center;}
-
+button {background: #a10001;border: none;color: #fff;}
 .Liber .boucl{background: url("../assets/icon/bouclier.png")no-repeat left center; background-size: contain;}
 .Liber .viecl{background: url("../assets/icon/vie.png")no-repeat left center;background-size: contain;color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
 .Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}
@@ -232,7 +232,7 @@ form.Liber{display: table-cell;}
 .resultdeg2{background: darkgrey url(../assets/icon/backward-time.png) center center no-repeat;background-size: contain;}
 .resultdeg3{background: darkgrey url(../assets/icon/spiky-explosion.png) center center no-repeat;background-size: contain;}
 .resultdeg4{background: darkgrey url(../assets/icon/shrug.png) center center no-repeat;background-size: contain;}
-.action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6{display: inline-block;width: 38px;height: 38px;margin-left: 3px;}
+.action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6{display: inline-block;width: 42px;height: 42px;margin-left: 3px;}
 .action0{background: darkgrey url(../assets/icon/walk.png) center center no-repeat;background-size: contain;}
 .action0b{background: darkgrey url(../assets/icon/run.png) center center no-repeat;background-size: contain;}
 .action1{background: darkgrey url(../assets/icon/hydra-shot.png) center center no-repeat;background-size: contain;cursor: pointer}
