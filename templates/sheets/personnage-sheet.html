@@ -128,19 +128,7 @@
 						</div>
 						<div class="grid-3col" style="text-align: center">
 							<span class="iconbou"></span><input  class="bouclierqui" name="system.prod" type="text" value="{{actor.system.prod}}"  title="{{actor.system.prod}}" placeholder="Bouclier" readonly="" /><a class="desequi" data-genre="bouclier">🗑</a>
-							<ol class="items-list" style="margin-top: -5px; ">
-							{{#each actor.argent as |item id|}}
-					                <li class="item rexrow" data-item-id="{{item._id}}">
-					                    <div class="item-image" style="display: none"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-					                    <h4 class="item-poid" style="display: none">0</h4>
-					                    <h4 class="item-qt" style="width:42px;font-size: 0.9em;font-family: 'Signika';">{{item.system.quantite}}</h4>
-					                    <div class="item-controls" style="width: 40px;">
-					                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-					                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-					                    </div>
-					                </li>
-					            {{/each}}
-					        </ol>
+							<input  class="credit" name="system.credit" type="text" value="{{actor.system.credit}}" placeholder="Credit"/>
 						</div>		
 					</div>
     		</div>
