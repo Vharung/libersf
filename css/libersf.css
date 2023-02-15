@@ -156,9 +156,10 @@ form.Liber{display: table-cell;}
 .Liber .items-list .item:hover {opacity:1}
 .Liber .items-list .item-image {-webkit-box-flex: 0;-ms-flex: 0 0 24px;flex: 0 0 24px;margin-right: 5px;width: 25px}
 .Liber .items-list .item img {display: block;}
-.Liber .items-list .item-resitance,.Liber .items-list .item-hpmax,.Liber .items-type .item-hpmax,.Liber .items-list .item-genre,.Liber .items-list .item-techno,.Liber .items-list .item-duree,.Liber .items-list .item-classe,.Liber .items-list .item-controls,.Liber .items-list .item-image,.Liber .items-list .item-name,.Liber .items-list .item-description,.Liber .items-list .item-description2,.Liber .items-list .item-portee,.Liber .items-list .item-dommage,.Liber .items-list .item-poids,.Liber .items-list .item-poids,.Liber .items-list .item-valeur,.Liber .items-list .item-qt,.Liber .items-list .item-qty,.Liber .items-list .item-hand{display:block;height:25px;float: left;overflow: hidden;}
-.Liber .items-list .item-name {margin: 0;width: 35px;float: left;}
-.Liber .items-list .item-name2 {margin: 0;width: 95px;float: left;}
+.Liber .items-list .item-poids,.Liber .items-list .item-poid,.Liber .items-list .item-valeur{display: none}
+.Liber .items-list .item-resitance,.Liber .items-list .item-hpmax,.Liber .items-type .item-hpmax,.Liber .items-list .item-genre,.Liber .items-list .item-techno,.Liber .items-list .item-duree,.Liber .items-list .item-classe,.Liber .items-list .item-controls,.Liber .items-list .item-image,.Liber .items-list .item-name,.Liber .items-list .item-description,.Liber .items-list .item-description2,.Liber .items-list .item-portee,.Liber .items-list .item-dommage,.Liber .items-list .item-qt,.Liber .items-list .item-qty,.Liber .items-list .item-hand{display:block;height:25px;float: left;overflow: hidden;}
+.Liber .items-list .item-name {margin: 0;width: 97px;float: left;}
+.Liber .items-list .item-name2 {margin: 0;width: 157px;float: left;}
 .Liber .items-list .item-description,.Liber .items-list .item-description2{width: calc(100% - 20px);height: auto;margin: 10px;padding: 5px;display: block;}
 .Liber .items-list .item-genre{width: 20px;float: left; text-align: center}
 .Liber .items-list .item-classe{width: 50px;float: left}
@@ -232,7 +233,7 @@ button {background: #a10001;border: none;color: #fff;}
 .resultdeg2{background: darkgrey url(../assets/icon/backward-time.png) center center no-repeat;background-size: contain;}
 .resultdeg3{background: darkgrey url(../assets/icon/spiky-explosion.png) center center no-repeat;background-size: contain;}
 .resultdeg4{background: darkgrey url(../assets/icon/shrug.png) center center no-repeat;background-size: contain;}
-.action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6{display: inline-block;width: 42px;height: 42px;margin-left: 3px;}
+.action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6{display: inline-block;width: 41px;height: 41px;margin-left: 3px;}
 .action0{background: darkgrey url(../assets/icon/walk.png) center center no-repeat;background-size: contain;}
 .action0b{background: darkgrey url(../assets/icon/run.png) center center no-repeat;background-size: contain;}
 .action1{background: darkgrey url(../assets/icon/hydra-shot.png) center center no-repeat;background-size: contain;cursor: pointer}

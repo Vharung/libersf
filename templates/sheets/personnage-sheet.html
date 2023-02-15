@@ -133,7 +133,7 @@
 					                <li class="item rexrow" data-item-id="{{item._id}}">
 					                    <div class="item-image" style="display: none"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
 					                    <h4 class="item-poid" style="display: none">0</h4>
-					                    <h4 class="item-qt" style="width:90px;font-size: 0.9em;font-family: 'Signika';">{{item.system.quantite}}</h4>
+					                    <h4 class="item-qt" style="width:42px;font-size: 0.9em;font-family: 'Signika';">{{item.system.quantite}}</h4>
 					                    <div class="item-controls" style="width: 40px;">
 					                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 					                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -210,7 +210,7 @@
 				    {{!-- Features Tab --}}
 					<div id="features" class="tab features"  data-group="primary" data-tab="features">
 						<h1 style="text-align:center" class="titreaction">{{localize 'libersf.action'}}</h1>
-						<div class="action0" title="{{localize 'libersf.marche'}}"></div>
+						<div class="action0" title="{{localize 'libersf.marche'}}" style="margin-left: 6px;"></div>
 						<div class="action0b" title="{{localize 'libersf.run'}}"></div>
 						<div class="action1 jetdedes" data-name="Tircouv" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.tircouv'}}"></div>
 						<div class="action2" title="{{localize 'libersf.commun'}}"></div>
