@@ -115,6 +115,22 @@
         /*edition items*/
         html.find('.item-edit').click(this._onItemEdit.bind(this));
 
+        let niva=html.find('.cpt2').val();
+        let armetoile='';
+        let rac=html.find('.raceliste').val();
+        if(rac=="Elfen"){niva=parseInt(niva)+10}
+        if(niva<0){armetoile='✬ ☆ ☆ ☆ ☆'}
+        else if(niva<5){armetoile='★ ☆ ☆ ☆ ☆'}
+        else if(niva<10){armetoile='★ ✬ ☆ ☆ ☆'}
+        else if(niva<15){armetoile='★ ★ ☆ ☆ ☆'}
+        else if(niva<20){armetoile='★ ★ ✬ ☆ ☆'}
+        else if(niva<25){armetoile='★ ★ ★ ☆ ☆'}
+        else if(niva<30){armetoile='★ ★ ★ ✬ ☆'}
+        else if(niva<35){armetoile='★ ★ ★ ★ ☆'}
+        else if(niva<40){armetoile='★ ★ ★ ★ ✬'}
+        else {armetoile='★ ★ ★ ★ ★'}
+    console.log(armetoile)
+        html.find('.armetoile').html('(max '+armetoile+' )')
 
         // Delete Inventory Item
         html.find('.item-delete').click(ev => {
@@ -870,7 +886,7 @@
         }else if(clanliste==game.i18n.localize("libersf.yor")){
             bonusrace="10 Perception et sixième sens";
         }else if(clanliste==game.i18n.localize("libersf.elf")){
-            bonusrace="10 Agilité et polyglotte";
+            bonusrace="10 Agilité et Technophile";
         }else if(clanliste==game.i18n.localize("libersf.orqu")){
             bonusrace="10 Combat et double arme";
         }else {
