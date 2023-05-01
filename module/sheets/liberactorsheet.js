@@ -93,6 +93,7 @@
 
     activateListeners(html){
         super.activateListeners(html);
+
         /*Jet de des*/
         html.find('.jetdedes').click(this._onRoll.bind(this)); 
 
@@ -531,10 +532,16 @@
         
         if(hp<=0){
             html.find('.outer').css({"background": "linear-gradient(-45deg, transparent 12px, #ff0101 0) right,linear-gradient(135deg, transparent 12px, #ff0101 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+            html.find('.inner').css({"background": "linear-gradient(-45deg, transparent 12px, #310101 0) right,linear-gradient(135deg, transparent 12px, #310101 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+            html.find('.santes').css({"background": "none"});
         }else if(mut=="oui"){
             html.find('.outer').css({"background": "linear-gradient(-45deg, transparent 12px, #3ce47b 0) right,linear-gradient(135deg, transparent 12px, #3ce47b 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+            html.find('.inner').css({"background": "linear-gradient(-45deg, transparent 12px, #00220f  0) right,linear-gradient(135deg, transparent 12px, #00220f 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+            html.find('.santes').css({"background": "url(systems/libersf/css/biohazard.jpg) center center","background-size":"80% 80%","background-repeat": "no-repeat"});
         }else {
             html.find('.outer').css({"background": "linear-gradient(-45deg, transparent 12px, #00FFFF 0) right,linear-gradient(135deg, transparent 12px, #00FFFF 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+            html.find('.inner').css({"background": "linear-gradient(-45deg, transparent 12px, #004060  0) right,linear-gradient(135deg, transparent 12px, #004060 0) left","background-size":"50% 100%","background-repeat": "no-repeat"});
+            html.find('.santes').css({"background": "none"});
         } 
 
 
@@ -550,7 +557,7 @@
         const item = this.getItemFromEvent(event);
         item.sheet.render(true);
     }
-gbtgbbbbbb                                                                                                                                
+
     _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
         var name = event.target.dataset["name"];

@@ -5,8 +5,8 @@
     "version": "2",
     "compatibility": {
       "minimum": "10",
-      "verified": "10.285",
-      "maximum": "10"
+      "verified": "11.293",
+      "maximum": "11"
     },
     "templateVersion": 2,
     "authors": [
