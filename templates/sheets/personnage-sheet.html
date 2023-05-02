@@ -207,15 +207,14 @@
 						<div class="action5 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.horsmap'}}"></div>
 						<div class="action6" title="{{localize 'libersf.couver'}}" data-lettre="13"></div>
 						<div class="clear"></div>
-
 						<h1 style="text-align: center;margin-top: 20px;">{{localize 'libersf.base30'}}</h1>
 						<div class="compt"><a class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Agilité}}">{{localize 'libersf.agil'}}</a>
 						<input class="cpt0" name="system.Agilité" type="text" value="{{actor.system.Agilité}}" placeholder="{{actor.system.Agilité}}" style="text-align: center"/>
 						</div>
-						<div class="compt"><a class="jetdedes" data-name="Artisanat" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Artisanat}}" title="Construire / Réparer Objet">{{localize 'libersf.arti'}}*</a>
+						<div class="compt"><a class="my-popup-button" data-name="Artisanat" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Artisanat}}" title="Construire / Réparer Objet">{{localize 'libersf.arti'}}*</a>
 						<input class="cpt1" name="system.Artisanat" type="text" value="{{actor.system.Artisanat}}" placeholder="{{actor.system.Artisanat}}" style="text-align: center"/>
 						</div>
-						<div class="compt"><a class="jetdedes" data-name="Balistique" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Balistique}}" title="Réparer les armes / Fabriquer munition">{{localize 'libersf.bali'}}*</a>
+						<div class="compt"><a class="my-popup-button" data-name="Balistique" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Balistique}}" title="Réparer les armes / Fabriquer munition">{{localize 'libersf.bali'}}*</a>
 						<input class="cpt2" name="system.Balistique" type="text" value="{{actor.system.Balistique}}" placeholder="{{actor.system.Balistique}}" style="text-align: center"/>
 						</div>
 						<div class="compt"><a class="jetdedes" data-name="Combat" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Combat}}">{{localize 'libersf.comb'}}</a>
@@ -245,7 +244,7 @@
 						<div class="compt"><a class="jetdedes" data-name="Jeu" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Jeu}}">{{localize 'libersf.ajeu'}}</a>
 						<input class="cpt11" name="system.Jeu" type="text" value="{{actor.system.Jeu}}" placeholder="{{actor.system.Jeu}}" style="text-align: center"/>
 						</div>
-						<div class="compt"><a class="jetdedes" data-name="Mécanique" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Mécanique}}" title="Réparer Véhicule">{{localize 'libersf.meca'}}*</a>
+						<div class="compt"><a class="my-popup-button" data-name="Mécanique" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Mécanique}}" title="Réparer Véhicule">{{localize 'libersf.meca'}}*</a>
 						<input class="cpt12" name="system.Mécanique" type="text" value="{{actor.system.Mécanique}}" placeholder="{{actor.system.Mécanique}}" style="text-align: center"/>
 						</div>
 						<div class="compt"><a class="jetdedes" data-name="Médecine" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Médecine}}">{{localize 'libersf.mede'}}</a>
@@ -263,10 +262,10 @@
 						<div class="compt"><a class="jetdedes" data-name="Perception" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Perception}}">{{localize 'libersf.perc'}}</a>
 						<input class="cpt17" name="system.Perception" type="text" value="{{actor.system.Perception}}" placeholder="{{actor.system.Perception}}" style="text-align: center"/>
 						</div>
-						<div class="compt"><a class="jetdedes" data-name="Pilotage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Pilotage}}">{{localize 'libersf.pilo'}}*</a>
+						<div class="compt"><a class="my-popup-button" data-name="Pilotage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Pilotage}}">{{localize 'libersf.pilo'}}*</a>
 						<input class="cpt18" name="system.Pilotage" type="text" value="{{actor.system.Pilotage}}" placeholder="{{actor.system.Pilotage}}" style="text-align: center"/>
 						</div>
-						<div class="compt"><a class="jetdedes" data-name="Piratage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Piratage}}">{{localize 'libersf.pira'}}*</a>
+						<div class="compt"><a class="my-popup-button" data-name="Piratage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Piratage}}">{{localize 'libersf.pira'}}*</a>
 						<input class="cpt19" name="system.Piratage" type="text" value="{{actor.system.Piratage}}" placeholder="{{actor.system.Piratage}}" style="text-align: center"/>
 						</div>
 						<div class="compt"><a class="jetdedes" data-name="Pistage" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Pistage}}">{{localize 'libersf.pist'}}</a>
@@ -284,7 +283,7 @@
 						<div class="compt"><a class="jetdedes comptir" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}">{{localize 'libersf.atir'}}</a>
 						<input class="cpt24" name="system.Tir" type="text" value="{{actor.system.Tir}}" placeholder="{{actor.system.Tir}}" style="text-align: center"/>
 						</div>
-						<div class="compt"><a class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Visée}}">{{localize 'libersf.vise'}}</a>
+						<div class="compt"><a class="my-popup-button" data-name="Visée" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Visée}}">{{localize 'libersf.vise'}}</a>
 						<input class="cpt25" name="system.Visée" type="text" value="{{actor.system.Visée}}" placeholder="{{actor.system.Visée}}" style="text-align: center"/>
 						</div>
 						<div class="compt  andromede"><a class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Visée}}">{{localize 'libersf.psy'}}</a>
@@ -335,7 +334,7 @@
 				                    <div class="item-techno">{{item.system.techno}}</div>
 				                    <div class="item-qt">{{item.system.quantite}}</div>
 				                    <div class="item-controls">
-				                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}" data-genre="arme" data-name="{{item.name}}" data-degat="{{item.system.degats}}" data-type="{{item.system.type}}">+</span>
+				                    	<span class="item-equip" title="Equipé arme" genre="arme" name="{{item.name}}" data-genre="arme" data-name="{{item.name}}" data-degat="{{item.system.degats}}" data-type="{{item.system.type}}" data-etoile="{{item.system.techno}}">+</span>
 				                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 				                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 				                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

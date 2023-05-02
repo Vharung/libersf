@@ -57,7 +57,8 @@ form.Liber{background:none;display: block;width: 1220px;height: 770px;font-famil
 .chat-message .message-header{color: #fff}
 .chat-message.whisper,.chat-message.blind {background: #00abab;border: 2px solid #545469;}
 option, optgroup,#chat-controls .roll-type-select{background: #013635;}
-form button,.Liber button,.dialog .dialog-buttons button.default,.dialog .dialog-buttons button{background: rgb(165, 27, 27); border: none; color:#fff}
+form button,.Liber button,.dialog .dialog-buttons button.default,.dialog .dialog-buttons button, .choixdif{background: rgb(165, 27, 27); border: none; color:#fff;min-width: 80px;margin: 3px;}
+.choixdif{width: 177px;display: inline-block;padding: 5px;margin: 5px;text-align: center;}
 .compendium {background:#004060}
 .directory .directory-header .header-search input{background: #012b40}
 .sheet nav.sheet-tabs{border:none;margin: 0}

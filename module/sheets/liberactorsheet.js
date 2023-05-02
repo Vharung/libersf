@@ -115,6 +115,7 @@
         /*edition items*/
         html.find('.item-edit').click(this._onItemEdit.bind(this));
 
+
         let niva=html.find('.cpt2').val();
         let armetoile='';
         let rac=html.find('.raceliste').val();
@@ -581,6 +582,9 @@
         var arme = this.actor.system.armed;
         var chargequi = this.actor.system.charged;
         var degat = this.actor.system.degatd;
+        var etoiled = this.actor.system.etoiled;
+
+        var balistique=this.actor.system.Balistique;
 
         const jetdeDesFormule = "1d100";
         var bonus =this.actor.system.malus;
@@ -601,7 +605,33 @@
         if(inforesult>echec){
             inforesult=echec;
         }
+        let etoilemax = Math.floor(parseInt(balistique)/5);
+        let etoile=0;
+        if(etoiled=="★ ★ ★ ★ ★"){
+            etoile=10;
+        }else if(etoiled=="★ ★ ★ ★ ✬"){
+            etoile=9;
+        }else if(etoiled=="★ ★ ★ ★ ☆"){
+            etoile=8;
+        }else if(etoiled=="★ ★ ★ ✬ ☆"){
+            etoile=7;
+        }else if(etoiled=="★ ★ ★ ☆ ☆"){
+            etoile=6;
+        }else if(etoiled=="★ ★ ✬ ☆ ☆"){
+            etoile=5;
+        }else if(etoiled=="★ ★ ☆ ☆ ☆"){
+            etoile=4;
+        }else if(etoiled=="★ ✬ ☆ ☆ ☆"){
+            etoile=3;
+        }else if(etoiled=="★ ☆ ☆ ☆ ☆"){
+            etoile=2;
+        }else if(etoiled=="✬ ☆ ☆ ☆ ☆"){
+            etoile=1;
+        }
+        let dif=parseInt(etoilemax)-parseInt(etoile);
         if(name=="Tir" || name=="Tircouv"){
+            inforesult=parseInt(inforesult)+(dif*5)
+            console.log(inforesult)
             if(name=="Tir"){var conf="none;width: 200px;";}
             if(chargequi=='' || chargequi== undefined){
                  chargequi="Mun. "+arme
@@ -928,10 +958,11 @@
         var genre=event.target.dataset["genre"];
         var objetaequipe=event.target.dataset["name"];
         var type=event.target.dataset["type"];
+        var etoile=event.target.dataset["etoile"];
 
         if(genre=="arme" ){
             var degat=event.target.dataset["degat"]; 
-            this.actor.update({'system.degatd': degat,'system.armed':objetaequipe,'system.typed':type});
+            this.actor.update({'system.degatd': degat,'system.armed':objetaequipe,'system.typed':type,'system.etoiled':etoile});
         }else if(genre=="Armure"  || genre=="Combinaison"){
             var hp=event.target.dataset["hp"]; 
             var hpmax=event.target.dataset["hpmax"]; 
