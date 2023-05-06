@@ -8,89 +8,92 @@
             "planete"
         ],
         "templates":{
-            "stat":{
-                "hp": {
-                  "value":20,
-                  "max": 20
+            "defaut":{
+                "stat":{
+                    "hp": {
+                      "value":20,
+                      "max": 20
+                    },
+                    "armure":{
+                      "value":"0",
+                      "max": "0"
+                    },
+                    "protections":{
+                      "value":"0",
+                      "max": "0"
+                    },
+                    "credit":0,
+                    "solit":0,
+                    "tete":0,
+                    "bd":0,
+                    "torse":0,
+                    "bg":0,
+                    "jd":0,
+                    "jg":0,
+                    "encombrement": {
+                      "value": 0,
+                      "max": 0
+                    }
+                },            
+                "attributs":{
+                    "Agilité":0,
+                    "Artisanat":0,
+                    "Balistique":0,
+                    "Combat":0,
+                    "ConGén":0,
+                    "ConSpécif":0,
+                    "Dextérité":0,
+                    "Diplomatie":0,
+                    "Discrétion":0,
+                    "Force":0,
+                    "Investigation":0,
+                    "Jeu":0,
+                    "Mécanique":0,
+                    "Médecine":0,
+                    "Natation":0,
+                    "Navigation":0,
+                    "Négociation":0,
+                    "Perception":0,
+                    "Pilotage":0,
+                    "Piratage":0,
+                    "Pistage":0,
+                    "Religion":0,
+                    "Science":0,
+                    "Survie":0,
+                    "Tir":0,
+                    "Visée":0,
+                    "magie":0,
+                    "bonus":0
                 },
-                "armure":{
-                  "value":"0",
-                  "max": "0"
+                "background":{
+                    "histoire":"",
+                    "race":"",
+                    "bonusrace":"",
+                    "metier":"",
+                    "bonusmetier":"",
+                    "level":"1",
+                    "etat":{
+                        "a":0.5,  
+                        "b":0.5,  
+                        "c":0.5,  
+                        "d":0.5,  
+                        "e":0.5,  
+                        "f":0.5,  
+                        "g":0.5,  
+                        "h":0.5,  
+                        "i":0.5,  
+                        "j":0.5,  
+                        "k":0.5,  
+                        "l":0.5,  
+                        "m":0.5,  
+                        "n":0.5 
+                    } 
                 },
-                "protections":{
-                  "value":"0",
-                  "max": "0"
-                },
-                "credit":0,
-                "solit":0,
-                "tete":0,
-                "bd":0,
-                "torse":0,
-                "bg":0,
-                "jd":0,
-                "jg":0,
-                "encombrement": {
-                  "value": 0,
-                  "max": 0
-                }
-            },            
-            "attributs":{
-                "Agilité":0,
-                "Artisanat":0,
-                "Balistique":0,
-                "Combat":0,
-                "ConGén":0,
-                "ConSpécif":0,
-                "Dextérité":0,
-                "Diplomatie":0,
-                "Discrétion":0,
-                "Force":0,
-                "Investigation":0,
-                "Jeu":0,
-                "Mécanique":0,
-                "Médecine":0,
-                "Natation":0,
-                "Navigation":0,
-                "Négociation":0,
-                "Perception":0,
-                "Pilotage":0,
-                "Piratage":0,
-                "Pistage":0,
-                "Religion":0,
-                "Science":0,
-                "Survie":0,
-                "Tir":0,
-                "Visée":0,
-                "bonus":0
-            },
-            "background":{
-                "histoire":"",
-                "race":"",
-                "bonusrace":"",
-                "metier":"",
-                "bonusmetier":"",
-                "level":"1",
-                "etat":{
-                    "a":0.5,  
-                    "b":0.5,  
-                    "c":0.5,  
-                    "d":0.5,  
-                    "e":0.5,  
-                    "f":0.5,  
-                    "g":0.5,  
-                    "h":0.5,  
-                    "i":0.5,  
-                    "j":0.5,  
-                    "k":0.5,  
-                    "l":0.5,  
-                    "m":0.5,  
-                    "n":0.5 
-                } 
-            },
-            "nomcomp":""
+                "nomcomp":""
+            }
         },
         "personnage":{
-            "templates":["stat","attributs","background"], 
+            "templates":["defaut"], 
             "charged":"",
             "armed":"",
             "armeg":"",
@@ -103,7 +106,7 @@
             "mutation":"Non"
         },
         "pnj":{
-            "templates":["stat","attributs","background"],
+            "templates":["defaut"],
             "charged":"",
             "armed":"",
             "armeg":"",
@@ -115,7 +118,7 @@
             "typeg":""
         },
         "monstre":{
-            "templates":["stat","attributs","background"],
+            "templates":["defaut"],
             "charged":"",
             "armed":"",
             "armeg":"",
@@ -126,7 +129,7 @@
             "degat":""
         },
         "vehicule":{
-            "templates":["stat","attributs","background"],
+            "templates":["defaut"],
             "ia":0,
             "equi":0,
             "piece":0,

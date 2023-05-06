@@ -241,98 +241,7 @@
             }else {
                 var resultat=-20-((parseInt(level)-1)*10); 
             }
-            var min=-20;
-            for(i=0;i<26;i++){
-                if(race=="Humain" && i==6){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(race=="Arthuriens" && i==4){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(race=="Alpha Draconiens" && i==9){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(race=="Machine" && i==19){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(race=="Pleiadiens" && i==20){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(race=="Yoribiens" && i==17){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(race=="Elfen" && i==0){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(race=="Orquanien" && i==3){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }
-                if(metier=="Artisans" && i==1){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Commerce" && i==16){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Colon" && i==23){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Intellectuel" && i==10){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Malandrins" && i==8){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Pilote" && i==18){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Médecin" && i==13){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Militaire" && i==24){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }else if(metier=="Mécanicien" && i==12){
-                    var controle= html.find('.cpt'+i).val();
-                    if(controle<min){
-                        html.find('.cpt'+i).val(min);
-                    }
-                }
-                var valor=parseInt(html.find('.cpt'+i).val());
-                resultat=resultat+valor;
-            }
+            
             $( ".features input" ).each(function( index ) {
               var valor= $( this ).val();
               if(valor==0){
@@ -1220,7 +1129,7 @@
     _onEncom(data){
         const adata = data.actor;
         var  exo = adata.system.prog;
-        var enc=parseInt(adata.system.Force) /2 + 35; 
+        var enc=parseInt(adata.system.attributs.Force) /2 + 35; 
         if(exo=='Exosquelette'){
            enc=enc*2; 
         }
@@ -1270,6 +1179,8 @@
     }
     async _onStatM(event){
         let level=this.actor.system.background.level;
+        let metier=this.actor.system.background.metier;
+        let race=this.actor.system.background.race;
         let cpt0=this.actor.system.attributs.Agilité;
         let cpt1=this.actor.system.attributs.Artisanat;
         let cpt2=this.actor.system.attributs.Balistique;
@@ -1296,13 +1207,53 @@
         let cpt23=this.actor.system.attributs.Survie;
         let cpt24=this.actor.system.attributs.Tir;
         let cpt25=this.actor.system.attributs.Visée;
-        let cpt=[cpt0,cpt1,cpt2,cpt3,cpt4,cpt5,cpt6,cpt7,cpt8,cpt9,cpt10,cpt11,cpt12,cpt13,cpt14,cpt15,cpt16,cpt17,cpt18,cpt19,cpt20,cpt21,cpt22,cpt23,cpt24,cpt25]
+        let cpt26=this.actor.system.attributs.magie;
+        let cpt=[cpt0,cpt1,cpt2,cpt3,cpt4,cpt5,cpt6,cpt7,cpt8,cpt9,cpt10,cpt11,cpt12,cpt13,cpt14,cpt15,cpt16,cpt17,cpt18,cpt19,cpt20,cpt21,cpt22,cpt23,cpt24,cpt25,cpt26]
         if(level==1){
             for (var i = cpt.length - 1; i >= 0; i--) {
-                if(cpt[i]>30){cpt[i]=30}
+                if(metier==game.i18n.localize("libersf.metier1") && i==1 || 
+                   metier==game.i18n.localize("libersf.metier2") && i==16|| 
+                   metier==game.i18n.localize("libersf.metier3") && i==23|| 
+                   metier==game.i18n.localize("libersf.metier4") && i==10|| 
+                   metier==game.i18n.localize("libersf.metier5") && i==8 || 
+                   metier==game.i18n.localize("libersf.metier6") && i==18|| 
+                   metier==game.i18n.localize("libersf.metier7") && i==13|| 
+                   metier==game.i18n.localize("libersf.metier8") && i==24|| 
+                   metier==game.i18n.localize("libersf.metier9") && i==12|| 
+                   metier==game.i18n.localize("libersf.metier10") && i==22|| 
+                   metier==game.i18n.localize("libersf.metier11") && i==26||
+                   race==game.i18n.localize("libersf.humain") && i==6 ||
+                   race==game.i18n.localize("libersf.artu") && i==4 || 
+                   race==game.i18n.localize("libersf.pleiadiens") && i==20 || 
+                   race==game.i18n.localize("libersf.yor") && i==17 || 
+                   race==game.i18n.localize("libersf.dragon") && i==9 || 
+                   race==game.i18n.localize("libersf.elf") && i==0 || 
+                   race==game.i18n.localize("libersf.machine") && i==19 || 
+                   race==game.i18n.localize("libersf.orqu") && i==3){
+
+                    if(cpt[i]>40){cpt[i]=40}else if(parseInt(cpt[i])<-20){cpt[i]=-20}
+                }else if(cpt[i]>30){cpt[i]=30}else if(parseInt(cpt[i])<-30){cpt[i]=-30}
+
             }
         }
-        console.log(cpt)
+        if(parseInt(level)>1){
+            for (var i = cpt.length - 1; i >= 0; i--) {
+                if(race==game.i18n.localize("libersf.humain") && i==6 ||
+                   race==game.i18n.localize("libersf.artu") && i==4 || 
+                   race==game.i18n.localize("libersf.pleiadiens") && i==20 || 
+                   race==game.i18n.localize("libersf.yor") && i==17 || 
+                   race==game.i18n.localize("libersf.dragon") && i==9 || 
+                   race==game.i18n.localize("libersf.elf") && i==0 || 
+                   race==game.i18n.localize("libersf.machine") && i==19 || 
+                   race==game.i18n.localize("libersf.orqu") && i==3){
+                    if(parseInt(cpt[i])<-20){cpt[i]=-20}
+                }
+                if(parseInt(cpt[i])<-30){cpt[i]=-30}
+            } 
+        }
+        
+  
+
 
 
         //activer les effets
@@ -1326,6 +1277,6 @@
             }
         }
 
-        this.actor.update({"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12]});        
+        this.actor.update({"system.attributs.Agilité":cpt[0],"system.attributs.Artisanat":cpt[1],"system.attributs.Balistique":cpt[2],"system.attributs.Combat":cpt[3],"system.attributs.ConGén":cpt[4],"system.attributs.ConSpécif":cpt[5],"system.attributs.Dextérité":cpt[6],"system.attributs.Diplomatie":cpt[7],"system.attributs.Discrétion":cpt[8],"system.attributs.Force":cpt[9],"system.attributs.Investigation":cpt[10],"system.attributs.Jeu":cpt[11],"system.attributs.Mécanique":cpt[12],"system.attributs.Médecine":cpt[13],"system.attributs.Natation":cpt[14],"system.attributs.Navigation":cpt[15],"system.attributs.Négociation":cpt[16],"system.attributs.Perception":cpt[17],"system.attributs.Pilotage":cpt[18],"system.attributs.Piratage":cpt[19],"system.attributs.Pistage":cpt[20],"system.attributs.Religion":cpt[21],"system.attributs.Science":cpt[22],"system.attributs.Survie":cpt[23],"system.attributs.Tir":cpt[24],"system.attributs.Visée":cpt[25],"system.attributs.magie":cpt[26],"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12]});        
     }
 }

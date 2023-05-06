@@ -286,7 +286,7 @@
 						<div class="compt"><a class="my-popup-button" data-name="Visée" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.Visée}}">{{localize 'libersf.vise'}}</a>
 						<input class="cpt25" name="system.attributs.Visée" type="text" value="{{actor.system.attributs.Visée}}" placeholder="{{actor.system.attributs.Visée}}" style="text-align: center"/>
 						</div>
-						<div class="compt  andromede"><a class="jetdedes" data-name="Visée" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.Visée}}">{{localize 'libersf.psy'}}</a>
+						<div class="compt  andromede"><a class="jetdedes" data-name="Magie" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.magie}}">{{localize 'libersf.psy'}}</a>
 						<input class="cpt26" name="system.attributs.magie" type="text" value="{{actor.system.attributs.magie}}" placeholder="{{actor.system.attributs.magie}}" style="text-align: center"/>
 						</div>
 						<div class="clear"></div>
@@ -465,7 +465,7 @@
 		                <input type="a" value="{{localize 'libersf.choisir'}}" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
 		                <h1 style="margin-top: 20px">{{localize 'libersf.faction'}}</h1>
 						<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.religion">
-		                    {{#select actor.system.religion}}
+		                    {{#select actor.system.background.religion}}
 			                    <option value="{{localize 'libersf.empire'}}">{{localize 'libersf.empire'}}</option>
 			                    <option value="{{localize 'libersf.pleide'}}">{{localize 'libersf.pleide'}}</option>
 			                    <option value="{{localize 'libersf.omc'}}">{{localize 'libersf.omc'}}</option>
