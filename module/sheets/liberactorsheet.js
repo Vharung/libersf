@@ -45,6 +45,7 @@
         const inventaire = [];
         const arme = [];
         const armure = [];
+        const bouclier = [];
         const piece = [];
         const argent = [];
         const sort = [];
@@ -54,18 +55,17 @@
         for (let i of sheetData.items) {
           let item = i.items;
           i.img = i.img || DEFAULT_TOKEN;
-          if (i.type === 'arme') {
+          if (i.type === 'objet') {
+            inventaire.push(i);
+          }else if (i.type === 'arme') {
             arme.push(i);
           }
           else if (i.type === 'armure') {
             armure.push(i);
-          }
+          } 
           else if (i.type === 'bouclier') {
-            armure.push(i);
-          }
-          else if (i.type === 'objet') {
-            inventaire.push(i);
-          }
+            bouclier.push(i);
+          } 
           else if (i.type === 'piece') {
             piece.push(i);
           }
@@ -76,16 +76,21 @@
             sort.push(i);
           }
         }
-        sort.sort((a, b) => a.system.cout - b.system.cout);
         inventaire.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         arme.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
-        piece.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         armure.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
+        bouclier.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
+        piece.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
+        sort.sort((a, b) => a.system.cout - b.system.cout);
+        
+        
+        
         // Assign and return
         actorData.inventaire = inventaire;
         actorData.arme = arme;
         actorData.piece = piece;
         actorData.armure = armure;
+        actorData.bouclier = bouclier;
         actorData.argent = argent;
         actorData.sort = sort;
     }
@@ -729,9 +734,9 @@
             if(bles==1){
                 game.user.targets.forEach(i => {
                     var nom=i.document.name;
-                    var hp = i.document._actor.system.hp.value;
-                    var armure=i.document.actor.system.armure.value
-                    var boucli=i.document.actor.system.protections.value;
+                    var hp = i.document._actor.system.stat.hp.value;
+                    var armure=i.document.actor.system.stat.armure.value
+                    var boucli=i.document.actor.system.stat.protections.value;
                     if(type=="L"){
                         boucli=parseInt(boucli)-parseInt(degat)
                         degat=parseInt(degat)-parseInt(armure)
@@ -778,7 +783,7 @@
                             console.log(i)
 
                         }
-                        i.actor.update({'system.hp.value': hp,'system.armure.value': armure,'system.protections.value': boucli });
+                        i.actor.update({'system.stat.hp.value': hp,'system.stat.armure.value': armure,'system.stat.protections.value': boucli });
                     } 
                 })
             }
@@ -896,11 +901,11 @@
         var tonchoix=items4[Math.floor(Math.random()*items2.length)];
         var motivation  = items3[Math.floor(Math.random()*items3.length)];
         var textgen ="Agé de "+age+" tu fais ta vie "+secteur+" "+planete+". Jusqu'au jour où "+evenement+", "+motivation+" tu décide "+tonchoix+".";
-        this.actor.update({'system.histoire': textgen});
+        this.actor.update({'system.background.histoire': textgen});
     }
 
     _onAvantageRace(event){
-        var clanliste=this.actor.system.race;
+        var clanliste=this.actor.system.background.race;
 
         var bonusrace='';
         if(clanliste==game.i18n.localize("libersf.humain")){
@@ -922,10 +927,10 @@
         }else {
             bonusrace="";
         }
-        this.actor.update({'system.bonusrace': bonusrace});
+        this.actor.update({'system.background.bonusrace': bonusrace});
     }
     _onAvantageJob(event){
-        var metierliste=this.actor.system.metier;
+        var metierliste=this.actor.system.background.metier;
         console.log(metierliste)
         var metier='';
         if(metierliste==game.i18n.localize("libersf.metier1")){
@@ -952,7 +957,7 @@
             metier="10 Magie";
         }
         console.log(metier)
-        this.actor.update({'system.bonusmetier': metier});
+        this.actor.update({'system.background.bonusmetier': metier});
     }
     _onArmor(event){
         var genre=event.target.dataset["genre"];
@@ -963,14 +968,14 @@
         if(genre=="arme" ){
             var degat=event.target.dataset["degat"]; 
             this.actor.update({'system.degatd': degat,'system.armed':objetaequipe,'system.typed':type,'system.etoiled':etoile});
-        }else if(genre=="Armure"  || genre=="Combinaison"){
+        }else if(genre=="armure"  || genre=="Combinaison"){
             var hp=event.target.dataset["hp"]; 
             var hpmax=event.target.dataset["hpmax"]; 
-            this.actor.update({'system.armure.value': hp,'system.armure.max': hpmax,'system.prog':objetaequipe});
+            this.actor.update({'system.stat.armure.value': hp,'system.stat.armure.max': hpmax,'system.prog':objetaequipe});
         }else if(genre=="Champ de force"){
             var hp=event.target.dataset["hp"]; 
             var hpmax=event.target.dataset["hpmax"]; 
-            this.actor.update({'system.protections.value': hp,'system.protections.max': hpmax,'system.prod':objetaequipe});
+            this.actor.update({'system.stat.protections.value': hp,'system.stat.protections.max': hpmax,'system.prod':objetaequipe});
         }else if(genre=="Chargeur"){
             this.actor.update({'system.charged':objetaequipe});
         }else{
@@ -982,9 +987,9 @@
         if(genre=="arme" ){
             this.actor.update({'system.degatd': '','system.armed':''});
         }else if(genre=="armure"){
-            this.actor.update({'system.armure.value': 0,'system.armure.max': 0,'system.prog':''});
+            this.actor.update({'system.stat.armure.value': 0,'system.stat.armure.max': 0,'system.prog':''});
         }else if(genre=="bouclier"){
-            this.actor.update({'system.protections.value': 0,'system.protections.max': 0,'system.prod':''});
+            this.actor.update({'system.stat.protections.value': 0,'system.stat.protections.max': 0,'system.prod':''});
         }else if(genre=='chargeur'){
             this.actor.update({'system.charged':''});
         }else if(genre=='autre'){
@@ -993,10 +998,10 @@
     }
 
     _onNivArmor(event){
-        var arm=this.actor.system.armure.value;
-        var armmax=this.actor.system.armure.max;
-        var bou=this.actor.system.protections.value;
-        var boumax=this.actor.system.protections.max;
+        var arm=this.actor.system.stat.armure.value;
+        var armmax=this.actor.system.stat.armure.max;
+        var bou=this.actor.system.stat.protections.value;
+        var boumax=this.actor.system.stat.protections.max;
         var armname=this.actor.system.prog;
         var bouname=this.actor.system.prod;
         if(arm==''){arm=0}
@@ -1045,21 +1050,21 @@
             var v= valeur[Math.floor(Math.random()*valeur.length)];
             cpt.push(v);
         }
-        this.actor.update({'name':nom,'img':img,'system.histoire':desc,'system.hp.value': pv,'system.hp.max': pv,'system.degatd': dgt,'system.armed':'Attaque','system.armure.value': ar,'system.armure.max': ar,'system.ptarm': ar,'system.prog':'Armure Naturel','system.Agilité':cpt[0],'system.Artisanat':cpt[1],'system.Balistique':cpt[2],'system.Combat':cpt[3],'system.ConGén':cpt=[4],'system.ConSpécif':cpt=[5],'system.Dextérité':cpt=[6],'system.Diplomatie':cpt=[7],'system.Discrétion':cpt=[8],'system.Force':cpt=[9],'system.Investigation':cpt=[10],'system.Jeu':cpt=[11],'system.Mécanique':cpt=[12],'system.Médecine':cpt=[13],'system.Natation':cpt=[14],'system.Navigation':cpt=[15],'system.Négociation':cpt=[16],'system.Perception':cpt=[17],'system.Pilotage':cpt=[18],'system.Piratage':cpt=[19],'system.Pistage':cpt=[20],'system.Religion':cpt=[21],'system.Science':cpt=[22],'system.Survie':cpt=[23],'system.Tir':cpt=[24],'system.Visée':cpt=[25]});
+        this.actor.update({'name':nom,'img':img,'system.background.histoire':desc,'system.stat.hp.value': pv,'system.stat.hp.max': pv,'system.degatd': dgt,'system.armed':'Attaque','system.stat.armure.value': ar,'system.stat.armure.max': ar,'system.ptarm': ar,'system.prog':'armure Naturel','system.Agilité':cpt[0],'system.Artisanat':cpt[1],'system.Balistique':cpt[2],'system.Combat':cpt[3],'system.ConGén':cpt=[4],'system.ConSpécif':cpt=[5],'system.Dextérité':cpt=[6],'system.Diplomatie':cpt=[7],'system.Discrétion':cpt=[8],'system.Force':cpt=[9],'system.Investigation':cpt=[10],'system.Jeu':cpt=[11],'system.Mécanique':cpt=[12],'system.Médecine':cpt=[13],'system.Natation':cpt=[14],'system.Navigation':cpt=[15],'system.Négociation':cpt=[16],'system.Perception':cpt=[17],'system.Pilotage':cpt=[18],'system.Piratage':cpt=[19],'system.Pistage':cpt=[20],'system.Religion':cpt=[21],'system.Science':cpt=[22],'system.Survie':cpt=[23],'system.Tir':cpt=[24],'system.Visée':cpt=[25]});
     }
 
     _onCouv(event){
         let idn=event.target.dataset["lettre"];  //recupére l'id du bouton
         let etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
-        var active=[this.actor.system.etat.a, this.actor.system.etat.b, this.actor.system.etat.c, this.actor.system.etat.d, this.actor.system.etat.e, this.actor.system.etat.f, this.actor.system.etat.g, this.actor.system.etat.h, this.actor.system.etat.i, this.actor.system.etat.j, this.actor.system.etat.k, this.actor.system.etat.l, this.actor.system.etat.m, this.actor.system.etat.n]
+        var active=[this.actor.system.background.etat.a, this.actor.system.background.etat.b, this.actor.system.background.etat.c, this.actor.system.background.etat.d, this.actor.system.background.etat.e, this.actor.system.background.etat.f, this.actor.system.background.etat.g, this.actor.system.background.etat.h, this.actor.system.background.etat.i, this.actor.system.background.etat.j, this.actor.system.background.etat.k, this.actor.system.background.etat.l, this.actor.system.background.etat.m, this.actor.system.background.etat.n]
         let lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort']
         let icon=['sleep','daze','blind','deaf','silenced','terror','fire','frozen','invisible','angel','poison','blood','unconscious','dead']
         if(idn==13){
-            var etat=this.actor.system.etat.n;
+            var etat=this.actor.system.background.etat.n;
             if(etat==1){
-                this.actor.update({"system.etat.n":0.5});    
+                this.actor.update({"system.background.etat.n":0.5});    
             }else {
-                this.actor.update({"system.etat.n":1});      
+                this.actor.update({"system.background.etat.n":1});      
             }
         }else {
             let effet=this.actor.effects;
@@ -1069,7 +1074,7 @@
                 this.actor.createEmbeddedDocuments("ActiveEffect", [
                   {label: lists[idn], icon: 'icons/svg/'+icon[idn]+'.svg', flags: { core: { statusId: icon[idn] } } }
                 ]);
-                this.actor.update({[`system.etat.${etats[idn]}`]:1});
+                this.actor.update({[`system.background.etat.${etats[idn]}`]:1});
             }else {
                 
                 effet.forEach(function(item, index, array) {
@@ -1078,7 +1083,7 @@
                     }
                 });            
                 this.actor.deleteEmbeddedDocuments("ActiveEffect", [ids]);
-                this.actor.update({[`system.etat.${etats[idn]}`]:0.5});
+                this.actor.update({[`system.background.etat.${etats[idn]}`]:0.5});
             }
         }
     }
@@ -1209,7 +1214,7 @@
         }
         
         
-        this.actor.update({"system.Agilité":0,"system.Artisanat":0,"system.Balistique":0,"system.Combat":0,"system.ConGén":com,"system.Visée":vis,"system.ConSpécif":0,"system.Négociation":0,"system.Dextérité":0,"system.Diplomatie":0,"system.Discrétion":dis,"system.Force":0,"system.Investigation":inv,"system.Jeu":0,"system.Mécanique":mec,"system.Médecine":med,"system.Natation":0,"system.Navigation":nav,"system.Perception":per,"system.Pilotage":pil,"system.Piratage":pir,"system.Pistage":0,"system.Religion":0,"system.Science":0,"system.Survie":0,"system.Tir":0,"system.tete":tete,"system.tete2":tete,"system.bd":bd,"system.bd2":bd,"system.bg":bg,"system.bg2":bg,"system.jd":jd,"system.jd2":jd,"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.prixbase":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.hp.value":pv,"system.hp.max":pv,"system.pointrestant2":ptrestant,"system.armure.value":blindage,"system.armure.max":blindage,"system.protections.value":bouclier,"system.protections.max":bouclier}); 
+        this.actor.update({"system.attributs.Agilité":0,"system.attributs.Artisanat":0,"system.attributs.Balistique":0,"system.attributs.Combat":0,"system.attributs.ConGén":com,"system.attributs.Visée":vis,"system.attributs.ConSpécif":0,"system.attributs.Négociation":0,"system.attributs.Dextérité":0,"system.attributs.Diplomatie":0,"system.attributs.Discrétion":dis,"system.attributs.Force":0,"system.attributs.Investigation":inv,"system.attributs.Jeu":0,"system.attributs.Mécanique":mec,"system.attributs.Médecine":med,"system.attributs.Natation":0,"system.attributs.Navigation":nav,"system.attributs.Perception":per,"system.attributs.Pilotage":pil,"system.attributs.Piratage":pir,"system.attributs.Pistage":0,"system.attributs.Religion":0,"system.attributs.Science":0,"system.attributs.Survie":0,"system.attributs.Tir":0,"system.stat.tete":tete,"system.stat.tete2":tete,"system.stat.bd":bd,"system.stat.bd2":bd,"system.stat.bg":bg,"system.stat.bg2":bg,"system.stat.jd":jd,"system.stat.jd2":jd,"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.prixbase":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.stat.hp.value":pv,"system.stat.hp.max":pv,"system.pointrestant2":ptrestant,"system.stat.armure.value":blindage,"system.stat.armure.max":blindage,"system.stat.protections.value":bouclier,"system.stat.protections.max":bouclier}); 
     }
 
     _onEncom(data){
@@ -1220,7 +1225,7 @@
            enc=enc*2; 
         }
         console.log('Encombrement:'+enc)
-        this.actor.update({"system.encombrement.max":enc});
+        this.actor.update({"system.stat.encombrement.max":enc});
     }
 
     _onEarth(event){
@@ -1261,9 +1266,44 @@
         var surnom=surnom1[Math. round(Math.random() * surnom1.length)]+' '+surnom2[Math. round(Math.random() * surnom2.length)];
         var histoire='C\'est '+type[Math. round(Math.random() * type.length)]+' avec '+type2[Math. round(Math.random() * type2.length)];
         var img='systems/libersf/assets/planete/p'+Math. round(Math.random() * 16)+'.png';
-        this.actor.update({"system.description":histoire,"system.surnom":surnom,'name':name,'img':img,"system.pop_humain":etoile[huma],"system.pop_arthuriens":etoile[artu],"system.pop_draconiens":etoile[drac],"system.pop_machine":etoile[mach],"system.pop_pleiadiens":etoile[plei],"system.pop_yoribiens":etoile[yori],"system.pop_elfen":etoile[elfe],"system.pop_orquanien":etoile[orqa],"system.domination":faction[fact],"system.armure.value":pv,"system.armure.max":pv,"system.niveau_arme":etoile[arme],"system.niveau_crime":etoile[crim],"system.niveau_secu":etoile[secu],"system.niveau_tech":etoile[tech],"system.hp.value":pv,"system.hp.max":pv,"system.pouplation":pop});
+        this.actor.update({"system.description":histoire,"system.surnom":surnom,'name':name,'img':img,"system.pop_humain":etoile[huma],"system.pop_arthuriens":etoile[artu],"system.pop_draconiens":etoile[drac],"system.pop_machine":etoile[mach],"system.pop_pleiadiens":etoile[plei],"system.pop_yoribiens":etoile[yori],"system.pop_elfen":etoile[elfe],"system.pop_orquanien":etoile[orqa],"system.domination":faction[fact],"system.stat.armure.value":pv,"system.stat.armure.max":pv,"system.niveau_arme":etoile[arme],"system.niveau_crime":etoile[crim],"system.niveau_secu":etoile[secu],"system.niveau_tech":etoile[tech],"system.stat.hp.value":pv,"system.stat.hp.max":pv,"system.pouplation":pop});
     }
     async _onStatM(event){
+        let level=this.actor.system.background.level;
+        let cpt0=this.actor.system.attributs.Agilité;
+        let cpt1=this.actor.system.attributs.Artisanat;
+        let cpt2=this.actor.system.attributs.Balistique;
+        let cpt3=this.actor.system.attributs.Combat;
+        let cpt4=this.actor.system.attributs.ConGén;
+        let cpt5=this.actor.system.attributs.ConSpécif;
+        let cpt6=this.actor.system.attributs.Dextérité;
+        let cpt7=this.actor.system.attributs.Diplomatie;
+        let cpt8=this.actor.system.attributs.Discrétion;
+        let cpt9=this.actor.system.attributs.Force;
+        let cpt10=this.actor.system.attributs.Investigation;
+        let cpt11=this.actor.system.attributs.Jeu;
+        let cpt12=this.actor.system.attributs.Mécanique;
+        let cpt13=this.actor.system.attributs.Médecine;
+        let cpt14=this.actor.system.attributs.Natation;
+        let cpt15=this.actor.system.attributs.Navigation;
+        let cpt16=this.actor.system.attributs.Négociation;
+        let cpt17=this.actor.system.attributs.Perception;
+        let cpt18=this.actor.system.attributs.Pilotage;
+        let cpt19=this.actor.system.attributs.Piratage;
+        let cpt20=this.actor.system.attributs.Pistage;
+        let cpt21=this.actor.system.attributs.Religion;
+        let cpt22=this.actor.system.attributs.Science;
+        let cpt23=this.actor.system.attributs.Survie;
+        let cpt24=this.actor.system.attributs.Tir;
+        let cpt25=this.actor.system.attributs.Visée;
+        let cpt=[cpt0,cpt1,cpt2,cpt3,cpt4,cpt5,cpt6,cpt7,cpt8,cpt9,cpt10,cpt11,cpt12,cpt13,cpt14,cpt15,cpt16,cpt17,cpt18,cpt19,cpt20,cpt21,cpt22,cpt23,cpt24,cpt25]
+        if(level==1){
+            for (var i = cpt.length - 1; i >= 0; i--) {
+                if(cpt[i]>30){cpt[i]=30}
+            }
+        }
+        console.log(cpt)
+
 
         //activer les effets
         let effet=this.actor.effects;
@@ -1286,6 +1326,6 @@
             }
         }
 
-        this.actor.update({"system.etat.a":active[0],"system.etat.b":active[1],"system.etat.c":active[2],"system.etat.d":active[3],"system.etat.e":active[4],"system.etat.f":active[5],"system.etat.g":active[6],"system.etat.h":active[7],"system.etat.i":active[8],"system.etat.j":active[9],"system.etat.k":active[10],"system.etat.l":active[11],"system.etat.m":active[12]});        
+        this.actor.update({"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12]});        
     }
 }
