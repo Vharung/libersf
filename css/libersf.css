@@ -73,7 +73,7 @@ form button,.Liber button,.dialog .dialog-buttons button.default,.dialog .dialog
 .Liber header {color: #fff};
 .Liber .col2{display: block;height: 752px;float: left;width: 590px;}
 .Liber{sans-serif;display: flex;flex-direction: row;flex-flow: row wrap;}
-form.Liber{display: table-cell;}
+form.Liber{display: table-cell;zoom:0.9}
 .Liber .window-header {flex: 100%;text-align: right;}
 .Liber .window-header h4 {float: left;height: 30px}
 .Liber .autre{float: left;}
@@ -94,7 +94,7 @@ form.Liber{display: table-cell;}
 .Liber option {background: none}
 .Liber .armetoile{font-size: 0.7em}
 
-.Liber .sante2 p{olor: #fff;width: 45%;float: left;display: block;font-size: 0.75em;padding: 5px;font-family: 'Signika';}
+.Liber .sante2 p{color: #fff;width: 45%;float: left;display: block;font-size: 0.8em;padding: 5px;font-family: 'Signika';}
 
 .grid-2col,.grid-3col,.grid-3-2col,.grid-4col,.grid-9col {float:left;}
 .grid-2col {width:50%;}.grid-3col {width:33.33%;}.grid-3-2col {width:66.66%;}.grid-4col {width:25%;display:inline-block;}.grid-9col {width:11%;}

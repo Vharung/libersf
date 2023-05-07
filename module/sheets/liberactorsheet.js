@@ -7,8 +7,8 @@
         return mergeObject(super.defaultOptions, {
           classes: ["Liber", "sheet", "actor"],
           //template: "systems/liber/templates/actor/personnage-sheet.html",
-          width: 1245,
-          height: 820,
+          width: 1115,
+          height: 740,
           tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
         });
     }
@@ -39,13 +39,12 @@
 
    
     _prepareCharacterItems(sheetData) {
-        const actorData = sheetData.actor;
+       const actorData = sheetData.actor;
 
         // Initialize containers.
         const inventaire = [];
         const arme = [];
         const armure = [];
-        const bouclier = [];
         const piece = [];
         const argent = [];
         const sort = [];
@@ -55,17 +54,18 @@
         for (let i of sheetData.items) {
           let item = i.items;
           i.img = i.img || DEFAULT_TOKEN;
-          if (i.type === 'objet') {
-            inventaire.push(i);
-          }else if (i.type === 'arme') {
+          if (i.type === 'arme') {
             arme.push(i);
           }
           else if (i.type === 'armure') {
             armure.push(i);
-          } 
+          }
           else if (i.type === 'bouclier') {
-            bouclier.push(i);
-          } 
+            armure.push(i);
+          }
+          else if (i.type === 'objet') {
+            inventaire.push(i);
+          }
           else if (i.type === 'piece') {
             piece.push(i);
           }
@@ -76,21 +76,16 @@
             sort.push(i);
           }
         }
+        sort.sort((a, b) => a.system.cout - b.system.cout);
         inventaire.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         arme.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
-        armure.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
-        bouclier.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         piece.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
-        sort.sort((a, b) => a.system.cout - b.system.cout);
-        
-        
-        
+        armure.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         // Assign and return
         actorData.inventaire = inventaire;
         actorData.arme = arme;
         actorData.piece = piece;
         actorData.armure = armure;
-        actorData.bouclier = bouclier;
         actorData.argent = argent;
         actorData.sort = sort;
     }
@@ -241,7 +236,10 @@
             }else {
                 var resultat=-20-((parseInt(level)-1)*10); 
             }
-            
+            for(i=0;i<26;i++){
+                var valor=parseInt(html.find('.cpt'+i).val());
+                resultat=resultat+valor;
+            }
             $( ".features input" ).each(function( index ) {
               var valor= $( this ).val();
               if(valor==0){
@@ -259,7 +257,7 @@
                 var pointhp=(parseInt(hpmax)-20)*2;
                 resultat=resultat+pointhp; 
             }
-            
+            console.log(resultat)
             html.find('.pointrestant').val(resultat); 
 
 
@@ -877,7 +875,7 @@
         if(genre=="arme" ){
             var degat=event.target.dataset["degat"]; 
             this.actor.update({'system.degatd': degat,'system.armed':objetaequipe,'system.typed':type,'system.etoiled':etoile});
-        }else if(genre=="armure"  || genre=="Combinaison"){
+        }else if(genre=="Armure"  || genre=="Combinaison"){
             var hp=event.target.dataset["hp"]; 
             var hpmax=event.target.dataset["hpmax"]; 
             this.actor.update({'system.stat.armure.value': hp,'system.stat.armure.max': hpmax,'system.prog':objetaequipe});

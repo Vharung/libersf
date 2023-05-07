@@ -223,7 +223,7 @@
 						<div class="compt"><a class="jetdedes" data-name="ConGén" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.ConGén}}">{{localize 'libersf.cong'}}</a>
 						<input class="cpt4" name="system.attributs.ConGén" type="text" value="{{actor.system.attributs.ConGén}}" placeholder="{{actor.system.attributs.ConGén}}" style="text-align: center"/>
 						</div>
-						<div class="compt"><a class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.ConSpécif}}">{{actor.system.attributs.nomcomp}}</a>
+						<div class="compt"><a class="jetdedes" data-name="ConSpécif" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.ConSpécif}}">{{actor.system.nomcomp}}</a>
 						<input class="cpt5" name="system.attributs.ConSpécif" type="text" value="{{actor.system.attributs.ConSpécif}}" placeholder="{{actor.system.attributs.ConSpécif}}" style="text-align: center"/>
 						</div>
 						<div class="compt"><a class="jetdedes" data-name="Dextérité" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.Dextérité}}">{{localize 'libersf.dext'}}</a>
@@ -365,13 +365,13 @@
 				                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
 				                    <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
 				                    <div class="item-resitance">{{item.system.resitance}}</div>
-				                    <div class="item-hpmax">{{item.system.stat.hp.max}}</div>
+				                    <div class="item-hpmax">{{item.system.hp.max}}</div>
 				                    <div class="item-poid">{{item.system.poids}}</div>
 				                    <div class="item-valeur">{{item.system.valeur}}</div>
 				                    <div class="item-techno">{{item.system.techno}}</div>
 				                    <div class="item-qt">{{item.system.quantite}}</div>
 				                    <div class="item-controls">
-				                    	<span class="item-equip" title="Equipé armure" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}"  data-name="{{item.name}}" data-hpmax="{{item.system.stat.hp.max}}" data-hp="{{item.system.resitance}}">+</span>
+				                    	<span class="item-equip" title="Equipé armure" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}"  data-name="{{item.name}}" data-hpmax="{{item.system.hp.max}}" data-hp="{{item.system.resitance}}">+</span>
 				                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 				                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 				                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -464,7 +464,7 @@
 		                </SELECT>
 		                <input type="a" value="{{localize 'libersf.choisir'}}" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
 		                <h1 style="margin-top: 20px">{{localize 'libersf.faction'}}</h1>
-						<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.religion">
+						<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.background.religion">
 		                    {{#select actor.system.background.religion}}
 			                    <option value="{{localize 'libersf.empire'}}">{{localize 'libersf.empire'}}</option>
 			                    <option value="{{localize 'libersf.pleide'}}">{{localize 'libersf.pleide'}}</option>
