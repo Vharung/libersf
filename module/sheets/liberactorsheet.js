@@ -7,8 +7,8 @@
         return mergeObject(super.defaultOptions, {
           classes: ["Liber", "sheet", "actor"],
           //template: "systems/liber/templates/actor/personnage-sheet.html",
-          width: 1115,
-          height: 740,
+          width: 1245,
+          height: 820,
           tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
         });
     }

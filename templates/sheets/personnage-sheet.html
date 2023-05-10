@@ -1,4 +1,4 @@
-<form class="{{cssClass}} Liber" autocomplete="off" >
+<form class="{{cssClass}} Liber" autocomplete="off">
 <!--{{!-- Sheet Header --}}-->
 	<div class="col3">
 		<div class="head outer">
@@ -128,7 +128,7 @@
 						</div>
 						<div class="grid-3col" style="text-align: center">
 							<span class="iconbou"></span><input  class="bouclierqui" name="system.prod" type="text" value="{{actor.system.prod}}"  title="{{actor.system.prod}}" placeholder="Bouclier" readonly="" /><a class="desequi" data-genre="bouclier">🗑</a>
-							<input  class="credit" name="system.stat.credit" type="text" value="{{actor.system.stat.credit}}" placeholder="Credit"/>
+							<input  class="credit" name="system.stat.credit" type="text" value="{{actor.system.stat.credit}}" placeholder="Credit"/> Cr
 						</div>		
 					</div>
     		</div>
@@ -175,7 +175,7 @@
     		<div class="inner">
     			<h2 style="text-align: center;">{{localize 'libersf.zone'}}</h2>
 					<p>{{localize 'libersf.regle'}}<br>{{localize 'libersf.regle2'}}<br><br>{{localize 'libersf.regle3'}}<br>{{localize 'libersf.regle5'}}<br>{{localize 'libersf.regle6'}}<br>{{localize 'libersf.regle7'}}<br>{{localize 'libersf.regle8'}}<br>{{localize 'libersf.regle9'}}<br>{{localize 'libersf.regle10'}}<br><br>{{localize 'libersf.regle11'}}</p>
-					<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="width: 198px;height: auto;float: right;margin-top: 30px;margin-right: 5px;opacity: 0.8;">
+					<img src="https://leschroniquesdeliber.fr/jdr/contenu/libersf/img/effetarme.png" style="max-width: 198px;width:50%;height: auto;float: right;margin-top: 30px;margin-right: 5px;opacity: 0.8;">
     		</div>
     	</div>
 	</div>
@@ -506,13 +506,17 @@
 			            	</SELECT>
 		                </div>
 		                <div class="clear"></div>
-		                <h1 style="margin-top: 20px">Andromède</h1>
-						<SELECT class="andomedes" size="1" style="width: 380px; margin: 3px;background: #0d0d0d;color: #fff;" name="system.andomedes">
-		                    {{#select actor.system.andomedes}}
-			                    <option value="non">{{localize 'libersf.non'}}</option>
-			                    <option value="oui">{{localize 'libersf.oui'}}</option>
-			                {{/select}}
-		                </SELECT>					
+		                <div class="grid-2col">
+		                	<h1 style="margin-top: 20px">Andromède</h1>
+							<SELECT class="andomedes" size="1" style="width: 380px; margin: 3px;background: #0d0d0d;color: #fff;" name="system.andomedes">
+			                    {{#select actor.system.andomedes}}
+				                    <option value="non">{{localize 'libersf.non'}}</option>
+				                    <option value="oui">{{localize 'libersf.oui'}}</option>
+				                {{/select}}
+			                </SELECT>	
+		                </div>
+		                
+		                				
 						
 					</div>
 				</section>
