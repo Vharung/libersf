@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @font-face {font-family: "spaceage";src: url('spaceage.ttf'); }
-form.Liber{background:none;display: block;width: 1220px;height: 770px;font-family: spaceage;}
+/*form.Liber{background:none;display: block;width: 1220px;height: 770px;font-family: spaceage;}*/
+.Liber form{ width: calc(100% - 20px);height: calc(100% - 50px);position: absolute;font-family: spaceage; overflow: auto;background: none;top: 36px;}
+.Liber .overflow{    overflow: hidden;
+    width: 1215px;
+    height: 764px;
+    display: block;
+    position: absolute;}
 .Liber .col3{display: inline-block;width: 400px; float: left;margin-right: 5px; }
 .Liber h1{font-size:1.2em;font-family: 'spaceage';}
 .Liber .head{height: 370px;}
-.Liber.actor{overflow: hidden;width: 1243px;}
 .Liber .head .avatar{height: 200px; width: 200px;border-radius: 50%; display:inline-block;overflow: hidden;float: left; border:solid 5px #004e74}
 
 .svg-frame {float:left;position: relative;width: 250px;height: 200px;transform-style: preserve-3d;display:inline-flex;justify-content: center;align-items: center;}
@@ -68,13 +73,13 @@ form button,.Liber button,.dialog .dialog-buttons button.default,.dialog .dialog
 .Liber a.item:hover{opacity: 1;transition: 0.5s;}
 /*@font-face {font-family: "abnes";src: url('abnes.otf'); }*/
 /*.Liber.window-app .window-content,.Liber .editable{background: none;}*/
-.Liber.window-app .window-content{background: none;overflow:auto;height: 773px;flex-direction: row;}
+.Liber.window-app .window-content{background: none;height: 773px;flex-direction: row;}
 .Liber .colonne{width:600px;float: left;display:flex;flex-direction: column;flex:1;flex-grow: initial;padding-right: 5px;}
 .Liber header {color: #fff};
 .Liber .col2{display: block;height: 752px;float: left;width: 590px;}
 .Liber{sans-serif;display: flex;flex-direction: row;flex-flow: row wrap;}
 form.Liber{display: table-cell;}
-.Liber .window-header {flex: 100%;text-align: right;}
+.Liber .window-header {flex: 100%;text-align: right;height: 32px}
 .Liber .window-header h4 {float: left;height: 30px}
 .Liber .autre{float: left;}
 .Liber .stat{float: left;display: inline-block;height: 84px;width: 84px;padding-top: 25px;border-radius: 50%;border: 2px solid #1290c2;margin: 5px;}
