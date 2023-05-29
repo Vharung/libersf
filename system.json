@@ -115,6 +115,7 @@
         "path": "lang/fr.json"
       }
     ],
+    "background": "systems/libersf/assets/accueil.jpg",
     "gridDistance": 1,
     "gridUnits": "m",
     "primaryTokenAttribute": "hp",
