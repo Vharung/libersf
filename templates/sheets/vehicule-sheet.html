@@ -131,8 +131,8 @@
 							{{#each actor.argent as |item id|}}
 					                <li class="item rexrow" data-item-id="{{item._id}}">
 					                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-					                    <h4 class="item-poid" style="display: none">0</h4>
-					                    <h4 class="item-qt" style="width:100px">{{item.system.quantite}}</h4>
+					                    <div class="item-poid" style="display: none">0</div>
+					                    <div class="item-qt" style="width:100px">{{item.system.quantite}}</div>
 					                    <div class="item-controls">
 					                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 					                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -399,17 +399,17 @@
 				            {{#each actor.piece as |item id|}}
 				                <li class="item rexrow" data-item-id="{{item._id}}">
 				                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-				                    <h4 class="item-name2" title="{{item.name}}" style="width: 335px;">{{item.name}}</h4>
-				                    <h4 class="item-valeur">{{item.system.valeur}}</h4>
-				                    <h4 class="item-techno">{{item.system.techno}}</h4>
-				                    <h4 class="item-qt">{{item.system.quantite}}</h4>
+				                    <div class="item-name2" title="{{item.name}}" style="width: 335px;">{{item.name}}</div>
+				                    <div class="item-valeur">{{item.system.valeur}}</div>
+				                    <div class="item-techno">{{item.system.techno}}</div>
+				                    <div class="item-qt">{{item.system.quantite}}</div>
 				                    <div class="item-controls">
 				                    	<span class="item-equip" title="Equipé Chargeur" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}">+</span>
 				                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 				                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 				                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 				                    </div>
-				                    <h4 class="item-description2" title="{{item.system.description}}">{{item.system.description}}</h4>
+				                    <div class="item-description2" title="{{item.system.description}}">{{item.system.description}}</div>
 				                </li>
 				            {{/each}}
 			        		</ol>
@@ -431,19 +431,19 @@
 				            {{#each actor.inventaire as |item id|}}
 				                <li class="item rexrow" data-item-id="{{item._id}}">
 				                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-				                    <h4 class="item-name2" title="{{item.name}}">{{item.name}}</h4>
-				                    <h4 class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</h4>
-				                    <h4 class="item-poid">{{item.system.poids}}</h4>
-				                    <h4 class="item-valeur">{{item.system.valeur}}</h4>
-				                    <h4 class="item-techno">{{item.system.techno}}</h4>
-				                    <h4 class="item-qt">{{item.system.quantite}}</h4>
+				                    <div class="item-name2" title="{{item.name}}">{{item.name}}</div>
+				                    <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
+				                    <div class="item-poid">{{item.system.poids}}</div>
+				                    <div class="item-valeur">{{item.system.valeur}}</div>
+				                    <div class="item-techno">{{item.system.techno}}</div>
+				                    <div class="item-qt">{{item.system.quantite}}</div>
 				                    <div class="item-controls">
 				                    	<span class="item-equip" title="Equipé Chargeur" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}">+</span>
 				                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
 				                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 				                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
 				                    </div>
-				                    <h4 class="item-description2" title="{{item.system.description}}">{{item.system.description}}</h4>
+				                    <div class="item-description2" title="{{item.system.description}}">{{item.system.description}}</div>
 				                </li>
 				            {{/each}}
 			        		</ol>
