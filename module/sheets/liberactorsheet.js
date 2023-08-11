@@ -685,7 +685,7 @@
                             console.log(i)
                             hp=0; 
                             i.actor.createEmbeddedDocuments("ActiveEffect", [
-                              {label: 'Mort', icon: 'icons/svg/skull.svg', flags: { core: { statusId: 'dead' } } }
+                              {name: 'Mort', icon: 'icons/svg/skull.svg'}
                             ]);
                             console.log(i)
 
@@ -979,13 +979,13 @@
             let etat=active[idn];
             if(etat==0.5){
                 this.actor.createEmbeddedDocuments("ActiveEffect", [
-                  {label: lists[idn], icon: 'icons/svg/'+icon[idn]+'.svg', flags: { core: { statusId: icon[idn] } } }
+                  {name: lists[idn], icon: 'icons/svg/'+icon[idn]+'.svg'}
                 ]);
                 this.actor.update({[`system.background.etat.${etats[idn]}`]:1});
             }else {
                 
                 effet.forEach(function(item, index, array) {
-                    if(item.label==lists[idn]){
+                    if(item.name==lists[idn]){
                         ids=item.id;
                     }
                 });            
@@ -1261,8 +1261,8 @@
         var active=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
         var lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort']
         effet.forEach(function(item, index, array) {
-            if(item.label!=''){
-                effets.push(item.label);
+            if(item.name!=''){
+                effets.push(item.name);
             }
         });
 
