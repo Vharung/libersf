@@ -554,7 +554,7 @@
             if(chargeur.length === 0){
                 succes="<h4 class='resultat' style='background:#ff3333;'>Pas de chargeur !</h4>";
                 ChatMessage.create({
-                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                    speaker: ChatMessage.getSpeaker({ actor: this }),
                     flavor: succes
                   });
                 return;
@@ -563,7 +563,7 @@
             if(munition<=0 || name=="Tircouv" && munition<=10 ){   
                 succes="<h4 class='resultat' style='background:#ff3333;'>Plus de munition !</h4>";
                 ChatMessage.create({
-                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                    speaker: ChatMessage.getSpeaker({ actor: this }),
                     flavor: succes
                   });
                 return;
@@ -725,7 +725,7 @@
         const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">Jet de ' + name + " : " + jetdeDesFormule +" - " + inforesult + '</p>'+ succes+'</span>'+deg;
         //roll.roll().toMessage({
         roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessage.getSpeaker({ actor: this }),
             flavor: texte
         });
     }
