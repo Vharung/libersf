@@ -961,38 +961,32 @@
     }
 
     _onCouv(event){
-        let idn=event.target.dataset["lettre"];  //recupére l'id du bouton
-        let etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
-        var active=[this.actor.system.background.etat.a, this.actor.system.background.etat.b, this.actor.system.background.etat.c, this.actor.system.background.etat.d, this.actor.system.background.etat.e, this.actor.system.background.etat.f, this.actor.system.background.etat.g, this.actor.system.background.etat.h, this.actor.system.background.etat.i, this.actor.system.background.etat.j, this.actor.system.background.etat.k, this.actor.system.background.etat.l, this.actor.system.background.etat.m, this.actor.system.background.etat.n]
+       let idn=event.target.dataset["lettre"];
+        let effet=this.actor.effects;
         let lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort']
-        let icon=['sleep','daze','blind','deaf','silenced','terror','fire','frozen','invisible','angel','poison','blood','unconscious','dead']
-        if(idn==13){
-            var etat=this.actor.system.background.etat.n;
-            if(etat==1){
-                this.actor.update({"system.background.etat.n":0.5});    
-            }else {
-                this.actor.update({"system.background.etat.n":1});      
-            }
-        }else {
-            let effet=this.actor.effects;
-            var ids=null;
-            let etat=active[idn];
-            if(etat==0.5){
-                this.actor.createEmbeddedDocuments("ActiveEffect", [
-                  {name: lists[idn], icon: 'icons/svg/'+icon[idn]+'.svg'}
-                ]);
-                this.actor.update({[`system.background.etat.${etats[idn]}`]:1});
-            }else {
-                
-                effet.forEach(function(item, index, array) {
-                    if(item.name==lists[idn]){
-                        ids=item.id;
-                    }
-                });            
-                this.actor.deleteEmbeddedDocuments("ActiveEffect", [ids]);
-                this.actor.update({[`system.background.etat.${etats[idn]}`]:0.5});
-            }
+        var nomRecherche=lists[idn];
+        var estPresent = effet.some(function(element) {
+            return element.name === nomRecherche;
+        });
+        var etre='Est';
+        if (estPresent) {
+            var effetAChercher = this.actor.effects.find(function(effect) {
+                return effect.name === nomRecherche;
+            });
+            var idEffet = effetAChercher._id;
+
+            // Suppression de l'effet en utilisant l'ID
+            this.actor.deleteEmbeddedDocuments("ActiveEffect", [idEffet])
+            etre="N'est plus";
+        } else {
+            this.actor.createEmbeddedDocuments("ActiveEffect", [{name: nomRecherche}]);
         }
+        var texte = "<span style='flex:auto'><p class='resultatp'>"+etre+" &nbsp; <span style='text-transform:uppercase;font-weight: bold;'> "+lists[idn]+"</span></span></span>";
+        let chatData = {
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            content: texte
+        };
+        ChatMessage.create(chatData, {});
     }
 
     _onVehi(event){
