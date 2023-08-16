@@ -977,6 +977,7 @@
 
             // Suppression de l'effet en utilisant l'ID
             this.actor.deleteEmbeddedDocuments("ActiveEffect", [idEffet])
+            //this.actor.update({[`system.etat.${etats[idn]}`]:0.5});
             etre="N'est plus";
         } else {
             this.actor.createEmbeddedDocuments("ActiveEffect", [{name: nomRecherche}]);
