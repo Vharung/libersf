@@ -257,7 +257,6 @@
                 var pointhp=(parseInt(hpmax)-20)*2;
                 resultat=resultat+pointhp; 
             }
-            console.log(resultat)
             html.find('.pointrestant').val(resultat); 
 
 
@@ -496,10 +495,10 @@
         var degat = this.actor.system.degatd;
         var etoiled = this.actor.system.etoiled;
 
-        var balistique=this.actor.system.Balistique;
+        var balistique=this.actor.system.attributs.Balistique;
 
         const jetdeDesFormule = "1d100";
-        var bonus =this.actor.system.malus;
+        var bonus =this.actor.system.attributs.malus;
         var critique=5;
         if(type=="C"){
             critique=10;
@@ -513,10 +512,11 @@
         if(bonus=='' || bonus ==undefined || bonus==null){
             bonus=0;
         }
-        let inforesult=parseInt(maxstat)+parseInt(bonus)+30;
+        var inforesult=parseInt(maxstat)+parseInt(bonus)+30;
         if(inforesult>echec){
             inforesult=echec;
         }
+
         let etoilemax = Math.floor(parseInt(balistique)/5);
         let etoile=0;
         if(etoiled=="★ ★ ★ ★ ★"){
@@ -541,9 +541,10 @@
             etoile=1;
         }
         let dif=parseInt(etoilemax)-parseInt(etoile);
+        console.log(etoilemax+'-'+etoile);
+        console.log(dif)
         if(name=="Tir" || name=="Tircouv"){
             inforesult=parseInt(inforesult)+(dif*5)
-            console.log(inforesult)
             if(name=="Tir"){var conf="none;width: 200px;";}
             if(chargequi=='' || chargequi== undefined){
                  chargequi="Mun. "+arme
@@ -723,6 +724,7 @@
             succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
         }
         const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">Jet de ' + name + " : " + jetdeDesFormule +" - " + inforesult + '</p>'+ succes+'</span>'+deg;
+        console.log(inforesult)
         //roll.roll().toMessage({
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: this }),
