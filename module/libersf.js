@@ -27,11 +27,13 @@ Hooks.on('renderActorSheet', (app, html, data) => {
     const button = event.currentTarget;
     const name = button.dataset.name;
     const dice = button.dataset.attdice;
-    const bonus =data.actor.system.malus
+    var bonus =data.actor.system.malus;
     const actor =data.actor
     // Votre contenu personnalisé pour la fenêtre Popup
     const content = `<p>Quel est le niveau d'étoiles ?</p>`;
-
+    if(bonus=="" || bonus==undefined){
+      bonus=0;
+    }
     
     let dialog=new Dialog({
       title: 'Jet de : '+name+' - Choix de difficulté',
@@ -118,6 +120,7 @@ Hooks.on('renderActorSheet', (app, html, data) => {
         //if(malus>0){malus=0}
         const jetdeDesFormule = "1d100";
         let inforesult=parseInt(dice)+parseInt(malus)+30+parseInt(bonus);
+
         let echec=95;let critique=5;
         if(inforesult>echec){
             inforesult=echec;
