@@ -37,7 +37,7 @@
 .outer{display: flex;align-items: center;justify-content: center;background: linear-gradient(-45deg, transparent 12px, #00FFFF 0) right,linear-gradient(135deg, transparent 12px, #00FFFF 0) left;background-size: 50% 100%;background-repeat: no-repeat;margin-bottom: 5px}
 .inner{width: calc(100% - 4px);    height: calc(100% - 4px);background: linear-gradient(-45deg, transparent 12px, #004060 0) right,linear-gradient(135deg, transparent 12px, #004060 0) left;background-size: 50% 100%;background-repeat: no-repeat;}
 
-
+/*figue#pause img.fa-spin{background: url(logo.png) center center no-repeat}
 
 /*.Liber .head .avatar img{height: 100%;max-width: none}*/
 
