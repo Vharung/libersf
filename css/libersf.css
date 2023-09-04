@@ -98,6 +98,7 @@ form.Liber{display: table-cell;}
 .Liber .menu {height: 50px;}
 .Liber option {background: none}
 .Liber .armetoile{font-size: 0.7em}
+.Liber .santes2{background:url(vaisseau.png) no-repeat center center; background-size: contain;height: 100%;}
 
 .Liber .sante2 p{color: #fff;width: 45%;float: left;display: block;font-size: 0.79em;padding: 5px;font-family: 'Signika';}
 
@@ -225,7 +226,14 @@ form.Liber{display: table-cell;}
 .Liber .bg{left: calc(50% + 60px);top:38px;}
 .Liber .jd{left: calc(50% - 160px);top:150px;}
 .Liber .jg{left: calc(50% + 40px);top:119px;}
+
+.Liber .proue{left: calc(50% - 60px);top:20px;}
+.Liber .babord{left: calc(50% - 180px);top:150px;}
+.Liber .centre{left: calc(50% - 60px);top:150px;}
+.Liber .tribord{left: calc(50% + 60px);top:90px;}
 .Liber .poupe{left: calc(50% - 60px);top:219px;}
+
+
 .Liber .bar {height: 5px; display: block;}
 .Liber .etoile{text-align: center;}
 .Liber .anciente{cursor: pointer;}
@@ -281,3 +289,4 @@ button {background: #a10001;border: none;color: #fff;}
 #sidebar-tabs { border-bottom: 1px solid #0ff;box-shadow: 0 0 10px #0178a2}
 #navigation #scene-list .scene.view, #navigation #scene-list .scene.context, #controls ol.control-tools > li.active, #controls ol.control-tools > li:hover{ border: 1px solid #0ff;box-shadow: 0 0 10px #0178a2}
 .directory .directory-item.context, .directory .directory-item.active {border-top: 1px solid #0ff;border-bottom: 1px solid #0ff;box-shadow: 0 0 10px #0178a2}
+.Liber.vehi .stat{text-align: center;padding-top: 5px;}

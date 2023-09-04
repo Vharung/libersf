@@ -1,4 +1,4 @@
-<form class="{{cssClass}} Liber" autocomplete="off" >
+<form class="{{cssClass}} Liber vehi" autocomplete="off" >
 <!--{{!-- Sheet Header --}}-->
 <div class="overflow">
 	<div class="col3">
@@ -44,13 +44,13 @@
 					<input  class="pris" name="system.prix" type="text" value="{{actor.system.prix}}" placeholder="{{actor.system.prix}}" style="text-align: right;width: 115px;float:right;margin-right: 6px;padding-right: 10px;"/>
 				</div>
 				<div class="stat vie">
-					<input class="hp" name="system.stat.hp.value" type="text" value="{{actor.system.stat.hp.value}}" placeholder="10" style="width: 40px;"/><span style="display: inline-block;">/</span><input class="hpmax" name="system.stat.hp.max" type="text" value="{{actor.system.stat.hp.max}}" placeholder="10"/>
+					<input class="hp" name="system.stat.hp.value" type="text" value="{{actor.system.stat.hp.value}}" placeholder="10" style="width: 80px;"/><br><span style="display: inline-block;">/</span><br><input class="hpmax" name="system.stat.hp.max" type="text" value="{{actor.system.stat.hp.max}}" placeholder="10" style="width: 80px;"/>
 				</div>
 				<div class="stat armur">
-					<input class="actarm" name="system.stat.armure.value" type="text" value="{{actor.system.stat.armure.value}}" placeholder="0" style="width: 40px;" /><span style="display: inline-block;">/</span><input class="actarmmax" name="system.stat.armure.max" type="text" value="{{actor.system.stat.armure.max}}" placeholder="0" readonly/><span class="update">↺</span>
+					<input class="actarm" name="system.stat.armure.value" type="text" value="{{actor.system.stat.armure.value}}" placeholder="0" style="width: 80px;" /><br><span style="display: inline-block;">/</span><br><input class="actarmmax" name="system.stat.armure.max" type="text" value="{{actor.system.stat.armure.max}}" placeholder="0" readonly style="width: 80px;"/>
 				</div>
 				<div class="stat bouci">
-					<input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0" style="width: 40px;" /><span style="display: inline-block;">/</span><input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0" readonly/><span class="update">↺</span>
+					<input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0" style="width: 80px;" /><br><span style="display: inline-block;">/</span><br><input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0" readonly style="width: 80px;"/>
 				</div>
 			</div>
 			
@@ -84,14 +84,14 @@
 						<h2>{{localize 'libersf.solitude'}}</h2>
 						<input class="solit" name="system.stat.solit" type="text" value="{{actor.system.stat.solit}}" placeholder="0"/>
 					</div>
-					<div class="grid-4col">
+					<!--div class="grid-4col">
 						<h2>{{localize 'libersf.ptarmor'}}</h2>
 						<div class="armcl"><span class="ptarm">{{actor.system.ptarm}}</span></div>
 					</div>
 					<div class="grid-4col">
 						<h2>{{localize 'libersf.ptboucl'}}</h2>
 						<div class="boucl"><span class="ptbou">{{actor.system.ptbou}}</span></div>
-					</div>
+					</div-->
 				</div>
 				<div class="clear"></div>
     		</div>
@@ -146,38 +146,27 @@
     	</div>
     	<div class="sante outer">
     		<div class="inner">
-    			<div class="colo" style="position: relative;top:0px;margin-bottom: 0px;">
-						<div class="z1"></div>
-						<div class="z2"></div>
-						<div class="z3"></div>
-						<div class="z4"></div>
-						<div class="z5"></div>		
-						<div class="z6"></div>		
-					</div>
-					<div class="santes">
-						<div class="zone tete">
+
+					<div class="santes2">
+						<div class="zone proue">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="tete" name="system.stat.tete" type="text" value="{{actor.system.stat.tete}}" placeholder="Tete"/>
+							<input class="refbar" data-zone="proue" name="system.stat.tete" type="text" value="{{actor.system.stat.tete}}" placeholder="Tete" title="Bouclier proue"/>
 						</div>
-						<div class="zone bd">
+						<div class="zone babord">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="bd" name="system.stat.bd" type="text" value="{{actor.system.stat.bd}}" placeholder="bd" style=""/>
+							<input class="refbar" data-zone="babord" name="system.stat.bd" type="text" value="{{actor.system.stat.bd}}" placeholder="bd" style="" title="Bouclier babord"/>
 						</div>
-						<div class="zone torse">
+						<div class="zone centre">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="torse" name="system.stat.torse" type="text" value="{{actor.system.stat.torse}}" placeholder="torse"/>
+							<input class="refbar" data-zone="centre" value="{{actor.system.stat.armure.value}}" type="text" placeholder="torse" title="Blindage" readonly />
 						</div>
-						<div class="zone bg">
+						<div class="zone tribord">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="bg" name="system.stat.bg" type="text" value="{{actor.system.stat.bg}}" placeholder="bg"/>
+							<input class="refbar" data-zone="tribord" name="system.stat.bg" type="text" value="{{actor.system.stat.bg}}" placeholder="bg" title="Bouclier tribord"/>
 						</div>
-						<div class="zone jd">
+						<div class="zone poupe">
 							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="jd" name="system.stat.jd" type="text" value="{{actor.system.stat.jd}}" placeholder="jb"/>
-						</div>
-						<div class="zone jg">
-							<div class="bar" style="width:100px"></div>
-							<input class="refbar" data-zone="jg" name="system.stat.jg" type="text" value="{{actor.system.stat.jg}}" placeholder="jg"/>
+							<input class="refbar" data-zone="poupe" name="system.stat.jd" type="text" value="{{actor.system.stat.jd}}" placeholder="jb" title="Bouclier poupe"/>
 						</div>
 					</div>
     		</div>
@@ -296,7 +285,7 @@
 					
 					<div class="grid-2col" style="margin-top: 20px">
 						<h2 style="text-align:center">{{localize 'libersf.restant'}}</h2>
-						<input class="pointrestant" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" type="text" value="0" readonly/>
+						<input class="pointrestant" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);" type="text" value="{{actor.system.pointrestant2}}" readonly/>
 					</div>
 					<div class="grid-2col" style="margin-top: 20px">
 						<h2 style="text-align:center">{{localize 'libersf.bonusmj'}}</h2>

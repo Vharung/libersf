@@ -179,7 +179,6 @@
         if(this.actor.type=="vehicule"){
             var type=this.actor.system.type;
             var tail=this.actor.system.taille;
-            var ptfixe=this.actor.system.pointrestant2;
             if(type==1){
                 html.find('.types').val(game.i18n.localize("libersf.type1"));
             }else if(type==2){
@@ -220,7 +219,6 @@
             for (var i = 1;i < prix.length ; i++) {
                total=total+parseFloat(prix[i])*parseFloat(quantite[i]);
             }
-            console.log(total)
             this.actor.update({'system.prix': total});
         }
 
@@ -233,6 +231,7 @@
             if(this.actor.type=="vehicule"){
                 var ptrestant2=this.actor.system.pointrestant2;
                 var resultat=parseInt(ptrestant2);
+                console.log(ptrestant2+'+'+resultat)
             }else {
                 var resultat=-20-((parseInt(level)-1)*10); 
             }
@@ -252,7 +251,7 @@
             });
             if(level==undefined){
                 resultat=resultat;
-            }else {
+            }else if(this.actor.type!="vehicule"){
                 var hpmax=html.find('.hpmax').val();
                 var pointhp=(parseInt(hpmax)-20)*2;
                 resultat=resultat+pointhp; 
@@ -315,38 +314,89 @@
         }
 
         //couleur bar
-        html.find( ".refbar" ).each(function( index ) {
-          var pc=$( this ).val();
-          var name=$( this ).attr('data-zone');
-          var z=0;var t='';
-          if(name=="tete"){
-            z=1;t='t';
-          } else if(name=="torse"){
-            z=2;t='to';
-          } else if(name=="bd"){
-            z=3;t='tbd';
-          } else if(name=="bg"){
-            z=4;t='tbg';
-          } else if(name=="jd"){
-            z=5;t='tjd';
-          } else if(name=="jg"){
-            z=6;t='tjg';
-          }
-          pc=(10-parseInt(pc))*10;
-          if(pc>'60'){
-            $('.zone.'+name+' .bar').css({'background':'#00abab','width':pc+'%'});
-            $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'1.png) center center no-repeat'});
-          }else if(pc>'30'){
-            $('.zone.'+name+' .bar').css({'background':'#c9984b','width':pc+'%'});
-            $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'2.png) center center no-repeat'});
-          }else if(pc<=0){
-            $('.zone.'+name+' .bar').css({'background':'#460000','width':pc+'%'});
-            $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'0.png) center center no-repeat'});
-          }else{
-            $('.zone.'+name+' .bar').css({'background':'#a10001','width':pc+'%'});
-            $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'3.png) center center no-repeat'});
-          }
-        });
+        if(this.actor.type!="vehicule"){
+            html.find( ".refbar" ).each(function( index ) {
+              var pc=$( this ).val();
+              var name=$( this ).attr('data-zone');
+              var z=0;var t='';
+              if(name=="tete"){
+                z=1;t='t';
+              } else if(name=="torse"){
+                z=2;t='to';
+              } else if(name=="bd"){
+                z=3;t='tbd';
+              } else if(name=="bg"){
+                z=4;t='tbg';
+              } else if(name=="jd"){
+                z=5;t='tjd';
+              } else if(name=="jg"){
+                z=6;t='tjg';
+              }
+              pc=(10-parseInt(pc))*10;
+              if(pc>'60'){
+                $('.zone.'+name+' .bar').css({'background':'#00abab','width':pc+'%'});
+                $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'1.png) center center no-repeat'});
+              }else if(pc>'30'){
+                $('.zone.'+name+' .bar').css({'background':'#c9984b','width':pc+'%'});
+                $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'2.png) center center no-repeat'});
+              }else if(pc<=0){
+                $('.zone.'+name+' .bar').css({'background':'#460000','width':pc+'%'});
+                $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'0.png) center center no-repeat'});
+              }else{
+                $('.zone.'+name+' .bar').css({'background':'#a10001','width':pc+'%'});
+                $('.z'+z).css({'background':' url(systems/libersf/assets/icon/'+t+'3.png) center center no-repeat'});
+              }
+            });
+        }else if(this.actor.type=="vehicule"){
+            var boucmax=parseInt(html.find('.actboumax').val());
+            var actarmmax=parseInt(html.find('.actarmmax').val());
+            var bouc=parseInt(html.find('.actbou').val());
+            var bouc4=boucmax/40;var bouc8=boucmax/80;var bouc16=boucmax/160;
+            var actar4=actarmmax/40;var actar8=actarmmax/80;var actar16=actarmmax/160;
+            var actuchamp=0;
+            html.find( ".refbar" ).each(function( index ) {
+                var pc=$( this ).val();
+               
+                var name=$( this ).attr('data-zone');
+                if(name!="centre"){
+                    actuchamp=parseInt(actuchamp)+parseInt(pc)
+                    pc=parseInt(pc)*100/boucmax;
+
+                    if(pc<bouc16){
+                        $('.zone.'+name+' .bar').css({'background':'#a10001','width':pc+'%'});//rouge
+                    }else if(pc<bouc8){
+                        $('.zone.'+name+' .bar').css({'background':'#c9984b','width':pc+'%'});//orange
+                    }else if(pc<bouc4){
+                        $('.zone.'+name+' .bar').css({'background':'#00abab','width':pc+'%'});
+                    }else{
+                        $('.zone.'+name+' .bar').css({'background':'#00ab28','width':pc+'%'});
+
+                    }     
+                }else {
+                    pc=parseInt(pc)*100/actarmmax;
+                    if(pc<actar16){
+                        $('.zone.'+name+' .bar').css({'background':'#a10001','width':pc+'%'});//rouge
+                    }else if(pc<actar8){
+                        $('.zone.'+name+' .bar').css({'background':'#c9984b','width':pc+'%'});//orange
+                    }else if(pc<actar4){
+                        $('.zone.'+name+' .bar').css({'background':'#00abab','width':pc+'%'});
+                    }else{
+                        $('.zone.'+name+' .bar').css({'background':'#00ab28','width':pc+'%'});
+
+                    }
+                }
+                console.log(actuchamp+'>'+bouc)
+                if(actuchamp>bouc){
+                    $('.santes2 input').css({'color':'#a10001'});
+                }else if(actuchamp==bouc){
+                    $('.santes2 input').css({'color':'white'});
+                }else{
+                    $('.santes2 input').css({'color':'#00ab28'});
+                }
+                $('.santes2 .centre input').css({'color':'white'});
+            });
+        }
+            
 
         /*Poids encombrement*/
         var poids=[];
@@ -1094,7 +1144,9 @@
             blindage=2000
         }
        
-        var moyen=(ia+blin+mote)/3;var etoile="";
+        var moyen=(parseInt(ia)+parseInt(blin)+parseInt(mote))/3;var etoile="";
+        console.log(ia+'+'+blin+"+"+mote)
+        console.log(moyen)
         if(moyen<=0.5){
             etoile="✬ ☆ ☆ ☆ ☆";
         }else if(moyen<=1){
@@ -1116,7 +1168,6 @@
         }else{
             etoile="★ ★ ★ ★ ★";
         }
-        
         
         this.actor.update({"system.attributs.Agilité":0,"system.attributs.Artisanat":0,"system.attributs.Balistique":0,"system.attributs.Combat":0,"system.attributs.ConGén":com,"system.attributs.Visée":vis,"system.attributs.ConSpécif":0,"system.attributs.Négociation":0,"system.attributs.Dextérité":0,"system.attributs.Diplomatie":0,"system.attributs.Discrétion":dis,"system.attributs.Force":0,"system.attributs.Investigation":inv,"system.attributs.Jeu":0,"system.attributs.Mécanique":mec,"system.attributs.Médecine":med,"system.attributs.Natation":0,"system.attributs.Navigation":nav,"system.attributs.Perception":per,"system.attributs.Pilotage":pil,"system.attributs.Piratage":pir,"system.attributs.Pistage":0,"system.attributs.Religion":0,"system.attributs.Science":0,"system.attributs.Survie":0,"system.attributs.Tir":0,"system.stat.tete":tete,"system.stat.tete2":tete,"system.stat.bd":bd,"system.stat.bd2":bd,"system.stat.bg":bg,"system.stat.bg2":bg,"system.stat.jd":jd,"system.stat.jd2":jd,"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.prixbase":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.stat.hp.value":pv,"system.stat.hp.max":pv,"system.pointrestant2":ptrestant,"system.stat.armure.value":blindage,"system.stat.armure.max":blindage,"system.stat.protections.value":bouclier,"system.stat.protections.max":bouclier}); 
     }
