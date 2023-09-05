@@ -219,6 +219,7 @@
             for (var i = 1;i < prix.length ; i++) {
                total=total+parseFloat(prix[i])*parseFloat(quantite[i]);
             }
+            total= total+' Cr'
             this.actor.update({'system.prix': total});
         }
 
@@ -1168,7 +1169,6 @@
         }else{
             etoile="★ ★ ★ ★ ★";
         }
-        
         this.actor.update({"system.attributs.Agilité":0,"system.attributs.Artisanat":0,"system.attributs.Balistique":0,"system.attributs.Combat":0,"system.attributs.ConGén":com,"system.attributs.Visée":vis,"system.attributs.ConSpécif":0,"system.attributs.Négociation":0,"system.attributs.Dextérité":0,"system.attributs.Diplomatie":0,"system.attributs.Discrétion":dis,"system.attributs.Force":0,"system.attributs.Investigation":inv,"system.attributs.Jeu":0,"system.attributs.Mécanique":mec,"system.attributs.Médecine":med,"system.attributs.Natation":0,"system.attributs.Navigation":nav,"system.attributs.Perception":per,"system.attributs.Pilotage":pil,"system.attributs.Piratage":pir,"system.attributs.Pistage":0,"system.attributs.Religion":0,"system.attributs.Science":0,"system.attributs.Survie":0,"system.attributs.Tir":0,"system.stat.tete":tete,"system.stat.tete2":tete,"system.stat.bd":bd,"system.stat.bd2":bd,"system.stat.bg":bg,"system.stat.bg2":bg,"system.stat.jd":jd,"system.stat.jd2":jd,"system.model":etoile,"system.tailles":tailles,"system.types":types,"system.prix":prix,"system.prixbase":prix,"system.equi":nbequi,"system.piece":nbpiece,"system.stat.hp.value":pv,"system.stat.hp.max":pv,"system.pointrestant2":ptrestant,"system.stat.armure.value":blindage,"system.stat.armure.max":blindage,"system.stat.protections.value":bouclier,"system.stat.protections.max":bouclier}); 
     }
 

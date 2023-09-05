@@ -20,34 +20,10 @@
     "scripts": [],
     "packs": [
         {
-          "name": "vehicule_empire",
-          "label": "Véhicule Empire",
+          "name": "vehicule",
+          "label": "Véhicule",
           "system": "libersf",
-          "path": "./pack/vehicules-empire.db",
-          "type": "Actor",
-          "visibility": "trusted"
-        },
-        {
-          "name": "vehicule_federation",
-          "label": "Véhicule Fédération",
-          "system": "libersf",
-          "path": "./pack/vehicule-federation.db",
-          "type": "Actor",
-          "visibility": "trusted"
-        },
-        {
-          "name": "vehicule_mafia",
-          "label": "Véhicule Mafia",
-          "system": "libersf",
-          "path": "./pack/vehicules-mafia.db",
-          "type": "Actor",
-          "visibility": "trusted"
-        },
-        {
-          "name": "vehicule_omc",
-          "label": "Véhicule OMC",
-          "system": "libersf",
-          "path": "./pack/vehicules-omc.db",
+          "path": "./pack/vehicules.db",
           "type": "Actor",
           "visibility": "trusted"
         },
