@@ -36,11 +36,7 @@
 					</div>
 				</div>
 				<div class="info">
-					<input class="race" type="text" value="{{actor.system.background.race}}" placeholder="Race" readonly />
-					<input class="metier" type="text" value="{{actor.system.background.metier}}" placeholder="Métier" readonly />
-					<input class="faction" type="text" value="{{actor.system.religion}}" placeholder="Faction" readonly />
-					<input class="bonusrace" title="{{actor.system.background.bonusrace}}" name="system.background.bonusrace" type="text" value="{{actor.system.background.bonusrace}}" placeholder="B.Race"/>
-					<input class="bonusmetier" title="{{actor.system.background.bonusmetier}}" name="system.background.bonusmetier" type="text" value="{{actor.system.background.metier}}" placeholder="B.Metier" readonly />
+					<input class="race" name="system.background.race" type="text" value="{{actor.system.background.race}}" placeholder="Race" />
 				</div>
 				<div class="stat vie">
 					<input class="hp" name="system.stat.hp.value" type="text" value="{{actor.system.stat.hp.value}}" placeholder="10" style="width: 40px;"/><span style="display: inline-block;">/</span><input class="hpmax" name="system.stat.hp.max" type="text" value="{{actor.system.stat.hp.max}}" placeholder="10"/>
@@ -109,11 +105,12 @@
 	<div class="col3">
 		<div class="equiper outer">
     		<div class="inner">
-    			<div class="encom">
+    			<!--div class="encom">
 						<p style="text-align: center;margin-top: 0">{{localize 'libersf.encombrement'}} <input class="encours" name="system.stat.encombrement.value" type="text" value="{{actor.system.stat.encombrement.value}}" placeholder="0" style="width: 40px;" readonly=""/> / 
 						<input class="enc" name="system.stat.encombrement.max" type="text" value="{{actor.system.stat.encombrement.max}}" placeholder="0" style="width: 40px;" readonly="" /> {{localize 'libersf.kg'}}</p>
 						<div class="barenc" style="height: 2px;margin-top: 5px;margin-bottom: 5px"></div>
-					</div>
+					</div-->
+					<h2>Attaque</h2>
 					<div class="flexrow">
 						<div class="grid-3col" style="text-align: center">
 							<a class="icongun jetdedes" data-name="Tir"></a><input  class="armed" name="system.armed" type="text" value="{{actor.system.armed}}" title="{{actor.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{actor.system.degatd}}" readonly="" style="display: none;"/><a class="desequi" data-genre="arme">🗑</a>
@@ -198,7 +195,7 @@
     			{{!-- Sheet Tab Navigation --}}
     			<nav class="sheet-tabs tabs" data-group="primary">
     				<a class="item compe active" data-tab="features" title="{{localize 'libersf.cpt'}}"></a>
-    				<a class="item spiri" data-tab="carac" title="{{localize 'libersf.cara'}}"></a>
+    				
     				<a class="item inven" data-tab="items" title="{{localize 'libersf.inv'}}"><span></span></a>
     				<a class="item magi andromede" data-tab="magie" title="{{localize 'libersf.magie'}}"><span></span></a>
     				<a class="item outil" data-tab="lab" title="⚙"></a>
@@ -308,8 +305,8 @@
 						<p style="color: #f0f0e0;font-size: 0.9em;font-style: italic;">{{localize 'libersf.caution'}}</p>
 						
 						<div class="grid-2col" style="margin-top: 20px">
-							<h2 style="text-align:center;font-family:'spaceage'">{{localize 'libersf.restant'}}</h2>
-							<input class="pointrestant" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);font-family:'spaceage'" type="text" value="0" readonly/>
+							<!--h2 style="text-align:center;font-family:'spaceage'">{{localize 'libersf.restant'}}</h2>
+							<input class="pointrestant" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);font-family:'spaceage'" type="text" value="0" readonly/-->
 						</div>
 						<div class="grid-2col" style="margin-top: 20px">
 							<h2 style="text-align:center;font-family:'spaceage'">{{localize 'libersf.bonusmj'}}</h2>
@@ -317,29 +314,7 @@
 						</div>
 						
 					</div>
-					{{!-- Carac Tab --}}
-					<div id="carac" class="tab carac" data-group="primary" data-tab="carac">
-			            <div class="compt"><span>{{localize 'libersf.resid'}} :</span><input class="residence" name="system.caractere.residence" type="text" value="{{actor.system.caractere.residence}}" placeholder="{{localize 'libersf.resid'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.sanga'}} :</span><input class="sang" name="system.caractere.sang" type="text" value="{{actor.system.caractere.sang}}" placeholder="{{localize 'libersf.sanga'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.secte'}} :</span><input class="secte" name="system.caractere.politique" type="text" value="{{actor.system.caractere.politique}}" placeholder="{{localize 'libersf.secte'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.inter'}} :</span><input class="interet" name="system.caractere.interets" type="text" value="{{actor.system.caractere.interets}}" placeholder="{{localize 'libersf.inter'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.deces'}} :</span><input class="proche" name="system.caractere.deces" type="text" value="{{actor.system.caractere.deces}}" placeholder="{{localize 'libersf.deces'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.moral'}} :</span><input class="moral" name="system.caractere.moral" type="text" value="{{actor.system.caractere.moral}}" placeholder="{{localize 'libersf.moral'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.amour'}} :</span><input class="amour" name="system.caractere.amour" type="text" value="{{actor.system.caractere.amour}}" placeholder="{{localize 'libersf.amour'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.amiti'}} :</span><input class="amitie" name="system.caractere.amitie" type="text" value="{{actor.system.caractere.amitie}}" placeholder="{{localize 'libersf.amiti'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.haine'}} :</span><input class="haine" name="system.caractere.haine" type="text" value="{{actor.system.caractere.haine}}" placeholder="{{localize 'libersf.haine'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.princ'}} :</span><input class="principale" name="system.caractere.principale" type="text" value="{{actor.system.caractere.principale}}" placeholder="{{localize 'libersf.princ'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.secon'}} :</span><input class="secondaire" name="system.caractere.secondaire" type="text" value="{{actor.system.caractere.secondaire}}" placeholder="{{localize 'libersf.secon'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.passi'}} :</span><input class="passion" name="system.caractere.passion" type="text" value="{{actor.system.caractere.passion}}" placeholder="{{localize 'libersf.passi'}} "/></div>
-			            <div class="compt"><span>{{localize 'libersf.carac'}} :</span><input class="caractere" name="system.caractere.caract" type="text" value="{{actor.system.caractere.caract}}" placeholder="{{localize 'libersf.carac'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.persn'}} :</span><input class="personnalite" name="system.caractere.personnalite" type="text" value="{{actor.system.caractere.personnalite}}" placeholder="{{localize 'libersf.persn'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.perso'}} :</span><input class="monde" name="system.caractere.perception" type="text" value="{{actor.system.caractere.perception}}" placeholder="{{localize 'libersf.perso'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.objec'}} :</span><input class="objectif" name="system.caractere.objectif" type="text" value="{{actor.system.caractere.objectif}}" placeholder="{{localize 'libersf.objec'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.rancu'}} :</span><input class="rancunier" name="system.caractere.rancunier" type="text" value="{{actor.system.caractere.rancunier}}" placeholder="{{localize 'libersf.rancu'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.menta'}} :</span><input class="tare" name="system.caractere.tare" type="text" value="{{actor.system.caractere.tare}}" placeholder="{{localize 'libersf.menta'}}"/></div>
-			            <div class="compt"><span>{{localize 'libersf.obess'}} :</span><input class="obsession" name="system.caractere.obsession" type="text" value="{{actor.system.caractere.obsession}}" placeholder="{{localize 'libersf.obess'}}"/></div>
-					    
-					</div>
+					
 					{{!-- Items Tab --}}
 					<div id="items" class="tab items" data-group="primary" data-tab="items">
 						
@@ -485,50 +460,6 @@
 					</div>
 					{{!-- Lab Tab --}}
 					<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
-						<h1 style="margin-top: 20px">{{localize 'libersf.race'}}</h1>
-						<SELECT class="raceliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.background.race">
-							{{#select actor.system.background.race}}
-			                    <option value="{{localize 'libersf.humain'}}">{{localize 'libersf.humain'}}</option>
-			                    <option value="{{localize 'libersf.pleiadiens'}}">{{localize 'libersf.pleiadiens'}}</option>
-			                    <option value="{{localize 'libersf.artu'}}">{{localize 'libersf.artu'}}</option>
-			                    <option value="{{localize 'libersf.yor'}}">{{localize 'libersf.yor'}}</option>
-			                    <option value="{{localize 'libersf.dragon'}}">{{localize 'libersf.dragon'}}</option>
-			                    <option value="{{localize 'libersf.elf'}}">{{localize 'libersf.elf'}}</option>
-			                    <option value="{{localize 'libersf.machine'}}">{{localize 'libersf.machine'}}</option>
-			                    <option value="{{localize 'libersf.orqu'}}">{{localize 'libersf.orqu'}}</option>
-			                    <option value="{{localize 'libersf.autre'}}">{{localize 'libersf.autre'}}</option>
-		                    {{/select}}
-		                </SELECT>
-		                <input type="a" value="{{localize 'libersf.choisir'}}" class="racechoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
-		                <h1 style="margin-top: 20px">{{localize 'libersf.faction'}}</h1>
-						<SELECT class="factionliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.background.religion">
-		                    {{#select actor.system.background.religion}}
-			                    <option value="{{localize 'libersf.empire'}}">{{localize 'libersf.empire'}}</option>
-			                    <option value="{{localize 'libersf.pleide'}}">{{localize 'libersf.pleide'}}</option>
-			                    <option value="{{localize 'libersf.omc'}}">{{localize 'libersf.omc'}}</option>
-			                    <option value="{{localize 'libersf.fede'}}">{{localize 'libersf.fede'}}</option>
-			                    <option value="{{localize 'libersf.rebel'}}">{{localize 'libersf.rebel'}}</option>
-			                    <option value="{{localize 'libersf.fan'}}">{{localize 'libersf.fan'}}</option>
-			                {{/select}}
-		                </SELECT>
-		                <input type="a" value="{{localize 'libersf.choisir'}}" class="factionchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
-		                <h1 style="margin-top: 20px">{{localize 'libersf.metier'}}</h1>
-						<SELECT class="metierliste" size="1" style="width: 50%; margin: 3px;background: #0d0d0d;color: #fff;" name="system.background.metier">
-		                    {{#select actor.system.background.metier}}
-			                    <option value="{{localize 'libersf.metier1'}}">{{localize 'libersf.metier1'}}</option>
-			                    <option value="{{localize 'libersf.metier2'}}">{{localize 'libersf.metier2'}}</option>
-			                    <option value="{{localize 'libersf.metier3'}}">{{localize 'libersf.metier3'}}</option>
-			                    <option value="{{localize 'libersf.metier4'}}">{{localize 'libersf.metier4'}}</option>
-			                    <option value="{{localize 'libersf.metier5'}}">{{localize 'libersf.metier5'}}</option>
-			                    <option value="{{localize 'libersf.metier6'}}">{{localize 'libersf.metier6'}}</option>
-			                    <option value="{{localize 'libersf.metier7'}}">{{localize 'libersf.metier7'}}</option>
-			                    <option value="{{localize 'libersf.metier8'}}">{{localize 'libersf.metier8'}}</option>
-			                    <option value="{{localize 'libersf.metier9'}}">{{localize 'libersf.metier9'}}</option>
-			                    <option value="{{localize 'libersf.metier10'}}">{{localize 'libersf.metier10'}}</option>
-			                    <option class="andromede" value="{{localize 'libersf.metier11'}}">{{localize 'libersf.metier11'}}</option>
-			                {{/select}}
-		                </SELECT>
-		                <input type="a" value="Choisir" class="metierchoix" style="width: 40%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
 		                <div class="grid-2col">
 		                	<h1 style="margin-top: 20px">{{localize 'libersf.comp'}}</h1>
 		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec." style="float: left;background: #0d0d0d;width: 95%;">
@@ -550,6 +481,7 @@
 			                    <option value="oui">{{localize 'libersf.oui'}}</option>
 			                {{/select}}
 		                </SELECT>					
+		                <input type="a" value="Aléatoire" class="aleatoire" style="width: 100%;padding:5px;float: right;margin: 4px;background: #a10001;color:#ddd;">
 						
 					</div>
 				</section>

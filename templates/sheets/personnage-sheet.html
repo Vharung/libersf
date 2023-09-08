@@ -186,6 +186,7 @@
     			{{!-- Sheet Tab Navigation --}}
     			<nav class="sheet-tabs tabs" data-group="primary">
     				<a class="item compe active" data-tab="features" title="{{localize 'libersf.cpt'}}"></a>
+    				<a class="item spiri" data-tab="carac" title="{{localize 'libersf.cara'}}"></a>
     				<a class="item inven" data-tab="items" title="{{localize 'libersf.inv'}}"><span></span></a>
     				<a class="item magi andromede" data-tab="magie" title="{{localize 'libersf.magie'}}"><span></span></a>
     				<a class="item outil" data-tab="lab" title="⚙"></a>
@@ -303,6 +304,29 @@
 							<input class="malussactor" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);font-family:'spaceage'" name="system.malus" type="text" value="{{actor.system.malus}}" placeholder="0"/>
 						</div>
 						
+					</div>
+					{{!-- Carac Tab --}}
+					<div id="carac" class="tab carac" data-group="primary" data-tab="carac">
+			            <div class="compt"><span>{{localize 'libersf.resid'}} :</span><input class="residence" name="system.caractere.residence" type="text" value="{{actor.system.caractere.residence}}" placeholder="{{localize 'libersf.resid'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.sanga'}} :</span><input class="sang" name="system.caractere.sang" type="text" value="{{actor.system.caractere.sang}}" placeholder="{{localize 'libersf.sanga'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.secte'}} :</span><input class="secte" name="system.caractere.politique" type="text" value="{{actor.system.caractere.politique}}" placeholder="{{localize 'libersf.secte'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.inter'}} :</span><input class="interet" name="system.caractere.interets" type="text" value="{{actor.system.caractere.interets}}" placeholder="{{localize 'libersf.inter'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.deces'}} :</span><input class="proche" name="system.caractere.deces" type="text" value="{{actor.system.caractere.deces}}" placeholder="{{localize 'libersf.deces'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.moral'}} :</span><input class="moral" name="system.caractere.moral" type="text" value="{{actor.system.caractere.moral}}" placeholder="{{localize 'libersf.moral'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.amour'}} :</span><input class="amour" name="system.caractere.amour" type="text" value="{{actor.system.caractere.amour}}" placeholder="{{localize 'libersf.amour'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.amiti'}} :</span><input class="amitie" name="system.caractere.amitie" type="text" value="{{actor.system.caractere.amitie}}" placeholder="{{localize 'libersf.amiti'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.haine'}} :</span><input class="haine" name="system.caractere.haine" type="text" value="{{actor.system.caractere.haine}}" placeholder="{{localize 'libersf.haine'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.princ'}} :</span><input class="principale" name="system.caractere.principale" type="text" value="{{actor.system.caractere.principale}}" placeholder="{{localize 'libersf.princ'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.secon'}} :</span><input class="secondaire" name="system.caractere.secondaire" type="text" value="{{actor.system.caractere.secondaire}}" placeholder="{{localize 'libersf.secon'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.passi'}} :</span><input class="passion" name="system.caractere.passion" type="text" value="{{actor.system.caractere.passion}}" placeholder="{{localize 'libersf.passi'}} "/></div>
+			            <div class="compt"><span>{{localize 'libersf.carac'}} :</span><input class="caractere" name="system.caractere.caract" type="text" value="{{actor.system.caractere.caract}}" placeholder="{{localize 'libersf.carac'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.persn'}} :</span><input class="personnalite" name="system.caractere.personnalite" type="text" value="{{actor.system.caractere.personnalite}}" placeholder="{{localize 'libersf.persn'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.perso'}} :</span><input class="monde" name="system.caractere.perception" type="text" value="{{actor.system.caractere.perception}}" placeholder="{{localize 'libersf.perso'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.objec'}} :</span><input class="objectif" name="system.caractere.objectif" type="text" value="{{actor.system.caractere.objectif}}" placeholder="{{localize 'libersf.objec'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.rancu'}} :</span><input class="rancunier" name="system.caractere.rancunier" type="text" value="{{actor.system.caractere.rancunier}}" placeholder="{{localize 'libersf.rancu'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.menta'}} :</span><input class="tare" name="system.caractere.tare" type="text" value="{{actor.system.caractere.tare}}" placeholder="{{localize 'libersf.menta'}}"/></div>
+			            <div class="compt"><span>{{localize 'libersf.obess'}} :</span><input class="obsession" name="system.caractere.obsession" type="text" value="{{actor.system.caractere.obsession}}" placeholder="{{localize 'libersf.obess'}}"/></div>
+					    
 					</div>
 					{{!-- Items Tab --}}
 					<div id="items" class="tab items" data-group="primary" data-tab="items">

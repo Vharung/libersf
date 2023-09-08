@@ -130,7 +130,6 @@
         else if(niva<35){armetoile='★ ★ ★ ★ ☆'}
         else if(niva<40){armetoile='★ ★ ★ ★ ✬'}
         else {armetoile='★ ★ ★ ★ ★'}
-    console.log(armetoile)
         html.find('.armetoile').html('(max '+armetoile+' )')
 
         // Delete Inventory Item
@@ -208,13 +207,11 @@
                 }
                 
             });
-            //console.log(prix)
             html.find( ".item-qt" ).each(function( index ) {
                 if($( this ).text()!=game.i18n.localize('libersf.l6')){
                     quantite.push($( this ).text());
                 }
             });
-            //console.log(quantite)
 
             for (var i = 1;i < prix.length ; i++) {
                total=total+parseFloat(prix[i])*parseFloat(quantite[i]);
@@ -232,7 +229,6 @@
             if(this.actor.type=="vehicule"){
                 var ptrestant2=this.actor.system.pointrestant2;
                 var resultat=parseInt(ptrestant2);
-                console.log(ptrestant2+'+'+resultat)
             }else {
                 var resultat=-20-((parseInt(level)-1)*10); 
             }
@@ -386,7 +382,6 @@
 
                     }
                 }
-                console.log(actuchamp+'>'+bouc)
                 if(actuchamp>bouc){
                     $('.santes2 input').css({'color':'#a10001'});
                 }else if(actuchamp==bouc){
@@ -400,44 +395,86 @@
             
 
         /*Poids encombrement*/
-        var poids=[];
-        var quantite=[];
-        var total=0;
-        //var exo=html.find('.armurequi').val()
-        html.find( ".item-poid" ).each(function( index ) {
-          poids.push($( this ).text());
-        });
-        html.find( ".item-qt" ).each(function( index ) {
-          quantite.push($( this ).text());
-        });
+        if(this.actor.type!="vehicule"){
+            var poids=[];
+            var quantite=[];
+            var total=0;
+            //var exo=html.find('.armurequi').val()
+            html.find( ".item-poid" ).each(function( index ) {
+              poids.push($( this ).text());
+            });
+            html.find( ".item-qt" ).each(function( index ) {
+              quantite.push($( this ).text());
+            });
 
 
-        for (var i = 1;i < poids.length ; i++) {
-           total=total+parseFloat(poids[i])*parseFloat(quantite[i]);
-        }
-        /*if(exo=="Exosquelette"){
-            enc=enc*2;
-        }*/
-        var enc=html.find('.enc').val();
-        var enc=parseFloat(enc);
-        var pourcentage= total*100/enc;
+            for (var i = 1;i < poids.length ; i++) {
+               total=total+parseFloat(poids[i])*parseFloat(quantite[i]);
+            }
+            /*if(exo=="Exosquelette"){
+                enc=enc*2;
+            }*/
+            var enc=html.find('.enc').val();
+            var enc=parseFloat(enc);
+            var pourcentage= total*100/enc;
 
-        if(pourcentage<50){
-            html.find('.barenc').css({"background":'#00abab'})
-        }else if(pourcentage<75){
-            html.find('.barenc').css({"background":'#c9984b'})
-        }else if(pourcentage<100){
-            html.find('.barenc').css({"background":'#a10001'})
-        }else if(pourcentage<120){
-            html.find('.barenc').css({"background":'#660000'})
+            if(pourcentage<50){
+                html.find('.barenc').css({"background":'#00abab'})
+            }else if(pourcentage<75){
+                html.find('.barenc').css({"background":'#c9984b'})
+            }else if(pourcentage<100){
+                html.find('.barenc').css({"background":'#a10001'})
+            }else if(pourcentage<120){
+                html.find('.barenc').css({"background":'#660000'})
+            }else{
+                html.find('.barenc').css({"background":'#460000'})
+            }
+            if(pourcentage>100){
+                pourcentage=100;
+            }
+            html.find('.encours').val(total);
+            html.find('.barenc').css({"width":pourcentage+"%"});
         }else{
-            html.find('.barenc').css({"background":'#460000'})
+            var type=this.actor.system.type;
+            var tail=this.actor.system.taille;
+            var encour=html.find('.encours').val();;
+            var nrj=0;
+            if(tail==1){
+                nrj=250;
+            }else if(tail==2){
+                nrj=500;
+            }else if(tail==3){
+                nrj=1000;
+            }else if(tail==4){
+                nrj=2000;
+            }
+            var pourcentage= encour*100/nrj;
+       
+            if(type==1){
+                html.find('.santes2').css({"background":'url(systems/libersf/css/air.png) no-repeat center center',"background-size":"contain"})
+            }else if(type==2){
+                html.find('.santes2').css({"background":'url(systems/libersf/css/terre.png) no-repeat center center',"background-size":"contain"})
+            }else if(type==3){ 
+                html.find('.santes2').css({"background":'url(systems/libersf/css/mer.png) no-repeat center center',"background-size":"contain"})
+            }else if(type==4){
+                html.find('.santes2').css({"background":'url(systems/libersf/css/vaisseau.png) no-repeat center center',"background-size":"contain"})
+            }
+
+            if(pourcentage<25){
+                html.find('.barenc').css({"background":'#c92626'})
+            }else if(pourcentage<50){
+                html.find('.barenc').css({"background":'#c99326'})
+            }else if(pourcentage<75){
+                html.find('.barenc').css({"background":'#c9c726'})
+            }else if(pourcentage<=100){
+               html.find('.barenc').css({"background":'#41c926'})
+            }
+            if(pourcentage>100){
+                pourcentage=100;
+            }
+            html.find('.barenc').css({"width":pourcentage+"%"});
+            html.find('.enc').val(nrj);
         }
-        if(pourcentage>100){
-            pourcentage=100;
-        }
-        html.find('.encours').val(total);
-        html.find('.barenc').css({"width":pourcentage+"%"});
 
         
 
@@ -473,7 +510,6 @@
             var max=html.find(".max"+i).val();
             if(i<4){maxblind=parseInt(maxblind)+parseInt(max)};
             var pou=parseInt(min)*100/parseInt(max);
-            //console.log(pou)
             if(pou<20){
                 var color='red';
             }else if(pou<60){
@@ -545,6 +581,8 @@
         var chargequi = this.actor.system.charged;
         var degat = this.actor.system.degatd;
         var etoiled = this.actor.system.etoiled;
+        var race = this.actor.system.background.race;
+        var mutant = this.actor.system.mutation;
 
         var balistique=this.actor.system.attributs.Balistique;
 
@@ -592,8 +630,6 @@
             etoile=1;
         }
         let dif=parseInt(etoilemax)-parseInt(etoile);
-        console.log(etoilemax+'-'+etoile);
-        console.log(dif)
         if(name=="Tir" || name=="Tircouv"){
             inforesult=parseInt(inforesult)+(dif*5)
             if(name=="Tir"){var conf="none;width: 200px;";}
@@ -621,6 +657,44 @@
                 return;
             } 
         }
+        let avantage="";
+        let invonven="";
+        if(race=="Humains" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>le joueur augmente son plancher de réussite critique de 5 avec un maximum de 20.</p>";
+            invonven="<h2 style='text-align:center'>Mutation activée</h2><p>le plafond de echec critique augmente de 5 avec un max 30.</p>";
+        }
+        else if(race=="Pleiadiens" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>+1 résurrection/par jour, détecte les vibrations éléctriques des êtres vivants ou machine sur 20 m pour 5 tours.</p>";
+            invonven="<h2 style='text-align:center'>Mutation activée</h2><p>perte d’un point de résurrection / jour, il lâche un acide qui dissout instantanément toute personne dans un rayon de 20 m, infligeant 15 point de dégat passe armure et bouclier</p>";
+        }
+        else if(race=="Arthuriens" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>peut recharger  100 points de champ de force et 100 balles d’armes laser.</p>";
+            invonven="<h2 style='text-align:center'>Mutation activée</h2><p>déclence une explosion gigantesque, à 200 points de dégâts sur un rayon de 200 km.</p>";
+        }
+        else if(race=="Yoribiens" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>peut faire des jet de plasma pour les 5 prochaines attaques sur visé, 10 de dégâts, passe armure et champ de force. Il augmente son armure de +10.</p>";
+            invonven="<h2 style='text-align:center'>Mutation activée</h2><p>Rejet des spores de champignons qui rendront malade toutes créatures les respirantes, les machines sont aussi infecter, bloqueant les rouages et circuits. Inflige 15 de dégats passe armure et bouclier.</p>";
+        }
+        else if(race=="Alpha Draconiens" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>Peut lancer un souffle de feu, infligeant 20 de dégât pour les 5 prochaines attaques, +5 PV en récupération / jour."
+            invonven="<h2 style='text-align:center'>Mutation activée</h2><p>il grandi de 50 cm et donne un bonus de 10 aux ennemis pour le toucher.</p>";
+        }
+        else if(race=="Elfen" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>Une action supplémentaire imédiate. Se soigne entierement  en volant la vie de la prochaine personne qu’il touche, le tuant au passage. Devient une ombre invisible/indétectable pour 5 tours</p>";
+            invonven="<h2 style='text-align:center' style='text-align:center'>Mutation activée</h2><p>Libère trois parasites dévoreurs</p>";
+        }
+        else if(race=="Machine" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>améliore le blindage, +10 d’armure, possède aussi une frappe électrique 20 de dégâts pour 5 prochaines attaques</p>";
+            invonven="<h2 style='text-align:center'>Mutation activée</h2><p>Blue screen, la machine doit être redémarrée via une invite de commande sur  jet de compétence piratage à -30 pour le joueur. Un autre joueur peut le redémarrer sans malus.</p>";
+        }
+        else if(race=="Orquanien" && mutant=="oui"){
+            avantage="<h2 style='text-align:center'>Mutation activée</h2><p>Capacité berserk, increvable pendant 5 tour/2 jour. À la fin de cette capacité, la moindre blessure lui sera fatale, il perdra connaissance.</p>";
+            invonven="<h2 style='text-align:center'>Mutation activée</h2><p>Il attaque tout le monde en commençant par les personne les plus proches pour les 5 prochains tours.</p>";
+        }
+
+ 
+
+
         let r = new Roll("1d100");
         var roll=r.evaluate({"async": false});
         var deg='';
@@ -702,7 +776,6 @@
                         if(armure<0){
                             armure=0;
                             hp=hp-parseInt(degat)
-                            console.log(hp+'='+degat+'-'+boucli+'-'+armure)
                         }
                     }else if(type=="F" || type=="E"){
                         boucli=parseInt(boucli)-parseInt(degat)
@@ -710,7 +783,6 @@
                         if(boucli<0){
                             boucli=0;
                             hp=hp-parseInt(degat)
-                            console.log(hp+'='+degat+'-'+boucli+'-'+armure)
                         } 
                     }else if(type=="P" || type=="S"){
                         hp=hp-parseInt(degat)
@@ -724,7 +796,6 @@
                             if(armure<0){
                                 armure=0;
                                 hp=hp-parseInt(degat)
-                                console.log(hp+'='+degat+'-'+boucli+'-'+armure)
                             }
                         }        
                     }
@@ -734,12 +805,10 @@
                     if(bles>0){
                         hp=parseInt(hp)-degat;
                         if(hp<0){
-                            console.log(i)
                             hp=0; 
                             i.actor.createEmbeddedDocuments("ActiveEffect", [
                               {name: 'Mort', icon: 'icons/svg/skull.svg'}
                             ]);
-                            console.log(i)
 
                         }
                         i.actor.update({'system.stat.hp.value': hp,'system.stat.armure.value': armure,'system.stat.protections.value': boucli });
@@ -749,9 +818,9 @@
            
         }else {
             if(retour>echec){
-                succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
+                succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>"+invonven;
             }else if(retour<=critique){
-                succes="<h4 class='resultat' style='background:#7dff33;'>Réussite critique</h4>";
+                succes="<h4 class='resultat' style='background:#7dff33;'>Réussite critique</h4>"+avantage;
             }else if(retour<=inforesult){
                 succes="<h4 class='resultat' style='background:#78be50;'>Réussite</h4>";
             }else{
@@ -759,7 +828,6 @@
             }
         }
         if(perte==1 || perte==10){
-            console.log('perte'+perte)
             let itemData= this.actor.items.filter(i=>i.name == chargequi);                 
             var iditem= itemData[0].id;
             var qty = itemData[0].system.quantite;
@@ -775,7 +843,6 @@
             succes="<h4 class='resultat' style='background:#ff3333;'>Echec critique</h4>";
         }
         const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">Jet de ' + name + " : " + jetdeDesFormule +" - " + inforesult + '</p>'+ succes+'</span>'+deg;
-        console.log(inforesult)
         //roll.roll().toMessage({
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: this }),
@@ -891,7 +958,6 @@
     }
     _onAvantageJob(event){
         var metierliste=this.actor.system.background.metier;
-        console.log(metierliste)
         var metier='';
         if(metierliste==game.i18n.localize("libersf.metier1")){
             metier="10 Artisanat";
@@ -916,7 +982,6 @@
         }else if(metierliste==game.i18n.localize("libersf.metier11")){
             metier="10 Magie";
         }
-        console.log(metier)
         this.actor.update({'system.background.bonusmetier': metier});
     }
     _onArmor(event){
@@ -1146,8 +1211,6 @@
         }
        
         var moyen=(parseInt(ia)+parseInt(blin)+parseInt(mote))/3;var etoile="";
-        console.log(ia+'+'+blin+"+"+mote)
-        console.log(moyen)
         if(moyen<=0.5){
             etoile="✬ ☆ ☆ ☆ ☆";
         }else if(moyen<=1){
@@ -1179,7 +1242,6 @@
         if(exo=='Exosquelette'){
            enc=enc*2; 
         }
-        console.log('Encombrement:'+enc)
         this.actor.update({"system.stat.encombrement.max":enc});
     }
 
@@ -1200,7 +1262,7 @@
         var type=['une planète desertique','un super continent','une série d\'îles et d\'archipèle','une planète océan','une planète rocailleuse','une jungle luxuriante','une planète glacée']
         var type2=['de nombreuse villes','des animaux dangereux','un faune rare','des volcans très actifs','une techtonique des plaques très active','de violents cyclones et tempêtes','des éruptions solaires fréquentes']
         var huma=0; var drac=0;var plei=0;var elfe=0;var orqa=0;var artu=0;var mach=0;var yori=0;
-        if(fact==1){
+        if(fact==1){//a corriger bug
            huma=Math. round(Math.random() * 11);
            drac=Math. round(Math.random() * (11-huma));
            mach=10-huma-drac;
@@ -1318,7 +1380,6 @@
             for (var j=0; j < effets.length; j++) {
                 if(lists[i]== effets[j]){
                     active[i]=1;
-                    console.log(i+' : '+effets[j]) 
                 }
             }
         }

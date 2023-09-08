@@ -98,7 +98,7 @@ form.Liber{display: table-cell;}
 .Liber .menu {height: 50px;}
 .Liber option {background: none}
 .Liber .armetoile{font-size: 0.7em}
-.Liber .santes2{background:url(vaisseau.png) no-repeat center center; background-size: contain;height: 100%;}
+.Liber .santes2{background:url(vaisseau.png) no-repeat center center; background-size: contain;height: 100%;margin-top:20px}
 
 .Liber .sante2 p{color: #fff;width: 45%;float: left;display: block;font-size: 0.79em;padding: 5px;font-family: 'Signika';}
 
@@ -232,7 +232,7 @@ form.Liber{display: table-cell;}
 .Liber .centre{left: calc(50% - 60px);top:150px;}
 .Liber .tribord{left: calc(50% + 60px);top:90px;}
 .Liber .poupe{left: calc(50% - 60px);top:219px;}
-
+.Liber .infov{height: 483px}
 
 .Liber .bar {height: 5px; display: block;}
 .Liber .etoile{text-align: center;}
