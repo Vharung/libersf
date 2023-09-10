@@ -23,7 +23,7 @@
           "name": "vehicule",
           "label": "Véhicule",
           "system": "libersf",
-          "path": "./pack/vehicules.db",
+          "path": "./pack/vehicule.db",
           "type": "Actor",
           "visibility": "trusted"
         },

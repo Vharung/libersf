@@ -229,6 +229,7 @@
             if(this.actor.type=="vehicule"){
                 var ptrestant2=this.actor.system.pointrestant2;
                 var resultat=parseInt(ptrestant2);
+
             }else {
                 var resultat=-20-((parseInt(level)-1)*10); 
             }
@@ -253,6 +254,10 @@
                 var pointhp=(parseInt(hpmax)-20)*2;
                 resultat=resultat+pointhp; 
             }
+            
+            if(isNaN(resultat)){resultat='A Config';}
+            
+
             html.find('.pointrestant').val(resultat); 
 
 
