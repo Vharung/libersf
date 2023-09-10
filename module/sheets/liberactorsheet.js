@@ -398,8 +398,12 @@
         if(this.actor.type!="vehicule"){
             var poids=[];
             var quantite=[];
-            var total=0;
+            var valeur=[];
+            var total=0;var crinv=0;
             //var exo=html.find('.armurequi').val()
+            html.find( ".item-valeurs" ).each(function( index ) {
+              valeur.push($( this ).text());
+            });
             html.find( ".item-poid" ).each(function( index ) {
               poids.push($( this ).text());
             });
@@ -407,9 +411,9 @@
               quantite.push($( this ).text());
             });
 
-
-            for (var i = 1;i < poids.length ; i++) {
-               total=total+parseFloat(poids[i])*parseFloat(quantite[i]);
+            for (var i = 0;i < poids.length ; i++) {
+               total=parseInt(total)+(parseFloat(poids[i])*parseFloat(quantite[i]));
+               crinv=parseInt(crinv)+(parseFloat(valeur[i])*parseFloat(quantite[i]));
             }
             /*if(exo=="Exosquelette"){
                 enc=enc*2;
@@ -433,6 +437,7 @@
                 pourcentage=100;
             }
             html.find('.encours').val(total);
+            html.find('.crinv').val(crinv);
             html.find('.barenc').css({"width":pourcentage+"%"});
         }else{
             var type=this.actor.system.type;
@@ -587,7 +592,7 @@
         var balistique=this.actor.system.attributs.Balistique;
 
         const jetdeDesFormule = "1d100";
-        var bonus =this.actor.system.attributs.malus;
+        var bonus =this.actor.system.attributs.bonus;//test
         var critique=5;
         if(type=="C"){
             critique=10;
@@ -629,7 +634,11 @@
         }else if(etoiled=="✬ ☆ ☆ ☆ ☆"){
             etoile=1;
         }
+        if(race=="Elfen"){
+            etoilemax=parseInt(etoilemax)+2
+        }
         let dif=parseInt(etoilemax)-parseInt(etoile);
+        if(dif>0){dif=0;}
         if(name=="Tir" || name=="Tircouv"){
             inforesult=parseInt(inforesult)+(dif*5)
             if(name=="Tir"){var conf="none;width: 200px;";}
@@ -1080,8 +1089,9 @@
 
     _onCouv(event){
        let idn=event.target.dataset["lettre"];
+       console.log(idn)
         let effet=this.actor.effects;
-        let lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort']
+        let lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort','à Couvert']
         var nomRecherche=lists[idn];
         var estPresent = effet.some(function(element) {
             return element.name === nomRecherche;
@@ -1365,11 +1375,12 @@
 
 
         //activer les effets
-        let effet=this.actor.effects;
+       let effet=this.actor.effects;
         var effets=[];
         //var etats=['a','b','c','d','e','f','g','h','i','j','k','l','m','n'];
-        var active=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-        var lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort']
+        var active=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,0.5]
+        console.log(active)
+        var lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort','à Couvert']
         effet.forEach(function(item, index, array) {
             if(item.name!=''){
                 effets.push(item.name);
@@ -1384,6 +1395,6 @@
             }
         }
 
-        this.actor.update({"system.attributs.Agilité":cpt[0],"system.attributs.Artisanat":cpt[1],"system.attributs.Balistique":cpt[2],"system.attributs.Combat":cpt[3],"system.attributs.ConGén":cpt[4],"system.attributs.ConSpécif":cpt[5],"system.attributs.Dextérité":cpt[6],"system.attributs.Diplomatie":cpt[7],"system.attributs.Discrétion":cpt[8],"system.attributs.Force":cpt[9],"system.attributs.Investigation":cpt[10],"system.attributs.Jeu":cpt[11],"system.attributs.Mécanique":cpt[12],"system.attributs.Médecine":cpt[13],"system.attributs.Natation":cpt[14],"system.attributs.Navigation":cpt[15],"system.attributs.Négociation":cpt[16],"system.attributs.Perception":cpt[17],"system.attributs.Pilotage":cpt[18],"system.attributs.Piratage":cpt[19],"system.attributs.Pistage":cpt[20],"system.attributs.Religion":cpt[21],"system.attributs.Science":cpt[22],"system.attributs.Survie":cpt[23],"system.attributs.Tir":cpt[24],"system.attributs.Visée":cpt[25],"system.attributs.magie":cpt[26],"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12]});        
+        this.actor.update({"system.attributs.Agilité":cpt[0],"system.attributs.Artisanat":cpt[1],"system.attributs.Balistique":cpt[2],"system.attributs.Combat":cpt[3],"system.attributs.ConGén":cpt[4],"system.attributs.ConSpécif":cpt[5],"system.attributs.Dextérité":cpt[6],"system.attributs.Diplomatie":cpt[7],"system.attributs.Discrétion":cpt[8],"system.attributs.Force":cpt[9],"system.attributs.Investigation":cpt[10],"system.attributs.Jeu":cpt[11],"system.attributs.Mécanique":cpt[12],"system.attributs.Médecine":cpt[13],"system.attributs.Natation":cpt[14],"system.attributs.Navigation":cpt[15],"system.attributs.Négociation":cpt[16],"system.attributs.Perception":cpt[17],"system.attributs.Pilotage":cpt[18],"system.attributs.Piratage":cpt[19],"system.attributs.Pistage":cpt[20],"system.attributs.Religion":cpt[21],"system.attributs.Science":cpt[22],"system.attributs.Survie":cpt[23],"system.attributs.Tir":cpt[24],"system.attributs.Visée":cpt[25],"system.attributs.magie":cpt[26],"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12],"system.background.etat.n":active[14]});        
     }
 }

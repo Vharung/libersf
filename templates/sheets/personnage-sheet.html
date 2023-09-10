@@ -72,7 +72,7 @@
 				<a class="etat10 chnget" data-lettre="10" data-etat="Empoisonné" style="opacity: {{actor.system.background.etat.k}};"></a>
 				<a class="etat11 chnget" data-lettre="11" data-etat="Saignement" style="opacity: {{actor.system.background.etat.l}};"></a>
 				<a class="etat12 chnget" data-lettre="12" data-etat="Inconscient" style="opacity: {{actor.system.background.etat.m}};"></a>
-				<a class="etat13 chnget" data-lettre="13" style="opacity: {{actor.system.background.etat.n}};"></a>
+				<a class="etat14 chnget" data-lettre="14" style="opacity: {{actor.system.background.etat.n}};"></a>
     		</div>
     	</div>
     	<div class="resum outer">
@@ -202,12 +202,12 @@
 						<h1 style="text-align:center" class="titreaction">{{localize 'libersf.action'}}</h1>
 						<div class="action0" title="{{localize 'libersf.marche'}}" style="margin-left: 6px;"></div>
 						<div class="action0b" title="{{localize 'libersf.run'}}"></div>
-						<div class="action1 jetdedes" data-name="Tircouv" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.tircouv'}}"></div>
+						<div class="action1 jetdedes" data-name="Tircouv" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.tircouv'}}"></div>
 						<div class="action2" title="{{localize 'libersf.commun'}}"></div>
 						<div class="action3" title="{{localize 'libersf.soutien'}}"></div>
-						<div class="action4 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.raffale'}}"></div>
-						<div class="action5 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.horsmap'}}"></div>
-						<div class="action6" title="{{localize 'libersf.couver'}}" data-lettre="13"></div>
+						<div class="action4 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.raffale'}}"></div>
+						<div class="action5 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.horsmap'}}"></div>
+						<div class="action6" title="{{localize 'libersf.couver'}}" data-lettre="14"></div>
 						<div class="clear"></div>
 						<h1 style="text-align: center;margin-top: 20px;">{{localize 'libersf.base30'}}</h1>
 						<div class="compt"><a class="jetdedes" data-name="Agilité" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.attributs.Agilité}}">{{localize 'libersf.agil'}}</a>
@@ -301,7 +301,7 @@
 						</div>
 						<div class="grid-2col" style="margin-top: 20px">
 							<h2 style="text-align:center;font-family:'spaceage'">{{localize 'libersf.bonusmj'}}</h2>
-							<input class="malussactor" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);font-family:'spaceage'" name="system.malus" type="text" value="{{actor.system.malus}}" placeholder="0"/>
+							<input class="malussactor" style="width:150px;border: none;background: none; font-size: 50px;height:50px;color: #fff; text-align: center;margin-left: calc(50% - 75px);font-family:'spaceage'" name="system.attributs.bonus" type="text" value="{{actor.system.attributs.bonus}}" placeholder="0"/>
 						</div>
 						
 					</div>
@@ -332,7 +332,7 @@
 					<div id="items" class="tab items" data-group="primary" data-tab="items">
 						
 						<div>
-							<h1 style="margin-top: 20px">{{localize 'libersf.armes'}} <span class="armetoile"></span></h1>
+							<h1 style="margin-top: 20px">{{localize 'libersf.armes'}} <span class="armetoile"></span><span><input type="text" class="crinv" name="system.stat.crinv" type="text" value="{{actor.system.stat.crinv}}" style="width: 145px;text-align: right;" readonly>Cr</span></h1>
 							<ol class="items-list">
 				                <li class="item rexrow item-header">
 				                  <div class="item-image"></div>
@@ -355,7 +355,7 @@
 				                    <div class="item-portee">{{item.system.portee}}</div>
 				                    <div class="item-dommage">{{item.system.degats}}</div>
 				                    <div class="item-poid">{{item.system.poids}}</div>
-				                    <div class="item-valeur">{{item.system.valeur}}</div>
+				                    <div class="item-valeurs">{{item.system.valeur}}</div>
 				                    <div class="item-techno">{{item.system.techno}}</div>
 				                    <div class="item-qt">{{item.system.quantite}}</div>
 				                    <div class="item-controls">
@@ -392,7 +392,7 @@
 				                    <div class="item-resitance">{{item.system.resitance}}</div>
 				                    <div class="item-hpmax">{{item.system.hp.max}}</div>
 				                    <div class="item-poid">{{item.system.poids}}</div>
-				                    <div class="item-valeur">{{item.system.valeur}}</div>
+				                    <div class="item-valeurs">{{item.system.valeur}}</div>
 				                    <div class="item-techno">{{item.system.techno}}</div>
 				                    <div class="item-qt">{{item.system.quantite}}</div>
 				                    <div class="item-controls">
@@ -425,7 +425,7 @@
 				                    <div class="item-name2" title="{{item.name}}">{{item.name}}</div>
 				                    <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
 				                    <div class="item-poid">{{item.system.poids}}</div>
-				                    <div class="item-valeur">{{item.system.valeur}}</div>
+				                    <div class="item-valeurs">{{item.system.valeur}}</div>
 				                    <div class="item-techno">{{item.system.techno}}</div>
 				                    <div class="item-qt">{{item.system.quantite}}</div>
 				                    <div class="item-controls">

@@ -22,7 +22,8 @@
                       "value":"0",
                       "max": "0"
                     },
-                    "credit":0,
+                    "credit":500,
+                    "crinv":0,
                     "solit":0,
                     "tete":0,
                     "bd":0,
