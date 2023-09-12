@@ -1,3 +1,4 @@
+body{background:url(fond.jpg) no-repeat top center; }
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @font-face {font-family: "spaceage";src: url('spaceage.ttf'); }
 /*form.Liber{background:none;display: block;width: 1220px;height: 770px;font-family: spaceage;}*/
@@ -37,7 +38,7 @@
 .outer{display: flex;align-items: center;justify-content: center;background: linear-gradient(-45deg, transparent 12px, #00FFFF 0) right,linear-gradient(135deg, transparent 12px, #00FFFF 0) left;background-size: 50% 100%;background-repeat: no-repeat;margin-bottom: 5px}
 .inner{width: calc(100% - 4px);    height: calc(100% - 4px);background: linear-gradient(-45deg, transparent 12px, #004060 0) right,linear-gradient(135deg, transparent 12px, #004060 0) left;background-size: 50% 100%;background-repeat: no-repeat;}
 
-/*figue#pause img.fa-spin{background: url(logo.png) center center no-repeat}
+#pause img.fa-spin{content: url(logo.png)}
 
 /*.Liber .head .avatar img{height: 100%;max-width: none}*/
 
@@ -243,7 +244,7 @@ button {background: #a10001;border: none;color: #fff;}
 .Liber .viecl{background: url("../assets/icon/vie.png")no-repeat left center;background-size: contain;color: #fff;padding-left: 58px;border: none;width: 174px;height: 71px;font-size: 2.5em;}
 .Liber .carac,.Liber .items,.Liber .spells,.Liber .stats {display: none; overflow: auto;}
 .resultat{text-align: center;color: #fff;padding: 5px;border: 1px solid #999;}
-.resultdeg,.resultdeg2,.resultdeg3,.resultdeg4{width: 60px;height: 60px;margin: 5px;}
+.resultdeg,.resultdeg2,.resultdeg3,.resultdeg4{width: 60px;height: 60px;margin: 5px;display:inline-block}
 .resultdeg{color: #040404;font-size: 4em;text-align: center;line-height: normal;background: darkgrey url(../assets/icon/gunshot.png) center center no-repeat;background-size: contain;}
 .resultdeg2{background: darkgrey url(../assets/icon/backward-time.png) center center no-repeat;background-size: contain;}
 .resultdeg3{background: darkgrey url(../assets/icon/spiky-explosion.png) center center no-repeat;background-size: contain;}

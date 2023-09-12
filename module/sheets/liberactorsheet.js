@@ -646,7 +646,7 @@
         if(dif>0){dif=0;}
         if(name=="Tir" || name=="Tircouv"){
             inforesult=parseInt(inforesult)+(dif*5)
-            if(name=="Tir"){var conf="none;width: 200px;";}
+            if(name=="Tir"){var conf="none;width: 200px;display:inline-block";}
             if(chargequi=='' || chargequi== undefined){
                  chargequi="Mun. "+arme
             }
