@@ -2,7 +2,7 @@
     "id": "libersf",
     "title": "Liber SF ",
     "description": "The libersf SF  system for FoundryVTT!",
-    "version": "2.24",
+    "version": "2.25",
     "compatibility": {
       "minimum": "10",
       "verified": "11.299",
@@ -23,7 +23,7 @@
           "name": "vehicule",
           "label": "Véhicule",
           "system": "libersf",
-          "path": "./pack/vehicule.db",
+          "path": "./pack/vehicule",
           "type": "Actor",
           "visibility": "trusted"
         },
@@ -31,21 +31,21 @@
           "name": "armure",
           "label": "Armure",
           "system": "libersf",
-          "path": "./pack/armurebouclier.db",
+          "path": "./pack/armurebouclier",
           "type": "Item"
         },
         {
           "name": "arme",
           "label": "Arme",
           "system": "libersf",
-          "path": "./pack/armes.db",
+          "path": "./pack/armes",
           "type": "Item"
         },
         {
           "name": "chargeur",
           "label": "Chargeur",
           "system": "libersf",
-          "path": "./pack/chargeur.db",
+          "path": "./pack/chargeur",
           "type": "Item"
         },
         {
@@ -59,14 +59,14 @@
           "name": "pieces",
           "label": "Pieces",
           "system": "libersf",
-          "path": "./pack/pieces.db",
+          "path": "./pack/pieces",
           "type": "Item"
         },
         {
           "name": "planete",
           "label": "Planete",
           "system": "libersf",
-          "path": "./pack/planete.db",
+          "path": "./pack/planete",
           "type": "Actor"
         },
         {
@@ -80,7 +80,7 @@
           "label": "Régles",
           "type": "JournalEntry",
           "name": "regles",
-          "path": "./pack/regles.db",
+          "path": "./pack/regles",
           "system": "libersf"
         }
     ],
