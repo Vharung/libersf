@@ -10,9 +10,9 @@ Hooks.once("init", async function() {
     CONFIG.Item.documentClass = LiberItem;
 
     CONFIG.Combat.initiative = {
-	    formula: "30+@Perception",
+	    formula: "30+@attributs.Perception",
 	    decimals: 3
-	};
+	};//bug perception
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("liber", LiberItemSheet, { makeDefault: true });
