@@ -396,6 +396,8 @@
                 }
                 $('.santes2 .centre input').css({'color':'white'});
             });
+            //etoile mecanique pilotage piratage et visée
+            
         }
             
 
@@ -616,7 +618,7 @@
             inforesult=echec;
         }
 
-        let etoilemax = Math.floor(parseInt(balistique)/5);
+        let etoilemax = Math.floor(parseInt(balistique)/5)+2;
         let etoile=0;
         if(etoiled=="★ ★ ★ ★ ★"){
             etoile=10;
@@ -643,6 +645,7 @@
             etoilemax=parseInt(etoilemax)+2
         }
         let dif=parseInt(etoilemax)-parseInt(etoile);
+        console.log(dif+'='+etoilemax+'+'+etoile)
         if(dif>0){dif=0;}
         if(name=="Tir" || name=="Tircouv"){
             inforesult=parseInt(inforesult)+(dif*5)
