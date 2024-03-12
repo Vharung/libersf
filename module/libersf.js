@@ -10,7 +10,7 @@ Hooks.once("init", async function() {
     CONFIG.Item.documentClass = LiberItem;
 
     CONFIG.Combat.initiative = {
-	    formula: "30+@attributs.Perception",
+	    formula: "30 + @attributs.Perception",
 	    decimals: 3
 	};//bug perception
 

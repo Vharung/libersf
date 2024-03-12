@@ -178,6 +178,8 @@
         if(this.actor.type=="vehicule"){
             var type=this.actor.system.type;
             var tail=this.actor.system.taille;
+            var moteur=this.actor.system.moteur;
+            var ia=this.actor.system.ia;
             if(type==1){
                 html.find('.types').val(game.i18n.localize("libersf.type1"));
             }else if(type==2){
@@ -216,8 +218,18 @@
             for (var i = 1;i < prix.length ; i++) {
                total=total+parseFloat(prix[i])*parseFloat(quantite[i]);
             }
-            total= total+' Cr'
-            this.actor.update({'system.prix': total});
+            total= total+' Cr';
+            let sun2=parseInt(ia)+parseInt(moteur);
+            let sun3=parseInt(ia)-1;
+            let sun4=parseInt(ia)+1;
+if(sun2<=0.5){sun2="✬ ☆ ☆ ☆ ☆";}else if(sun2<=1){sun2="★ ☆ ☆ ☆ ☆";}else if(sun2<=1.5){sun2="★ ✬ ☆ ☆ ☆";}else if(sun2<=2){sun2="★ ★ ☆ ☆ ☆";}else if(sun2<=2.5){sun2="★ ★ ✬ ☆ ☆";}else if(sun2<=3){sun2="★ ★ ★ ☆ ☆";}else if(sun2<=3.5){sun2="★ ★ ★ ✬ ☆";}else if(sun2<=4){sun2="★ ★ ★ ★ ☆";}else if(sun2<=4.5){sun2="★ ★ ★ ★ ✬";}else{sun2="★ ★ ★ ★ ★";}            if(sun3=="★ ★ ★ ★ ★"){sun3=10;}else if(sun3=="★ ★ ★ ★ ✬"){sun3=9;}else if(sun3=="★ ★ ★ ★ ☆"){sun3=8;}else if(sun3=="★ ★ ★ ✬ ☆"){sun3=7;}else if(sun3=="★ ★ ★ ☆ ☆"){sun3=6;}else if(sun3=="★ ★ ✬ ☆ ☆"){sun3=5;}else if(sun3=="★ ★ ☆ ☆ ☆"){sun3=4;}else if(sun3=="★ ✬ ☆ ☆ ☆"){sun3=3;}else if(sun3=="★ ☆ ☆ ☆ ☆"){sun3=2;}else if(sun3=="✬ ☆ ☆ ☆ ☆"){sun3=1;}
+if(sun3<=0.5){sun3="✬ ☆ ☆ ☆ ☆";}else if(sun3<=1){sun3="★ ☆ ☆ ☆ ☆";}else if(sun3<=1.5){sun3="★ ✬ ☆ ☆ ☆";}else if(sun3<=2){sun3="★ ★ ☆ ☆ ☆";}else if(sun3<=2.5){sun3="★ ★ ✬ ☆ ☆";}else if(sun3<=3){sun3="★ ★ ★ ☆ ☆";}else if(sun3<=3.5){sun3="★ ★ ★ ✬ ☆";}else if(sun3<=4){sun3="★ ★ ★ ★ ☆";}else if(sun3<=4.5){sun3="★ ★ ★ ★ ✬";}else{sun3="★ ★ ★ ★ ★";}
+if(sun4<=0.5){sun4="✬ ☆ ☆ ☆ ☆";}else if(sun4<=1){sun4="★ ☆ ☆ ☆ ☆";}else if(sun4<=1.5){sun4="★ ✬ ☆ ☆ ☆";}else if(sun4<=2){sun4="★ ★ ☆ ☆ ☆";}else if(sun4<=2.5){sun4="★ ★ ✬ ☆ ☆";}else if(sun4<=3){sun4="★ ★ ★ ☆ ☆";}else if(sun4<=3.5){sun4="★ ★ ★ ✬ ☆";}else if(sun4<=4){sun4="★ ★ ★ ★ ☆";}else if(sun4<=4.5){sun4="★ ★ ★ ★ ✬";}else{sun4="★ ★ ★ ★ ★";}            
+            html.find('.sun2').val(sun2);
+            html.find('.sun3').val(sun3);
+            html.find('.sun4').val(sun4);
+           this.actor.update({'system.prix': total});
+
         }
 
             var clanliste=html.find('.raceliste').val();
