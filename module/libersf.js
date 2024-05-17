@@ -1,3 +1,4 @@
+import { liber } from "./sheets/class/config.js";
 import { LiberActor } from"./sheets/liberactor.js";
 import { LiberActorSheet } from "./sheets/liberactorsheet.js";
 import { LiberItem } from "./sheets/liberitem.js";
@@ -5,18 +6,16 @@ import { LiberItemSheet } from "./sheets/liberitemsheet.js";
 
 
 Hooks.once("init", async function() {
-    console.log("Liber SF | Initialisation du système Liber Chronicles");
-	CONFIG.Actor.documentClass = LiberActor;
-    CONFIG.Item.documentClass = LiberItem;
-
-    CONFIG.Combat.initiative = {
-	    formula: "30 + @attributs.Perception",
-	    decimals: 3
-	};//bug perception
+  console.log(liber.ASCII)
+  CONFIG.Actor.documentClass = LiberActor;
+  CONFIG.Item.documentClass = LiberItem;
+  CONFIG.Combat.initiative = {
+    formula: "30 + @attributs.Perception",
+    decimals: 3
+	};
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("liber", LiberItemSheet, { makeDefault: true });
-
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("liber", LiberActorSheet, { makeDefault: true });
 });
@@ -30,13 +29,13 @@ Hooks.on('renderActorSheet', (app, html, data) => {
     var bonus =data.actor.system.malus;
     const actor =data.actor
     // Votre contenu personnalisé pour la fenêtre Popup
-    const content = `<p>Quel est le niveau d'étoiles ?</p>`;
+    const content = `<p>Quel est le niveau d'étoiles ?</p>`;//Fr
     if(bonus=="" || bonus==undefined){
       bonus=0;
     }
     
     let dialog=new Dialog({
-      title: 'Jet de : '+name+' - Choix de difficulté',
+      title: 'Jet de : '+name+' - Choix de difficulté',//Fr
       content: content,
       buttons: {
         roll0: {
@@ -107,7 +106,7 @@ Hooks.on('renderActorSheet', (app, html, data) => {
         },
         ok: {
           icon: '<i class="fas fa-check"></i>',
-          label: 'Fermer',
+          label: 'Fermer',//Fr
           callback: () => console.log('Fenêtre popup fermée'),
         },
       },

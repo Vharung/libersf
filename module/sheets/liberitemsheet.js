@@ -4,8 +4,11 @@
  */
  export class LiberItemSheet extends ItemSheet{
     get template(){
-        console.log(`Liber | Récupération du fichier html ${this.item.type}-sheet.`);
-        return `systems/libersf/templates/sheets/${this.item.type}-sheet.html`;
+        if (this.item.type == 'arme' || this.item.type == 'arme-véhicule' ) {
+            return `systems/libersf/templates/sheets/arme-sheet.html`;
+        }else {
+            return `systems/libersf/templates/sheets/${this.item.type}-sheet.html`;
+        }    
     }
 
     getData(){

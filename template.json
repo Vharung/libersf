@@ -15,12 +15,16 @@
                       "max": 20
                     },
                     "armure":{
-                      "value":"0",
-                      "max": "0"
+                      "value":0,
+                      "max": 0
                     },
                     "protections":{
-                      "value":"0",
-                      "max": "0"
+                      "value":0,
+                      "max": 0
+                    },
+                    "moteur":{
+                      "value":0,
+                      "max": 0
                     },
                     "credit":500,
                     "crinv":0,
@@ -34,7 +38,8 @@
                     "encombrement": {
                       "value": 0,
                       "max": 0
-                    }
+                    },
+                    "pointrestant":0
                 },            
                 "attributs":{
                     "Agilité":0,
@@ -131,21 +136,60 @@
         },
         "vehicule":{
             "templates":["defaut"],
-            "ia":0,
-            "equi":0,
-            "piece":0,
-            "blindage":0,
-            "bouclier":0,
-            "tehnologie":0,
-            "prix":0,
-            "prixbase":0,
-            "model":"",
-            "ordre":"",
-            "moteur":0.5,
-            "type":1,
-            "types":"",
-            "taille":1,
-            "tailles":""
+            "bouclier":{
+                "proue":{
+                  "value":"0",
+                  "max": "0"
+                },
+                "tribord":{
+                  "value":"0",
+                  "max": "0"
+                },
+                "poupe":{
+                  "value":"0",
+                  "max": "0"
+                },
+                "babord":{
+                  "value":"0",
+                  "max": "0"
+                }
+            },
+            "model":{
+                "faction":"",
+                "type":{
+                    "nb":1,
+                    "etoile":""
+                },
+                "taille":{
+                    "nb":1,
+                    "etoile":""
+                },
+                "moteur":{
+                    "nb":0.5,
+                    "etoile":"☆ ☆ ☆ ☆ ☆"
+                },
+                "ia":{
+                    "nb":0.5,
+                    "etoile":"☆ ☆ ☆ ☆ ☆"
+                },
+                "blindage":{
+                    "nb":0.5,
+                    "etoile":"☆ ☆ ☆ ☆ ☆"
+                },
+                "point":{
+                    "piece":0,
+                    "ia":0,
+                    "arme":0
+                },
+                "pilotage":"☆ ☆ ☆ ☆ ☆",
+                "piratage":"☆ ☆ ☆ ☆ ☆",
+                "vise":"☆ ☆ ☆ ☆ ☆",
+                "tehnologie":"☆ ☆ ☆ ☆ ☆"
+            },
+            "back":{
+                "vaisseau":"",
+                "danger":""
+            }
         },
         "planete":{
             "surnom": "",
@@ -171,14 +215,27 @@
     "Item": {
         "types": [
             "arme",
+            "arme-véhicule",
             "armure",
             "bouclier",
             "objet",
             "piece",
             "argent",
-            "sort"
+            "sort",
+            "level"
         ],
         "arme": {
+            "description": "",
+            "genre": "",
+            "degats": "",
+            "portee": "",
+            "poids":"1",
+            "techno":"☆ ☆ ☆ ☆ ☆",
+            "valeur":"10",
+            "quantite":"1",
+            "used":false
+        },
+        "arme-véhicule": {
             "description": "",
             "genre": "",
             "degats": "",

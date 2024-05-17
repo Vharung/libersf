@@ -16,12 +16,14 @@ export class LiberItem extends Item {
     const itemData = this.system;
     const data = itemData.system;
     const flags = itemData.flags;
-  	//preparation dépendant du type de personnage (
-  	if (itemData.type === 'arme') this._prepareItemData(itemData);
+    //preparation dépendant du type de personnage (
+    if (itemData.type === 'arme') this._prepareItemData(itemData);
+    if (itemData.type === 'arme-véhicule') this._prepareItemData(itemData);
     if (itemData.type === 'armure') this._prepareItemData(itemData);
     if (itemData.type === 'bouclier') this._prepareItemData(itemData);
     if (itemData.type === 'objet') this._prepareItemData(itemData);
     if (itemData.type === 'piece') this._prepareItemData(itemData);
+    if (itemData.type === 'level') this._prepareItemData(itemData);
   }
 
   _prepareItemData(itemData) {

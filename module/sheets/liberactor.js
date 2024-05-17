@@ -19,6 +19,7 @@ export class LiberActor extends Actor {
   }
 
 
+
    /**
    * Prepare Character type specific data
    */

@@ -1,104 +1,138 @@
 {
-    "id": "libersf",
-    "title": "Liber SF ",
-    "description": "The libersf SF  system for FoundryVTT!",
-    "version": "2.26",
-    "compatibility": {
-      "minimum": "10",
-      "verified": "11.299",
-      "maximum": "11"
+  "id": "libersf",
+  "title": "Liber SF",
+  "description": "The libersf SF  system for FoundryVTT!",
+  "version": "2.5",
+  "compatibility": {
+    "minimum": "0.9",
+    "verified": "11.299"
+  },
+  "authors": [
+    {
+      "name": "Vharung",
+      "url": "https://foundryvtt.com",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "module/libersf.js"
+  ],
+  "styles": [
+    "css/libersf.css"
+  ],
+  "packs": [
+    {
+      "name": "vehicule",
+      "label": "Véhicule",
+      "system": "libersf",
+      "path": "pack/vehicule",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
     },
-    "templateVersion": 2,
-    "authors": [
-      {
-        "name": "Vharung",
-        "url": "https://foundryvtt.com"
-      }
-    ],
-    "esmodules": ["module/libersf.js"],
-    "styles": ["css/libersf.css"],
-    "scripts": [],
-    "packs": [
-        {
-          "name": "vehicule",
-          "label": "Véhicule",
-          "system": "libersf",
-          "path": "./pack/vehicule",
-          "type": "Actor",
-          "visibility": "trusted"
-        },
-        {
-          "name": "armure",
-          "label": "Armure",
-          "system": "libersf",
-          "path": "./pack/armurebouclier",
-          "type": "Item"
-        },
-        {
-          "name": "arme",
-          "label": "Arme",
-          "system": "libersf",
-          "path": "./pack/armes",
-          "type": "Item"
-        },
-        {
-          "name": "chargeur",
-          "label": "Chargeur",
-          "system": "libersf",
-          "path": "./pack/chargeur",
-          "type": "Item"
-        },
-        {
-          "name": "objet",
-          "label": "Objet",
-          "system": "libersf",
-          "path": "./pack/objet.db",
-          "type": "Item"
-        },
-        {
-          "name": "pieces",
-          "label": "Pieces",
-          "system": "libersf",
-          "path": "./pack/pieces",
-          "type": "Item"
-        },
-        {
-          "name": "planete",
-          "label": "Planete",
-          "system": "libersf",
-          "path": "./pack/planete",
-          "type": "Actor"
-        },
-        {
-          "name": "magie",
-          "label": "Magie",
-          "system": "libersf",
-          "path": "./pack/magie.db",
-          "type": "Item"
-        },
-        {
-          "label": "Régles",
-          "type": "JournalEntry",
-          "name": "regles",
-          "path": "./pack/regles",
-          "system": "libersf"
-        }
-    ],
-    "languages": [
-      {
-        "lang": "fr",
-        "name": "Français",
-        "path": "lang/fr.json"
-      }
-    ],
-    "background": "systems/libersf/assets/accueil.jpg",
-    "gridDistance": 1,
-    "gridUnits": "m",
-    "primaryTokenAttribute": "hp",
-    "secondaryTokenAttribute": "psy",
-    "url": "https://github.com/Vharung/libersfsf",
-    "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
-    "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
-    "license": "LICENSE.txt",
-    "relationships.requires":""
+    {
+      "name": "armure",
+      "label": "Armure",
+      "system": "libersf",
+      "path": "pack/armurebouclier",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "arme",
+      "label": "Arme / Chargeur",
+      "system": "libersf",
+      "path": "pack/armes",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "armevehicule",
+      "label": "Equipement vehicule",
+      "system": "libersf",
+      "path": "pack/armevehicule",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "objet",
+      "label": "Objet",
+      "system": "libersf",
+      "path": "pack/objet",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "planete",
+      "label": "Planete",
+      "system": "libersf",
+      "path": "pack/planete",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "magie",
+      "label": "Magie",
+      "system": "libersf",
+      "path": "pack/magie",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "label": "Régles",
+      "type": "JournalEntry",
+      "name": "regles",
+      "path": "pack/regles",
+      "system": "libersf",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    }
+  ],
+  "languages": [
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json",
+      "flags": {}
+    }
+  ],
+  "background": "systems/libersf/assets/accueil.jpg",
+  "gridDistance": 1,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "hp",
+  "secondaryTokenAttribute": "psy",
+  "url": "https://github.com/Vharung/libersfsf",
+  "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
+  "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
+  "license": "LICENSE.txt"
 }
