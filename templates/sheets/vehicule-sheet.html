@@ -269,83 +269,38 @@
 						<div class="grid-2col">
 							<h2>{{localize 'libersf.faction'}}</h2>
 							<SELECT class="factionliste" size="1" name="system.model.faction">
-			                    {{#select actor.system.model.faction}}
-				                    {{#each config.factionTypes as |faction|}}
-										<option value="{{localize faction}}">{{localize faction}}</option>
-									{{/each}}
-				                {{/select}}
-			                </SELECT>
+								{{selectOptions listValues.faction selected=actor.system.model.faction labelAttr="label" localize=true blank="libersf.none"}}
+			                </select>
 			            </div>
 						<div class="grid-2col">
 							<h2>{{localize 'libersf.type'}}</h2>
 							<SELECT class="typeliste" size="1" name="system.model.type.nb">
-			                    {{#select actor.system.model.type.nb}}
-			                    	{{#each config.typeTypes as |type|}}
-										<option value="{{@index}}">{{localize type}}</option>
-									{{/each}}
-				                {{/select}}
-			                </SELECT>
+								{{selectOptions listValues.type selected=actor.system.model.type.nb labelAttr="label" localize=true blank="libersf.none"}}
+			                </select>
 			            </div>
 			            <div class="grid-2col">
 			            	<h2>{{localize 'libersf.taille'}}</h2>
 							<SELECT class="tailleliste" size="1" name="system.model.taille.nb">
-			                    {{#select actor.system.model.taille.nb}}
-				                    {{#each config.tailleTypes as |taille|}}
-										<option value="{{@index}}">{{localize taille}}</option>
-									{{/each}}
-				                {{/select}}
-			                </SELECT>
+								{{selectOptions listValues.taille selected=actor.system.model.taille.nb labelAttr="label" localize=true blank="libersf.none"}}
+			                </select>
 			            </div>
 			            <div class="grid-2col">
 			            	<h2>{{localize 'libersf.ia'}}</h2>
 							<SELECT class="ialiste" size="1" name="system.model.ia.nb" title="">
-			                    {{#select actor.system.model.ia.nb}}
-				                    <option value="0.5" title="{{localize 'libersf.v1'}}">✬ ☆ ☆ ☆ ☆</option>
-				                    <option value="1" title="{{localize 'libersf.v2'}}">★ ☆ ☆ ☆ ☆</option>
-				                    <option value="1.5" title="{{localize 'libersf.v3'}}">★ ✬ ☆ ☆ ☆</option>
-				                    <option value="2" title="{{localize 'libersf.v4'}}">★ ★ ☆ ☆ ☆</option>
-				                    <option value="2.5" title="{{localize 'libersf.v5'}}">★ ★ ✬ ☆ ☆</option>
-				                    <option value="3" title="{{localize 'libersf.v6'}}">★ ★ ★ ☆ ☆</option>
-				                    <option value="3.5" title="{{localize 'libersf.v7'}}">★ ★ ★ ✬ ☆</option>
-				                    <option value="4" title="{{localize 'libersf.v8'}}">★ ★ ★ ★ ☆</option>
-				                    <option value="4.5" title="{{localize 'libersf.v9'}}">★ ★ ★ ★ ✬</option>
-				                    <option value="5" title="{{localize 'libersf.v10'}}">★ ★ ★ ★ ★</option>
-				                {{/select}}
-			                </SELECT>
+								{{selectOptions listValues.niveau selected=actor.system.model.ia.nb labelAttr="label" localize=true blank="libersf.none"}}
+			                </selectOptions>
 			            </div>
 						<div class="grid-2col" title="">
 							<h2>{{localize 'libersf.moteur'}}</h2>
 							<SELECT class="moteurliste" size="1" name="system.model.moteur.nb" title="">
-			                    {{#select actor.system.model.moteur.nb}}
-				                    <option value="0.5" title="{{localize 'libersf.v1'}}">✬ ☆ ☆ ☆ ☆</option>
-				                    <option value="1" title="{{localize 'libersf.v2'}}">★ ☆ ☆ ☆ ☆</option>
-				                    <option value="1.5" title="{{localize 'libersf.v3'}}">★ ✬ ☆ ☆ ☆</option>
-				                    <option value="2" title="{{localize 'libersf.v4'}}">★ ★ ☆ ☆ ☆</option>
-				                    <option value="2.5" title="{{localize 'libersf.v5'}}">★ ★ ✬ ☆ ☆</option>
-				                    <option value="3" title="{{localize 'libersf.v6'}}">★ ★ ★ ☆ ☆</option>
-				                    <option value="3.5" title="{{localize 'libersf.v7'}}">★ ★ ★ ✬ ☆</option>
-				                    <option value="4" title="{{localize 'libersf.v8'}}">★ ★ ★ ★ ☆</option>
-				                    <option value="4.5" title="{{localize 'libersf.v9'}}">★ ★ ★ ★ ✬</option>
-				                    <option value="5" title="{{localize 'libersf.v10'}}">★ ★ ★ ★ ★</option>
-				                {{/select}}
-			                </SELECT>
+								{{selectOptions listValues.niveau selected=actor.system.model.moteur.nb labelAttr="label" localize=true blank="libersf.none"}}
+			                </selectOptions>
 						</div>
 						<div class="grid-2col" title="">
 							<h2>{{localize 'libersf.blindage'}}</h2>
 							<SELECT class="blindageliste" size="1" name="system.model.blindage.nb" title="">
-			                    {{#select actor.system.model.blindage.nb}}
-				                    <option value="0.5" title="{{localize 'libersf.v1'}}">✬ ☆ ☆ ☆ ☆</option>
-				                    <option value="1" title="{{localize 'libersf.v2'}}">★ ☆ ☆ ☆ ☆</option>
-				                    <option value="1.5" title="{{localize 'libersf.v3'}}">★ ✬ ☆ ☆ ☆</option>
-				                    <option value="2" title="{{localize 'libersf.v4'}}">★ ★ ☆ ☆ ☆</option>
-				                    <option value="2.5" title="{{localize 'libersf.v5'}}">★ ★ ✬ ☆ ☆</option>
-				                    <option value="3" title="{{localize 'libersf.v6'}}">★ ★ ★ ☆ ☆</option>
-				                    <option value="3.5" title="{{localize 'libersf.v7'}}">★ ★ ★ ✬ ☆</option>
-				                    <option value="4" title="{{localize 'libersf.v8'}}">★ ★ ★ ★ ☆</option>
-				                    <option value="4.5" title="{{localize 'libersf.v9'}}">★ ★ ★ ★ ✬</option>
-				                    <option value="5" title="{{localize 'libersf.v10'}}">★ ★ ★ ★ ★</option>
-				                {{/select}}
-			                </SELECT>
+								{{selectOptions listValues.niveau selected=actor.system.model.blindage.nb labelAttr="label" localize=true blank="libersf.none"}}
+			                </selectOptions>
 						</div>
 						<div class="grid-2col">
 							<h2>{{localize 'libersf.comp'}}</h2>

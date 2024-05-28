@@ -17,13 +17,13 @@ export class LiberItem extends Item {
     const data = itemData.system;
     const flags = itemData.flags;
     //preparation dépendant du type de personnage (
-    if (itemData.type === 'arme') this._prepareItemData(itemData);
-    if (itemData.type === 'arme-véhicule') this._prepareItemData(itemData);
-    if (itemData.type === 'armure') this._prepareItemData(itemData);
-    if (itemData.type === 'bouclier') this._prepareItemData(itemData);
-    if (itemData.type === 'objet') this._prepareItemData(itemData);
-    if (itemData.type === 'piece') this._prepareItemData(itemData);
-    if (itemData.type === 'level') this._prepareItemData(itemData);
+    if (itemData.type == game.i18n.localize("TYPES.Item.arme") ) this._prepareItemData(itemData);
+    if (itemData.type == game.i18n.localize("TYPES.Item.arme-véhicule") ) this._prepareItemData(itemData);
+    if (itemData.type == game.i18n.localize("TYPES.Item.armure") ) this._prepareItemData(itemData);
+    if (itemData.type == game.i18n.localize("TYPES.Item.bouclier") ) this._prepareItemData(itemData);
+    if (itemData.type == game.i18n.localize("TYPES.Item.objet") ) this._prepareItemData(itemData);
+    if (itemData.type == game.i18n.localize("TYPES.Item.piece") ) this._prepareItemData(itemData);
+    if (itemData.type == game.i18n.localize("TYPES.Item.level") ) this._prepareItemData(itemData);
   }
 
   _prepareItemData(itemData) {

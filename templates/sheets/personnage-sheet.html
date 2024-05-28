@@ -21,9 +21,9 @@
 		</div>
 		<h2>{{localize 'libersf.info'}}</h2>
 		<div class="info">
-			<span>{{localize 'libersf.race'}}</span><input class="race" type="text" value="{{actor.system.background.race}}" placeholder="{{localize 'libersf.race'}}" readonly />
-			<span>{{localize 'libersf.metier'}}</span><input class="metier" type="text" value="{{actor.system.background.metier}}" placeholder="{{localize 'libersf.metier'}}" readonly />
-			<span>{{localize 'libersf.faction'}}</span><input class="faction" type="text" value="{{actor.system.background.religion}}" placeholder="{{localize 'libersf.faction'}}" readonly />
+			<span>{{localize 'libersf.race'}}</span><input class="race" type="text" value="{{listValues.traduct.race}}" placeholder="{{localize 'libersf.race'}}" readonly />
+			<span>{{localize 'libersf.metier'}}</span><input class="metier" type="text" value="{{listValues.traduct.metier}}" placeholder="{{localize 'libersf.metier'}}" readonly />
+			<span>{{localize 'libersf.faction'}}</span><input class="faction" type="text" value="{{listValues.traduct.faction}}" placeholder="{{localize 'libersf.faction'}}" readonly />
 		</div>
 		<div class="clear"></div>
 		<h2 class="marge">Bonus</h2>
@@ -302,53 +302,32 @@
 				<h3>{{localize 'libersf.race'}}</h3>
 				<div class="configuration">
 					<SELECT class="raceliste" size="1" name="system.background.race">
-						{{#select actor.system.background.race}}
-							{{#each config.raceTypes as |race|}}
-								<option value="{{localize race}}">{{localize race}}</option>
-							{{/each}}
-	                    {{/select}}
-	                </SELECT>
+						{{selectOptions listValues.race selected=actor.system.background.race labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
 		            <h2>{{localize 'libersf.faction'}}</h2>
 					<SELECT class="factionliste" size="1" name="system.background.religion">
-	                    {{#select actor.system.background.religion}}
-		                    {{#each config.factionTypes as |faction|}}
-								<option value="{{localize faction}}">{{localize faction}}</option>
-							{{/each}}
-		                {{/select}}
-	                </SELECT>
+						{{selectOptions listValues.faction selected=actor.system.background.religion labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
 		            <h2>{{localize 'libersf.metier'}}</h2>
 					<SELECT class="metierliste" size="1" name="system.background.metier">
-	                    {{#select actor.system.background.metier}}
-	                    	{{#each config.metierTypes as |metier|}}
-								<option value="{{localize metier}}">{{localize metier}}</option>
-							{{/each}}
-		                    <option class="andromede" value="{{localize 'libersf.metier11'}}">{{localize 'libersf.metier11'}}</option>
-		                {{/select}}
-	                </SELECT>
+						{{selectOptions listValues.metier selected=actor.system.background.metier labelAttr="label" localize=true blank="libersf.none"}}<!--andromède magicien-->
+	                </select>
 		                <div class="grid-2col">
 		                	<h2>{{localize 'libersf.comp'}}</h2>
-		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec.">
+		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="{{localize 'libersf.comp'}}">
 		                </div>
 		                <div class="grid-2col">
 		                	<h2>{{localize 'libersf.mut'}}</h2>
 		                	<SELECT class="mutation" size="1" name="system.mutation">
-			                	{{#select actor.system.mutation}}
-				                    {{#each config.choix as |choix|}}
-										<option value="{{localize choix}}">{{localize choix}}</option>
-									{{/each}}
-				                {{/select}}
-			            	</SELECT>
+								{{selectOptions listValues.choix selected=actor.system.mutation labelAttr="label" localize=true blank="libersf.none"}}
+			            	</select>
 		                </div>
 		                <div class="clear"></div>
 		                <div class="grid-2col">
 		                	<h2>Andromède</h2>
 							<SELECT class="andomedes" size="1" name="system.andomedes">
-			                    {{#select actor.system.andomedes}}
-			                    	{{#each config.choix as |choix|}}
-										<option value="{{localize choix}}">{{localize choix}}</option>
-									{{/each}}
-				                {{/select}}
-			                </SELECT>	
+			                    {{selectOptions listValues.choix selected=actor.system.andomedes labelAttr="label" localize=true blank="libersf.none"}}
+			                </select>	
 		                </div>
 		            <input type="a" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
 		        </div>	

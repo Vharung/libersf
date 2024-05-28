@@ -1,5 +1,26 @@
 {
+   "TYPES": {
+        "Actor": {
+            "personnage":"Personnage",
+            "pnj":"PNJ",
+            "monstre":"Monstres",
+            "vehicule":"Véhicule",
+            "planete":"Planète"
+        },
+        "Item":{
+            "arme":"Arme",
+            "arme-véhicule":"Arme de véhicule",
+            "armure":"Armure",
+            "bouclier":"Bouclier",
+            "objet":"Objet",
+            "piece":"Pièce",
+            "argent":"Crédit",
+            "sort":"Sorts",
+            "level":"Niveau"
+        }
+    },
    "libersf" : {
+    "none":"",
     "action": "2 Actions / tour",
     "action0": "Double Actions",
     "action1": "Simple Action",
@@ -684,23 +705,6 @@
     "age":"Agé de ",
     "vie":" tu fais ta vie ",
     "jour":". Jusqu'au jour où ",
-    "decide":" tu décide ",
-    "action10":"Manœuvre évasive : Le pilote effectue une manœuvre rapide et imprévisible pour éviter les tirs ennemis ou les obstacles, ce qui peut réduire les chances de toucher l'engin ou lui conférer un bonus à sa défense pour le prochain tour.  Malus de 20 pour le toucher, utilise 20 d’énergie.",
-    "action11":"Attaque en piqué / Charge rapide : Le pilote plonge rapidement vers l'ennemi, effectuant une attaque agressive pour infliger des dégâts supplémentaires ou déséquilibrer l'adversaire, mais cela peut rendre le véhicule plus vulnérable aux contre-attaques. Bonus de 20 pour le toucher, dégât *2 ou +20 pour le toucher, utilise 20 d’énergie.",
-    "action12":"Déploiement de leurres : Le pilote largue des leurres ou des contre-mesures pour détourner l'attention des ennemis ou les empêcher de verrouiller leurs armes sur le véhicule, ce qui peut les distraire ou réduire leurs chances de toucher lors de leur prochain tour. Chaque tir ennemi doit faire un jet de chance à 50 ou moins pour ne pas se faire avoir, utilisé 10 d'énergie.",
-    "action13":"Assistance de tir : Le pilote ajuste la trajectoire ou la position du véhicule pour permettre à ses passagers d'effectuer des tirs plus précis ou de bénéficier d'un meilleur angle de tir, ce qui peut augmenter leurs chances de toucher ou de causer des dégâts supplémentaires. Bonus de 15 pour le toucher, bonus de 30 pour la visée, utilise 10 d'énergie.",
-    "action14":"Escamotage rapide / invisibilité: Le pilote utilise la vitesse et l'agilité du véhicule pour se faufiler derrière un abri ou se mettre à couvert, ce qui peut rendre plus difficile pour les ennemis de le cibler ou d'effectuer des tirs directs lors de leur prochain tour. Effectuer un jet de détection pour le trouver, utilise 30 d'énergie.",
-    "action15":"Survol tactique / Tir de couverture : Le pilote effectue un survol bas ou un vol stationnaire pour fournir un soutien aérien aux troupes au sol ou pour effectuer des reconnaissances, ce qui peut permettre de repérer les positions ennemies ou de coordonner des attaques depuis les airs. Utilise 10 d'énergie",
-    "action16":"Sprint aérien : Le pilote engage temporairement une surcharge de vitesse pour effectuer un sprint rapide vers une destination spécifique, ce qui peut lui permettre de rejoindre rapidement un point stratégique ou de fuir une situation dangereuse. Utilise 50, d'énergie.",
-    "action17":"Tir avec des armes secondaires : Les véhicules peuvent être équipés de plusieurs armes, et les autres joueurs à bord peuvent utiliser ces armes secondaires pour tirer sur les ennemis ou les cibles désignées par le pilote. Utilise 5 d’énergie par tir.",
-    "action18":"Réparation d'urgence : En cas de dommages au véhicule, les joueurs peuvent entreprendre des réparations d'urgence pour rétablir partiellement la fonctionnalité du véhicule et limiter les dégâts.",
-    "action19":"Gestion de l'énergie : Les joueurs peuvent être chargés de surveiller et de gérer les niveaux d'énergie du véhicule, en ajustant les paramètres pour optimiser les performances des systèmes essentiels tels que le champ de force, les armes et les moteurs. Seule cette personne connaîtra le niveau d’énergie du véhicule.",
-    "action20":"Surcharge du moteur : Un joueur peut décider de surcharger le moteur, lui faisant perdre des points de vie, pour les transformer en énergie.",
-    "action21":"Détection d'ennemis : Les joueurs peuvent utiliser des capteurs et des instruments de détection à bord du véhicule pour repérer les ennemis et fournir des informations précieuses au pilote pour planifier des tactiques de combat. Utilise 5 d'énergie",
-    "action22":"Communication avec d'autres véhicules : Les joueurs peuvent être chargés de maintenir la communication avec d'autres véhicules alliés pour coordonner les mouvements, les attaques et les tactiques pendant le combat.",
-    "action23":"Support médical : Si des blessures surviennent pendant le combat, les joueurs peuvent fournir des premiers soins et des soins médicaux de base à l'équipage blessé pour les stabiliser jusqu'à ce qu'ils puissent recevoir un traitement plus complet après le combat.",
-    "action24":"Urgence : En cas d'incendie ou d'urgence à bord du véhicule, les joueurs peuvent utiliser des extincteurs et d'autres équipements pour éteindre les flammes et maintenir la sécurité de l'équipage et du véhicule. Redonnant 50 points de PV."
-
-  
+    "decide":" tu décide "
   }
 }

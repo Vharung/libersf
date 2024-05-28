@@ -15,7 +15,7 @@ export class LiberActor extends Actor {
     const data = actorData;
     const flags = actorData.flags;
     //preparation dépendant du type de personnage (
-    if (actorData.type === 'personnage') this._preparePJData(actorData.system);
+    if (actorData.type === game.i18n.localize("TYPES.Actor.personnage")) this._preparePJData(actorData.system);
   }
 
 

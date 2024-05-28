@@ -1,13 +1,14 @@
 import { liber } from "./class/config.js";
+import { range } from "./class/list.js";
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
  export class LiberActorSheet extends ActorSheet {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
           classes: ["Liber", "sheet", "actor"],
-          width: 640,
+          width: 660,
           height: 870,
           dragDrop: [{dragSelector: ".draggable", dropSelector: null},{dragSelector: ".ability", dropSelector: null}],
           tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -22,26 +23,55 @@ import { liber } from "./class/config.js";
         }    
     }
 
-    getData(){
-        const data = super.getData();
-        var poidsactor='';
-        data.dtypes = ["String", "Number", "Boolean"];
-        data.config=liber
-        console.log(data);        
-        if (this.actor.type == 'personnage' || this.actor.type == 'pnj' || this.actor.type == 'monstre' | this.actor.type == 'vehicule') {
-            this._prepareCharacterItems(data);this._onStatM(data);
+    async getData(options) {
+        // Récupération des données de la méthode parente
+        const context = await super.getData(options);
+        context.dtypes = ["String", "Number", "Boolean"];
+        context.listValues = {
+            race: range.raceTypes,
+            faction: range.factionTypes,
+            metier: range.metierTypes,
+            taille: range.tailleTypes,
+            type: range.typeTypes,
+            choix: range.choix,
+            niveau: range.niveau,
+            traduct: {}                
+        };
+        // Récupérer les valeurs nécessaires depuis l'acteur
+        const race = context.actor.system.background.race;
+        const faction = context.actor.system.background.religion; 
+        const metier = context.actor.system.background.metier; 
+        const type = context.actor.system.background.type; 
+        const choix = context.actor.system.background.choix;
+        const taille = context.actor.system.background.taille;
+
+
+        context.listValues.traduct = {
+            race: context.listValues.race[race] ? game.i18n.localize(context.listValues.race[race].label) : '',
+            faction: context.listValues.faction[faction] ? game.i18n.localize(context.listValues.faction[faction].label) : '',
+            metier: metier && context.listValues.metier[metier] ? game.i18n.localize(context.listValues.metier[metier].label) : '',
+            religion: context.actor.system.religion && context.listValues.religion && context.listValues.religion[context.actor.system.religion]
+                ? game.i18n.localize(context.listValues.religion[context.actor.system.religion].label) : '',
+            type: type && context.listValues.type[type] ? game.i18n.localize(context.listValues.type[type].label) : '',
+            choix: choix && context.listValues.choix[choix] ? game.i18n.localize(context.listValues.choix[choix].label) : '',
+            taille: taille && context.listValues.taille[taille] ? game.i18n.localize(context.listValues.taille[taille].label) : ''
+        };
+
+        if (this.actor.type == game.i18n.localize("TYPES.Actor.personnage") || this.actor.type == game.i18n.localize("TYPES.Actor.pnj") || this.actor.type == game.i18n.localize("TYPES.Actor.monstre")  | this.actor.type == game.i18n.localize("TYPES.Actor.vehicule") ) {
+            this._prepareCharacterItems(context);this._onStatM(context);
         }
-        if (this.actor.type == 'personnage' || this.actor.type == 'pnj' ) {
-            this._onEncom(data);
+        if (this.actor.type == game.i18n.localize("TYPES.Actor.personnage") || this.actor.type == game.i18n.localize("TYPES.Actor.pnj") ) {
+            this._onEncom(context);
         }
-        if(this.actor.type == 'vehicule'){
-            this._onStatV(data);
+        if(this.actor.type == game.i18n.localize("TYPES.Actor.vehicule") ){
+            this._onVehiStat(context);
         }
-        return data;
+        console.log(context)
+        return context;
     }
 
    
-    _prepareCharacterItems(sheetData) {
+    _prepareCharacterItems(sheetData) {//bug
        const actorData = sheetData.actor;
        console.log('_prepareCharacterItems')
         // Initialize containers.
@@ -58,26 +88,26 @@ import { liber } from "./class/config.js";
         for (let i of sheetData.items) {
           let item = i.items;
           i.img = i.img || DEFAULT_TOKEN;
-          if (i.type === 'arme') {
+          if (i.type === game.i18n.localize("TYPES.Item.arme")) {
             arme.push(i);
-          }else if (i.type === 'arme-véhicule') {
+          }else if (i.type === game.i18n.localize("TYPES.Item.arme-véhicule")) {
             varme.push(i);
-          }else if (i.type === 'armure') {
+          }else if (i.type === game.i18n.localize("TYPES.Item.armure")) {
             armure.push(i);
           }
-          else if (i.type === 'bouclier') {
+          else if (i.type === game.i18n.localize("TYPES.Item.bouclier")) {
             armure.push(i);
           }
-          else if (i.type === 'objet') {
+          else if (i.type === game.i18n.localize("TYPES.Item.objet")) {
             inventaire.push(i);
           }
-          else if (i.type === 'piece') {
+          else if (i.type === game.i18n.localize("TYPES.Item.piece")) {
             piece.push(i);
           }
-          else if (i.type === 'argent') {
+          else if (i.type === game.i18n.localize("TYPES.Item.argent")) {
             argent.push(i);
           }
-          else if (i.type === 'sort') {
+          else if (i.type === game.i18n.localize("TYPES.Item.sort")) {
             sort.push(i);
           }
         }
@@ -191,7 +221,7 @@ import { liber } from "./class/config.js";
         var race=html.find('.race').val();
         var ptrestant=html.find('.pointrestant').val();
         var level=html.find('.niveau').val();
-        if(this.actor.type=="vehicule"){
+        if(this.actor.type==game.i18n.localize("TYPES.Actor.vehicule")){
             var ptrestant2=this.actor.system.stat.pointrestant;
             resultat=parseInt(ptrestant2);
 
@@ -214,7 +244,7 @@ import { liber } from "./class/config.js";
         });
         if(level==undefined){
             resultat=resultat;
-        }else if(this.actor.type!="vehicule"){
+        }else if(this.actor.type!=game.i18n.localize("TYPES.Actor.vehicule")){
             var hpmax=html.find('.hpmax').val();
             var pointhp=(parseInt(hpmax)-20)*2;
             resultat=resultat+pointhp; 
@@ -352,7 +382,7 @@ import { liber } from "./class/config.js";
             html.find('.encours').val(total);
             html.find('.crinv').val(crinv);
             html.find('.barenc').css({"width":pourcentage+"%"});
-        }else if(this.actor.type=="vehicule"){
+        }else if(this.actor.type==game.i18n.localize("TYPES.Actor.vehicule")){
             let type=this.actor.system.type;
             let tail=this.actor.system.taille;
             let encour=html.find('.encours').val();

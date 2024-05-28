@@ -4,9 +4,9 @@
  */
  export class LiberItemSheet extends ItemSheet{
     get template(){
-        if (this.item.type == 'arme' || this.item.type == 'arme-véhicule' ) {
+        if (this.item.type == game.i18n.localize("TYPES.Item.arme")  || this.item.type == game.i18n.localize("TYPES.Item.arme-véhicule")) {
             return `systems/libersf/templates/sheets/arme-sheet.html`;
-        }else {
+        }else {//bug
             return `systems/libersf/templates/sheets/${this.item.type}-sheet.html`;
         }    
     }

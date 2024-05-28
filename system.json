@@ -2,10 +2,10 @@
   "id": "libersf",
   "title": "Liber SF",
   "description": "The libersf SF  system for FoundryVTT!",
-  "version": "2.5",
+  "version": "3",
   "compatibility": {
-    "minimum": "0.9",
-    "verified": "11.299"
+    "minimum": "12",
+    "verified": "12.324"
   },
   "authors": [
     {
@@ -127,8 +127,10 @@
     }
   ],
   "background": "systems/libersf/assets/accueil.jpg",
-  "gridDistance": 1,
-  "gridUnits": "m",
+  "grid":{
+      "distance": 1,
+      "units": "m"
+    },
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "psy",
   "url": "https://github.com/Vharung/libersfsf",

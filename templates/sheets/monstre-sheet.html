@@ -238,29 +238,29 @@
 				<h3>{{localize 'libersf.race'}}</h3>
 				<div class="configuration">
 					<SELECT class="raceliste" size="1" name="system.background.race">
-						{{#select actor.system.background.race}}
+						{{#selectOptions actor.system.background.race}}
 							{{#each config.raceTypes as |race|}}
 								<option value="{{localize race}}">{{localize race}}</option>
 							{{/each}}
-	                    {{/select}}
-	                </SELECT>
+	                    {{/selectOptions}}
+	                </selectOptions>
 		            <h2>{{localize 'libersf.faction'}}</h2>
 					<SELECT class="factionliste" size="1" name="system.background.religion">
-	                    {{#select actor.system.background.religion}}
+	                    {{#selectOptions actor.system.background.religion}}
 		                    {{#each config.factionTypes as |faction|}}
 								<option value="{{localize faction}}">{{localize faction}}</option>
 							{{/each}}
-		                {{/select}}
-	                </SELECT>
+		                {{/selectOptions}}
+	                </selectOptions>
 		            <h2>{{localize 'libersf.metier'}}</h2>
 					<SELECT class="metierliste" size="1" name="system.background.metier">
-	                    {{#select actor.system.background.metier}}
+	                    {{#selectOptions actor.system.background.metier}}
 	                    	{{#each config.metierTypes as |metier|}}
 								<option value="{{localize metier}}">{{localize metier}}</option>
 							{{/each}}
 		                    <option class="andromede" value="{{localize 'libersf.metier11'}}">{{localize 'libersf.metier11'}}</option>
-		                {{/select}}
-	                </SELECT>
+		                {{/selectOptions}}
+	                </selectOptions>
 		                <div class="grid-2col">
 		                	<h2>{{localize 'libersf.comp'}}</h2>
 		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec.">
@@ -268,23 +268,23 @@
 		                <div class="grid-2col">
 		                	<h2>{{localize 'libersf.mut'}}</h2>
 		                	<SELECT class="mutation" size="1" name="system.mutation">
-			                	{{#select actor.system.mutation}}
+			                	{{#selectOptions actor.system.mutation}}
 				                    {{#each config.choix as |choix|}}
 										<option value="{{localize choix}}">{{localize choix}}</option>
 									{{/each}}
-				                {{/select}}
-			            	</SELECT>
+				                {{/selectOptions}}
+			            	</selectOptions>
 		                </div>
 		                <div class="clear"></div>
 		                <div class="grid-2col">
 		                	<h2>Andromède</h2>
 							<SELECT class="andomedes" size="1" name="system.andomedes">
-			                    {{#select actor.system.andomedes}}
+			                    {{#selectOptions actor.system.andomedes}}
 			                    	{{#each config.choix as |choix|}}
 										<option value="{{localize choix}}">{{localize choix}}</option>
 									{{/each}}
-				                {{/select}}
-			                </SELECT>	
+				                {{/selectOptions}}
+			                </selectOptions>	
 		                </div>
 		            <input type="a" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
 		        </div>	

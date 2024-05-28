@@ -45,6 +45,7 @@ input.m_degat,input.m_pv,input.m_ar{color:grey}
 .Liber input{border: none; background: none;}
 
 #sidebar a.item i{display: none}
+#sidebar a.item {height: 20px}
 #sidebar a.item[data-tab="chat"]{background:url(" ../assets/icon/f1.png") no-repeat center center;background-size: 80%;}
 #sidebar a.item[data-tab="combat"]{background:url(" ../assets/icon/f2.png") no-repeat center center;background-size: 80%;}
 #sidebar a.item[data-tab="scenes"]{background:url(" ../assets/icon/f3.png") no-repeat center center;background-size: 80%;}
@@ -57,7 +58,7 @@ input.m_degat,input.m_pv,input.m_ar{color:grey}
 #sidebar a.item[data-tab="compendium"]{background:url(" ../assets/icon/f10.png") no-repeat center center;background-size: 80%;}
 #sidebar a.item[data-tab="settings"]{background:url(" ../assets/icon/f11.png") no-repeat center center;background-size: 80%;}
 #sidebar a.item.active,#sidebar a.item.active:hover{filter:invert(100%);}
-#sidebar a.item:hover{filter:invert(80%); transition:0.5s}
+#sidebar a.item:hover{filter:invert(80%); transition:0.5s;}
 textarea{color:var(--couleur-clair)}
 
 /*Style*/
