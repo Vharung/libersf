@@ -280,3 +280,4 @@ textarea{color:var(--couleur-clair)}
 }
 @keyframes scans {0% {top: 580px;}50% {top:-5px;}100% {top: 580px;}}
 @keyframes scanss {0% {top: 300px;}50% {top:-20px;}100% {top: 300px;}}
+#sidebar .resultat{padding: 20px;text-align: center;text-transform: uppercase;font-size: large;}

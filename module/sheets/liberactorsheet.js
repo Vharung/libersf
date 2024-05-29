@@ -56,24 +56,23 @@ import { range } from "./class/list.js";
             choix: choix && context.listValues.choix[choix] ? game.i18n.localize(context.listValues.choix[choix].label) : '',
             taille: taille && context.listValues.taille[taille] ? game.i18n.localize(context.listValues.taille[taille].label) : ''
         };
-
-        if (this.actor.type == game.i18n.localize("TYPES.Actor.personnage") || this.actor.type == game.i18n.localize("TYPES.Actor.pnj") || this.actor.type == game.i18n.localize("TYPES.Actor.monstre")  | this.actor.type == game.i18n.localize("TYPES.Actor.vehicule") ) {
+        if (this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"  | this.actor.type == "vehicule" ) {
+            console.log('type perso')
             this._prepareCharacterItems(context);this._onStatM(context);
         }
-        if (this.actor.type == game.i18n.localize("TYPES.Actor.personnage") || this.actor.type == game.i18n.localize("TYPES.Actor.pnj") ) {
+        if (this.actor.type == "personnage" || this.actor.type == "pnj" ) {
             this._onEncom(context);
         }
-        if(this.actor.type == game.i18n.localize("TYPES.Actor.vehicule") ){
-            this._onVehiStat(context);
+        if(this.actor.type == "vehicule"){
+            this._onStatV(context);
         }
         console.log(context)
         return context;
     }
 
    
-    _prepareCharacterItems(sheetData) {//bug
+    _prepareCharacterItems(sheetData) {
        const actorData = sheetData.actor;
-       console.log('_prepareCharacterItems')
         // Initialize containers.
         const inventaire = [];
         const arme = [];
@@ -88,26 +87,26 @@ import { range } from "./class/list.js";
         for (let i of sheetData.items) {
           let item = i.items;
           i.img = i.img || DEFAULT_TOKEN;
-          if (i.type === game.i18n.localize("TYPES.Item.arme")) {
+          if (i.type === "arme") {
             arme.push(i);
-          }else if (i.type === game.i18n.localize("TYPES.Item.arme-véhicule")) {
+          }else if (i.type === "arme-véhicule") {
             varme.push(i);
-          }else if (i.type === game.i18n.localize("TYPES.Item.armure")) {
+          }else if (i.type === "armure") {
             armure.push(i);
           }
-          else if (i.type === game.i18n.localize("TYPES.Item.bouclier")) {
+          else if (i.type === "bouclier") {
             armure.push(i);
           }
-          else if (i.type === game.i18n.localize("TYPES.Item.objet")) {
+          else if (i.type === "objet") {
             inventaire.push(i);
           }
-          else if (i.type === game.i18n.localize("TYPES.Item.piece")) {
+          else if (i.type === "piece") {
             piece.push(i);
           }
-          else if (i.type === game.i18n.localize("TYPES.Item.argent")) {
+          else if (i.type === "argent") {
             argent.push(i);
           }
-          else if (i.type === game.i18n.localize("TYPES.Item.sort")) {
+          else if (i.type === "sort") {
             sort.push(i);
           }
         }
@@ -137,7 +136,7 @@ import { range } from "./class/list.js";
         html.find('.desequi').click(this._onDesArmor.bind(this));
         html.find('.update').click(this._onNivArmor.bind(this))
         //choix Race
-        html.find('.validation').click(this._onAvantageRace.bind(this),this._onAvantageJob.bind(this));
+        html.find('.validation').click(this._onAvantageRace.bind(this));
         //caractere aléatoire
         html.find('.genererp').click(this._onEarth.bind(this));
         html.find('.generator').click(this._onStory2.bind(this));
@@ -542,7 +541,7 @@ import { range } from "./class/list.js";
         item.sheet.render(true);
     }
 
-    _onRoll(event){
+    async _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
         var name = event.target.dataset["name"];
         var type = this.actor.system.typed;
@@ -671,11 +670,12 @@ import { range } from "./class/list.js";
 
   
 
-        let r = new Roll("1d100");
-        var roll=r.evaluate({"async": false});
+        let r = await new Roll('1d100').evaluate();
+        let retour = r.result;
+        console.log(retour)
         var deg='';
         var perte=0;
-        let retour=r.result; var succes="";
+        var succes="";
         if(name=="Visée"){
             if(retour>echec){
                 succes="<h4 class='resultat' style='background:#ff3333;'>"+game.i18n.localize('libersf.J17')+"</h4>";
@@ -818,12 +818,15 @@ import { range } from "./class/list.js";
         if(inforesult<=0){
             succes="<h4 class='resultat' style='background:#ff3333;'>"+game.i18n.localize('libersf.echec')+"</h4>";
         }
-        const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">'+game.i18n.localize('libersf.jet')+ name + " : " + jetdeDesFormule +" - " + inforesult + '</p>'+ succes+'</span>'+deg;
+        const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">'+game.i18n.localize('libersf.jet')+ name + " : " + retour +" / " + inforesult + '</p>'+ succes+'</span>'+deg;
         //roll.roll().toMessage({
-        roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this }),
-            flavor: texte
-        });
+        if (r && texte) {
+            await r.toMessage({
+                user: game.user._id,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: texte
+            });
+        }
     }
 
 
@@ -889,57 +892,55 @@ import { range } from "./class/list.js";
     }
 
     _onAvantageRace(event){
+        console.log("avantagerace")
         var clanliste=this.actor.system.background.race;
-
         var bonusrace='';
-        if(clanliste==game.i18n.localize("libersf.humain")){
+        if(clanliste=="r0"){
             bonusrace=game.i18n.localize("libersf.bonushumain");
-        }else if(clanliste==game.i18n.localize("libersf.artu")){
+        }else if(clanliste=="r2"){
             bonusrace=game.i18n.localize("libersf.bonusarthuriens");
-        }else if(clanliste==game.i18n.localize("libersf.dragon")){
+        }else if(clanliste=="r4"){
             bonusrace=game.i18n.localize("libersf.bonusdraconiens");
-        }else if(clanliste==game.i18n.localize("libersf.machine")){
+        }else if(clanliste=="r6"){
             bonusrace=game.i18n.localize("libersf.bonusmachine");
-        }else if(clanliste==game.i18n.localize("libersf.pleiadiens")){
+        }else if(clanliste=="r1"){
             bonusrace=game.i18n.localize("libersf.bonuspleiadiens");
-        }else if(clanliste==game.i18n.localize("libersf.yor")){
+        }else if(clanliste=="r3"){
             bonusrace=game.i18n.localize("libersf.bonusyoribiens");
-        }else if(clanliste==game.i18n.localize("libersf.elf")){
+        }else if(clanliste=="r5"){
             bonusrace=game.i18n.localize("libersf.bonuselfen");
-        }else if(clanliste==game.i18n.localize("libersf.orqu")){
+        }else if(clanliste=="r7"){
             bonusrace=game.i18n.localize("libersf.bonusorc");
         }else {
             bonusrace="";
         }
-        this.actor.update({'system.background.bonusrace': bonusrace});
-    }
-    _onAvantageJob(event){
+        
         var metierliste=this.actor.system.background.metier;
         var metier='';
-        if(metierliste==game.i18n.localize("libersf.metier1")){
+        if(metierliste=="m1"){
             metier="10 "+game.i18n.localize("libersf.arti");
-        }else if(metierliste==game.i18n.localize("libersf.metier2")){
+        }else if(metierliste=="m2"){
             metier="10 "+game.i18n.localize("libersf.nego");
-        }else if(metierliste==game.i18n.localize("libersf.metier3")){
+        }else if(metierliste=="m3"){
             metier="10 "+game.i18n.localize("libersf.surv");
-        }else if(metierliste==game.i18n.localize("libersf.metier4")){
+        }else if(metierliste=="m4"){
             metier="10 "+game.i18n.localize("libersf.inve");
-        }else if(metierliste==game.i18n.localize("libersf.metier5")){
+        }else if(metierliste=="m5"){
             metier="10 "+game.i18n.localize("libersf.disc");
-        }else if(metierliste==game.i18n.localize("libersf.metier6")){
+        }else if(metierliste=="m6"){
             metier="10 "+game.i18n.localize("libersf.pilo");
-        }else if(metierliste==game.i18n.localize("libersf.metier7")){
+        }else if(metierliste=="m7"){
             metier="10 "+game.i18n.localize("libersf.mede");
-        }else if(metierliste==game.i18n.localize("libersf.metier8")){
+        }else if(metierliste=="m8"){
             metier="10 "+game.i18n.localize("libersf.atir");
-        }else if(metierliste==game.i18n.localize("libersf.metier9")){
+        }else if(metierliste=="m9"){
             metier="10 "+game.i18n.localize("libersf.meca");
-        }else if(metierliste==game.i18n.localize("libersf.metier10")){
+        }else if(metierliste=="10"){
             metier="10 "+game.i18n.localize("libersf.scie");
-        }else if(metierliste==game.i18n.localize("libersf.metier11")){
+        }else if(metierliste=="m11"){
             metier="10 "+game.i18n.localize("libersf.magie");
         }
-        this.actor.update({'system.background.bonusmetier': metier});
+        this.actor.update({'system.background.bonusmetier': metier,'system.background.bonusrace': bonusrace});
     }
     _onArmor(event){
         var genre=event.target.dataset["genre"];
@@ -1035,7 +1036,7 @@ import { range } from "./class/list.js";
         this.actor.update({'name':nom,'img':img,'system.background.histoire':desc,'system.stat.hp.value': pv,'system.stat.hp.max': pv,'system.degatd': dgt,'system.armed':'Attaque','system.stat.armure.value': ar,'system.stat.armure.max': ar,'system.ptarm': ar,'system.prog':'armure Naturel','system.attributs.Agilité':cpt[0],'system.attributs.Artisanat':cpt[1],'system.attributs.Balistique':cpt[2],'system.attributs.Combat':cpt[3],'system.attributs.ConGén':cpt=[4],'system.attributs.ConSpécif':cpt=[5],'system.attributs.Dextérité':cpt=[6],'system.attributs.Diplomatie':cpt=[7],'system.attributs.Discrétion':cpt=[8],'system.attributs.Force':cpt=[9],'system.attributs.Investigation':cpt=[10],'system.attributs.Jeu':cpt=[11],'system.attributs.Mécanique':cpt=[12],'system.attributs.Médecine':cpt=[13],'system.attributs.Natation':cpt=[14],'system.attributs.Navigation':cpt=[15],'system.attributs.Négociation':cpt=[16],'system.attributs.Perception':cpt=[17],'system.attributs.Pilotage':cpt=[18],'system.attributs.Piratage':cpt=[19],'system.attributs.Pistage':cpt=[20],'system.attributs.Religion':cpt=[21],'system.attributs.Science':cpt=[22],'system.attributs.Survie':cpt=[23],'system.attributs.Tir':cpt=[24],'system.attributs.Visée':cpt=[25]});
     }
 
-    _onCouv(event){
+    _onCouv(event){//Fr
        let idn=event.target.dataset["lettre"];
         let effet=this.actor.effects;
         let lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort','à Couvert']//Fr

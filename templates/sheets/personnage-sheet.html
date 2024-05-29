@@ -2,11 +2,11 @@
 	{{!-- Sheet Header --}}
 	{{!-- Sheet Tab Navigation --}}
 	<nav class="sheet-tabs tabs navlib" data-group="primary">
-		<a class="item bg active" data-tab="bg" title="{{localize 'libersf.histoire'}}"><span></span></a>
-		<a class="item carac" data-tab="carac" title="{{localize 'libersf.carac'}}"><span></span></a>
-		<a class="item inven" data-tab="items" title="{{localize 'libersf.inv'}}"><span></span></a>
-		<a class="item compe " data-tab="features" title="{{localize 'libersf.cpt'}}"><span></span></a>
+		<a class="item inven active" data-tab="items" title="{{localize 'libersf.inv'}}"><span></span></a>
 		<a class="item magi andromede" data-tab="magie" title="{{localize 'libersf.magie'}}"><span></span></a>
+		<a class="item compe " data-tab="features" title="{{localize 'libersf.cpt'}}"><span></span></a>	
+		<a class="item bg" data-tab="bg" title="{{localize 'libersf.histoire'}}"><span></span></a>
+		<a class="item carac" data-tab="carac" title="{{localize 'libersf.carac'}}"><span></span></a>
 		<a class="item outil" data-tab="lab" title="⚙"><span></span></a>
 	</nav>
 	<header>
@@ -28,7 +28,7 @@
 		<div class="clear"></div>
 		<h2 class="marge">Bonus</h2>
 		<div class="info">
-			<input class="bonusrace" title="{{actor.system.background.bonusrace}}" name="system.background.bonusrace" type="text" value="{{actor.system.background.bonusrace}}" placeholder="{{localize 'libersf.bonus'}}"/>
+			<input class="bonusrace" title="{{actor.system.background.bonusrace}}" name="system.background.bonusrace" type="text" value="{{actor.system.background.bonusrace}}" placeholder="{{localize 'libersf.bonus'}}" readonly/>
 			<input class="bonusmetier" title="{{actor.system.background.bonusmetier}}" name="system.background.bonusmetier" type="text" value="{{actor.system.background.bonusmetier}}" placeholder="{{localize 'libersf.bonus'}}" readonly />
 			<!--input class="bonuslevel" title="{{actor.system.background.bonuslevel}}" name="system.background.bonuslevel" type="text" value="{{actor.system.background.bonuslevel}}" placeholder="{{localize 'libersf.bonuslevel'}}" readonly /-->
 		</div>
