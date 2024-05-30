@@ -59,6 +59,7 @@ input.m_degat,input.m_pv,input.m_ar{color:grey}
 #sidebar a.item[data-tab="settings"]{background:url(" ../assets/icon/f11.png") no-repeat center center;background-size: 80%;}
 #sidebar a.item.active,#sidebar a.item.active:hover{filter:invert(100%);}
 #sidebar a.item:hover{filter:invert(80%); transition:0.5s;}
+#sidebar resultdeg {width: calc(100% - 210px);padding: 40px 0px;text-align: center;float: right;background: var(--couleur-clair);height: 118px;margin-top: 8px;font-size: x-large;}
 textarea{color:var(--couleur-clair)}
 
 /*Style*/
@@ -262,7 +263,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .left{margin-left: 12px;}
 .Liber.vehi .solit{margin-top: 22px; }
 .Liber .inventator .histoire{resize: none;width: 188px;height: 325px;overflow: auto;scrollbar-width: none;color: var(--couleur-clair);margin: 0px;padding: 5px;}
-.Liber .ville{resize: none;color:var(--couleur-clair);height: 50px;overflow: auto;scrollbar-width: none; }
+.Liber .ville{resize: none;color:var(--couleur-clair);height: 100px;overflow: auto;scrollbar-width: none; }
 .Liber .planet{height: 120px}
 .Liber .full{margin-top: 10px;width: 400px}
 .Liber .full h3{margin-top: 10px;width: 400px}
@@ -273,6 +274,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .troisquart h2{width: 118px;}
 .Liber .unquart{width: 90px;float: left}
 .Liber .unquart h2{width: 88px;}
+.Liber .infoplanete select{float: right;width: 125px;background: none;color: var(--color-clair);height: 33px;margin-bottom: 10px;}
 @keyframes scan {
     0% {top: -5px;}
     50% {top:190px;}

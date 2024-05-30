@@ -4,7 +4,7 @@
   "description": "The libersf SF  system for FoundryVTT!",
   "version": "3.01",
   "compatibility": {
-    "minimum": "12",
+    "minimum": "0.9",
     "verified": "12.324"
   },
   "authors": [
@@ -34,20 +34,8 @@
       "flags": {}
     },
     {
-      "name": "armure",
-      "label": "Armure",
-      "system": "libersf",
-      "path": "pack/armurebouclier",
-      "type": "Item",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "flags": {}
-    },
-    {
       "name": "arme",
-      "label": "Arme / Chargeur",
+      "label": "Inventaire",
       "system": "libersf",
       "path": "pack/armes",
       "type": "Item",
@@ -62,18 +50,6 @@
       "label": "Equipement vehicule",
       "system": "libersf",
       "path": "pack/armevehicule",
-      "type": "Item",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "flags": {}
-    },
-    {
-      "name": "objet",
-      "label": "Objet",
-      "system": "libersf",
-      "path": "pack/objet",
       "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",
@@ -127,10 +103,9 @@
     }
   ],
   "background": "systems/libersf/assets/accueil.jpg",
-  "grid":{
-      "distance": 1,
-      "units": "m"
-    },
+  "grid": {
+    "units": "m"
+  },
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "psy",
   "url": "https://github.com/Vharung/libersfsf",

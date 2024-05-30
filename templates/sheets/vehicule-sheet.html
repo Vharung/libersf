@@ -21,10 +21,10 @@
 		</div>
 		<h2>{{localize 'libersf.info'}}</h2>
 		<div class="info">
-			<span>{{localize 'libersf.faction'}}</span><input class="faction" type="text" value="{{actor.system.model.faction}}" placeholder="{{localize 'libersf.faction'}}" readonly />
-			<span>{{localize 'libersf.techno'}}</span><input class="model" name="system.model" type="text" value="{{actor.system.model.tehnologie}}" placeholder="☆ ☆ ☆ ☆ ☆" readonly="" />
-			<span>{{localize 'libersf.type'}}</span><input class="metier types" type="text" value="{{actor.system.model.type.etoile}}" placeholder="{{localize 'libersf.type'}}" readonly />
-			<span>{{localize 'libersf.taille'}}</span><input class="tailles" type="text" value="{{actor.system.model.taille.etoile}}" placeholder="{{localize 'libersf.taille'}}" readonly />
+			<span>{{localize 'libersf.faction'}}</span><input class="faction" type="text" value="{{listValues.traduct.faction}}" placeholder="{{localize 'libersf.faction'}}" readonly />
+			<span>{{localize 'libersf.techno'}}</span><input class="model" name="system.model.technologie" type="text" value="{{actor.system.model.technologie}}" placeholder="☆ ☆ ☆ ☆ ☆" readonly="" />
+			<span>{{localize 'libersf.type'}}</span><input class="metier types" type="text" value="{{listValues.traduct.type}}" placeholder="{{localize 'libersf.type'}}" readonly />
+			<span>{{localize 'libersf.taille'}}</span><input class="tailles" type="text" value="{{listValues.traduct.taille}}" placeholder="{{localize 'libersf.taille'}}" readonly />
 		</div>
 		<div class="clear"></div>
 		<div class="points marge moteur space">
@@ -266,48 +266,48 @@
 				<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
 					<h3>Inventaire</h3>
 					<div class="zoneinfo inventator">
-						<div class="grid-2col">
+						
+						
+		                <div class="grid-2col">
 							<h2>{{localize 'libersf.faction'}}</h2>
-							<SELECT class="factionliste" size="1" name="system.model.faction">
+							<select class="factionliste" size="1" name="system.model.faction">
 								{{selectOptions listValues.faction selected=actor.system.model.faction labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 			            </div>
 						<div class="grid-2col">
 							<h2>{{localize 'libersf.type'}}</h2>
-							<SELECT class="typeliste" size="1" name="system.model.type.nb">
+							<select class="typeliste" size="1" name="system.model.type.nb">
 								{{selectOptions listValues.type selected=actor.system.model.type.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 			            </div>
 			            <div class="grid-2col">
 			            	<h2>{{localize 'libersf.taille'}}</h2>
-							<SELECT class="tailleliste" size="1" name="system.model.taille.nb">
+							<select class="tailleliste" size="1" name="system.model.taille.nb">
 								{{selectOptions listValues.taille selected=actor.system.model.taille.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 			            </div>
 			            <div class="grid-2col">
 			            	<h2>{{localize 'libersf.ia'}}</h2>
-							<SELECT class="ialiste" size="1" name="system.model.ia.nb" title="">
+							<select class="ialiste" size="1" name="system.model.ia.nb" title="">
 								{{selectOptions listValues.niveau selected=actor.system.model.ia.nb labelAttr="label" localize=true blank="libersf.none"}}
-			                </selectOptions>
+			                </select>
 			            </div>
 						<div class="grid-2col" title="">
 							<h2>{{localize 'libersf.moteur'}}</h2>
-							<SELECT class="moteurliste" size="1" name="system.model.moteur.nb" title="">
+							<select class="moteurliste" size="1" name="system.model.moteur.nb" title="">
 								{{selectOptions listValues.niveau selected=actor.system.model.moteur.nb labelAttr="label" localize=true blank="libersf.none"}}
-			                </selectOptions>
+			                </select>
 						</div>
 						<div class="grid-2col" title="">
 							<h2>{{localize 'libersf.blindage'}}</h2>
-							<SELECT class="blindageliste" size="1" name="system.model.blindage.nb" title="">
+							<select class="blindageliste" size="1" name="system.model.blindage.nb" title="">
 								{{selectOptions listValues.niveau selected=actor.system.model.blindage.nb labelAttr="label" localize=true blank="libersf.none"}}
-			                </selectOptions>
+			                </select>
 						</div>
 						<div class="grid-2col">
 							<h2>{{localize 'libersf.comp'}}</h2>
 		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec." style="float: left;background: #0d0d0d;">
 						</div>	
-						
-		                
 
 						<div class="clear"></div>				
 					</div>	

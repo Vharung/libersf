@@ -16,6 +16,7 @@ import { range } from "./class/list.js";
     }
 
     get template() {
+        console.log(this.actor.type)
         if (this.actor.type == 'personnage' || this.actor.type == 'pnj' ) {
             return `systems/libersf/templates/sheets/personnage-sheet.html`;
         }else {
@@ -37,15 +38,154 @@ import { range } from "./class/list.js";
             niveau: range.niveau,
             traduct: {}                
         };
+        console.log(context)
+        console.log(context.listValues)
+        let faction=null;
+        let metier = null;
+        let type = null;
+        let choix = null;
+        let taille = null;
+        let race = null;
         // Récupérer les valeurs nécessaires depuis l'acteur
-        const race = context.actor.system.background.race;
-        const faction = context.actor.system.background.religion; 
-        const metier = context.actor.system.background.metier; 
-        const type = context.actor.system.background.type; 
-        const choix = context.actor.system.background.choix;
-        const taille = context.actor.system.background.taille;
+        if(this.actor.type == "vehicule"){
+            faction = context.actor.system.model.faction || null;
+            metier = context.actor.system.model.metier || null;
+            type = context.actor.system.model.type.nb || null;
+            choix = context.actor.system.model.choix || null;
+            taille = context.actor.system.model.taille.nb || null;
+        }else if(this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"){
+            race = context.actor.system.background.race || null;
+            faction = context.actor.system.background.religion || null;
+            metier = context.actor.system.background.metier || null;
+            type = context.actor.system.background.type || null;
+            choix = context.actor.system.background.choix || null;
+            taille = context.actor.system.background.taille || null;
+        }
+        console.log(faction)
+        console.log(metier)
+        console.log(type)
+        console.log(taille)
 
 
+        
+        if (this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"  | this.actor.type == "vehicule" ) {
+            this._prepareCharacterItems(context);
+            let stat= await this._onStatM(context);
+            context.actor.system = {
+                ...context.actor.system,
+                attributs: {
+                    ...context.actor.system.attributs,
+                    Agilité: stat['system.attributs.Agilité'],
+                    Artisanat: stat['system.attributs.Artisanat'],
+                    Balistique: stat['system.attributs.Balistique'],
+                    Combat: stat['system.attributs.Combat'],
+                    ConGén: stat['system.attributs.ConGén'],
+                    ConSpécif: stat['system.attributs.ConSpécif'],
+                    Dextérité: stat['system.attributs.Dextérité'],
+                    Diplomatie: stat['system.attributs.Diplomatie'],
+                    Discrétion: stat['system.attributs.Discrétion'],
+                    Force: stat['system.attributs.Force'],
+                    Investigation: stat['system.attributs.Investigation'],
+                    Jeu: stat['system.attributs.Jeu'],
+                    Mécanique: stat['system.attributs.Mécanique'],
+                    Médecine: stat['system.attributs.Médecine'],
+                    Natation: stat['system.attributs.Natation'],
+                    Navigation: stat['system.attributs.Navigation'],
+                    Négociation: stat['system.attributs.Négociation'],
+                    Perception: stat['system.attributs.Perception'],
+                    Pilotage: stat['system.attributs.Pilotage'],
+                    Piratage: stat['system.attributs.Piratage'],
+                    Pistage: stat['system.attributs.Pistage'],
+                    Religion: stat['system.attributs.Religion'],
+                    Science: stat['system.attributs.Science'],
+                    Survie: stat['system.attributs.Survie'],
+                    Tir: stat['system.attributs.Tir'],
+                    Visée: stat['system.attributs.Visée'],
+                    magie: stat['system.attributs.magie'],
+                },
+                background: {
+                    ...context.actor.system.background,
+                    etat: {
+                        ...context.actor.system.background.etat,
+                        a: stat['system.background.etat.a'],
+                        b: stat['system.background.etat.b'],
+                        c: stat['system.background.etat.c'],
+                        d: stat['system.background.etat.d'],
+                        e: stat['system.background.etat.e'],
+                        f: stat['system.background.etat.f'],
+                        g: stat['system.background.etat.g'],
+                        h: stat['system.background.etat.h'],
+                        i: stat['system.background.etat.i'],
+                        j: stat['system.background.etat.j'],
+                        k: stat['system.background.etat.k'],
+                        l: stat['system.background.etat.l'],
+                        m: stat['system.background.etat.m'],
+                        n: stat['system.background.etat.n']
+                    }
+                }
+            };
+        }
+        if (this.actor.type == "personnage" || this.actor.type == "pnj" ) {
+            this._onEncom(context);
+        }
+        if(this.actor.type == "vehicule"){
+            let stat= await this._onStatV(context);
+            context.actor.system = {
+                ...context.actor.system,
+                stat: {
+                    ...context.actor.system.stat,
+                    moteur: {
+                        ...context.actor.system.stat.moteur,
+                        value: stat['system.stat.moteur.value'],
+                        max: stat['system.stat.moteur.max']
+                    },
+                    encombrement: {
+                        ...context.actor.system.stat.encombrement,
+                        value: stat['system.stat.encombrement.value'],
+                        max: stat['system.stat.encombrement.max']
+                    },
+                    pointrestant: stat['system.stat.pointrestant'],
+                    protections: {
+                        ...context.actor.system.stat.protections,
+                        max: stat['system.stat.protections.max']
+                    },
+                    armure: {
+                        ...context.actor.system.stat.armure,
+                        max: stat['system.stat.armure.max']
+                    },
+                    credit: stat['system.stat.credit']
+                },
+                model: {
+                    ...context.actor.system.model,
+                    point: {
+                        ...context.actor.system.model.point,
+                        piece: stat['system.model.point.piece'],
+                        arme: stat['system.model.point.arme']
+                    },
+                    tehnologie: stat['system.model.tehnologie'],
+                    type: {
+                        ...context.actor.system.model.type,
+                        etoile: stat['system.model.type.etoile']
+                    },
+                    taille: {
+                        ...context.actor.system.model.taille,
+                        etoile: stat['system.model.taille.etoile']
+                    },
+                    moteur: {
+                        ...context.actor.system.model.moteur,
+                        etoile: stat['system.model.moteur.etoile']
+                    },
+                    pilotage: stat['system.model.pilotage'],
+                    piratage: stat['system.model.piratage'],
+                    vise: stat['system.model.vise']
+                },
+                back: {
+                    ...context.actor.system.back,
+                    danger: stat['system.back.danger'],
+                    vaisseau: stat['system.back.vaisseau']
+                }
+            };
+        }
         context.listValues.traduct = {
             race: context.listValues.race[race] ? game.i18n.localize(context.listValues.race[race].label) : '',
             faction: context.listValues.faction[faction] ? game.i18n.localize(context.listValues.faction[faction].label) : '',
@@ -56,16 +196,6 @@ import { range } from "./class/list.js";
             choix: choix && context.listValues.choix[choix] ? game.i18n.localize(context.listValues.choix[choix].label) : '',
             taille: taille && context.listValues.taille[taille] ? game.i18n.localize(context.listValues.taille[taille].label) : ''
         };
-        if (this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"  | this.actor.type == "vehicule" ) {
-            console.log('type perso')
-            this._prepareCharacterItems(context);this._onStatM(context);
-        }
-        if (this.actor.type == "personnage" || this.actor.type == "pnj" ) {
-            this._onEncom(context);
-        }
-        if(this.actor.type == "vehicule"){
-            this._onStatV(context);
-        }
         console.log(context)
         return context;
     }
@@ -220,7 +350,7 @@ import { range } from "./class/list.js";
         var race=html.find('.race').val();
         var ptrestant=html.find('.pointrestant').val();
         var level=html.find('.niveau').val();
-        if(this.actor.type==game.i18n.localize("TYPES.Actor.vehicule")){
+        if(this.actor.type=="vehicule"){
             var ptrestant2=this.actor.system.stat.pointrestant;
             resultat=parseInt(ptrestant2);
 
@@ -243,7 +373,7 @@ import { range } from "./class/list.js";
         });
         if(level==undefined){
             resultat=resultat;
-        }else if(this.actor.type!=game.i18n.localize("TYPES.Actor.vehicule")){
+        }else if(this.actor.type!="vehicule"){
             var hpmax=html.find('.hpmax').val();
             var pointhp=(parseInt(hpmax)-20)*2;
             resultat=resultat+pointhp; 
@@ -381,7 +511,7 @@ import { range } from "./class/list.js";
             html.find('.encours').val(total);
             html.find('.crinv').val(crinv);
             html.find('.barenc').css({"width":pourcentage+"%"});
-        }else if(this.actor.type==game.i18n.localize("TYPES.Actor.vehicule")){
+        }else if(this.actor.type=="vehicule"){
             let type=this.actor.system.type;
             let tail=this.actor.system.taille;
             let encour=html.find('.encours').val();
@@ -490,9 +620,8 @@ import { range } from "./class/list.js";
             html.find(".bonusactor").val('0');            
         });
 
-
-        var andro=html.find('.andomedes').val();
-        if(andro=='oui'){
+        var andro=html.find('.andomedes').val();        
+        if(andro=='o'){
             html.find(".andromede").css({'display':'block'});
             html.find(".compt27").css({'display':'block'});
         }else{
@@ -520,7 +649,7 @@ import { range } from "./class/list.js";
         if (hp <= 0) {
             // Appliquer le style CSS pour le fond lorsque les points de vie sont égaux à 0
             $('#LiberActorSheet-Actor-'+this.actor._id+' .window-content').css('background', 'linear-gradient(230deg, rgba(190,25,25,1) 0%, rgba(25,25,25,1) 100%)');
-        }else if(mut=="Oui"){
+        }else if(mut=="o"){
             $('#LiberActorSheet-Actor-'+this.actor._id+' .window-content').css({"background": 'linear-gradient(230deg, rgba(64,108,56,1) 0%, rgba(21,22,21,1) 100%)'});
         } else {
             // Réinitialiser les styles CSS lorsque les points de vie sont supérieurs à 0
@@ -543,6 +672,7 @@ import { range } from "./class/list.js";
 
     async _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
+        if(!maxstat){maxstat=this.actor.system.attributs.Tir}
         var name = event.target.dataset["name"];
         var type = this.actor.system.typed;
         var arme = this.actor.system.armed;
@@ -569,7 +699,7 @@ import { range } from "./class/list.js";
         if(bonus=='' || bonus ==undefined || bonus==null){
             bonus=0;
         }
-        var inforesult=parseInt(maxstat)+parseInt(bonus)+30;
+        var inforesult=parseInt(maxstat)+parseInt(bonus)+30;console.log(inforesult);console.log(maxstat);console.log(bonus)
         if(inforesult>echec){
             inforesult=echec;
         }
@@ -1200,30 +1330,73 @@ import { range } from "./class/list.js";
             }
         }
 
-        this.actor.update({"system.attributs.Agilité":cpt[0],"system.attributs.Artisanat":cpt[1],"system.attributs.Balistique":cpt[2],"system.attributs.Combat":cpt[3],"system.attributs.ConGén":cpt[4],"system.attributs.ConSpécif":cpt[5],"system.attributs.Dextérité":cpt[6],"system.attributs.Diplomatie":cpt[7],"system.attributs.Discrétion":cpt[8],"system.attributs.Force":cpt[9],"system.attributs.Investigation":cpt[10],"system.attributs.Jeu":cpt[11],"system.attributs.Mécanique":cpt[12],"system.attributs.Médecine":cpt[13],"system.attributs.Natation":cpt[14],"system.attributs.Navigation":cpt[15],"system.attributs.Négociation":cpt[16],"system.attributs.Perception":cpt[17],"system.attributs.Pilotage":cpt[18],"system.attributs.Piratage":cpt[19],"system.attributs.Pistage":cpt[20],"system.attributs.Religion":cpt[21],"system.attributs.Science":cpt[22],"system.attributs.Survie":cpt[23],"system.attributs.Tir":cpt[24],"system.attributs.Visée":cpt[25],"system.attributs.magie":cpt[26],"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12],"system.background.etat.n":active[14]});        
+        /*this.actor.update({"system.attributs.Agilité":cpt[0],"system.attributs.Artisanat":cpt[1],"system.attributs.Balistique":cpt[2],"system.attributs.Combat":cpt[3],"system.attributs.ConGén":cpt[4],"system.attributs.ConSpécif":cpt[5],"system.attributs.Dextérité":cpt[6],"system.attributs.Diplomatie":cpt[7],"system.attributs.Discrétion":cpt[8],"system.attributs.Force":cpt[9],"system.attributs.Investigation":cpt[10],"system.attributs.Jeu":cpt[11],"system.attributs.Mécanique":cpt[12],"system.attributs.Médecine":cpt[13],"system.attributs.Natation":cpt[14],"system.attributs.Navigation":cpt[15],"system.attributs.Négociation":cpt[16],"system.attributs.Perception":cpt[17],"system.attributs.Pilotage":cpt[18],"system.attributs.Piratage":cpt[19],"system.attributs.Pistage":cpt[20],"system.attributs.Religion":cpt[21],"system.attributs.Science":cpt[22],"system.attributs.Survie":cpt[23],"system.attributs.Tir":cpt[24],"system.attributs.Visée":cpt[25],"system.attributs.magie":cpt[26],"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12],"system.background.etat.n":active[14]}); */
+        let context = {
+            "system.attributs.Agilité": cpt[0],
+            "system.attributs.Artisanat": cpt[1],
+            "system.attributs.Balistique": cpt[2],
+            "system.attributs.Combat": cpt[3],
+            "system.attributs.ConGén": cpt[4],
+            "system.attributs.ConSpécif": cpt[5],
+            "system.attributs.Dextérité": cpt[6],
+            "system.attributs.Diplomatie": cpt[7],
+            "system.attributs.Discrétion": cpt[8],
+            "system.attributs.Force": cpt[9],
+            "system.attributs.Investigation": cpt[10],
+            "system.attributs.Jeu": cpt[11],
+            "system.attributs.Mécanique": cpt[12],
+            "system.attributs.Médecine": cpt[13],
+            "system.attributs.Natation": cpt[14],
+            "system.attributs.Navigation": cpt[15],
+            "system.attributs.Négociation": cpt[16],
+            "system.attributs.Perception": cpt[17],
+            "system.attributs.Pilotage": cpt[18],
+            "system.attributs.Piratage": cpt[19],
+            "system.attributs.Pistage": cpt[20],
+            "system.attributs.Religion": cpt[21],
+            "system.attributs.Science": cpt[22],
+            "system.attributs.Survie": cpt[23],
+            "system.attributs.Tir": cpt[24],
+            "system.attributs.Visée": cpt[25],
+            "system.attributs.magie": cpt[26],
+            "system.background.etat.a": active[0],
+            "system.background.etat.b": active[1],
+            "system.background.etat.c": active[2],
+            "system.background.etat.d": active[3],
+            "system.background.etat.e": active[4],
+            "system.background.etat.f": active[5],
+            "system.background.etat.g": active[6],
+            "system.background.etat.h": active[7],
+            "system.background.etat.i": active[8],
+            "system.background.etat.j": active[9],
+            "system.background.etat.k": active[10],
+            "system.background.etat.l": active[11],
+            "system.background.etat.m": active[12],
+            "system.background.etat.n": active[13]
+        };   
+        return context;    
     }
     _onStatV(event){
         let type=this.actor.system.model.type.nb;
         let etype="";
-        let tail=this.actor.system.model.taille.nb;
+        let tail=this.actor.system.model.taille.nb.slice(1);
         let etail="";
-        let moteur=this.actor.system.model.moteur.nb;
-        let blind=this.actor.system.model.blindage.nb;
-        let ia=this.actor.system.model.ia.nb;
+        let moteur=this.actor.system.model.moteur.nb.slice(1);
+        let blind=this.actor.system.model.blindage.nb.slice(1);
+        let ia=this.actor.system.model.ia.nb.slice(1);
         let champ=0;let total=0;let coef=0;let arme=0;let piece=0;let ptia=0;let dif=0;let nrj=0;let pvmoteur=0;
         let background="";
         let blindage = this.actor.system.stat.armure.value;
-        let blindagemax = this.actor.system.stat.armure.max;
+        let blindagemax = this.actor.system.stat.armure.max;//bug
         let enc=this.actor.system.stat.encombrement.value;
         let pvvalue=this.actor.system.stat.moteur.value;
-        let technologie=(parseFloat(moteur)+parseFloat(ia)+parseFloat(blind))/3;
+        let technologie=(parseFloat(moteur)+parseFloat(ia)+parseFloat(blind))/3; /*bug*/
         let danger ="";
-        let sun1=parseInt(moteur);
-        let sun2=parseInt(ia)+parseInt(moteur);
-        let sun3=parseInt(ia)-1;
-        let sun4=parseInt(ia)+1;
+        let sun1=parseInt(moteur);//bug
+        let sun2=parseInt(ia)+parseInt(moteur);//bug
+        let sun3=parseInt(ia)-1;//bug
+        let sun4=parseInt(ia)+1;//bug
         
-
         //Affichage background selon type de vaisseau, coef multiplicateur du prix et indication de la type du vaisseau
         if(type==0){
             etype=game.i18n.localize("libersf.type1");
@@ -1318,7 +1491,30 @@ import { range } from "./class/list.js";
         pvmoteur=Math.floor(pvmoteur);console.log(pvmoteur)
         if(enc>nrj){enc=nrj}
         if(pvvalue>pvmoteur){pvvalue=pvmoteur}
-        this.actor.update({'system.stat.moteur.value':pvvalue,'system.stat.encombrement.value':enc,'system.stat.moteur.max':pvmoteur,'system.stat.encombrement.max':nrj,"system.stat.pointrestant":ptia,"system.model.point.piece":piece,"system.model.point.arme":arme,"system.stat.protections.max":champ,"system.stat.armure.max":blind,"system.back.danger":danger,"system.back.vaisseau":background,"system.model.tehnologie":technologie,"system.model.type.etoile":etype,"system.model.taille.etoile":etail,"system.model.moteur.etoile":sun1,"system.model.pilotage":sun2,"system.model.piratage":sun3,"system.model.vise":sun4,"system.stat.credit":total})
+        /*this.actor.update({'system.stat.moteur.value':pvvalue,'system.stat.encombrement.value':enc,'system.stat.moteur.max':pvmoteur,'system.stat.encombrement.max':nrj,"system.stat.pointrestant":ptia,"system.model.point.piece":piece,"system.model.point.arme":arme,"system.stat.protections.max":champ,"system.stat.armure.max":blind,"system.back.danger":danger,"system.back.vaisseau":background,"system.model.tehnologie":technologie,"system.model.type.etoile":etype,"system.model.taille.etoile":etail,"system.model.moteur.etoile":sun1,"system.model.pilotage":sun2,"system.model.piratage":sun3,"system.model.vise":sun4,"system.stat.credit":total})*/
+        let context = {
+            'system.stat.moteur.value': pvvalue,
+            'system.stat.encombrement.value': enc,
+            'system.stat.moteur.max': pvmoteur,
+            'system.stat.encombrement.max': nrj,
+            "system.stat.pointrestant": ptia,
+            "system.model.point.piece": piece,
+            "system.model.point.arme": arme,
+            "system.stat.protections.max": champ,
+            "system.stat.armure.max": blind,
+            "system.back.danger": danger,
+            "system.back.vaisseau": background,
+            "system.model.tehnologie": technologie,
+            "system.model.type.etoile": etype,
+            "system.model.taille.etoile": etail,
+            "system.model.moteur.etoile": sun1,
+            "system.model.pilotage": sun2,
+            "system.model.piratage": sun3,
+            "system.model.vise": sun4,
+            "system.stat.credit": total
+        };
+
+        return context;
         
     }
 }

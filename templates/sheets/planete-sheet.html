@@ -5,13 +5,28 @@
     <div class="col3">
         <input class="nomperso" name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
         <h2>{{localize 'libersf.info'}}</h2>
-        <div class="info">
+        <div class="info infoplanete">
             <span>{{localize 'libersf.surnom'}}</span><input class="nick" name="system.surnom" type="text" value="{{actor.system.surnom}}" placeholder="{{localize 'libersf.surnom'}}"/>
-            <span>{{localize 'libersf.controle'}}</span><input class="model" name="system.domination" type="text" value="{{actor.system.domination}}" placeholder="{{localize 'libersf.controle'}}"/>
-            <span>{{localize 'libersf.arme'}}</span><input class="model" name="system.niveau_arme" type="text" value="{{actor.system.niveau_arme}}" placeholder="{{localize 'libersf.arme'}}"/>
-            <span>{{localize 'libersf.crime'}}</span><input class="model" name="system.niveau_crime" type="text" value="{{actor.system.niveau_crime}}" placeholder="{{localize 'libersf.crime'}}"/>
-            <span>{{localize 'libersf.securite'}}</span><input class="model" name="system.niveau_secu" type="text" value="{{actor.system.niveau_secu}}" placeholder="{{localize 'libersf.securite'}}"/>
-            <span>{{localize 'libersf.techno'}}</span><input class="model" name="system.niveau_tech" type="text" value="{{actor.system.niveau_tech}}" placeholder="{{localize 'libersf.techno'}}"/>
+            <span>{{localize 'libersf.controle'}}</span>
+            <select class="model" size="1" name="system.domination">
+				{{selectOptions listValues.faction selected=actor.system.domination labelAttr="label" localize=true blank="libersf.none"}}
+			</select>
+            <span>{{localize 'libersf.arme'}}</span>
+            <select class="model" size="1" name="system.niveau_arme">
+				{{selectOptions listValues.niveau selected=actor.system.niveau_arme labelAttr="label" localize=true blank="libersf.none"}}
+			</select>
+            <span>{{localize 'libersf.crime'}}</span>
+            <select class="model" size="1" name="system.niveau_crime">
+				{{selectOptions listValues.niveau selected=actor.system.niveau_crime labelAttr="label" localize=true blank="libersf.none"}}
+			</select>
+            <span>{{localize 'libersf.securite'}}</span>
+            <select class="model" size="1" name="system.niveau_secu">
+				{{selectOptions listValues.niveau selected=actor.system.niveau_secu labelAttr="label" localize=true blank="libersf.none"}}
+			</select>
+            <span>{{localize 'libersf.techno'}}</span>
+            <select class="model" size="1" name="system.niveau_tech">
+				{{selectOptions listValues.niveau selected=actor.system.niveau_secu labelAttr="label" localize=true blank="libersf.none"}}
+			</select>
         </div>
         <div class="clear"></div>
         <h2 class="marge">{{localize 'libersf.ville'}}</h2>
