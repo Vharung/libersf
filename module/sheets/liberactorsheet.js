@@ -18,9 +18,9 @@ import { range } from "./class/list.js";
     get template() {
         console.log(this.actor.type)
         if (this.actor.type == 'personnage' || this.actor.type == 'pnj' ) {
-            return `systems/libersf/templates/sheets/personnage-sheet.html`;
+            return `systems/libersf/templates/sheets/personnage-sheet.hbs`;
         }else {
-            return `systems/libersf/templates/sheets/${this.actor.type}-sheet.html`;
+            return `systems/libersf/templates/sheets/${this.actor.type}-sheet.hbs`;
         }    
     }
 
@@ -30,6 +30,7 @@ import { range } from "./class/list.js";
         context.dtypes = ["String", "Number", "Boolean"];
         context.listValues = {
             race: range.raceTypes,
+            sexe: range.sex,
             faction: range.factionTypes,
             metier: range.metierTypes,
             taille: range.tailleTypes,
@@ -46,6 +47,7 @@ import { range } from "./class/list.js";
         let choix = null;
         let taille = null;
         let race = null;
+        let sexe = null;
         // Récupérer les valeurs nécessaires depuis l'acteur
         if(this.actor.type == "vehicule"){
             faction = context.actor.system.model.faction || null;
@@ -60,11 +62,12 @@ import { range } from "./class/list.js";
             type = context.actor.system.background.type || null;
             choix = context.actor.system.background.choix || null;
             taille = context.actor.system.background.taille || null;
+            sexe = context.actor.system.background.sexe || null;
         }
         console.log(faction)
         console.log(metier)
         console.log(type)
-        console.log(taille)
+        console.log(sexe)
 
 
         
@@ -188,6 +191,7 @@ import { range } from "./class/list.js";
         }
         context.listValues.traduct = {
             race: context.listValues.race[race] ? game.i18n.localize(context.listValues.race[race].label) : '',
+            sexe: context.listValues.sexe[sexe] ? game.i18n.localize(context.listValues.sexe[sexe].label) : '',
             faction: context.listValues.faction[faction] ? game.i18n.localize(context.listValues.faction[faction].label) : '',
             metier: metier && context.listValues.metier[metier] ? game.i18n.localize(context.listValues.metier[metier].label) : '',
             religion: context.actor.system.religion && context.listValues.religion && context.listValues.religion[context.actor.system.religion]

@@ -78,6 +78,7 @@
                     "metier":"",
                     "bonusmetier":"",
                     "level":"1",
+                    "sexe":"",
                     "etat":{
                         "a":0.5,  
                         "b":0.5,  

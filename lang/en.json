@@ -21,6 +21,10 @@
     },
    "libersf" : {
     "none":"",
+    "sex": "Sexe",
+    "sex1": "Male",
+    "sex2": "Female",
+    "sex0": "Other",
     "action": "2 Actions / tour",
     "action0": "Double Actions",
     "action1": "Simple Action",

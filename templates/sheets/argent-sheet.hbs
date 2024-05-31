@@ -1,0 +1,24 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div id="pj-titre" class="objet">
+        <div class="flexrow">
+            <div class="grid-2col" style="max-width: 134px;">
+                <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="128" width="128"/>
+            </div>
+            <div class="grid-2col">
+                <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+            </div>
+        </div>
+    </div>  
+    <div class="flexrow objet">
+        <div class="grid-2col">
+            <label>{{localize 'libersf.valeur'}}
+                <input name="system.valeur" type="text" value="{{item.system.valeur}}" placeholder="{{localize 'libersf.valeur'}}" readonly="" />
+            </label>
+        </div>
+        <div class="grid-2col">
+            <label>{{localize 'libersf.qte'}}
+                <input name="system.quantite" type="text" value="{{item.system.quantite}}" placeholder="{{localize 'libersf.qte'}}"/>
+            </label>
+        </div>
+    </div>
+</form>

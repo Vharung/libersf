@@ -1,4 +1,18 @@
-export const range = Object.freeze({   
+export const range = Object.freeze({ 
+	sex:{
+         sex1:{
+            id:"sex1",
+            label:'libersf.sex1',
+        },
+        sex2:{
+            id:"sex2",
+            label:'libersf.sex2',
+        },
+        sex0:{
+            id:"sex0",
+            label:'libersf.sex0',
+        },
+    } ,  
     raceTypes: {
 		r0: {
 			label:"libersf.humain",
