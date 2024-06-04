@@ -39,8 +39,6 @@ import { range } from "./class/list.js";
             niveau: range.niveau,
             traduct: {}                
         };
-        console.log(context)
-        console.log(context.listValues)
         let faction=null;
         let metier = null;
         let type = null;
@@ -64,12 +62,6 @@ import { range } from "./class/list.js";
             taille = context.actor.system.background.taille || null;
             sexe = context.actor.system.background.sexe || null;
         }
-        console.log(faction)
-        console.log(metier)
-        console.log(type)
-        console.log(sexe)
-
-
         
         if (this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"  | this.actor.type == "vehicule" ) {
             this._prepareCharacterItems(context);
@@ -319,33 +311,7 @@ import { range } from "./class/list.js";
         else if(niva<40){armetoile='★ ★ ★ ★ ✬'}
         else {armetoile='★ ★ ★ ★ ★'}
         html.find('.armetoile').html('(max '+armetoile+' )')
-
         
-
-
-
-        
-
-        /*html.find('.item-desc').on('click',function(){
-           var hauteur= $(this).parent().parent().css("height");
-           if(hauteur=='30px'){
-                $(this).parent().parent().css({"height":"auto"});
-            }else{
-                $(this).parent().parent().css({"height":"30px"});
-            }
-        });*/
-
-        //choix faction
-        /*html.find('.factionchoix').on('click',function(){ 
-            var clanliste=html.find('.factionliste').val();
-            html.find('.faction').val(clanliste);
-        });*/
-
-        
-
-
-
-
         //calcule compétence
         let resultat
         var clanliste=html.find('.raceliste').val();
@@ -385,8 +351,6 @@ import { range } from "./class/list.js";
         if(isNaN(resultat)){resultat='A Config';}
         html.find('.pointrestant').val(resultat); 
 
-
-
         /*Avantage*/
         var avant=html.find('.avant').val();
         var desan=html.find('.desan').val();
@@ -407,8 +371,6 @@ import { range } from "./class/list.js";
             html.find('.solit').css("opacity", "0.5");
         }
 
-        
-
         /*Ancienté*/ // bug ??
         var ancien=html.find('.model').val();
         var etoile="☆ ☆ ☆ ☆ ☆"
@@ -423,10 +385,6 @@ import { range } from "./class/list.js";
         else if(ancien=="Futuriste : ★ ★ ★ ★ ✬"){etoile="★ ★ ★ ★ ✬"}
         else if(ancien=="Prototype : ★ ★ ★ ★ ★"){etoile="★ ★ ★ ★ ★"}
         html.find('.etoile').html(etoile);
-
-
-        ;
-
 
         //+1 action si dext et agilité >30
         var agi=html.find('.cpt0').val();
@@ -607,11 +565,7 @@ import { range } from "./class/list.js";
                     $('.vehicule').css({[cssProperty]: '#00abab solid 5px'}); // couleur 4
                 }   
             }
-        }
-            
-
-
-        
+        }      
 
         /*Ajout Bonus*/
         $('.attribut').on('click',function(){
@@ -659,8 +613,6 @@ import { range } from "./class/list.js";
             // Réinitialiser les styles CSS lorsque les points de vie sont supérieurs à 0
              $('#LiberActorSheet-Actor-'+this.actor._id+' .window-content').css('background', 'linear-gradient(218deg, #2a2b2c 0%, #120304 100%)');
         }
-
-
     }
 
 
@@ -800,9 +752,6 @@ import { range } from "./class/list.js";
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J16')+"</p>";
             }
         }
-       
-
-  
 
         let r = await new Roll('1d100').evaluate();
         let retour = r.result;
@@ -964,7 +913,7 @@ import { range } from "./class/list.js";
     }
 
 
-    _onStory(event){
+    _onStory(){
         const demeure = [game.i18n.localize("libersf.maison"),game.i18n.localize("libersf.hotel"),game.i18n.localize("libersf.chezUnAmi"),game.i18n.localize("libersf.demeure"),game.i18n.localize("libersf.sousUnPont"),game.i18n.localize("libersf.surUnBateau"),game.i18n.localize("libersf.ferme"),game.i18n.localize("libersf.auberge"),game.i18n.localize("libersf.commerceNegociation"),game.i18n.localize("libersf.forge"),game.i18n.localize("libersf.villa"),game.i18n.localize("libersf.cabane"),game.i18n.localize("libersf.appartement")];
         const proximite = [game.i18n.localize("libersf.surUnePlaneteDuSecteurDe"),game.i18n.localize("libersf.sur")];
         const lieu=["End-125","Proxima","Atarus","Sebos","ZX52","DX-128","ROF-89","HD-720P","Quenza","Sigma","TK86","Talouine","Turka","Rota","Imperator","Reset","Creab","87AB","TH5","R852","Natura","F10-X","Tella","Olympus","Iron","Zeus","Athena","Gaia","Apollon","Gallus","M-IP","Elysée","Grande nébuleuse","Tartare","Alexandrie","Maxima","74P-R","Centaurus","Nouvelle Terre","END-128","Terre","HAT-P1B","Valhala","Mystérious"]
@@ -1004,11 +953,32 @@ import { range } from "./class/list.js";
         let obsession=obsessionlist[Math.floor(Math.random()*racunelist.length)]
         let distingue=distinguelist[Math.floor(Math.random()*racunelist.length)]
 
-        this.actor.update({'system.caractere.distingue': distingue,'system.caractere.residence': resident,'system.caractere.sang': sang,'system.caractere.politique': politique,'system.caractere.interets': groupe,'system.caractere.deces': dc,'system.caractere.moral': moral,'system.caractere.amour': amour,'system.caractere.amitie': ami,'system.caractere.haine': haine,'system.caractere.principale': metier,'system.caractere.secondaire': metier1,'system.caractere.passion': metier2,'system.caractere.caract': caractere,'system.caractere.personnalite': personnalite,'system.caractere.perception': vision,'system.caractere.objectif': objectif,'system.caractere.rancunier': racune,'system.caractere.tare': tare,'system.caractere.obsession': obsession});
+        return {
+            'system.caractere.distingue': distingue,
+            'system.caractere.residence': resident,
+            'system.caractere.sang': sang,
+            'system.caractere.politique': politique,
+            'system.caractere.interets': groupe,
+            'system.caractere.deces': dc,
+            'system.caractere.moral': moral,
+            'system.caractere.amour': amour,
+            'system.caractere.amitie': ami,
+            'system.caractere.haine': haine,
+            'system.caractere.principale': metier,
+            'system.caractere.secondaire': metier1,
+            'system.caractere.passion': metier2,
+            'system.caractere.caract': caractere,
+            'system.caractere.personnalite': personnalite,
+            'system.caractere.perception': vision,
+            'system.caractere.objectif': objectif,
+            'system.caractere.rancunier': racune,
+            'system.caractere.tare': tare,
+            'system.caractere.obsession': obsession
+        };
 
     }
 
-    _onStory2(event){
+    _onStory2(){
         var age = Math.floor((Math.random() * 34) + 16);
         const items0 = [game.i18n.localize("libersf.surUnePlaneteDuSecteurDe"),game.i18n.localize("libersf.sur")];
         const items1 = [game.i18n.localize("libersf.end125"),game.i18n.localize("libersf.proxima"),game.i18n.localize("libersf.atarus"),game.i18n.localize("libersf.sebos"),game.i18n.localize("libersf.zx52"),game.i18n.localize("libersf.dx128"),game.i18n.localize("libersf.rof89"),game.i18n.localize("libersf.hd720p"),game.i18n.localize("libersf.quenza"),game.i18n.localize("libersf.sigma"),game.i18n.localize("libersf.tk86"),game.i18n.localize("libersf.talouine"),game.i18n.localize("libersf.turka"),game.i18n.localize("libersf.rota"),game.i18n.localize("libersf.imperator"),game.i18n.localize("libersf.reset"),game.i18n.localize("libersf.creab"),game.i18n.localize("libersf.ab"),game.i18n.localize("libersf.th5"),game.i18n.localize("libersf.r852"),game.i18n.localize("libersf.natura"),game.i18n.localize("libersf.f10x"),game.i18n.localize("libersf.tella"),game.i18n.localize("libersf.olympus"),game.i18n.localize("libersf.iron"),game.i18n.localize("libersf.zeus"),game.i18n.localize("libersf.athena"),game.i18n.localize("libersf.gaia"),game.i18n.localize("libersf.apollon"),game.i18n.localize("libersf.gallus"),game.i18n.localize("libersf.mip"),game.i18n.localize("libersf.elysee"),game.i18n.localize("libersf.grandeNebuleuse"),game.i18n.localize("libersf.tartare"),game.i18n.localize("libersf.alexandrie"),game.i18n.localize("libersf.maxima"),game.i18n.localize("libersf.p74r"),game.i18n.localize("libersf.centaurus"),game.i18n.localize("libersf.nouvelleTerre"),game.i18n.localize("libersf.end128"),game.i18n.localize("libersf.terre"),game.i18n.localize("libersf.hatp1b"),game.i18n.localize("libersf.valhala"),game.i18n.localize("libersf.mysterious")];
@@ -1022,11 +992,12 @@ import { range } from "./class/list.js";
         let tonchoix=items4[Math.floor(Math.random()*items2.length)];
         let motivation  = items3[Math.floor(Math.random()*items3.length)];
         let textgen =game.i18n.localize("libersf.age")+age+game.i18n.localize("libersf.vie")+secteur+" "+planete+game.i18n.localize("libersf.jour")+evenement+", "+motivation+game.i18n.localize("libersf.decide")+tonchoix+".";
-        this.actor.update({'system.background.histoire': textgen});
+        return {
+            'system.background.histoire': textgen
+        };
     }
 
-    _onAvantageRace(event){
-        console.log("avantagerace")
+    async _onAvantageRace(event){
         var clanliste=this.actor.system.background.race;
         var bonusrace='';
         if(clanliste=="r0"){
@@ -1074,9 +1045,12 @@ import { range } from "./class/list.js";
         }else if(metierliste=="m11"){
             metier="10 "+game.i18n.localize("libersf.magie");
         }
-        this.actor.update({'system.background.bonusmetier': metier,'system.background.bonusrace': bonusrace});
+        let story= await this._onStory();
+        let story2= await this._onStory2();
+        this.actor.update({story,story2,'system.background.bonusmetier': metier,'system.background.bonusrace': bonusrace});
     }
-    _onArmor(event){
+
+    _onArmor(event){//Fr
         var genre=event.target.dataset["genre"];
         var objetaequipe=event.target.dataset["name"];
         var type=event.target.dataset["type"];
@@ -1099,6 +1073,7 @@ import { range } from "./class/list.js";
             this.actor.update({'system.autre':objetaequipe});
         } 
     }
+
     _onDesArmor(event){
         var genre=event.target.dataset["genre"];
         if(genre=="arme" ){
@@ -1125,9 +1100,6 @@ import { range } from "./class/list.js";
         if(armmax==''){armmax=0}
         if(bou==''){bou=0}
         if(boumax==''){boumax=0}
-        /*var modifarmure=1;
-        actarm=Math.floor(parseInt(actarm)/modifarmure);
-        actbou=Math.floor(parseInt(actbou)/modifarmure);*/
         this.actor.update({'system.ptarm':arm,'system.ptbou':bou});
         if(arm != 0){
             let itemData= this.actor.items.filter(i=>i.name == armname);                 
@@ -1139,28 +1111,28 @@ import { range } from "./class/list.js";
         }
     }
 
-    _onAleatoire(event){//Fr
-        var race=["Chien","Serpent","Vermine","Ourse","Sangsue","Lézard","Oiseau","Araignée","Chimère","Grenouille"]
-        var carc=["féroce","sombre","immense","redoutable","inquiétante","étrange","rouge","invisible","invinsible"]
-        var lieu=["des enfers","des ombres","d'outre tombe"]
-        var type=["volant","sous terrain","marin"]
-        var effe=["paralyse","empoisonne","detecte sur l'infra-rouge","detecte l'odeur de","detecte la chaleur de","detecte l'énergie de","crahe","lance des épines","se camoufle de","prend l'apparence de"]
+    _onAleatoire(event){
+        var race = ["libersf.dog", "libersf.snake", "libersf.vermin", "libersf.bear", "libersf.leech", "libersf.lizard", "libersf.bird", "libersf.spider", "libersf.chimera", "libersf.frog"];
+        var carc = ["libersf.ferocious", "libersf.dark", "libersf.huge", "libersf.formidable", "libersf.disturbing", "libersf.strange", "libersf.red", "libersf.invisible", "libersf.invincible"];
+        var place = ["libersf.hellish", "libersf.shadowy", "libersf.from"];
+        var type = ["libersf.flying", "libersf.underground", "libersf.marine"];
+        var effect = ["libersf.paralyzes", "libersf.poisons", "libersf.detects4", "libersf.detects3", "libersf.detects2", "libersf.detects", "libersf.spits", "libersf.throws", "libersf.camouflages", "libersf.takes"];
         var img='systems/libersf/assets/icon/monstre.jpg';
-        var nom= race[Math.floor(Math.random()*race.length)];
+        var nom= game.i18n.localize(race[Math.floor(Math.random()*race.length)]);
         var o=Math.random()*100;
         if(o>50){
-            nom+=' '+carc[Math.floor(Math.random()*carc.length)];
+            nom+=' '+game.i18n.localize(carc[Math.floor(Math.random()*carc.length)]);
         }
         o=Math.random()*100;
         if(o>50){
-            nom+=' '+lieu[Math.floor(Math.random()*lieu.length)];
+            nom+=' '+game.i18n.localize(lieu[Math.floor(Math.random()*lieu.length)]);
         }
-        var t= type[Math.floor(Math.random()*type.length)];
-        var e= effe[Math.floor(Math.random()*effe.length)];
+        var t= game.i18n.localize(type[Math.floor(Math.random()*type.length)]);
+        var e= game.i18n.localize(effe[Math.floor(Math.random()*effe.length)]);
         var dgt=Math.floor((Math.random()*5)*10);
         var ar=Math.floor((Math.random()*5)*10);
         var pv=Math.floor((Math.random()*5+1)*10);
-        var desc=nom+' est un animal '+t+' qui '+e+' ses ennemis. Il inflige '+dgt+' et à une armure de '+ar+' et à '+pv+'PV'
+        var desc=nom+' '+game.i18n.localize("libersf.animal")+' '+t+' '+game.i18n.localize("libersf.that")+' '+e+' '+game.i18n.localize("libersf.hits")+' '+dgt+game.i18n.localize("libersf.armorof")+' '+ar+' '+game.i18n.localize("libersf.andhas")+' '+pv+game.i18n.localize("libersf.HP")
         var cpt=[]
         var valeur=[-30,-20,-10,0,10,20,30,40]
         for (var i =0; i < 26; i++) {
@@ -1170,11 +1142,11 @@ import { range } from "./class/list.js";
         this.actor.update({'name':nom,'img':img,'system.background.histoire':desc,'system.stat.hp.value': pv,'system.stat.hp.max': pv,'system.degatd': dgt,'system.armed':'Attaque','system.stat.armure.value': ar,'system.stat.armure.max': ar,'system.ptarm': ar,'system.prog':'armure Naturel','system.attributs.Agilité':cpt[0],'system.attributs.Artisanat':cpt[1],'system.attributs.Balistique':cpt[2],'system.attributs.Combat':cpt[3],'system.attributs.ConGén':cpt=[4],'system.attributs.ConSpécif':cpt=[5],'system.attributs.Dextérité':cpt=[6],'system.attributs.Diplomatie':cpt=[7],'system.attributs.Discrétion':cpt=[8],'system.attributs.Force':cpt=[9],'system.attributs.Investigation':cpt=[10],'system.attributs.Jeu':cpt=[11],'system.attributs.Mécanique':cpt=[12],'system.attributs.Médecine':cpt=[13],'system.attributs.Natation':cpt=[14],'system.attributs.Navigation':cpt=[15],'system.attributs.Négociation':cpt=[16],'system.attributs.Perception':cpt=[17],'system.attributs.Pilotage':cpt=[18],'system.attributs.Piratage':cpt=[19],'system.attributs.Pistage':cpt=[20],'system.attributs.Religion':cpt=[21],'system.attributs.Science':cpt=[22],'system.attributs.Survie':cpt=[23],'system.attributs.Tir':cpt=[24],'system.attributs.Visée':cpt=[25]});
     }
 
-    _onCouv(event){//Fr
+    _onCouv(event){
        let idn=event.target.dataset["lettre"];
         let effet=this.actor.effects;
-        let lists=['Endormi','Etourdi','Aveugle','Sourd','Réduit au silence','Apeuré','Brûlant','Gelé','Invisible','Béni','Empoisonné','Saignement','Inconscient','Mort','à Couvert']//Fr
-        var nomRecherche=lists[idn];
+        let lists=['libersf.sleeping','libersf.dizzy','libersf.blind','libersf.deaf','libersf.silenced','libersf.fearful','libersf.burning','libersf.frozen','libersf.invisible','libersf.blessed','libersf.poisoned','libersf.bleeding','libersf.unconscious','libersf.dead','libersf.covered']
+        var nomRecherche=game.i18n.localize(lists[idn]);
         var estPresent = effet.some(function(element) {
             return element.name === nomRecherche;
         });
@@ -1188,11 +1160,11 @@ import { range } from "./class/list.js";
             // Suppression de l'effet en utilisant l'ID
             this.actor.deleteEmbeddedDocuments("ActiveEffect", [idEffet])
             //this.actor.update({[`system.etat.${etats[idn]}`]:0.5});
-            etre="N'est plus";//Fr
+            etre=game.i18n.localize('notbe');
         } else {
             this.actor.createEmbeddedDocuments("ActiveEffect", [{name: nomRecherche}]);
         }
-        var texte = "<span style='flex:auto'><p class='resultatp'>"+etre+" &nbsp; <span style='text-transform:uppercase;font-weight: bold;'> "+lists[idn]+"</span></span></span>";
+        var texte = "<span style='flex:auto'><p class='resultatp'>"+etre+" &nbsp; <span style='text-transform:uppercase;font-weight: bold;'> "+game.i18n.localize(lists[idn])+"</span></span></span>";
         let chatData = {
             speaker: ChatMessage.getSpeaker({ actor: this }),
             content: texte
@@ -1205,13 +1177,13 @@ import { range } from "./class/list.js";
         const adata = data.actor;
         var  exo = adata.system.prog;
         var enc=parseInt(adata.system.attributs.Force) /2 + 35; 
-        if(exo=='Exosquelette'){
+        if(exo==game.i18n.localize('libersf.Exosquelette')){
            enc=enc*2; 
         }
         this.actor.update({"system.stat.encombrement.max":enc});
     }
 
-    _onEarth(event){//Fr
+    _onEarth(event){
         var fact=Math. round(Math.random() * 4);
         var arme=Math. round(Math.random() * 11);
         var secu=Math. round(Math.random() * 11);
@@ -1223,10 +1195,10 @@ import { range } from "./class/list.js";
         let etoile=["☆ ☆ ☆ ☆ ☆","✬ ☆ ☆ ☆ ☆","★ ☆ ☆ ☆ ☆","★ ✬ ☆ ☆ ☆","★ ★ ☆ ☆ ☆","★ ★ ✬ ☆ ☆","★ ★ ★ ☆ ☆","★ ★ ★ ✬ ☆","★ ★ ★ ★ ☆","★ ★ ★ ★ ✬","★ ★ ★ ★ ★"]
         var nom=['Noxaqum','Terioll','Kimabas','Kepler','Luyten','Gliese','HD']
         var abc=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-        var surnom1=['Planète','Zone','Reine','Super','Naine','Nébuleuse','Perle']
-        var surnom2=['émeraude','saphir','infini','morte','géante','diamant','bleue','noire','rouge','mercure','rocailleuse']
-        var type=['une planète desertique','un super continent','une série d\'îles et d\'archipèle','une planète océan','une planète rocailleuse','une jungle luxuriante','une planète glacée']
-        var type2=['de nombreuse villes','des animaux dangereux','un faune rare','des volcans très actifs','une techtonique des plaques très active','de violents cyclones et tempêtes','des éruptions solaires fréquentes']
+        var surnom1 = ['libersf.surnom0', 'libersf.surnom1', 'libersf.surnom2', 'libersf.surnom3', 'libersf.surnom4', 'libersf.surnom5', 'libersf.surnom6'];
+        var surnom2 = ['libersf.surnom7', 'libersf.surnom8', 'libersf.surnom9', 'libersf.surnom10', 'libersf.surnom11', 'libersf.surnom12', 'libersf.surnom13', 'libersf.surnom14', 'libersf.surnom15', 'libersf.surnom16', 'libersf.surnom17'];
+        var type = ['libersf.type0', 'libersf.type1', 'libersf.type2', 'libersf.type3', 'libersf.type4', 'libersf.type5', 'libersf.type6'];
+        var type2 = ['libersf.type20', 'libersf.type21', 'libersf.type22', 'libersf.type23', 'libersf.type24', 'libersf.type25', 'libersf.type26'];
         var huma=0; var drac=0;var plei=0;var elfe=0;var orqa=0;var artu=0;var mach=0;var yori=0;
         if(fact==1){//a corriger bug
            huma=Math. round(Math.random() * 11);
@@ -1246,12 +1218,13 @@ import { range } from "./class/list.js";
            mach=10-yori-artu;
         }
         var name=nom[Math. round(Math.random() * 7)]+'-'+Math. round(Math.random() * 1000)+abc[Math. round(Math.random() * 26)];
-        var surnom=surnom1[Math. round(Math.random() * surnom1.length)]+' '+surnom2[Math. round(Math.random() * surnom2.length)];
-        var histoire='C\'est '+type[Math. round(Math.random() * type.length)]+' avec '+type2[Math. round(Math.random() * type2.length)];
+        var surnom=game.i18n.localize(+surnom1[Math. round(Math.random() * surnom1.length)])+' '+game.i18n.localize(surnom2[Math. round(Math.random() * surnom2.length)]);
+        var histoire=game.i18n.localize('libersf.its')+game.i18n.localize(type[Math. round(Math.random() * type.length)])+game.i18n.localize('libersf.with')+game.i18n.localize(type2[Math. round(Math.random() * type2.length)]);
         var img='systems/libersf/assets/planete/p'+Math. round(Math.random() * 16)+'.png';
         this.actor.update({"system.description":histoire,"system.surnom":surnom,'name':name,'img':img,"system.pop_humain":etoile[huma],"system.pop_arthuriens":etoile[artu],"system.pop_draconiens":etoile[drac],"system.pop_machine":etoile[mach],"system.pop_pleiadiens":etoile[plei],"system.pop_yoribiens":etoile[yori],"system.pop_elfen":etoile[elfe],"system.pop_orquanien":etoile[orqa],"system.domination":faction[fact],"system.stat.armure.value":pv,"system.stat.armure.max":pv,"system.niveau_arme":etoile[arme],"system.niveau_crime":etoile[crim],"system.niveau_secu":etoile[secu],"system.niveau_tech":etoile[tech],"system.stat.hp.value":pv,"system.stat.hp.max":pv,"system.pouplation":pop});
     }
-    async _onStatM(event){//a tester
+
+    async _onStatM(event){
         let level=this.actor.system.background.level;
         let metier=this.actor.system.background.metier;
         let race=this.actor.system.background.race;
@@ -1380,6 +1353,7 @@ import { range } from "./class/list.js";
         };   
         return context;    
     }
+
     _onStatV(event){
         let type=this.actor.system.model.type.nb;
         let etype="";
@@ -1422,23 +1396,22 @@ import { range } from "./class/list.js";
         //Affichage background selon type de vaisseau, coef multiplicateur du prix et indication de la taille du vaisseau
         if(tail==0){
            etail=game.i18n.localize("libersf.taille1");
-           coef=coef*100;
+           coef=Math.pow(coef * 100, 2);;
         }else if(tail==1){
             etail=game.i18n.localize("libersf.taille2");
-            coef=coef*200;
+            coef=Math.pow(coef * 200, 2);;
         }else if(tail==2){
             etail=game.i18n.localize("libersf.taille3");
-            coef=coef*300;
+            coef=Math.pow(coef * 300, 2);;
         }else if(tail==3){
             etail=game.i18n.localize("libersf.taille4");
-            coef=coef*400;
+            coef=Math.pow(coef * 400, 2);;
         }
 
         //Calcule du prix
         total=(parseInt(ia)+parseInt(type)+parseInt(moteur)+parseInt(tail))*coef;
 
-
-            //Indication du niveau de technologie, moteur etc
+         //Indication du niveau de technologie, moteur etc
         function determinerSun(valeur) {
             if (valeur <= 0.5) {
                 return "✬ ☆ ☆ ☆ ☆";
@@ -1478,24 +1451,20 @@ import { range } from "./class/list.js";
             danger='#ccff003b';
         }else{
             danger='transparent';
-        }
-
-        //indication du niveau du chanmp de force
-        
+        }       
 
         //calcule des différents niveau de blindage, champ de force, point d'ia, résistence moteur, nombre d'arme et de pièce disponible 
         arme=parseFloat(ia)+parseFloat(blind)+1;console.log(parseFloat(ia)+'+'+blind);
         arme=Math.floor(arme);
         blind=(parseFloat(blind)*(parseFloat(tail)+2))*200;
         champ=(parseFloat(moteur)*(parseFloat(tail)+2))*200; 
-        piece=tail*tail*tail;
+        piece=Math.pow(tail, 3);
         ptia=ia*10;   
         nrj=(parseFloat(moteur)*(parseFloat(moteur)))*2000; 
         pvmoteur=(parseFloat(moteur)*(parseFloat(moteur)))*150;
         pvmoteur=Math.floor(pvmoteur);console.log(pvmoteur)
         if(enc>nrj){enc=nrj}
         if(pvvalue>pvmoteur){pvvalue=pvmoteur}
-        /*this.actor.update({'system.stat.moteur.value':pvvalue,'system.stat.encombrement.value':enc,'system.stat.moteur.max':pvmoteur,'system.stat.encombrement.max':nrj,"system.stat.pointrestant":ptia,"system.model.point.piece":piece,"system.model.point.arme":arme,"system.stat.protections.max":champ,"system.stat.armure.max":blind,"system.back.danger":danger,"system.back.vaisseau":background,"system.model.tehnologie":technologie,"system.model.type.etoile":etype,"system.model.taille.etoile":etail,"system.model.moteur.etoile":sun1,"system.model.pilotage":sun2,"system.model.piratage":sun3,"system.model.vise":sun4,"system.stat.credit":total})*/
         let context = {
             'system.stat.moteur.value': pvvalue,
             'system.stat.encombrement.value': enc,
@@ -1517,8 +1486,6 @@ import { range } from "./class/list.js";
             "system.model.vise": sun4,
             "system.stat.credit": total
         };
-
         return context;
-        
     }
 }
