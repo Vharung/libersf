@@ -165,5 +165,25 @@ export const range = Object.freeze({
 		n10:{
 			label:'★ ★ ★ ★ ★',
 		},
+	},
+	usage:{
+		u0:{
+			label:'libersf.usage0',
+		},
+		u1:{
+			label:'libersf.usage1',
+		},
+		u2:{
+			label:'libersf.usage2',
+		},
+		u3:{
+			label:'libersf.usage3',
+		},
+		u4:{
+			label:'libersf.usage4',
+		},
+		u5:{
+			label:'liberssf.usage5',
+		},
 	},	
 });

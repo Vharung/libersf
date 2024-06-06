@@ -274,6 +274,12 @@
 								{{selectOptions listValues.faction selected=actor.system.model.faction labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 			            </div>
+			            <div class="grid-2col">
+							<h2>{{localize 'libersf.usage'}}</h2>
+							<select class="usage" size="1" name="system.nomcomp">
+								{{selectOptions listValues.usage selected=actor.system.nomcomp labelAttr="label" localize=true blank="libersf.none"}}
+			                </select>
+			            </div>
 						<div class="grid-2col">
 							<h2>{{localize 'libersf.type'}}</h2>
 							<select class="typeliste" size="1" name="system.model.type.nb">
@@ -304,10 +310,7 @@
 								{{selectOptions listValues.niveau selected=actor.system.model.blindage.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 						</div>
-						<div class="grid-2col">
-							<h2>{{localize 'libersf.comp'}}</h2>
-		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="Con. Spec." style="float: left;background: #0d0d0d;">
-						</div>	
+
 
 						<div class="clear"></div>				
 					</div>	

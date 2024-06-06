@@ -37,6 +37,7 @@ import { range } from "./class/list.js";
             type: range.typeTypes,
             choix: range.choix,
             niveau: range.niveau,
+            usage:range.usage,
             traduct: {}                
         };
         let faction=null;
@@ -46,6 +47,7 @@ import { range } from "./class/list.js";
         let taille = null;
         let race = null;
         let sexe = null;
+        let usage = null;
         // Récupérer les valeurs nécessaires depuis l'acteur
         if(this.actor.type == "vehicule"){
             faction = context.actor.system.model.faction || null;
@@ -53,6 +55,7 @@ import { range } from "./class/list.js";
             type = context.actor.system.model.type.nb || null;
             choix = context.actor.system.model.choix || null;
             taille = context.actor.system.model.taille.nb || null;
+            usage = context.actor.system.model.usage || null;
         }else if(this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"){
             race = context.actor.system.background.race || null;
             faction = context.actor.system.background.religion || null;
@@ -566,7 +569,11 @@ import { range } from "./class/list.js";
                 }   
             }
         }      
-
+        /*mise en forme credit*/
+        let credit= html.find(".credit").val();
+        credit = credit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        html.find(".credit").val(credit);
+        
         /*Ajout Bonus*/
         $('.attribut').on('click',function(){
             var bonusactor=$(this).attr('name');
@@ -1197,8 +1204,8 @@ import { range } from "./class/list.js";
         var abc=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
         var surnom1 = ['libersf.surnom0', 'libersf.surnom1', 'libersf.surnom2', 'libersf.surnom3', 'libersf.surnom4', 'libersf.surnom5', 'libersf.surnom6'];
         var surnom2 = ['libersf.surnom7', 'libersf.surnom8', 'libersf.surnom9', 'libersf.surnom10', 'libersf.surnom11', 'libersf.surnom12', 'libersf.surnom13', 'libersf.surnom14', 'libersf.surnom15', 'libersf.surnom16', 'libersf.surnom17'];
-        var type = ['libersf.type0', 'libersf.type1', 'libersf.type2', 'libersf.type3', 'libersf.type4', 'libersf.type5', 'libersf.type6'];
-        var type2 = ['libersf.type20', 'libersf.type21', 'libersf.type22', 'libersf.type23', 'libersf.type24', 'libersf.type25', 'libersf.type26'];
+        var typ = ['libersf.typ0', 'libersf.typ1', 'libersf.typ2', 'libersf.typ3', 'libersf.typ4', 'libersf.typ5', 'libersf.typ6'];
+        var typ2 = ['libersf.typ20', 'libersf.typ21', 'libersf.typ22', 'libersf.typ23', 'libersf.typ24', 'libersf.typ25', 'libersf.typ26'];
         var huma=0; var drac=0;var plei=0;var elfe=0;var orqa=0;var artu=0;var mach=0;var yori=0;
         if(fact==1){//a corriger bug
            huma=Math. round(Math.random() * 11);
@@ -1355,7 +1362,7 @@ import { range } from "./class/list.js";
     }
 
     _onStatV(event){
-        let type=this.actor.system.model.type.nb;
+        let type=this.actor.system.model.type.nb.slice(1);
         let etype="";
         let tail=this.actor.system.model.taille.nb.slice(1);
         let etail="";
@@ -1374,42 +1381,43 @@ import { range } from "./class/list.js";
         let sun2=parseInt(ia)+parseInt(moteur);//bug
         let sun3=parseInt(ia)-1;//bug
         let sun4=parseInt(ia)+1;//bug
-        
         //Affichage background selon type de vaisseau, coef multiplicateur du prix et indication de la type du vaisseau
-        if(type==0){
+        if(type==1){
             etype=game.i18n.localize("libersf.type1");
             background='url(systems/libersf/css/air.png) center center no-repeat';
             coef=300;
-        }else if(type==1){
+        }else if(type==2){
             etype=game.i18n.localize("libersf.type2");
             background='url(systems/libersf/css/terre.png) center center no-repeat';
             coef=100;
-        }else if(type==2){ 
+        }else if(type==3){ 
             etype=game.i18n.localize("libersf.type3");
             background='url(systems/libersf/css/mer.png) center center no-repeat';
             coef=200
-        }else if(type==3){
+        }else if(type==4){
             etype=game.i18n.localize("libersf.type4");
             background='url(systems/libersf/css/vaisseau.png) center center no-repeat';
             coef=400;
         }
+        console.log(tail)
         //Affichage background selon type de vaisseau, coef multiplicateur du prix et indication de la taille du vaisseau
-        if(tail==0){
-           etail=game.i18n.localize("libersf.taille1");
-           coef=Math.pow(coef * 100, 2);;
-        }else if(tail==1){
+        if(tail==1){
             etail=game.i18n.localize("libersf.taille2");
-            coef=Math.pow(coef * 200, 2);;
+            coef=coef * 400;
         }else if(tail==2){
             etail=game.i18n.localize("libersf.taille3");
-            coef=Math.pow(coef * 300, 2);;
+            coef=coef * 800;
         }else if(tail==3){
             etail=game.i18n.localize("libersf.taille4");
-            coef=Math.pow(coef * 400, 2);;
+            coef=coef * 1600;
+        }else if(tail==4){
+            etail=game.i18n.localize("libersf.taille4");
+            coef=coef * 3200;
         }
-
         //Calcule du prix
-        total=(parseInt(ia)+parseInt(type)+parseInt(moteur)+parseInt(tail))*coef;
+        total=(parseInt(ia)+parseInt(type)+parseInt(moteur)+parseInt(tail)+parseInt(blind))*parseInt(coef);console.log(total)
+        
+
 
          //Indication du niveau de technologie, moteur etc
         function determinerSun(valeur) {
@@ -1454,7 +1462,7 @@ import { range } from "./class/list.js";
         }       
 
         //calcule des différents niveau de blindage, champ de force, point d'ia, résistence moteur, nombre d'arme et de pièce disponible 
-        arme=parseFloat(ia)+parseFloat(blind)+1;console.log(parseFloat(ia)+'+'+blind);
+        arme=parseFloat(ia)+parseFloat(blind)+1;
         arme=Math.floor(arme);
         blind=(parseFloat(blind)*(parseFloat(tail)+2))*200;
         champ=(parseFloat(moteur)*(parseFloat(tail)+2))*200; 
@@ -1462,7 +1470,7 @@ import { range } from "./class/list.js";
         ptia=ia*10;   
         nrj=(parseFloat(moteur)*(parseFloat(moteur)))*2000; 
         pvmoteur=(parseFloat(moteur)*(parseFloat(moteur)))*150;
-        pvmoteur=Math.floor(pvmoteur);console.log(pvmoteur)
+        pvmoteur=Math.floor(pvmoteur);
         if(enc>nrj){enc=nrj}
         if(pvvalue>pvmoteur){pvvalue=pvmoteur}
         let context = {
