@@ -45,7 +45,7 @@ input.m_degat,input.m_pv,input.m_ar{color:grey}
 .Liber input{border: none; background: none;}
 
 #sidebar a.item i{display: none}
-#sidebar a.item {height: 20px}
+#sidebar a.item {height: 20px;filter:invert(50%)}
 #sidebar a.item[data-tab="chat"]{background:url(" ../assets/icon/f1.png") no-repeat center center;background-size: 80%;}
 #sidebar a.item[data-tab="combat"]{background:url(" ../assets/icon/f2.png") no-repeat center center;background-size: 80%;}
 #sidebar a.item[data-tab="scenes"]{background:url(" ../assets/icon/f3.png") no-repeat center center;background-size: 80%;}
@@ -68,7 +68,7 @@ textarea{color:var(--couleur-clair)}
 .Liber form header{width: 100%; height: 50px;display: block; text-align: center;border-top: solid 20px var(--couleur-clair);color:var(--couleur-clair);text-transform: uppercase;position: relative;top: -8px;}
 .Liber form header h1{font-family: "Jersey 15";background: var(--couleur-noir); font-size: 2em; border:solid 2px var(--couleur-clair); border-top: none;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;position: absolute;width: 200px;top: -20px;left: calc(50% - 100px);}
 .Liber .col3,.Liber .col31,.Liber .col32,.Liber .col4{position: relative;float:left;display: inline-block; height: 750px; padding:5px}
-.Liber .col3{width:200px;}
+.Liber .col3{width:200px;margin-right: 5px;}
 .Liber .col31{width:220px;}
 .Liber .col32{width: 420px;}
 .Liber .col4 {width: 415px;margin-left: 5px}
@@ -90,7 +90,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .info input{width: 125px; float: right;color:var(--couleur-clair);border-bottom:1px dotted var(--couleur-clair);text-align: right;}
 .Liber .corps{background: url('corps.png') no-repeat center top;background-size: contain;width: 210px;display: block; height: 600px}
 .Liber .histoires,.Liber .histoire,.Liber .points,.Liber .equipement,.Liber .moteur{border:1px solid var(--couleur-bleu);border-radius: 10px}
-.Liber .marge,.Liber h2.marge{margin-top:18px}
+.Liber .marge,.Liber h2.marge{margin-top:5px}
 .Liber .histoire{resize: none;width:200px;height: 570px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
 .Liber .points div{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-bleu);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-bleu)}
 .Liber .points input{display: inline-block;width: 25px;color: var(--couleur-bleu);margin: 18px auto;text-align: center;}
@@ -124,7 +124,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .peser{font-size: 0.8em;padding: 5px;width: 214px;color: var(--couleur-bleu);text-align: right;margin-bottom: 20px;}
 .Liber .peser input{width: 20px;color: var(--couleur-bleu);}
 .Liber .encom{background: var(--couleur-clair);width: 100%;display: block;height: 10px;padding: 2px}
-.Liber .barenc{height: 6px; display: block;}
+.Liber .barenc, .Liber .barmoteur{height: 6px; display: block;}
 .navlib {height: 200px;width: 40px;position: absolute;right: -40px;top: 40px;}
 .Liber nav.navlib a{display: block;height: 40px;width: 40px;background: var(--couleur-bleu);border-top-right-radius:10px;border-bottom-right-radius: 10px; margin-bottom: 5px;transition: 1s}
 .Liber nav.navlib a.active{background: var(--couleur-noir);}
@@ -157,7 +157,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .compt{color:var(--couleur-clair);text-align: center;; font-size: 0.7em}
 .Liber .compt a{height: 15px;display: block;margin-top: 5px;}
 .Liber .compt a{color:var(--couleur-clair)}
-.Liber .list-compt{height: 564px;width: 210px}
+.Liber .list-compt{height: 564px;width: 210px;columns: 2;}
 .Liber #features p{color:var(--couleur-bleu);font-size: 0.7em;}
 .Liber .italic{font-style: italic;}
 .Liber #features .grid-2col input{width: 150px; border: medium none; background: transparent none repeat scroll 0% 0%; font-size: 25px; height: 30px; color: rgb(255, 255, 255); text-align: center; margin-left: calc(50% - 75px);}
@@ -187,7 +187,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .etat12 {background: url("../assets/icon/unconscious.png");background-size: cover;}
 .Liber .etat13 {background: url("../assets/icon/skull.png");background-size: cover;}
 .action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6,.action7,.action8,.action9{display: inline-block;width: 25px;height: 25px;margin-left: 2px;}
-.action10,.action11,.action12,.action13,.action14,.action15,.action16,.action17,.action18,.action19,.action20,.action21,.action22,.action23,.action24{display: inline-block;width: 28px;height: 28px;margin-left: 1px;}
+.action10,.action11,.action12,.action13,.action14,.action15,.action16,.action17,.action18,.action19,.action20,.action21,.action22,.action23,.action24,.action25{display: inline-block;width: 28px;height: 28px;margin-left: 1px;}
 .Liber .col4 .action0,.Liber .col4 .action0b,.Liber .col4 .action1,.Liber .col4 .action2,.Liber .col4 .action3,.Liber .col4 .action4,.Liber .col4 .action5,.Liber .col4 .action6,.Liber .col4 .action7,.Liber .col4 .action8,.Liber .col4 .action9{display: inline-block;width: 39px;height: 39px;margin-left: 8px;}
 .action0{background: darkgrey url(../assets/icon/walk.png) center center no-repeat;background-size: contain;}
 .action0b{background: darkgrey url(../assets/icon/run.png) center center no-repeat;background-size: contain;}
@@ -214,6 +214,7 @@ textarea{color:var(--couleur-clair)}
 .action22{background: darkgrey url(../assets/icon/action22.png) center center no-repeat;background-size: contain;cursor: pointer}
 .action23{background: darkgrey url(../assets/icon/action23.png) center center no-repeat;background-size: contain;cursor: pointer}
 .action24{background: darkgrey url(../assets/icon/action24.png) center center no-repeat;background-size: contain;cursor: pointer}
+.action25{background: darkgrey url(../assets/icon/action24.png) center center no-repeat;background-size: contain;cursor: pointer}
 
 
 .Liber .effetarme{background: url(effetarme.png) no-repeat left center;background-size: cover;width: 200px;height: 194px;display: block;}
@@ -246,17 +247,17 @@ textarea{color:var(--couleur-clair)}
 .Liber .poupe{top: 152px;left:  calc(50% - 60px);}
 .Liber .canon{height: 346px;width: 188px;}
 .Liber .canon .item-name{width: 124px;}
-.Liber .moteur {height: 120px}
+.Liber .moteur {height: 155px}
+.Liber .moteur.space {height: 110px}
 .Liber .moteur .encom{width: 178px}
-.Liber .moteur .encom input{width: 50px;display: inline-block;margin-top:5px;color:var(--couleur-clair)}
+.Liber .moteur input{width: 75px;display: inline-block;margin-top:5px;color:var(--couleur-clair)}
 .Liber .inventator{width: 210px;padding:0 10px;height: 346px}
 .Liber .bg .inventator{padding-top:10px;}
 .Liber .inventator select{width: 190px;margin-bottom:10px}
 .Liber .inventator h2{padding: 10px 0px 5px 0px;}
 .Liber .bouton{padding:5px; background: var(--couleur-bleu);color:var(--couleur-noir)}
 .Liber .space input{width: 60px;margin: 0}
-.Liber .moteurmax,.Liber .motor{width: 50px;display: inline-block;margin: 0}
-.Liber .prems{margin-left:50px}
+//.Liber .moteurmax,.Liber .motor{width: 75px;display: inline-block;margin: 0}
 .Liber .inventator .item-name{padding-top: 5px;font-size: 0.9em;width: 120px}
 .Liber .suny {float: left;width: 50%}
 .Liber .suny input,.Liber .moteur input{color:var(--couleur-clair);top: 0px;position: relative;}

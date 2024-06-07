@@ -36,16 +36,20 @@
 			<span class="update">↺</span>
 		</div>
 		
-		<div class="moteur marge">
+		<div class="moteur marge mecano">
 			<h3 class="">{{localize 'libersf.moteur'}} <span class="etoilemoteur"></span></h3>
 			<h2>{{localize 'libersf.l8'}}</h2>
-			<input class="motor prems" name="system.stat.moteur.value" type="text" value="{{actor.system.stat.moteur.value}}" placeholder="0"/><span>/</span><input  class="moteurmax" name="system.stat.moteur.max" type="text" value="{{actor.system.stat.moteur.max}}" placeholder="0" readonly/>
+			<div class="encom margin">
+				<div class="barmoteur"></div>
+			</div>
+				<input class="motor prems" name="system.stat.moteur.value" type="text" value="{{actor.system.stat.moteur.value}}" placeholder="0"/><span>/</span><input  class="moteurmax" name="system.stat.moteur.max" type="text" value="{{actor.system.stat.moteur.max}}" placeholder="0" readonly/>
 			<h2>{{localize 'libersf.energie'}}</h2>
 			<div class="encom margin">
 				<div class="barenc"></div>
+			</div>
 				<input class="encours prems" name="system.stat.encombrement.value" type="text" value="{{actor.system.stat.encombrement.value}}" placeholder="0"/> / 
 				<input class="enc" name="system.stat.encombrement.max" type="text" value="{{actor.system.stat.encombrement.max}}" placeholder="0"/></p>			
-			</div>
+			
 		</div>
 		
 		<div class="listaction">
@@ -66,6 +70,7 @@
 			<div class="action22" title="{{localize 'libersf.action22'}}"></div>
 			<div class="action23" title="{{localize 'libersf.action23'}}"></div>
 			<div class="action24" title="{{localize 'libersf.action24'}}"></div>
+			<div class="action25" title="{{localize 'libersf.action25'}}"></div>
 		</div>
 	</div>
 	<div class="col32">
@@ -73,22 +78,22 @@
 		<div class="vehicule" style="background:{{actor.system.back.vaisseau}};background-size:contain;">
 			<div class="scan3"></div>
 			<div class="danger" style="background:{{actor.system.back.danger}} ">
-				<div class="zone proue">
+				<div class="zone proue mecano">
 					<input class="refbar" data-zone="proue" name="system.bouclier.proue.value" type="text" value="{{actor.system.bouclier.proue.value}}" placeholder="0" title="Bouclier proue"/>
 					<input class="refbarmax" data-zone="prouemax" name="system.bouclier.proue.max" type="text" value="{{actor.system.bouclier.proue.max}}" placeholder="0" title="Bouclier proue"/>
 				</div>
-				<div class="zone babord">
+				<div class="zone babord mecano">
 					<input class="refbar" data-zone="babord" name="system.bouclier.babord.value" type="text" value="{{actor.system.bouclier.babord.value}}" placeholder="0" style="" title="Bouclier babord"/>
 					<input class="refbarmax" data-zone="babord" name="system.bouclier.babord.max" type="text" value="{{actor.system.bouclier.babord.max}}" placeholder="0" style="" title="Bouclier babord"/>
 				</div>
-				<div class="zone centre">
+				<div class="zone centre mecano">
 					<input data-zone="centre" value="{{actor.system.stat.armure.value}} / {{actor.system.stat.armure.max}}" type="text" placeholder="torse" title="0" readonly />
 				</div>
-				<div class="zone tribord">
+				<div class="zone tribord mecano">
 					<input class="refbar" data-zone="tribord" name="system.bouclier.tribord.value" type="text" value="{{actor.system.bouclier.tribord.value}}" placeholder="0" title="Bouclier tribord"/>
 					<input class="refbarmax" data-zone="tribord" name="system.bouclier.tribord.max" type="text" value="{{actor.system.bouclier.tribord.max}}" placeholder="0" title="Bouclier tribord"/>
 				</div>
-				<div class="zone poupe">
+				<div class="zone poupe mecano">
 					<input class="refbar" data-zone="poupe" name="system.bouclier.poupe.value" type="text" value="{{actor.system.bouclier.poupe.value}}" placeholder="0" title="Bouclier poupe"/>
 					<input class="refbarmax" data-zone="poupe" name="system.bouclier.poupe.max" type="text" value="{{actor.system.bouclier.poupe.max}}" placeholder="0" title="Bouclier poupe"/>
 				</div>
@@ -295,19 +300,19 @@
 			            <div class="grid-2col">
 			            	<h2>{{localize 'libersf.ia'}}</h2>
 							<select class="ialiste" size="1" name="system.model.ia.nb" title="">
-								{{selectOptions listValues.niveau selected=actor.system.model.ia.nb labelAttr="label" localize=true blank="libersf.none"}}
+								{{selectOptions listValues.ia selected=actor.system.model.ia.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 			            </div>
 						<div class="grid-2col" title="">
 							<h2>{{localize 'libersf.moteur'}}</h2>
 							<select class="moteurliste" size="1" name="system.model.moteur.nb" title="">
-								{{selectOptions listValues.niveau selected=actor.system.model.moteur.nb labelAttr="label" localize=true blank="libersf.none"}}
+								{{selectOptions listValues.moteur selected=actor.system.model.moteur.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 						</div>
 						<div class="grid-2col" title="">
 							<h2>{{localize 'libersf.blindage'}}</h2>
 							<select class="blindageliste" size="1" name="system.model.blindage.nb" title="">
-								{{selectOptions listValues.niveau selected=actor.system.model.blindage.nb labelAttr="label" localize=true blank="libersf.none"}}
+								{{selectOptions listValues.blindage selected=actor.system.model.blindage.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 						</div>
 

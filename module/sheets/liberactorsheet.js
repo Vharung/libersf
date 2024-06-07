@@ -16,7 +16,6 @@ import { range } from "./class/list.js";
     }
 
     get template() {
-        console.log(this.actor.type)
         if (this.actor.type == 'personnage' || this.actor.type == 'pnj' ) {
             return `systems/libersf/templates/sheets/personnage-sheet.hbs`;
         }else {
@@ -38,8 +37,18 @@ import { range } from "./class/list.js";
             choix: range.choix,
             niveau: range.niveau,
             usage:range.usage,
-            traduct: {}                
-        };
+            moteur:range.moteur,
+            blindage:range.blindage,
+            ia:range.ia,
+            ia:range.ia,
+            traduct: {},
+            domination :null,
+            niveau_arme :null,
+            crime:null,
+            niveau_secu :null,
+            niveau_tech :null               
+        };        
+        console.log('idem')
         let faction=null;
         let metier = null;
         let type = null;
@@ -48,6 +57,24 @@ import { range } from "./class/list.js";
         let race = null;
         let sexe = null;
         let usage = null;
+        let moteur = null;
+        let blindage = null;
+        let ia = null;
+        let domination=null;
+        let niveau_arme=null;
+        let crime=null;
+        let niveau_secu=null;
+        let niveau_tech=null;
+        let limited=context.limited;
+        let owner=context.owner;
+        let droit=null;
+        if(limited==true && owner==false){
+            droit='limite';//pilote
+        }else if(limited==false && owner==false){
+            droit='observateur';//mecano et artilleur
+        }else if(limited==false && owner==true){
+            droit='proprio';//commandant, navigateur
+        } 
         // Récupérer les valeurs nécessaires depuis l'acteur
         if(this.actor.type == "vehicule"){
             faction = context.actor.system.model.faction || null;
@@ -56,7 +83,11 @@ import { range } from "./class/list.js";
             choix = context.actor.system.model.choix || null;
             taille = context.actor.system.model.taille.nb || null;
             usage = context.actor.system.model.usage || null;
-        }else if(this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"){
+            moteur = context.actor.system.model.moteur || null;
+            blindage = context.actor.system.model.blindage || null;
+            ia = context.actor.system.model.ia || null;
+            droit=context.actor.system.droit || droit;
+        } else if (["personnage", "pnj", "monstre"].includes(this.actor.type)) {
             race = context.actor.system.background.race || null;
             faction = context.actor.system.background.religion || null;
             metier = context.actor.system.background.metier || null;
@@ -64,9 +95,14 @@ import { range } from "./class/list.js";
             choix = context.actor.system.background.choix || null;
             taille = context.actor.system.background.taille || null;
             sexe = context.actor.system.background.sexe || null;
+        }else if(this.actor.type == "planete"){
+            domination = context.actor.system.domination || null;
+            niveau_arme = context.actor.system.niveau_arme || null;
+            crime = context.actor.system.crime || null;
+            niveau_secu = context.actor.system.niveau_secu || null;
+            niveau_tech = context.actor.system.niveau_tech || null;
         }
-        
-        if (this.actor.type == "personnage" || this.actor.type == "pnj" || this.actor.type == "monstre"  | this.actor.type == "vehicule" ) {
+        if (["personnage", "pnj", "monstre", "vehicule"].includes(this.actor.type)) {
             this._prepareCharacterItems(context);
             let stat= await this._onStatM(context);
             context.actor.system = {
@@ -123,13 +159,14 @@ import { range } from "./class/list.js";
                 }
             };
         }
-        if (this.actor.type == "personnage" || this.actor.type == "pnj" ) {
+        if (["personnage", "pnj"].includes(this.actor.type)) {
             this._onEncom(context);
         }
         if(this.actor.type == "vehicule"){
             let stat= await this._onStatV(context);
             context.actor.system = {
                 ...context.actor.system,
+                droit:droit,
                 stat: {
                     ...context.actor.system.stat,
                     moteur: {
@@ -160,7 +197,7 @@ import { range } from "./class/list.js";
                         piece: stat['system.model.point.piece'],
                         arme: stat['system.model.point.arme']
                     },
-                    tehnologie: stat['system.model.tehnologie'],
+                    technologie: stat['system.model.tehnologie'],
                     type: {
                         ...context.actor.system.model.type,
                         etoile: stat['system.model.type.etoile']
@@ -193,7 +230,8 @@ import { range } from "./class/list.js";
                 ? game.i18n.localize(context.listValues.religion[context.actor.system.religion].label) : '',
             type: type && context.listValues.type[type] ? game.i18n.localize(context.listValues.type[type].label) : '',
             choix: choix && context.listValues.choix[choix] ? game.i18n.localize(context.listValues.choix[choix].label) : '',
-            taille: taille && context.listValues.taille[taille] ? game.i18n.localize(context.listValues.taille[taille].label) : ''
+            taille: taille && context.listValues.taille[taille] ? game.i18n.localize(context.listValues.taille[taille].label) : '',
+            moteur: moteur && context.listValues.moteur[moteur] ? game.i18n.localize(context.listValues.moteur[moteur].label) : ''
         };
         console.log(context)
         return context;
@@ -480,6 +518,8 @@ import { range } from "./class/list.js";
             let type=this.actor.system.type;
             let tail=this.actor.system.taille;
             let encour=html.find('.encours').val();
+            let moteur=html.find('.motor').val();
+            let moteurmax=html.find('.moteurmax').val();
             let nrj=html.find('.enc').val();
             let prixbase=this.actor.system.stat.credit;
            
@@ -499,6 +539,22 @@ import { range } from "./class/list.js";
             }
             html.find('.barenc').css({"width":pourcentage+"%"});
             html.find('.enc').val(nrj);
+
+            let pourcent= moteur*100/moteurmax;
+       
+            if(pourcent<25){
+                html.find('.barmoteur').css({"background":'#c92626'})
+            }else if(pourcent<50){
+                html.find('.barmoteur').css({"background":'#c99326'})
+            }else if(pourcent<75){
+                html.find('.barmoteur').css({"background":'#c9c726'})
+            }else if(pourcent<=100){
+               html.find('.barmoteur').css({"background":'#41c926'})
+            }
+            if(pourcent>100){
+                pourcent=100;
+            }
+            html.find('.barmoteur').css({"width":pourcent+"%"});
             
 
             let prix=[];
@@ -519,17 +575,20 @@ import { range } from "./class/list.js";
                prixbase=parseFloat(prixbase)+parseFloat(prix[i])*parseFloat(quantite[i]);
             }
             html.find('.credit').val(prixbase);
-            let proue = this.actor.system.bouclier.proue.value;
-            let prouemax = this.actor.system.bouclier.proue.max;
-            let babord = this.actor.system.bouclier.babord.value;
-            let babordmax = this.actor.system.bouclier.babord.max;
-            let tribord = this.actor.system.bouclier.tribord.value;
-            let tribordmax = this.actor.system.bouclier.tribord.max;
-            let poupe = this.actor.system.bouclier.poupe.value;
-            let poupemax = this.actor.system.bouclier.poupe.max;
-            let bouc = this.actor.system.stat.protections.value;
-            let boucmax = this.actor.system.stat.protections.max;
-            let dif=parseFloat(boucmax)-(parseFloat(prouemax)+parseFloat(babordmax)+parseFloat(tribordmax)+parseFloat(poupemax));
+            let proue = parseFloat(this.actor.system.bouclier.proue.value);
+            let babord = parseFloat(this.actor.system.bouclier.babord.value);
+            let tribord = parseFloat(this.actor.system.bouclier.tribord.value);
+            let poupe = parseFloat(this.actor.system.bouclier.poupe.value);
+            let bouc = parseFloat(this.actor.system.stat.protections.value);
+
+            let boucmax = parseFloat(this.actor.system.stat.protections.max);
+            let prouemax = parseFloat(this.actor.system.bouclier.proue.max);
+            let babordmax = parseFloat(this.actor.system.bouclier.babord.max);
+            let tribordmax = parseFloat(this.actor.system.bouclier.tribord.max);
+            let poupemax = parseFloat(this.actor.system.bouclier.poupe.max);
+
+            let dif = boucmax - (prouemax + babordmax + tribordmax + poupemax);
+
             const zone=[proue,tribord,poupe,babord];
             const zonename=['proue','tribord','poupe','babord'];
             const zonemax=[prouemax,tribordmax,poupemax,babordmax];
@@ -540,7 +599,7 @@ import { range } from "./class/list.js";
             }else{
                 html.find('.refbarmax').css({'color':'#b1feff'});
             }
-            dif=parseFloat(bouc)-(parseFloat(proue)+parseFloat(babord)+parseFloat(tribord)+parseFloat(poupe));
+            dif=bouc-(proue+babord+tribord+poupe);
             if(dif<0){
                 html.find('.refbar').css({'color':'red'});
             }else if(dif>0){
@@ -568,11 +627,24 @@ import { range } from "./class/list.js";
                     $('.vehicule').css({[cssProperty]: '#00abab solid 5px'}); // couleur 4
                 }   
             }
+
+            //affichage selon les droits
+            let droit=this.actor.system.droit;console.log(droit)
+            if(droit=='limite'){
+                html.find('.mecano').css({'display':'none'});//pilote
+            }else if(droit=='observateur'){
+                //mecano et artilleur
+            }else if(droit=='proprio'){
+                //commandant, navigateur
+            } 
         }      
         /*mise en forme credit*/
-        let credit= html.find(".credit").val();
-        credit = credit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        html.find(".credit").val(credit);
+        if(this.actor.type!=='planete'){
+           let credit= html.find(".credit").val();
+            credit = credit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            html.find(".credit").val(credit); 
+        }
+        
         
         /*Ajout Bonus*/
         $('.attribut').on('click',function(){
@@ -648,7 +720,8 @@ import { range } from "./class/list.js";
         var balistique=this.actor.system.attributs.Balistique;
 
         const jetdeDesFormule = "1d100";
-        var bonus =this.actor.system.attributs.bonus;//test
+        let bonus =this.actor.system.stat.bonus;console.log(bonus)//test
+        var malus =this.actor.system.malus;console.log(malus)//test
         var critique=5;
         if(type=="C"){
             critique=10;
@@ -662,7 +735,10 @@ import { range } from "./class/list.js";
         if(bonus=='' || bonus ==undefined || bonus==null){
             bonus=0;
         }
-        var inforesult=parseInt(maxstat)+parseInt(bonus)+30;console.log(inforesult);console.log(maxstat);console.log(bonus)
+        if(malus=='' || malus ==undefined || malus==null){
+            malus=0;
+        }
+        var inforesult=parseInt(maxstat)+parseInt(bonus)+parseInt(malus)+30;
         if(inforesult>echec){
             inforesult=echec;
         }
@@ -1362,25 +1438,26 @@ import { range } from "./class/list.js";
     }
 
     _onStatV(event){
-        let type=this.actor.system.model.type.nb.slice(1);
-        let etype="";
-        let tail=this.actor.system.model.taille.nb.slice(1);
-        let etail="";
-        let moteur=this.actor.system.model.moteur.nb.slice(1);
-        let blind=this.actor.system.model.blindage.nb.slice(1);
-        let ia=this.actor.system.model.ia.nb.slice(1);
+        let type = (this.actor.system.model.type.nb && typeof this.actor.system.model.type.nb === 'string') ? this.actor.system.model.type.nb.slice(1) : '';
+        let etype = "";
+        let tail = (this.actor.system.model.taille.nb && typeof this.actor.system.model.taille.nb === 'string') ? this.actor.system.model.taille.nb.slice(1) : '';
+        let etail = "";
+        let moteur = (this.actor.system.model.moteur.nb && typeof this.actor.system.model.moteur.nb === 'string') ? this.actor.system.model.moteur.nb.slice(1) : '';
+        let blind = (this.actor.system.model.blindage.nb && typeof this.actor.system.model.blindage.nb === 'string') ? this.actor.system.model.blindage.nb.slice(1) : '';
+        let ia = (this.actor.system.model.ia.nb && typeof this.actor.system.model.ia.nb === 'string') ? this.actor.system.model.ia.nb.slice(1) : '';
+
         let champ=0;let total=0;let coef=0;let arme=0;let piece=0;let ptia=0;let dif=0;let nrj=0;let pvmoteur=0;
         let background="";
         let blindage = this.actor.system.stat.armure.value;
-        let blindagemax = this.actor.system.stat.armure.max;//bug
+        let blindagemax = this.actor.system.stat.armure.max;
         let enc=this.actor.system.stat.encombrement.value;
         let pvvalue=this.actor.system.stat.moteur.value;
-        let technologie=(parseFloat(moteur)+parseFloat(ia)+parseFloat(blind))/3; /*bug*/
+        let technologie=(parseFloat(moteur)+parseFloat(ia)+parseFloat(blind))/6; console.log(technologie)
         let danger ="";
-        let sun1=parseInt(moteur);//bug
-        let sun2=parseInt(ia)+parseInt(moteur);//bug
-        let sun3=parseInt(ia)-1;//bug
-        let sun4=parseInt(ia)+1;//bug
+        let sun1=parseInt(moteur)/2;//bug
+        let sun2=parseInt(ia)/2+parseInt(moteur)/2;//bug
+        let sun3=parseInt(ia)/2-1;//bug
+        let sun4=parseInt(ia)/2+1;//bug
         //Affichage background selon type de vaisseau, coef multiplicateur du prix et indication de la type du vaisseau
         if(type==1){
             etype=game.i18n.localize("libersf.type1");
@@ -1399,7 +1476,6 @@ import { range } from "./class/list.js";
             background='url(systems/libersf/css/vaisseau.png) center center no-repeat';
             coef=400;
         }
-        console.log(tail)
         //Affichage background selon type de vaisseau, coef multiplicateur du prix et indication de la taille du vaisseau
         if(tail==1){
             etail=game.i18n.localize("libersf.taille2");
@@ -1415,8 +1491,7 @@ import { range } from "./class/list.js";
             coef=coef * 3200;
         }
         //Calcule du prix
-        total=(parseInt(ia)+parseInt(type)+parseInt(moteur)+parseInt(tail)+parseInt(blind))*parseInt(coef);console.log(total)
-        
+        total=(parseInt(ia)+parseInt(type)+parseInt(moteur)+parseInt(tail)+parseInt(blind))*parseInt(coef);      
 
 
          //Indication du niveau de technologie, moteur etc
@@ -1447,7 +1522,7 @@ import { range } from "./class/list.js";
         sun2 = determinerSun(sun2);
         sun3 = determinerSun(sun3);
         sun4 = determinerSun(sun4);
-        technologie = determinerSun(technologie);
+        technologie = determinerSun(technologie);console.log(technologie)
 
         //indication du niveau du blindage
         let por=parseInt(blindage)*100/blindagemax;
@@ -1467,8 +1542,8 @@ import { range } from "./class/list.js";
         blind=(parseFloat(blind)*(parseFloat(tail)+2))*200;
         champ=(parseFloat(moteur)*(parseFloat(tail)+2))*200; 
         piece=Math.pow(tail, 3);
-        ptia=ia*10;   
-        nrj=(parseFloat(moteur)*(parseFloat(moteur)))*2000; 
+        ptia=ia*-10;   
+        nrj=(parseFloat(moteur)*(parseFloat(moteur)))*200; 
         pvmoteur=(parseFloat(moteur)*(parseFloat(moteur)))*150;
         pvmoteur=Math.floor(pvmoteur);
         if(enc>nrj){enc=nrj}
@@ -1497,3 +1572,6 @@ import { range } from "./class/list.js";
         return context;
     }
 }
+
+/*bug 
+- action piratage à rajouter*/
