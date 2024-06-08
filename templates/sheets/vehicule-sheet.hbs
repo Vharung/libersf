@@ -2,10 +2,9 @@
 	{{!-- Sheet Header --}}
 	{{!-- Sheet Tab Navigation --}}
 	<nav class="sheet-tabs tabs navlib" data-group="primary">
-		<a class="item bg active" data-tab="bg" title="{{localize 'libersf.histoire'}}""><span></span></a>
-		<!--a class="item carac " data-tab="carac"><span></span></a-->
-		<a class="item inven active" data-tab="items" title="{{localize 'libersf.inv'}}"><span></span></a>
-		<a class="item compe " data-tab="features" title="{{localize 'libersf.cpt'}}"><span></span></a>
+		<a class="item compe active" data-tab="features" title="{{localize 'libersf.cpt'}}"><span></span></a>
+		<a class="item inven" data-tab="items" title="{{localize 'libersf.inv'}}"><span></span></a>
+		<a class="item bg" data-tab="bg" title="{{localize 'libersf.histoire'}}""><span></span></a>
 		<a class="item magi andromede" data-tab="magie" title="{{localize 'libersf.magie'}}"><span></span></a>
 		<a class="item outil" data-tab="lab" title="⚙"><span></span></a>
 	</nav>
@@ -102,6 +101,14 @@
 		<div class="moitie">
 			<h3>{{actor.system.model.point.arme}} {{localize 'libersf.armes'}}</h3>
 			<ul class="items-list canon">
+				<h2 class="margin">Arme Pilote</h2>
+				<li class="item rexrow">
+					<div class="item-qty">1</div>
+					<div class="item-image"><img src="systems/libersf/assets/icon/action17.png" title="{{actor.system.armed}}"/></div>
+	                <div class="item-name" title="{{actor.system.armed}}" style="width: 105px;">{{actor.system.armed}}</div>
+	                <a class="desequi" data-genre="arme">🗑</a>
+				</li>
+				<h2 class="margin">Toutes les armes</h2>
 				{{#each actor.varme as |item id|}}
 	                <li class="item rexrow" data-item-id="{{item._id}}">
 	                    <div class="item-qty">{{item.system.quantite}}</div>
@@ -113,7 +120,7 @@
 			                    <div class="item-portee">{{item.system.portee}}</div>
 			                    <div class="item-dommage">{{item.system.degats}}</div>
 			                    <div class="item-poid">{{item.system.poids}}</div>
-			                    <div class="item-valeurs">{{item.system.valeur}}</div>
+			                    <div class="item-valeur">{{item.system.valeur}}</div>
 			                </div>		                    
 	                    	<div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
 		                    <div class="item-controls">
@@ -184,7 +191,7 @@
 					                    <div class="item-portee">{{item.system.portee}}</div>
 					                    <div class="item-dommage">{{item.system.degats}}</div>
 					                    <div class="item-poid">{{item.system.poids}}</div>
-					                    <div class="item-valeurs">{{item.system.valeur}}</div>
+					                    <div class="item-valeur">{{item.system.valeur}}</div>
 					                </div>		                    
 			                    	<div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
 				                    <div class="item-controls">
@@ -247,16 +254,18 @@
 				{{!-- Features Tab --}}
 				<div id="features" class="tab features"  data-group="primary" data-tab="features">
 					<h3>{{localize 'libersf.ia'}}</h3>
-					<div class="zoneinfo inventator">
+					<div class="zoneinfo  inventator">
 						
 						<h2 style="text-align: center;">{{localize 'libersf.mode'}}</h2>
-						{{#each actor.system.attributs as |value caract|}}
-							<div class="compt compt{{@index}}">
-							  <a class="jetdedes" data-name="{{caract}}" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{value}}" title="{{caract}}">{{localize caract}}</a>
-							  <input class="cpt{{@index}}" type="text" name="system.attributs.{{caract}}" value="{{value}}">
-							</div>
-						{{/each}}
-						<div class="clear"></div>		
+						<div class="collone2">
+							{{#each actor.system.attributs as |value caract|}}
+								<div class="compt compt{{@index}}">
+								  <a class="jetdedes" data-name="{{caract}}" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{value}}" title="{{caract}}">{{localize caract}}</a>
+								  <input class="cpt{{@index}}" type="text" name="system.attributs.{{caract}}" value="{{value}}">
+								</div>
+							{{/each}}
+							<div class="clear"></div>		
+						</div>
 					</div>
 					<div class="grid-2col left">
 						<h2 style="text-align:center">{{localize 'libersf.restant'}}</h2>
@@ -325,11 +334,11 @@
 	                </div>
 				</div>
 			</section>
-			<div class="etat">
+			<!--div class="etat">
 				{{#each actor.system.background.etat as |value etat|}}
 			  		<a class="etat{{@index}} chnget" data-lettre="{{@index}}" style="opacity: {{value}};"></a>
 				{{/each}}	
-			</div>
+			</div-->
 		</div>
 	</div>
 </form>

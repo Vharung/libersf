@@ -511,6 +511,7 @@ import { range } from "./class/list.js";
             if(pourcentage>100){
                 pourcentage=100;
             }
+            total=Math.round(total)
             html.find('.encours').val(total);
             html.find('.crinv').val(crinv);
             html.find('.barenc').css({"width":pourcentage+"%"});
@@ -574,6 +575,9 @@ import { range } from "./class/list.js";
             for (var i = 0;i < prix.length ; i++) {
                prixbase=parseFloat(prixbase)+parseFloat(prix[i])*parseFloat(quantite[i]);
             }
+            console.log(prixbase)
+            console.log(prix)
+            console.log(quantite)
             html.find('.credit').val(prixbase);
             let proue = parseFloat(this.actor.system.bouclier.proue.value);
             let babord = parseFloat(this.actor.system.bouclier.babord.value);
@@ -639,7 +643,7 @@ import { range } from "./class/list.js";
             } 
         }      
         /*mise en forme credit*/
-        if(this.actor.type!=='planete'){
+        if(this.actor.type!=="planete" && this.actor.type !=="monstre"){
            let credit= html.find(".credit").val();
             credit = credit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
             html.find(".credit").val(credit); 
@@ -973,7 +977,7 @@ import { range } from "./class/list.js";
             let itemData= this.actor.items.filter(i=>i.name == chargequi);                 
             var iditem= itemData[0].id;
             var qty = itemData[0].system.quantite;
-            if(perte==10){
+            if(perte==10){list-compt
                 itemData[0].NunsMoins();
             }else{
                 itemData[0].MunMoins();

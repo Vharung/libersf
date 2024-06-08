@@ -122,7 +122,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .bonus{height: 112px}
 .Liber .update{width: 20px;background: var(--couleur-bleu);color:var(--couleur-noir);height: 20px;display: block;position: absolute;right: 6px;text-align: center;border-bottom-left-radius: 5px;cursor: pointer;}
 .Liber .peser{font-size: 0.8em;padding: 5px;width: 214px;color: var(--couleur-bleu);text-align: right;margin-bottom: 20px;}
-.Liber .peser input{width: 20px;color: var(--couleur-bleu);}
+.Liber .peser input{width: 40px;color: var(--couleur-bleu);}
 .Liber .encom{background: var(--couleur-clair);width: 100%;display: block;height: 10px;padding: 2px}
 .Liber .barenc, .Liber .barmoteur{height: 6px; display: block;}
 .navlib {height: 200px;width: 40px;position: absolute;right: -40px;top: 40px;}
@@ -214,11 +214,12 @@ textarea{color:var(--couleur-clair)}
 .action22{background: darkgrey url(../assets/icon/action22.png) center center no-repeat;background-size: contain;cursor: pointer}
 .action23{background: darkgrey url(../assets/icon/action23.png) center center no-repeat;background-size: contain;cursor: pointer}
 .action24{background: darkgrey url(../assets/icon/action24.png) center center no-repeat;background-size: contain;cursor: pointer}
-.action25{background: darkgrey url(../assets/icon/action24.png) center center no-repeat;background-size: contain;cursor: pointer}
+.action25{background: darkgrey url(../assets/icon/action25.png) center center no-repeat;background-size: contain;cursor: pointer}
 
 
 .Liber .effetarme{background: url(effetarme.png) no-repeat left center;background-size: cover;width: 200px;height: 194px;display: block;}
 .Liber #lab p {font-size: 0.8em}
+.Liber .collone2{columns: 2}
 .Liber .z1{width: 200px;height: 100px;}
 .Liber .z2{width: 60px;height: 236px;float: left;}
 .Liber .z3{width: 76px;height: 236px;float: left;}
@@ -234,6 +235,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .danger{height: 300px; width: 300px; display: block; background: transparent;border-radius: 50%;position: relative;top: -11px;}
 .Liber .moitie{width: 200px;height: 436px; float: left;}
 .Liber .margin{margin:5px;}
+.Liber h2.margin{width:170px;margin: 10px 5px;}
 .Liber .padding{padding:5px;}
 .Liber .scan3{box-shadow: 1px 10px 9px -3px var(--couleur-clair);width:320px;display:block;position: relative;top:0px; height: 10px; border-bottom:1px solid var(--couleur-clair);}
 .Liber .scan3{animation: scanss 7s ease-in-out infinite alternate;transform-origin: center;}
