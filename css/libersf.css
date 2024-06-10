@@ -154,10 +154,10 @@ textarea{color:var(--couleur-clair)}
 .Liber .objets{height: 266px}
 .Liber .zoneinfo{height: 400px}
 .Liber .zonemagie, .Liber .zonecaract{height: 740px;padding:5px}
-.Liber .compt{color:var(--couleur-clair);text-align: center;; font-size: 0.7em}
+.Liber .compt{color:var(--couleur-clair);text-align: center;; font-size: 0.7em;width: 50%; float: left;}
 .Liber .compt a{height: 15px;display: block;margin-top: 5px;}
 .Liber .compt a{color:var(--couleur-clair)}
-.Liber .list-compt{height: 564px;width: 210px;columns: 2;}
+.Liber .list-compt{height: 564px;width: 210px;}
 .Liber #features p{color:var(--couleur-bleu);font-size: 0.7em;}
 .Liber .italic{font-style: italic;}
 .Liber #features .grid-2col input{width: 150px; border: medium none; background: transparent none repeat scroll 0% 0%; font-size: 25px; height: 30px; color: rgb(255, 255, 255); text-align: center; margin-left: calc(50% - 75px);}
@@ -187,7 +187,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .etat12 {background: url("../assets/icon/unconscious.png");background-size: cover;}
 .Liber .etat13 {background: url("../assets/icon/skull.png");background-size: cover;}
 .action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6,.action7,.action8,.action9{display: inline-block;width: 25px;height: 25px;margin-left: 2px;}
-.action10,.action11,.action12,.action13,.action14,.action15,.action16,.action17,.action18,.action19,.action20,.action21,.action22,.action23,.action24,.action25{display: inline-block;width: 28px;height: 28px;margin-left: 1px;}
+.action10,.action11,.action12,.action13,.action14,.action15,.action16,.action17,.action18,.action19,.action20,.action21,.action22,.action23,.action24,.action25,.action26{display: inline-block;width: 28px;height: 28px;margin-left: 1px;}
 .Liber .col4 .action0,.Liber .col4 .action0b,.Liber .col4 .action1,.Liber .col4 .action2,.Liber .col4 .action3,.Liber .col4 .action4,.Liber .col4 .action5,.Liber .col4 .action6,.Liber .col4 .action7,.Liber .col4 .action8,.Liber .col4 .action9{display: inline-block;width: 39px;height: 39px;margin-left: 8px;}
 .action0{background: darkgrey url(../assets/icon/walk.png) center center no-repeat;background-size: contain;}
 .action0b{background: darkgrey url(../assets/icon/run.png) center center no-repeat;background-size: contain;}
@@ -215,6 +215,7 @@ textarea{color:var(--couleur-clair)}
 .action23{background: darkgrey url(../assets/icon/action23.png) center center no-repeat;background-size: contain;cursor: pointer}
 .action24{background: darkgrey url(../assets/icon/action24.png) center center no-repeat;background-size: contain;cursor: pointer}
 .action25{background: darkgrey url(../assets/icon/action25.png) center center no-repeat;background-size: contain;cursor: pointer}
+.action26{background: darkgrey url(../assets/icon/action26.jpg) center center no-repeat;background-size: contain;cursor: pointer}
 
 
 .Liber .effetarme{background: url(effetarme.png) no-repeat left center;background-size: cover;width: 200px;height: 194px;display: block;}
@@ -248,7 +249,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .tribord{top: 42px;right: 0px;}
 .Liber .poupe{top: 152px;left:  calc(50% - 60px);}
 .Liber .canon{height: 346px;width: 188px;}
-.Liber .canon .item-name{width: 124px;}
+.Liber .canon .item-name{width: 124px;font-size: 0.8em;height: 25px;}
 .Liber .moteur {height: 155px}
 .Liber .moteur.space {height: 110px}
 .Liber .moteur .encom{width: 178px}
@@ -286,3 +287,4 @@ textarea{color:var(--couleur-clair)}
 @keyframes scans {0% {top: 580px;}50% {top:-5px;}100% {top: 580px;}}
 @keyframes scanss {0% {top: 300px;}50% {top:-20px;}100% {top: 300px;}}
 #sidebar .resultat{padding: 20px;text-align: center;text-transform: uppercase;font-size: large;}
+#sidebar .resultdeg{text-align: center;height: 100px;width: 65px;padding-top: 40px;font-size: 1.6em;float: right;}

@@ -48,7 +48,6 @@ import { range } from "./class/list.js";
             niveau_secu :null,
             niveau_tech :null               
         };        
-        console.log('idem')
         let faction=null;
         let metier = null;
         let type = null;
@@ -523,7 +522,9 @@ import { range } from "./class/list.js";
             let moteurmax=html.find('.moteurmax').val();
             let nrj=html.find('.enc').val();
             let prixbase=this.actor.system.stat.credit;
-           
+            
+            html.find('.listaction div').click(this._onNrj.bind(this));
+            
             let pourcentage= encour*100/nrj;
        
             if(pourcentage<25){
@@ -557,7 +558,7 @@ import { range } from "./class/list.js";
             }
             html.find('.barmoteur').css({"width":pourcent+"%"});
             
-
+            
             let prix=[];
             let quantite=[];
             html.find( ".item-valeur" ).each(function( index ) {
@@ -575,9 +576,6 @@ import { range } from "./class/list.js";
             for (var i = 0;i < prix.length ; i++) {
                prixbase=parseFloat(prixbase)+parseFloat(prix[i])*parseFloat(quantite[i]);
             }
-            console.log(prixbase)
-            console.log(prix)
-            console.log(quantite)
             html.find('.credit').val(prixbase);
             let proue = parseFloat(this.actor.system.bouclier.proue.value);
             let babord = parseFloat(this.actor.system.bouclier.babord.value);
@@ -633,7 +631,7 @@ import { range } from "./class/list.js";
             }
 
             //affichage selon les droits
-            let droit=this.actor.system.droit;console.log(droit)
+            let droit=this.actor.system.droit;
             if(droit=='limite'){
                 html.find('.mecano').css({'display':'none'});//pilote
             }else if(droit=='observateur'){
@@ -641,6 +639,17 @@ import { range } from "./class/list.js";
             }else if(droit=='proprio'){
                 //commandant, navigateur
             } 
+
+            let nbarme=-1;
+            html.find( ".canon .item-qty" ).each(function( index ) {
+                nbarme=nbarme + parseInt($( this ).text());          
+            });
+            html.find(".nbarme").text(nbarme)
+            let nbpiece=0;
+            html.find( ".pieces .item-qty" ).each(function( index ) {
+                nbpiece=nbpiece + parseInt($( this ).text());          
+            });
+            html.find(".nbpiece").text(nbpiece)
         }      
         /*mise en forme credit*/
         if(this.actor.type!=="planete" && this.actor.type !=="monstre"){
@@ -849,22 +858,16 @@ import { range } from "./class/list.js";
         if(name=="Visée"){
             if(retour>echec){
                 succes="<h4 class='resultat' style='background:#ff3333;'>"+game.i18n.localize('libersf.J17')+"</h4>";
-                deg='<h4 class="resultdeg3"></h4>';
             }else if(retour>(inforesult+20)){
                 succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J18')+"</h4>";
-                deg='<h4 class="resultdeg2"></h4>';
             }else if(retour>inforesult){
                 succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J19')+"</h4>";
-                deg='<h4 class="resultdeg4"></h4>';
             }else if(retour>(inforesult-20)){
                 succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J20')+"</h4>";
-                deg='<h4 class="resultdeg"></h4>';
             }else if(retour>critique){
                 succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J21')+"</h4>";
-                deg='<h4 class="resultdeg"></h4>';
             }else if(retour<=critique){
                 succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J22')+"</h4>";
-                deg='<h4 class="resultdeg"></h4>';
             }
         }else if(name=="Tircouv"){
             perte=10;
@@ -886,20 +889,20 @@ import { range } from "./class/list.js";
             name+=" avec "+arme;       
             if(retour>95){
                 succes="<h4 class='resultat' style='background:#ff3333;'>"+game.i18n.localize('libersf.J17')+"</h4>";
-                deg='<h4 class="resultdeg3"></h4>';
+                deg='<h4 class="resultdeg">0</h4>';
             }else if(retour>(inforesult+20)){
                 succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J18')+"</h4>";
-                deg='<h4 class="resultdeg2"></h4>';
+                deg='<h4 class="resultdeg">0</h4>';
             }else if(retour>inforesult){
                 succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J19')+"</h4>";
-                deg='<h4 class="resultdeg4"></h4>';
+                deg='<h4 class="resultdeg">0</h4>';
                 perte=1;
             }else if(retour>(inforesult-20)){
                 succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J20')+"</h4>";
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
                 perte=1;bles=1;                
             }else if(retour>critique){
-                succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J12')+"</h4>";
+                succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J21')+"</h4>";
                 degat=Math.round(parseInt(degat)*1.5);
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
                 perte=1;bles=1;
@@ -1456,7 +1459,7 @@ import { range } from "./class/list.js";
         let blindagemax = this.actor.system.stat.armure.max;
         let enc=this.actor.system.stat.encombrement.value;
         let pvvalue=this.actor.system.stat.moteur.value;
-        let technologie=(parseFloat(moteur)+parseFloat(ia)+parseFloat(blind))/6; console.log(technologie)
+        let technologie=(parseFloat(moteur)+parseFloat(ia)+parseFloat(blind))/6;
         let danger ="";
         let sun1=parseInt(moteur)/2;//bug
         let sun2=parseInt(ia)/2+parseInt(moteur)/2;//bug
@@ -1526,7 +1529,7 @@ import { range } from "./class/list.js";
         sun2 = determinerSun(sun2);
         sun3 = determinerSun(sun3);
         sun4 = determinerSun(sun4);
-        technologie = determinerSun(technologie);console.log(technologie)
+        technologie = determinerSun(technologie);
 
         //indication du niveau du blindage
         let por=parseInt(blindage)*100/blindagemax;
@@ -1541,11 +1544,12 @@ import { range } from "./class/list.js";
         }       
 
         //calcule des différents niveau de blindage, champ de force, point d'ia, résistence moteur, nombre d'arme et de pièce disponible 
-        arme=parseFloat(ia)+parseFloat(blind)+1;
+       // arme=parseFloat(ia)+parseFloat(blind)+1;
+        arme=parseFloat(tail)*parseFloat(tail)+1;
         arme=Math.floor(arme);
         blind=(parseFloat(blind)*(parseFloat(tail)+2))*200;
         champ=(parseFloat(moteur)*(parseFloat(tail)+2))*200; 
-        piece=Math.pow(tail, 3);
+        piece=Math.pow(tail-1, 3);
         ptia=ia*-10;   
         nrj=(parseFloat(moteur)*(parseFloat(moteur)))*200; 
         pvmoteur=(parseFloat(moteur)*(parseFloat(moteur)))*150;
@@ -1575,7 +1579,192 @@ import { range } from "./class/list.js";
         };
         return context;
     }
+    
+    _onNrj(event) {
+        let classList = event.target.classList;
+        let classes = Array.from(classList);
+        let nrj = this.actor.system.stat.encombrement.value;
+        let energyCost = 0;
+        
+        console.log("Classes de l'élément cliqué : ", classes);
+        if (classes.includes("action10")) {
+            energyCost = 20;
+        } else if (classes.includes("action11")) {
+            energyCost = 20;
+        } else if (classes.includes("action12")) {
+            energyCost = 10;
+        } else if (classes.includes("action13")) {
+            energyCost = 10;
+        } else if (classes.includes("action14")) {
+            energyCost = 30;
+        } else if (classes.includes("action15")) {
+            energyCost = 10;
+        } else if (classes.includes("action16")) {
+            energyCost = 50;
+        } else if (classes.includes("action17")) {
+            energyCost = 5;
+        } else if (classes.includes("action18")) {
+            energyCost = 20;
+        } else if (classes.includes("action19")) {
+            //si salle de machines
+            energyCost = 0; // Update with the actual energy cost if necessary
+        } else if (classes.includes("action20")) {
+            energyCost = 20;
+        } else if (classes.includes("action21")) {
+            energyCost = 5;
+        } else if (classes.includes("action22")) {
+            energyCost = 5;
+        } else if (classes.includes("action23")) {
+            energyCost = 10; // si infirmerie
+        } else if (classes.includes("action24")) {
+            energyCost = 50;
+        } else if (classes.includes("action25")) {
+            energyCost = 20;
+        } else if (classes.includes("action26")) {
+            energyCost = 40;
+        }
+
+        if (parseInt(nrj) >= energyCost) {
+            nrj = parseInt(nrj) - energyCost;
+            this.actor.update({'system.stat.encombrement.value': nrj});
+
+            if (classes.includes("action17")) {
+                this._onVise(event); // choisir 'arme pour le tir'
+            }
+        } else {
+            ui.notifications.warn("Action impossible, niveau d'énergie faible");
+            var texte = "<h4 class='resultat' style='background:#ff3333;'>Action impossible, niveau d'énergie faible</h4>";
+            let chatData = {
+                speaker: ChatMessage.getSpeaker({ actor: this }),
+                content: texte
+            };
+            ChatMessage.create(chatData, {});
+        }
+    }
+
+    _onVise(event){
+        const actorData = this.actor;
+        const vise_vehicule = this.actor.system.attributs.Visée;
+        const listarme = [];
+        const malus=this.actor.system.malus;
+        for (let i of actorData.items) {
+            i.img = i.img || DEFAULT_TOKEN;
+            if (i.type === "arme-véhicule") {
+                listarme.push(`<option value="${i._id}" data-degat="${i.system.degats}" data-type="${i.system.type}">${i.name}</option>`); // Ajouter en option
+            }
+        }
+
+
+        const content = `
+        <form>
+            <div class="">
+                <label>Arme de véhicule :</label>
+                <select class="choix-option" style="width: 265px;">${listarme.join('')}</select><br>
+                <div style="width:49%;display:block; float:left;margin: 20px 0;">
+                    <label>Bonus de visée du joueur :</label>
+                    <input class="vise_joueur" type="text" value="0">
+                </div>
+                <div style="width:49%;display:block; float:left;margin: 20px 0;">
+                    <label>Bonus / Malus :</label>
+                    <input class="malus" type="text" value="${malus}">
+                </div>
+                <input class="vise_vehicule" type="text" value="${vise_vehicule}" style="display:none">
+            </div>
+        </form>
+        `;
+
+        // Affichage du dialogue
+        new Dialog({
+            title: "Choisissez une option",
+            content: content,
+            buttons: {
+                ok: {
+                    label: "OK",
+                    callback: (html) => this._traiterChoix(html)
+                },
+                cancel: {
+                    label: "Annuler"
+                }
+            },
+            default: "ok",
+            render: (html) => {
+                // Agrandir la fenêtre de dialogue en hauteur
+                html.closest('.app').css("height", "auto"); // Ajuster la hauteur automatiquement en fonction du contenu
+                html.closest('.app').css("min-height", "200px"); // Définir une hauteur minimale (ajuster selon vos besoins)
+            }
+        }).render(true);
+    }
+
+    async _traiterChoix(html) {
+        const choixElement = html.find('.choix-option');
+        const choix = choixElement.val();
+        let bonus = parseFloat(html.find('.vise_joueur').val() || 0); // Convertir en nombre
+        let vise_vehicule = parseFloat(html.find('.vise_vehicule').val() || 0); // Convertir en nombre
+        let malus = parseFloat(html.find('.malus').val() || 0); // Convertir en nombre
+        let type = choixElement.find('option:selected').data("type");
+        let degat = parseFloat(choixElement.find('option:selected').data("degat") || 0); // Convertir en nombre
+        let conf="none;width: 200px;display:inline-block";
+        const jetdeDesFormule = "1d100";
+        
+        var critique=5;
+        if(type=="C"){
+            critique=10;
+        }
+        var echec=95;
+        if(type=="P"){
+            echec=90;
+        }
+        
+        if(bonus=='' || bonus ==undefined || bonus==null){
+            bonus=0;
+        }
+        if(malus=='' || malus ==undefined || malus==null){
+            malus=0;
+        }
+        var inforesult=parseInt(bonus)+parseInt(malus)+parseInt(vise_vehicule)+30;
+        if(inforesult>echec){
+            inforesult=echec;
+        }
+        
+        let r = await new Roll('1d100').evaluate();
+        let retour = r.result;
+        var deg='';
+        var perte=0;
+        var succes="";
+        if(retour>95){
+            succes="<h4 class='resultat' style='background:#ff3333;'>"+game.i18n.localize('libersf.J17')+"</h4>";
+            deg='<h4 class="resultdeg3"></h4>';
+        }else if(retour>(inforesult+20)){
+            succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J18')+"</h4>";
+            deg='<h4 class="resultdeg2"></h4>';
+        }else if(retour>inforesult){
+            succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J19')+"</h4>";
+            deg='<h4 class="resultdeg4"></h4>';
+        }else if(retour>(inforesult-20)){
+            succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J20')+"</h4>";
+            deg='<h4 class="resultdeg">'+degat+'</h4>';
+        }else if(retour>critique){
+            succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J21')+"</h4>";
+            degat=Math.round(parseInt(degat)*1.5);
+            deg='<h4 class="resultdeg">'+degat+'</h4>';
+        }else if(retour<=critique){
+            succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J22')+"</h4>";
+            degat=parseInt(degat)*2;
+            deg='<h4 class="resultdeg">'+degat+'</h4>';
+        } 
+        const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">'+game.i18n.localize('libersf.jet')+ 'Visée' + " : " + retour +" / " + inforesult + '</p>'+ succes+'</span>'+deg;
+        //roll.roll().toMessage({
+        if (r && texte) {
+            await r.toMessage({
+                user: game.user._id,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: texte
+            });
+        }
+    }
 }
+
+
 
 /*bug 
 - action piratage à rajouter*/

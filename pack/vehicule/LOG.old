@@ -1,12 +1,12 @@
-2024/06/07-05:55:51.396043 7fce35fbc700 Delete type=3 #1
-2024/06/07-08:13:47.381247 7fce354d0700 Level-0 table #138: started
-2024/06/07-08:13:47.387931 7fce354d0700 Level-0 table #138: 25097 bytes OK
-2024/06/07-08:13:47.390915 7fce354d0700 Delete type=0 #136
-2024/06/07-08:13:47.406270 7fce354d0700 Manual compaction at level-0 from '!actors!IvVsGJS7nZV21cFD' @ 72057594037927935 : 1 .. '!folders!6ghoewBWPnHBFBaS' @ 0 : 0; will stop at '!actors.items!zyeUw20zMwq9qLIr.v0WO3ca4u3IrtCJr' @ 653 : 1
-2024/06/07-08:13:47.406284 7fce354d0700 Compacting 2@0 + 0@1 files
-2024/06/07-08:13:47.408709 7fce354d0700 Generated table #139@0: 10 keys, 6568 bytes
-2024/06/07-08:13:47.408724 7fce354d0700 Compacted 2@0 + 0@1 files => 6568 bytes
-2024/06/07-08:13:47.409974 7fce354d0700 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/06/07-08:13:47.410036 7fce354d0700 Delete type=2 #138
-2024/06/07-08:13:47.410117 7fce354d0700 Delete type=2 #132
-2024/06/07-08:13:47.414601 7fce354d0700 Manual compaction at level-0 from '!actors.items!zyeUw20zMwq9qLIr.v0WO3ca4u3IrtCJr' @ 653 : 1 .. '!folders!6ghoewBWPnHBFBaS' @ 0 : 0; will stop at (end)
+2024/06/08-07:39:52.071173 7fce35fbc700 Delete type=3 #1
+2024/06/10-14:35:11.132177 7fce354d0700 Level-0 table #152: started
+2024/06/10-14:35:11.161454 7fce354d0700 Level-0 table #152: 405924 bytes OK
+2024/06/10-14:35:11.164280 7fce354d0700 Delete type=0 #150
+2024/06/10-14:35:11.191992 7fce354d0700 Manual compaction at level-0 from '!actors!1MuJhCTrSnACLkTp' @ 72057594037927935 : 1 .. '!folders!wpuY00y0HnwTGQrS' @ 0 : 0; will stop at '!folders!wpuY00y0HnwTGQrS' @ 913 : 1
+2024/06/10-14:35:11.192022 7fce354d0700 Compacting 2@0 + 0@1 files
+2024/06/10-14:35:11.198398 7fce354d0700 Generated table #153@0: 159 keys, 64542 bytes
+2024/06/10-14:35:11.198418 7fce354d0700 Compacted 2@0 + 0@1 files => 64542 bytes
+2024/06/10-14:35:11.199553 7fce354d0700 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/06/10-14:35:11.199638 7fce354d0700 Delete type=2 #144
+2024/06/10-14:35:11.199754 7fce354d0700 Delete type=2 #152
+2024/06/10-14:35:11.203780 7fce354d0700 Manual compaction at level-0 from '!folders!wpuY00y0HnwTGQrS' @ 913 : 1 .. '!folders!wpuY00y0HnwTGQrS' @ 0 : 0; will stop at (end)

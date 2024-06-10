@@ -1,11 +1,11 @@
-2024/06/07-05:55:51.447353 7fce367bd700 Delete type=3 #1
-2024/06/07-08:13:47.442197 7fce354d0700 Level-0 table #196: started
-2024/06/07-08:13:47.442513 7fce354d0700 Level-0 table #196: 0 bytes OK
-2024/06/07-08:13:47.444569 7fce354d0700 Delete type=0 #194
-2024/06/07-08:13:47.446783 7fce354d0700 Manual compaction at level-0 from '!actors!0YxhVryvrkLg1mD7' @ 72057594037927935 : 1 .. '!actors!wamUWH8GeAa3PUHk' @ 0 : 0; will stop at '!actors!wamUWH8GeAa3PUHk' @ 93 : 1
-2024/06/07-08:13:47.446791 7fce354d0700 Compacting 1@0 + 0@1 files
-2024/06/07-08:13:47.449584 7fce354d0700 Generated table #197@0: 42 keys, 44390 bytes
-2024/06/07-08:13:47.449598 7fce354d0700 Compacted 1@0 + 0@1 files => 44390 bytes
-2024/06/07-08:13:47.450877 7fce354d0700 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/06/07-08:13:47.450948 7fce354d0700 Delete type=2 #191
-2024/06/07-08:13:47.456321 7fce354d0700 Manual compaction at level-0 from '!actors!wamUWH8GeAa3PUHk' @ 93 : 1 .. '!actors!wamUWH8GeAa3PUHk' @ 0 : 0; will stop at (end)
+2024/06/08-07:39:52.108489 7fce36fbe700 Delete type=3 #1
+2024/06/10-14:35:11.222685 7fce354d0700 Level-0 table #209: started
+2024/06/10-14:35:11.223141 7fce354d0700 Level-0 table #209: 0 bytes OK
+2024/06/10-14:35:11.225148 7fce354d0700 Delete type=0 #207
+2024/06/10-14:35:11.228689 7fce354d0700 Manual compaction at level-0 from '!actors!0YxhVryvrkLg1mD7' @ 72057594037927935 : 1 .. '!actors!wamUWH8GeAa3PUHk' @ 0 : 0; will stop at '!actors!wamUWH8GeAa3PUHk' @ 93 : 1
+2024/06/10-14:35:11.228697 7fce354d0700 Compacting 1@0 + 0@1 files
+2024/06/10-14:35:11.231233 7fce354d0700 Generated table #210@0: 42 keys, 44390 bytes
+2024/06/10-14:35:11.231249 7fce354d0700 Compacted 1@0 + 0@1 files => 44390 bytes
+2024/06/10-14:35:11.232506 7fce354d0700 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/06/10-14:35:11.232584 7fce354d0700 Delete type=2 #197
+2024/06/10-14:35:11.239305 7fce354d0700 Manual compaction at level-0 from '!actors!wamUWH8GeAa3PUHk' @ 93 : 1 .. '!actors!wamUWH8GeAa3PUHk' @ 0 : 0; will stop at (end)

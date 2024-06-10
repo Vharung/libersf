@@ -70,6 +70,7 @@
 			<div class="action23" title="{{localize 'libersf.action23'}}"></div>
 			<div class="action24" title="{{localize 'libersf.action24'}}"></div>
 			<div class="action25" title="{{localize 'libersf.action25'}}"></div>
+			<div class="action26" title="{{localize 'libersf.action26'}}"></div>
 		</div>
 	</div>
 	<div class="col32">
@@ -99,7 +100,7 @@
 			</div>
 		</div>
 		<div class="moitie">
-			<h3>{{actor.system.model.point.arme}} {{localize 'libersf.armes'}}</h3>
+			<h3><span class="nbarme"></span> / {{actor.system.model.point.arme}} {{localize 'libersf.armes'}}</h3>
 			<ul class="items-list canon">
 				<h2 class="margin">Arme Pilote</h2>
 				<li class="item rexrow">
@@ -112,7 +113,7 @@
 				{{#each actor.varme as |item id|}}
 	                <li class="item rexrow" data-item-id="{{item._id}}">
 	                    <div class="item-qty">{{item.system.quantite}}</div>
-	                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
+	                    <div class="item-image tir_vh"><img src="{{item.img}}" title="{{item.name}}"/></div>
 	                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
 	                    <div class="zonecontrole">
 	                    	<div class="cache">
@@ -158,7 +159,8 @@
 				<div id="items" class="tab items" data-group="primary" data-tab="items">
 					<h3>{{localize 'libersf.inv'}}</h3>
 					<ul class="items-list inventator">
-		        		<h2>{{actor.system.model.point.piece}} {{localize 'libersf.piece'}} <a class="item-control item-create" title="Create Item" data-type="piece" style="float: right;"><i class="fas fa-plus"></i></a></h2>
+		        		<h2><span class="nbpiece"></span> / {{actor.system.model.point.piece}} {{localize 'libersf.piece'}} <a class="item-control item-create" title="Create Item" data-type="piece" style="float: right;"><i class="fas fa-plus"></i></a></h2>
+		        		<div class="pieces">
 			            {{#each actor.piece as |item id|}}
 			                <li class="item rexrow" data-item-id="{{item._id}}">
 			                	<div class="item-qty">{{item.system.quantite}}</div>
@@ -179,6 +181,7 @@
 			                    </div>
 			                </li>
 			            {{/each}}
+			            </div>
 		        		<h2>{{localize 'libersf.inv'}} <a class="item-control item-create" title="Create Item" data-type="objet" style="float: right;"><i class="fas fa-plus"></i></a></h2>
 			            {{#each actor.arme as |item id|}}
 			                <li class="item rexrow" data-item-id="{{item._id}}">
@@ -257,7 +260,6 @@
 					<div class="zoneinfo  inventator">
 						
 						<h2 style="text-align: center;">{{localize 'libersf.mode'}}</h2>
-						<div class="collone2">
 							{{#each actor.system.attributs as |value caract|}}
 								<div class="compt compt{{@index}}">
 								  <a class="jetdedes" data-name="{{caract}}" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{value}}" title="{{caract}}">{{localize caract}}</a>
@@ -265,7 +267,6 @@
 								</div>
 							{{/each}}
 							<div class="clear"></div>		
-						</div>
 					</div>
 					<div class="grid-2col left">
 						<h2 style="text-align:center">{{localize 'libersf.restant'}}</h2>

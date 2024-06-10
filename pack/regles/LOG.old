@@ -1,11 +1,11 @@
-2024/06/07-05:55:51.473034 7fce35fbc700 Delete type=3 #1
-2024/06/07-08:13:47.463835 7fce354d0700 Level-0 table #169: started
-2024/06/07-08:13:47.464178 7fce354d0700 Level-0 table #169: 0 bytes OK
-2024/06/07-08:13:47.466024 7fce354d0700 Delete type=0 #167
-2024/06/07-08:13:47.469173 7fce354d0700 Manual compaction at level-0 from '!journal!8rDvLMOLSVibzIOk' @ 72057594037927935 : 1 .. '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 0 : 0; will stop at '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 143 : 1
-2024/06/07-08:13:47.469182 7fce354d0700 Compacting 1@0 + 0@1 files
-2024/06/07-08:13:47.485551 7fce354d0700 Generated table #170@0: 7 keys, 40973 bytes
-2024/06/07-08:13:47.485569 7fce354d0700 Compacted 1@0 + 0@1 files => 40973 bytes
-2024/06/07-08:13:47.486814 7fce354d0700 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/06/07-08:13:47.486884 7fce354d0700 Delete type=2 #164
-2024/06/07-08:13:47.486985 7fce354d0700 Manual compaction at level-0 from '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 143 : 1 .. '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 0 : 0; will stop at (end)
+2024/06/08-07:39:52.135302 7fce367bd700 Delete type=3 #1
+2024/06/10-14:35:11.275141 7fce354d0700 Level-0 table #182: started
+2024/06/10-14:35:11.275504 7fce354d0700 Level-0 table #182: 0 bytes OK
+2024/06/10-14:35:11.277730 7fce354d0700 Delete type=0 #180
+2024/06/10-14:35:11.282346 7fce354d0700 Manual compaction at level-0 from '!journal!8rDvLMOLSVibzIOk' @ 72057594037927935 : 1 .. '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 0 : 0; will stop at '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 143 : 1
+2024/06/10-14:35:11.282357 7fce354d0700 Compacting 1@0 + 0@1 files
+2024/06/10-14:35:11.295885 7fce354d0700 Generated table #183@0: 7 keys, 40973 bytes
+2024/06/10-14:35:11.295904 7fce354d0700 Compacted 1@0 + 0@1 files => 40973 bytes
+2024/06/10-14:35:11.296896 7fce354d0700 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/06/10-14:35:11.296968 7fce354d0700 Delete type=2 #170
+2024/06/10-14:35:11.297514 7fce354d0700 Manual compaction at level-0 from '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 143 : 1 .. '!journal.pages!8rDvLMOLSVibzIOk.qKwa7aOjiLsFRqpg' @ 0 : 0; will stop at (end)
