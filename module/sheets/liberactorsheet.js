@@ -735,6 +735,12 @@ import { range } from "./class/list.js";
         const jetdeDesFormule = "1d100";
         let bonus =this.actor.system.stat.bonus;console.log(bonus)//test
         var malus =this.actor.system.malus;console.log(malus)//test
+        if (["Artisanat", "Balistique", "Mécanique", "Pilotage", "Piratage"].includes(name) && ["personnage", "pnj"].includes(this.actor.type)) {
+            let etoiles = await this._onMeca(event);console.log(etoiles)
+            let meca = parseInt(maxstat) - (parseInt(etoiles) * 5);console.log(meca)
+            if (meca > 0) { meca = 0; }console.log(meca)
+            bonus = bonus + meca;console.log(bonus)
+        }
         var critique=5;
         if(type=="C"){
             critique=10;
@@ -1002,6 +1008,46 @@ import { range } from "./class/list.js";
         }
     }
 
+    async _onMeca(event){
+        return new Promise((resolve, reject) => {
+            new Dialog({
+                title: "Sélection du Niveau de Difficulté",
+                content: `
+                    <form>
+                        <div class="form-group">
+                            <label for="etoiles">Nombre d'Étoiles :</label>
+                            <select id="etoiles" name="etoiles">
+                                <option value="0">✬ ☆ ☆ ☆ ☆</option>
+                                <option value="1">★ ☆ ☆ ☆ ☆</option>
+                                <option value="2">★ ✬ ☆ ☆ ☆</option>
+                                <option value="3">★ ★ ☆ ☆ ☆</option>
+                                <option value="4">★ ★ ✬ ☆ ☆</option>
+                                <option value="5">★ ★ ★ ☆ ☆</option>
+                                <option value="6">★ ★ ★ ✬ ☆</option>
+                                <option value="7">★ ★ ★ ★ ☆</option>
+                                <option value="8">★ ★ ★ ★ ✬</option>
+                                <option value="9">★ ★ ★ ★ ★</option>
+                            </select>
+                        </div>
+                    </form>
+                `,
+                buttons: {
+                    ok: {
+                        label: "OK",
+                        callback: (html) => {
+                            const etoiles = parseInt(html.find('[name="etoiles"]').val());
+                            resolve(etoiles);
+                        }
+                    },
+                    cancel: {
+                        label: "Annuler",
+                        callback: () => resolve(0) // Si annulé, on considère zéro étoiles
+                    }
+                },
+                default: "ok"
+            }).render(true);
+        });
+    }
 
     _onStory(){
         const demeure = [game.i18n.localize("libersf.maison"),game.i18n.localize("libersf.hotel"),game.i18n.localize("libersf.chezUnAmi"),game.i18n.localize("libersf.demeure"),game.i18n.localize("libersf.sousUnPont"),game.i18n.localize("libersf.surUnBateau"),game.i18n.localize("libersf.ferme"),game.i18n.localize("libersf.auberge"),game.i18n.localize("libersf.commerceNegociation"),game.i18n.localize("libersf.forge"),game.i18n.localize("libersf.villa"),game.i18n.localize("libersf.cabane"),game.i18n.localize("libersf.appartement")];

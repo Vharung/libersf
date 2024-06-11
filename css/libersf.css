@@ -12,7 +12,7 @@ body{background:url(fond2.png) no-repeat top center;font-family: "Electrolize" }
 #logo {display: none;}
 #ui-left{background: url(../assets/icon/logo.png)no-repeat 20px 20px;padding-top: 81px;background-size: 103px;}
 .Liber .clear{clear: both;}
-
+ 
 /*outil*/
 .chat-message{color: #fff;border: none;margin-bottom: 15px;background: var(--couleur-noir);color:#fff;}
 .chat-message .message-header{color:var(--couleur-clair);}
@@ -23,7 +23,11 @@ body{background:url(fond2.png) no-repeat top center;font-family: "Electrolize" }
 .resultatp{text-align: center;font-size: medium;background: var(--couleur-clair);padding: 5px;color: var(--couleur-noir);display: flex;}
 .desctchat{padding: 5px;background: var(--couleur-or);color: var(--couleur-noir);display:none}
 .infosort:active .desctchat{display: flex;}
-.window-app .window-content, .app.sidebar-popout .window-content{background: linear-gradient(218deg, #2a2b2c 0%, #120304 100%);color:var(--couleur-clair);}
+.window-app .window-content, .app.sidebar-popout .window-content,.window-content{background: linear-gradient(218deg, #2a2b2c 0%, #120304 100%);color:var(--couleur-clair);}
+.standard-form .form-group .hint, .standard-form .form-group label {color:var(--couleur-bleu);}
+.standard-form .form-group:hover label, .standard-form .form-group:hover .hint,form .form-group.slim .form-fields .label {color:var(--couleur-clair);}
+input,.application input[type="text"], .application input[type="number"], .application input[type="password"], .application input[type="date"], .application input[type="time"], .application input[type="search"], .application input[type="file"], .application select {background: var(--couleur-clair); color:var(--couleur-noir)}
+#region-legend button.icon, .application button{background: var(--couleur-bleu);color:var(--couleur-noir);}
 .filepicker .display-modes a{border:none;background: var(--couleur-noir);color: var(--couleur-or);}
 .filepicker .display-modes a.active{border:none;background: var(--couleur-or);color: var(--couleur-noir);}
 
@@ -41,6 +45,8 @@ input.m_degat,input.m_pv,input.m_ar{color:grey}
 .m_name{width:200px}
 
 #pause img.fa-spin{content: url(logo.png)}
+
+option,optgroup{background: var(--couleur-noir); color: var(--couleur-bleu)}
 
 .Liber input{border: none; background: none;}
 
@@ -61,7 +67,8 @@ input.m_degat,input.m_pv,input.m_ar{color:grey}
 #sidebar a.item:hover{filter:invert(80%); transition:0.5s;}
 #sidebar resultdeg {width: calc(100% - 210px);padding: 40px 0px;text-align: center;float: right;background: var(--couleur-clair);height: 118px;margin-top: 8px;font-size: x-large;}
 textarea{color:var(--couleur-clair)}
-
+.prosemirror menu button{background: var(--couleur-bleu)}
+.journal-sheet .journal-header .title{color:var(--couleur-clair)}
 /*Style*/
 
 .Liber,.sheet.actor,#sidebar,.sheet.journal-entry .journal-entry-content,.dialog,.sheet.journal-entry{background: linear-gradient(218deg, #2a2b2c 0%, #120304 100%); }
@@ -239,7 +246,7 @@ textarea{color:var(--couleur-clair)}
 .Liber h2.margin{width:170px;margin: 10px 5px;}
 .Liber .padding{padding:5px;}
 .Liber .scan3{box-shadow: 1px 10px 9px -3px var(--couleur-clair);width:320px;display:block;position: relative;top:0px; height: 10px; border-bottom:1px solid var(--couleur-clair);}
-.Liber .scan3{animation: scanss 7s ease-in-out infinite alternate;transform-origin: center;}
+.Liber .scan3{animation: scanss 7s ease-in-out infinite alternate;transform-origin: center;z-index: 2;}
 .Liber .proue,.Liber .prouemax,.Liber .babord,.Liber .centre,.Liber .tribord,.Liber .poupe{width: 126px;position: absolute;}
 .Liber .danger input {background: var(--couleur-noir);width: 50px;display:inline-block;}
 .Liber .danger .centre input {width: 140px}
