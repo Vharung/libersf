@@ -98,7 +98,8 @@ textarea{color:var(--couleur-clair)}
 .Liber .corps{background: url('corps.png') no-repeat center top;background-size: contain;width: 210px;display: block; height: 600px}
 .Liber .histoires,.Liber .histoire,.Liber .points,.Liber .equipement,.Liber .moteur{border:1px solid var(--couleur-bleu);border-radius: 10px}
 .Liber .marge,.Liber h2.marge{margin-top:5px}
-.Liber .histoire{resize: none;width:200px;height: 570px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
+.Liber .spe {height: 150px;resize: none;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
+.Liber .histoire{resize: none;width:200px;height: 400px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
 .Liber .points div{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-bleu);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-bleu)}
 .Liber .points input{display: inline-block;width: 25px;color: var(--couleur-bleu);margin: 18px auto;text-align: center;}
 .Liber .equipe{background: url(dark-squad.png) no-repeat center center; background-size: cover;}
@@ -164,8 +165,8 @@ textarea{color:var(--couleur-clair)}
 .Liber .compt{color:var(--couleur-clair);text-align: center;; font-size: 0.7em;width: 50%; float: left;}
 .Liber .compt a{height: 15px;display: block;margin-top: 5px;}
 .Liber .compt a{color:var(--couleur-clair)}
-.Liber .list-compt{height: 564px;width: 210px;}
-.Liber #features p{color:var(--couleur-bleu);font-size: 0.7em;}
+.Liber .list-compt{height: 600px;width: 210px;}
+.Liber #features p, .Liber .notice{color:var(--couleur-bleu);font-size: 0.7em;}
 .Liber .italic{font-style: italic;}
 .Liber #features .grid-2col input{width: 150px; border: medium none; background: transparent none repeat scroll 0% 0%; font-size: 25px; height: 30px; color: rgb(255, 255, 255); text-align: center; margin-left: calc(50% - 75px);}
 .Liber .item-create{float: right;padding: 5px;height: 20px;}
@@ -225,7 +226,7 @@ textarea{color:var(--couleur-clair)}
 .action26{background: darkgrey url(../assets/icon/action26.jpg) center center no-repeat;background-size: contain;cursor: pointer}
 
 
-.Liber .effetarme{background: url(effetarme.png) no-repeat left center;background-size: cover;width: 200px;height: 194px;display: block;}
+.Liber .effetarme{background: url(effetarme.png) no-repeat left center;background-size: cover;width: 200px;height: 164px;display: block;}
 .Liber #lab p {font-size: 0.8em}
 .Liber .collone2{columns: 2}
 .Liber .z1{width: 200px;height: 100px;}

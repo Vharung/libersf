@@ -365,13 +365,13 @@ import { range } from "./class/list.js";
             resultat=parseInt(ptrestant2);
 
         }else {
-            resultat=-20-((parseInt(level)-1)*10); 
+            resultat=-40-((parseInt(level)-1)*10); 
         }
         for(i=0;i<26;i++){
             var valor=parseInt(html.find('.cpt'+i).val());
             resultat=resultat+valor;
         }
-        $( ".compt input" ).each(function( index ) {
+        /*$( ".compt input" ).each(function( index ) {
           var valor= $( this ).val();
           if(valor==0){
             $( this ).css({"background":"transparent","color": "#050a10"});
@@ -380,7 +380,7 @@ import { range } from "./class/list.js";
           }else if(valor<0){
             $( this ).css({"background":"#a51b1b","color": "#fff"});
           }
-        });
+        });*/
         if(level==undefined){
             resultat=resultat;
         }else if(this.actor.type!="vehicule"){
@@ -682,6 +682,7 @@ import { range } from "./class/list.js";
         html.find( ".compt input" ).each(function() {
               var valor= $( this ).val();
               valor = Math.round(valor / 5) * 5;
+
               if(valor!=$(this).val()){
                 $( this ).val(valor);
               }
@@ -1393,23 +1394,50 @@ import { range } from "./class/list.js";
         let cpt26=this.actor.system.attributs.magie;
         let cpt=[cpt0,cpt1,cpt2,cpt3,cpt4,cpt5,cpt6,cpt7,cpt8,cpt9,cpt10,cpt11,cpt12,cpt13,cpt14,cpt15,cpt16,cpt17,cpt18,cpt19,cpt20,cpt21,cpt22,cpt23,cpt24,cpt25,cpt26]
         for (var i = cpt.length - 1; i >= 0; i--) {
-            let maxThreshold = 40;
-            let minThreshold = -20;
-
+            let maxThreshold = 30;
+            let minThreshold = -30;
+            console.log(race)
             if (level == 1) {
                 if (
-                    (metier == game.i18n.localize("libersf.metier1") && i == 1 && (race == game.i18n.localize("libersf.machine") || race == game.i18n.localize("libersf.yor"))) ||
-                    (metier == game.i18n.localize("libersf.metier3") && i == 23 && (race == game.i18n.localize("libersf.artu") || race == game.i18n.localize("libersf.yor"))) ||
-                    (metier == game.i18n.localize("libersf.metier5") && i == 8 && (race == game.i18n.localize("libersf.pleiadiens") || race == game.i18n.localize("libersf.elf"))) ||
-                    (metier == game.i18n.localize("libersf.metier6") && i == 18 && (race == game.i18n.localize("libersf.dragon") || race == game.i18n.localize("libersf.orqu"))) ||
-                    (metier == game.i18n.localize("libersf.metier10") && i == 22 && (race == game.i18n.localize("libersf.humain") || race == game.i18n.localize("libersf.machine")))
+                    (metier == "m1" && i == 1 && (race == "r6")) ||
+                    (metier == "m3" && i == 23 && (race == "r2")) || 
+                    (metier == "m5" && i == 8 && (race == "r1")) || 
+                    (metier == "m5" && i == 8 && (race == "r5")) || 
+                    (metier == "m6" && i == 18 && (race == "r4")) ||
+                    (metier == "m6" && i == 18 && (race == "r7")) ||
+                    (metier == "m6" && i == 18 && (race == "r0")) ||
+                    (metier == "m10" && i == 22 && (race == "r0")) ||
+                    (metier == "m3" && i == 23 && (race == "r3"))
                 ) {
                     maxThreshold = 50;
                     minThreshold = -10;
+                } else if (
+                    (metier == "m1" && i == 1) ||
+                    (metier == "m2" && i == 16) ||
+                    (metier == "m4" && i == 11) ||
+                    (metier == "m5" && i == 8) || 
+                    (metier == "m6" && i == 18) || 
+                    (metier == "m7" && i == 13) || 
+                    (metier == "m8" && i == 24) || 
+                    (metier == "m9" && i == 12) || 
+                    (metier == "m10" && i == 22) || 
+                    (metier == "m11" && i == 26) ||
+                    (race == "r0" && (i == 7 || i == 17 || i == 22)) || 
+                    (race == "r4"&& (i == 3 || i == 7 || i == 18)) || 
+                    (race == "r2" && (i == 6 || i == 17 || i == 23)) || 
+                    (race == "r6" && (i == 1 || i == 19 || i == 22)) || 
+                    (race == "r1" && (i == 3 || i == 17 || i == 18)) || 
+                    (race == "r3" && (i == 0 || i == 17 || i == 23)) || 
+                    (race == "r5" && (i == 0 || i == 8 || i == 17)) || 
+                    (race == "r7" && (i == 3 || i == 9 || i == 18))
+                ) {
+                    console.log(metier)
+                    let maxThreshold = 40;
+                    let minThreshold = -20;
                 }
             } else if (parseInt(level) > 1) {
                 maxThreshold = Infinity; // Aucune limite supérieure
-                minThreshold = -20;
+                minThreshold = -30;
             }
 
             if (cpt[i] > maxThreshold) {
@@ -1418,9 +1446,6 @@ import { range } from "./class/list.js";
                 cpt[i] = minThreshold;
             }
         }
-           
-  
-
 
 
         //activer les effets

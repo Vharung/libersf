@@ -55,7 +55,7 @@
 			</div>
 			
 		</div>
-		
+		<p class="notice">{{localize 'libersf.caution2'}}</p>
 	</div>
 	<div class="col3">
 		<div class="corps">
@@ -137,7 +137,11 @@
 				
 				<div class="histoires marge">
 					<h3>{{localize 'libersf.histoire'}}</h3>
-					<textarea class="histoire" name="system.background.histoire">{{actor.system.background.histoire}}</textarea>
+					<textarea class="histoire" name="system.background.histoire" style="border:none">{{actor.system.background.histoire}}</textarea>
+				</div>
+				<div class="histoires marge">
+					<h3>{{localize 'libersf.competencespet'}}</h3>
+					<textarea class="spe" name="system.background.competencespet">{{actor.system.background.competencespet}}</textarea>
 				</div>
 				<div class="etat">
 					{{#each actor.system.background.etat as |value etat|}}
@@ -262,7 +266,7 @@
 					<h2>{{localize 'libersf.bonusmj'}}</h2>
 					<input class="malussactor" name="system.stat.bonus" type="text" value="{{actor.system.stat.bonus}}" placeholder="0"/>
 				</div>
-				<p>{{localize 'libersf.caution2'}}</p>
+				
 				<p>{{localize 'libersf.caution'}}</p>
 			
 			</div>
@@ -310,7 +314,11 @@
 	                </select>
 		            <h2>{{localize 'libersf.metier'}}</h2>
 					<SELECT class="metierliste" size="1" name="system.background.metier">
-						{{selectOptions listValues.metier selected=actor.system.background.metier labelAttr="label" localize=true blank="libersf.none"}}<!--andromède magicien-->
+						{{selectOptions listValues.metier selected=actor.system.background.metier labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
+	                <h2>{{localize 'libersf.metier0'}}</h2>
+					<SELECT class="metierliste" size="1" name="system.background.metier2">
+						{{selectOptions listValues.metier selected=actor.system.background.metier2 labelAttr="label" localize=true blank="libersf.none"}}
 	                </select>
 		                <div class="grid-2col">
 		                	<h2>{{localize 'libersf.comp'}}</h2>
@@ -332,7 +340,7 @@
 		            <input type="a" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
 		        </div>	
 
-	            <p>{{localize 'libersf.regle'}}<br>{{localize 'libersf.regle2'}}<br><br>{{localize 'libersf.regle3'}}<br>{{localize 'libersf.regle5'}}<br>{{localize 'libersf.regle6'}}<br>{{localize 'libersf.regle7'}}<br>{{localize 'libersf.regle8'}}<br>{{localize 'libersf.regle9'}}<br>{{localize 'libersf.regle10'}}<br><br>{{localize 'libersf.regle11'}}</p>
+	            <p>{{localize 'libersf.regle'}}<br>{{localize 'libersf.regle2'}}<br>{{localize 'libersf.regle3'}}<br>{{localize 'libersf.regle5'}}<br>{{localize 'libersf.regle6'}}<br>{{localize 'libersf.regle7'}}<br>{{localize 'libersf.regle8'}}<br>{{localize 'libersf.regle9'}}<br>{{localize 'libersf.regle10'}}</p>
 				<div class="effetarme"></div>					
 			</div>
 		</section>
