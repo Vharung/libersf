@@ -19,7 +19,7 @@
 			<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
 			<input class="niveau" name="system.background.level" type="text" value="{{actor.system.background.level}}" placeholder="1"/>
 		</div>
-		<h2>{{localize 'libersf.info'}}</h2>
+		<h2 style="margin-top: -5px;">{{localize 'libersf.info'}}</h2>
 		<div class="info">
 			<span>{{localize 'libersf.race'}}</span><input class="race" type="text" value="{{listValues.traduct.race}}" placeholder="{{localize 'libersf.race'}}" readonly />
 			<span>{{localize 'libersf.metier'}}</span><input class="metier" type="text" value="{{listValues.traduct.metier}}" placeholder="{{localize 'libersf.metier'}}" readonly />
@@ -27,8 +27,8 @@
 		</div>
 		<div class="clear"></div>
 		<h2 class="marge">Bonus</h2>
-		<div class="info">
-			<input class="bonusrace" title="{{actor.system.background.bonusrace}}" name="system.background.bonusrace" type="text" value="{{actor.system.background.bonusrace}}" placeholder="{{localize 'libersf.bonus'}}" readonly/>
+		<div class="info info2">
+			<textarea class="bonusrace" title="{{actor.system.background.bonusrace}}" name="system.background.bonusrace" placeholder="{{localize 'libersf.bonus'}}" readonly/>{{actor.system.background.bonusrace}}</textarea>
 			<input class="bonusmetier" title="{{actor.system.background.bonusmetier}}" name="system.background.bonusmetier" type="text" value="{{actor.system.background.bonusmetier}}" placeholder="{{localize 'libersf.bonus'}}" readonly />
 			<!--input class="bonuslevel" title="{{actor.system.background.bonuslevel}}" name="system.background.bonuslevel" type="text" value="{{actor.system.background.bonuslevel}}" placeholder="{{localize 'libersf.bonuslevel'}}" readonly /-->
 		</div>
@@ -139,9 +139,29 @@
 					<h3>{{localize 'libersf.histoire'}}</h3>
 					<textarea class="histoire" name="system.background.histoire" style="border:none">{{actor.system.background.histoire}}</textarea>
 				</div>
-				<div class="histoires marge">
+				<div class="histoires bonulvl marge">
 					<h3>{{localize 'libersf.competencespet'}}</h3>
-					<textarea class="spe" name="system.background.competencespet">{{actor.system.background.competencespet}}</textarea>
+					<!--textarea class="spe" name="system.background.competencespet">{{actor.system.background.competencespet}}</textarea-->
+					<h2>Level 2</h2>
+					<SELECT class="factionliste" size="1" name="system.background.bm1">
+						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm1 labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
+	                <h2>Level 4</h2>
+					<SELECT class="factionliste" size="1" name="system.background.bm2">
+						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm2 labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
+	                <h2>Level 6</h2>
+					<SELECT class="factionliste" size="1" name="system.background.bm3">
+						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm3 labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
+	                <h2>Level 8</h2>
+					<SELECT class="factionliste" size="1" name="system.background.bm4">
+						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm4 labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
+	                <h2>Level 10</h2>
+					<SELECT class="factionliste" size="1" name="system.background.bm5">
+						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm5 labelAttr="label" localize=true blank="libersf.none"}}
+	                </select>
 				</div>
 				<div class="etat">
 					{{#each actor.system.background.etat as |value etat|}}

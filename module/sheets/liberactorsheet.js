@@ -46,10 +46,12 @@ import { range } from "./class/list.js";
             niveau_arme :null,
             crime:null,
             niveau_secu :null,
-            niveau_tech :null               
+            niveau_tech :null,
+            bonusmetierlvl:{}               
         };        
         let faction=null;
         let metier = null;
+        let metier2 = null;
         let type = null;
         let choix = null;
         let taille = null;
@@ -67,6 +69,7 @@ import { range } from "./class/list.js";
         let limited=context.limited;
         let owner=context.owner;
         let droit=null;
+        let bonusmetierlvl={};
         if(limited==true && owner==false){
             droit='limite';//pilote
         }else if(limited==false && owner==false){
@@ -90,6 +93,7 @@ import { range } from "./class/list.js";
             race = context.actor.system.background.race || null;
             faction = context.actor.system.background.religion || null;
             metier = context.actor.system.background.metier || null;
+            metier2 = context.actor.system.background.metier2 || null;
             type = context.actor.system.background.type || null;
             choix = context.actor.system.background.choix || null;
             taille = context.actor.system.background.taille || null;
@@ -101,6 +105,60 @@ import { range } from "./class/list.js";
             niveau_secu = context.actor.system.niveau_secu || null;
             niveau_tech = context.actor.system.niveau_tech || null;
         }
+        console.log(metier+'+'+metier2)
+        // Fonction pour fusionner les objets JSON dans bonusmetierlvl
+        /*function mergeBonusMetierLvl(source) {
+            for (let key in source) {
+                if (source.hasOwnProperty(key)) {
+                    bonusmetierlvl[key] = source[key];
+                }
+            }
+        }*/
+        function mergeBonusMetierLvl(source) {
+            Object.assign(bonusmetierlvl, source);
+        }
+        // Vérification pour `metier`
+        if (metier == "m1") {
+            mergeBonusMetierLvl(range.artisan);
+        } else if (metier == "m2") {
+            mergeBonusMetierLvl(range.commerce);
+        } else if (metier == "m3") {
+            mergeBonusMetierLvl(range.colon);
+        } else if (metier == "m4") {
+            mergeBonusMetierLvl(range.intellectuel);
+        } else if (metier == "m5") {
+            mergeBonusMetierLvl(range.malandrin);
+        } else if (metier == "m6") {
+            mergeBonusMetierLvl(range.pilote);
+        } else if (metier == "m7") {
+            mergeBonusMetierLvl(range.medecin);
+        } else if (metier == "m8") {
+            mergeBonusMetierLvl(range.militaire);
+        } else if (metier == "m9") {
+            mergeBonusMetierLvl(range.mecanicien);
+        }
+
+        // Vérification pour `metier2`
+        if (metier2 == "m1") {
+            mergeBonusMetierLvl(range.artisan);
+        } else if (metier2 == "m2") {
+            mergeBonusMetierLvl(range.commerce);
+        } else if (metier2 == "m3") {
+            mergeBonusMetierLvl(range.colon);
+        } else if (metier2 == "m4") {
+            mergeBonusMetierLvl(range.intellectuel);
+        } else if (metier2 == "m5") {
+            mergeBonusMetierLvl(range.malandrin);
+        } else if (metier2 == "m6") {
+            mergeBonusMetierLvl(range.pilote);
+        } else if (metier2 == "m7") {
+            mergeBonusMetierLvl(range.medecin);
+        } else if (metier2 == "m8") {
+            mergeBonusMetierLvl(range.militaire);
+        } else if (metier2 == "m9") {
+            mergeBonusMetierLvl(range.mecanicien);
+        }
+        console.log(bonusmetierlvl)
         if (["personnage", "pnj", "monstre", "vehicule"].includes(this.actor.type)) {
             this._prepareCharacterItems(context);
             let stat= await this._onStatM(context);
@@ -220,6 +278,7 @@ import { range } from "./class/list.js";
                 }
             };
         }
+        context.listValues.bonusmetierlvl = bonusmetierlvl;
         context.listValues.traduct = {
             race: context.listValues.race[race] ? game.i18n.localize(context.listValues.race[race].label) : '',
             sexe: context.listValues.sexe[sexe] ? game.i18n.localize(context.listValues.sexe[sexe].label) : '',
@@ -1087,8 +1146,8 @@ import { range } from "./class/list.js";
         let objectif=objectiflist[Math.floor(Math.random()*objectiflist.length)]
         let tare=tarelist[Math.floor(Math.random()*tarelist.length)]
         let racune=racunelist[Math.floor(Math.random()*racunelist.length)]
-        let obsession=obsessionlist[Math.floor(Math.random()*racunelist.length)]
-        let distingue=distinguelist[Math.floor(Math.random()*racunelist.length)]
+        let obsession=racunelist[Math.floor(Math.random()*racunelist.length)]
+        let distingue=racunelist[Math.floor(Math.random()*racunelist.length)]
 
         return {
             'system.caractere.distingue': distingue,
@@ -1184,6 +1243,7 @@ import { range } from "./class/list.js";
         }
         let story= await this._onStory();
         let story2= await this._onStory2();
+        console.log(metier+'+'+bonusrace) //bug
         this.actor.update({story,story2,'system.background.bonusmetier': metier,'system.background.bonusrace': bonusrace});
     }
 
@@ -1392,11 +1452,11 @@ import { range } from "./class/list.js";
         let cpt24=this.actor.system.attributs.Tir;
         let cpt25=this.actor.system.attributs.Visée;
         let cpt26=this.actor.system.attributs.magie;
-        let cpt=[cpt0,cpt1,cpt2,cpt3,cpt4,cpt5,cpt6,cpt7,cpt8,cpt9,cpt10,cpt11,cpt12,cpt13,cpt14,cpt15,cpt16,cpt17,cpt18,cpt19,cpt20,cpt21,cpt22,cpt23,cpt24,cpt25,cpt26]
+        let cpt=[cpt0,cpt1,cpt2,cpt3,cpt4,cpt5,cpt6,cpt7,cpt8,cpt9,cpt10,cpt11,cpt12,cpt13,cpt14,cpt15,cpt16,cpt17,cpt18,cpt19,cpt20,cpt21,cpt22,cpt23,cpt24,cpt25,cpt26];
+
         for (var i = cpt.length - 1; i >= 0; i--) {
             let maxThreshold = 30;
             let minThreshold = -30;
-            console.log(race)
             if (level == 1) {
                 if (
                     (metier == "m1" && i == 1 && (race == "r6")) ||
@@ -1422,7 +1482,7 @@ import { range } from "./class/list.js";
                     (metier == "m9" && i == 12) || 
                     (metier == "m10" && i == 22) || 
                     (metier == "m11" && i == 26) ||
-                    (race == "r0" && (i == 7 || i == 17 || i == 22)) || 
+                    (race == "r0" && (i == 2 || i == 7 || i == 17 || i == 22)) || 
                     (race == "r4"&& (i == 3 || i == 7 || i == 18)) || 
                     (race == "r2" && (i == 6 || i == 17 || i == 23)) || 
                     (race == "r6" && (i == 1 || i == 19 || i == 22)) || 
@@ -1431,9 +1491,8 @@ import { range } from "./class/list.js";
                     (race == "r5" && (i == 0 || i == 8 || i == 17)) || 
                     (race == "r7" && (i == 3 || i == 9 || i == 18))
                 ) {
-                    console.log(metier)
-                    let maxThreshold = 40;
-                    let minThreshold = -20;
+                    maxThreshold = 40;
+                    minThreshold = -20;
                 }
             } else if (parseInt(level) > 1) {
                 maxThreshold = Infinity; // Aucune limite supérieure
@@ -1446,7 +1505,6 @@ import { range } from "./class/list.js";
                 cpt[i] = minThreshold;
             }
         }
-
 
         //activer les effets
        let effet=this.actor.effects;
@@ -1834,8 +1892,3 @@ import { range } from "./class/list.js";
         }
     }
 }
-
-
-
-/*bug 
-- action piratage à rajouter*/

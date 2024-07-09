@@ -76,7 +76,9 @@
                     "race":"",
                     "bonusrace":"",
                     "metier":"",
+                    "metier2":"",
                     "bonusmetier":"",
+                    "bonusmetierlvl":"",
                     "level":"1",
                     "sexe":"",
                     "etat":{

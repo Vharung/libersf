@@ -95,11 +95,13 @@ textarea{color:var(--couleur-clair)}
 .Liber .info{color:var(--couleur-clair);font-size: 0.9em}
 .Liber .info span{clear: both;width: 35px;float: left;}
 .Liber .info input{width: 125px; float: right;color:var(--couleur-clair);border-bottom:1px dotted var(--couleur-clair);text-align: right;}
+.Liber .info2 input {width:188px;font-size: 0.8em;}
+.Liber .info2 textarea {width:188px;font-size: 0.8em;color:var(--couleur-clair)}
 .Liber .corps{background: url('corps.png') no-repeat center top;background-size: contain;width: 210px;display: block; height: 600px}
 .Liber .histoires,.Liber .histoire,.Liber .points,.Liber .equipement,.Liber .moteur{border:1px solid var(--couleur-bleu);border-radius: 10px}
 .Liber .marge,.Liber h2.marge{margin-top:5px}
 .Liber .spe {height: 150px;resize: none;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
-.Liber .histoire{resize: none;width:200px;height: 400px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
+.Liber .histoire{resize: none;width:200px;height: 262px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
 .Liber .points div{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-bleu);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-bleu)}
 .Liber .points input{display: inline-block;width: 25px;color: var(--couleur-bleu);margin: 18px auto;text-align: center;}
 .Liber .equipe{background: url(dark-squad.png) no-repeat center center; background-size: cover;}
@@ -194,6 +196,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .etat11 {background: url("../assets/icon/blood.png");background-size: cover;}
 .Liber .etat12 {background: url("../assets/icon/unconscious.png");background-size: cover;}
 .Liber .etat13 {background: url("../assets/icon/skull.png");background-size: cover;}
+.Liber .bonulvl h2, .Liber .bonulvl select{margin:5px; width: calc(100% - 10px)}
 .action0,.action0b,.action1,.action2,.action3,.action4,.action5,.action6,.action7,.action8,.action9{display: inline-block;width: 25px;height: 25px;margin-left: 2px;}
 .action10,.action11,.action12,.action13,.action14,.action15,.action16,.action17,.action18,.action19,.action20,.action21,.action22,.action23,.action24,.action25,.action26{display: inline-block;width: 28px;height: 28px;margin-left: 1px;}
 .Liber .col4 .action0,.Liber .col4 .action0b,.Liber .col4 .action1,.Liber .col4 .action2,.Liber .col4 .action3,.Liber .col4 .action4,.Liber .col4 .action5,.Liber .col4 .action6,.Liber .col4 .action7,.Liber .col4 .action8,.Liber .col4 .action9{display: inline-block;width: 39px;height: 39px;margin-left: 8px;}
