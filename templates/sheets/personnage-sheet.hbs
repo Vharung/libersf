@@ -28,9 +28,7 @@
 		<div class="clear"></div>
 		<h2 class="marge">Bonus</h2>
 		<div class="info info2">
-			<textarea class="bonusrace" title="{{actor.system.background.bonusrace}}" name="system.background.bonusrace" placeholder="{{localize 'libersf.bonus'}}" readonly/>{{actor.system.background.bonusrace}}</textarea>
-			<input class="bonusmetier" title="{{actor.system.background.bonusmetier}}" name="system.background.bonusmetier" type="text" value="{{actor.system.background.bonusmetier}}" placeholder="{{localize 'libersf.bonus'}}" readonly />
-			<!--input class="bonuslevel" title="{{actor.system.background.bonuslevel}}" name="system.background.bonuslevel" type="text" value="{{actor.system.background.bonuslevel}}" placeholder="{{localize 'libersf.bonuslevel'}}" readonly /-->
+			<textarea class="bonusrace" title="{{actor.system.background.bonusrace}}. {{actor.system.background.bonusmetier}}"  placeholder="{{localize 'libersf.bonus'}}" readonly/>{{actor.system.background.bonusrace}}. {{actor.system.background.bonusmetier}}</textarea>
 		</div>
 		<div class="clear"></div>
 		<div class="points marge  vie">
@@ -55,7 +53,7 @@
 			</div>
 			
 		</div>
-		<p class="notice">{{localize 'libersf.caution2'}}</p>
+		
 	</div>
 	<div class="col3">
 		<div class="corps">
@@ -115,25 +113,7 @@
 		<section class="sheet-body">	
 			{{!-- bg Tab --}}
 			<div id="bg" class="tab bg" data-group="primary" data-tab="bg">
-				<div class="troisquart">
-				<h2>{{localize 'libersf.action0'}}</h2>
-					<div class="action0b" title="{{localize 'libersf.run'}}"></div>
-					<div class="action1 jetdedes" data-name="Tircouv" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.tircouv'}}"></div>
-					<div class="action3" title="{{localize 'libersf.soutien'}}"></div>
-					<div class="action2" title="{{localize 'libersf.commun'}}"></div>
-					<h2>{{localize 'libersf.action1'}}</h2><!--a tester-->
-					<div class="action0" title="{{localize 'libersf.marche'}}"></div>
-					<div class="action4 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.raffale'}}"></div>
-					<div class="action6" title="{{localize 'libersf.couver'}}" data-lettre="14"></div>
-					<div class="action9" title="{{localize 'libersf.parler'}}"></div>
-				</div>
-				<div class="unquart">
-					<h2>{{localize 'libersf.action3'}}</h2><!--a tester-->
-					<div class="action7" title="{{localize 'libersf.rapide'}}"></div>
-					<h2>{{localize 'libersf.action3'}}</h2><!--a tester-->
-					<div class="action8" title="{{localize 'libersf.actionb'}}"></div>	
-				</div>			
-				<div class="clear"></div>
+				
 				
 				<div class="histoires marge">
 					<h3>{{localize 'libersf.histoire'}}</h3>
@@ -175,9 +155,9 @@
 				<h3 class="titlecaract">{{localize 'libersf.carac'}}</h3>
 				<div class="zonecaract">
 					{{#each actor.system.caractere as |value caract|}}
-						<div class="compt">
-							<span title="{{localize caract}}">{{localize caract}}</span><input  name="system.caractere.{{caract}}" type="text" value="{{value}}" title="system.caractere.{{caract}}" placeholder="{{localize caract}}" />
-						</div>
+							<div class="caract">
+								<span title="{{localize caract}}">{{localize caract}}</span><input class="{{caract}}" name="system.caractere.{{caract}}" type="text" value="{{value}}" title="system.caractere.{{caract}}"/>
+							</div>
 					{{/each}}
 				</div>
 			</div>
@@ -237,7 +217,7 @@
 		            {{/each}}
 		    	</ul>
 		    	<h3>{{localize 'libersf.inv'}} <a class="item-control item-create" title="Create Item" data-type="objet"><i class="fas fa-plus"></i></a></h3>
-				<ul class="items-list objets">
+				<ul class="items-list objets" style="top:-3px;">
 					{{#each actor.inventaire as |item id|}}
 		                <li class="item rexrow" data-item-id="{{item._id}}">
 		                    <div class="item-qty">{{item.system.quantite}}</div>
@@ -288,11 +268,30 @@
 				</div>
 				
 				<p>{{localize 'libersf.caution'}}</p>
-			
+				<p class="notice">{{localize 'libersf.caution2'}}</p>
+				<div class="troisquart">
+				<h2>{{localize 'libersf.action0'}}</h2>
+					<div class="action0b" title="{{localize 'libersf.run'}}"></div>
+					<div class="action1 jetdedes" data-name="Tircouv" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.tircouv'}}"></div>
+					<div class="action3" title="{{localize 'libersf.soutien'}}"></div>
+					<div class="action2" title="{{localize 'libersf.commun'}}"></div>
+					<h2>{{localize 'libersf.action1'}}</h2><!--a tester-->
+					<div class="action0" title="{{localize 'libersf.marche'}}"></div>
+					<div class="action4 jetdedes" data-name="Tir" data-dice="1d" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{actor.system.Tir}}" data-armed="{{actor.system.armed}}" data-degat="{{actor.system.degatd}}" data-charged="{{actor.system.charged}}" title="{{localize 'libersf.raffale'}}"></div>
+					<div class="action6" title="{{localize 'libersf.couver'}}" data-lettre="14"></div>
+					<div class="action9" title="{{localize 'libersf.parler'}}"></div>
+				</div>
+				<div class="unquart">
+					<h2>{{localize 'libersf.action3'}}</h2><!--a tester-->
+					<div class="action7" title="{{localize 'libersf.rapide'}}"></div>
+					<h2>{{localize 'libersf.action3'}}</h2><!--a tester-->
+					<div class="action8" title="{{localize 'libersf.actionb'}}"></div>	
+				</div>			
+				<div class="clear"></div>
 			</div>
 			{{!-- Spell Tab --}}
 			<div id="magie" class="tab items " data-group="primary" data-tab="magie">   
-				<h3 style=>{{localize 'libersf.sort'}}</h3>
+				<h3>{{localize 'libersf.sort'}}</h3>
 				<div class="zonemagie">
 					<ul class="items-list">
 		            {{#each actor.sort as |item id|}}
@@ -322,42 +321,39 @@
 			<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
 				<h3>{{localize 'libersf.race'}}</h3>
 				<div class="configuration">
-					<SELECT class="sexeliste" size="1" name="system.background.sexe">
-						{{selectOptions listValues.sexe selected=actor.system.background.sexe labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-					<SELECT class="raceliste" size="1" name="system.background.race">
-						{{selectOptions listValues.race selected=actor.system.background.race labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-		            <h2>{{localize 'libersf.faction'}}</h2>
-					<SELECT class="factionliste" size="1" name="system.background.religion">
-						{{selectOptions listValues.faction selected=actor.system.background.religion labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-		            <h2>{{localize 'libersf.metier'}}</h2>
-					<SELECT class="metierliste" size="1" name="system.background.metier">
-						{{selectOptions listValues.metier selected=actor.system.background.metier labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-	                <h2>{{localize 'libersf.metier0'}}</h2>
-					<SELECT class="metierliste" size="1" name="system.background.metier2">
-						{{selectOptions listValues.metier selected=actor.system.background.metier2 labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-		                <div class="grid-2col">
-		                	<h2>{{localize 'libersf.comp'}}</h2>
-		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="{{localize 'libersf.comp'}}">
-		                </div>
-		                <div class="grid-2col">
-		                	<h2>{{localize 'libersf.mut'}}</h2>
-		                	<SELECT class="mutation" size="1" name="system.mutation">
-								{{selectOptions listValues.choix selected=actor.system.mutation labelAttr="label" localize=true blank="libersf.none"}}
-			            	</select>
-		                </div>
-		                <div class="clear"></div>
-		                <div class="grid-2col">
-		                	<h2>Andromède</h2>
-							<SELECT class="andomedes" size="1" name="system.andomedes">
-			                    {{selectOptions listValues.choix selected=actor.system.andomedes labelAttr="label" localize=true blank="libersf.none"}}
-			                </select>	
-		                </div>
-		            <input type="a" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
+					<div class="grid-2col">
+						<SELECT class="sexeliste" size="1" name="system.background.sexe">
+							{{selectOptions listValues.sexe selected=actor.system.background.sexe labelAttr="label" localize=true blank="libersf.none"}}
+		                </select>
+						<SELECT class="raceliste" size="1" name="system.background.race">
+							{{selectOptions listValues.race selected=actor.system.background.race labelAttr="label" localize=true blank="libersf.none"}}
+		                </select>
+			            <h2>{{localize 'libersf.faction'}}</h2>
+						<SELECT class="factionliste" size="1" name="system.background.religion">
+							{{selectOptions listValues.faction selected=actor.system.background.religion labelAttr="label" localize=true blank="libersf.none"}}
+		                </select>
+			            <h2>{{localize 'libersf.metier'}}</h2>
+						<SELECT class="metierliste" size="1" name="system.background.metier">
+							{{selectOptions listValues.metier selected=actor.system.background.metier labelAttr="label" localize=true blank="libersf.none"}}
+		                </select>
+		                <h2>{{localize 'libersf.metier0'}}</h2>
+						<SELECT class="metierliste" size="1" name="system.background.metier2">
+							{{selectOptions listValues.metier selected=actor.system.background.metier2 labelAttr="label" localize=true blank="libersf.none"}}
+		                </select>
+		            </div>
+	                <div class="grid-2col">
+	                	<h2>{{localize 'libersf.comp'}}</h2>
+	                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="{{localize 'libersf.comp'}}">
+	                	<h2>{{localize 'libersf.mut'}}</h2>
+	                	<SELECT class="mutation" size="1" name="system.mutation">
+							{{selectOptions listValues.choix selected=actor.system.mutation labelAttr="label" localize=true blank="libersf.none"}}
+		            	</select>
+	                	<h2>Andromède</h2>
+						<SELECT class="andomedes" size="1" name="system.andomedes">
+		                    {{selectOptions listValues.choix selected=actor.system.andomedes labelAttr="label" localize=true blank="libersf.none"}}
+		                </select>	
+			            <input type="a" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
+		            </div>
 		        </div>	
 
 	            <p>{{localize 'libersf.regle'}}<br>{{localize 'libersf.regle2'}}<br>{{localize 'libersf.regle3'}}<br>{{localize 'libersf.regle5'}}<br>{{localize 'libersf.regle6'}}<br>{{localize 'libersf.regle7'}}<br>{{localize 'libersf.regle8'}}<br>{{localize 'libersf.regle9'}}<br>{{localize 'libersf.regle10'}}</p>

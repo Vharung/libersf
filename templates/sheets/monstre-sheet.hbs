@@ -138,7 +138,7 @@
 		            {{/each}}
 		    	</ul>
 		    	<h3>{{localize 'libersf.inv'}} <a class="item-control item-create" title="Create Item" data-type="objet"><i class="fas fa-plus"></i></a></h3>
-				<ul class="items-list objets">
+				<ul class="items-list objets" style="top:-3px;">
 					{{#each actor.inventaire as |item id|}}
 		                <li class="item rexrow" data-item-id="{{item._id}}">
 		                    <div class="item-qty">{{item.system.quantite}}</div>
@@ -194,7 +194,7 @@
 			</div>
 			{{!-- Spell Tab --}}
 			<div id="magie" class="tab items " data-group="primary" data-tab="magie">   
-				<h3 style=>{{localize 'libersf.sort'}}</h3>
+				<h3>{{localize 'libersf.sort'}}</h3>
 				<div class="zonemagie">
 					<ul class="items-list">
 		            {{#each actor.sort as |item id|}}

@@ -146,7 +146,7 @@
 			<input class="sun sun4" name="" type="text" value="{{actor.system.model.vise}}" placeholder=""/></div>
 			<div class="clear"></div>
 		</div>
-		<div class="moitie">
+		<div class="moitie2">
 			{{!-- Sheet Body --}}
 			<section class="sheet-body">
 				<div id="bg" class="tab bg" data-group="primary" data-tab="bg">
@@ -154,6 +154,11 @@
 		    		<div class="zoneinfo inventator">
 		    			<textarea class="histoire" name="system.background.histoire">{{actor.system.background.histoire}}</textarea>
 		    		</div>
+		    		<div class="etat">
+						{{#each actor.system.background.etat as |value etat|}}
+					  		<a class="etat{{@index}} chnget" data-lettre="{{@index}}" style="opacity: {{value}};"></a>
+						{{/each}}	
+					</div>
 		    	</div>
 				{{!-- Items Tab --}}
 				<div id="items" class="tab items" data-group="primary" data-tab="items">
@@ -325,21 +330,17 @@
 								{{selectOptions listValues.blindage selected=actor.system.model.blindage.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 						</div>
-
+						<div class="grid-2col">   
+							<h2>{{localize 'libersf.valid'}}</h2>             
+		                	<input class="bouton vehichoix" type="a" value="{{localize 'libersf.choisir'}}">
+		                </div>
 
 						<div class="clear"></div>				
 					</div>	
-					<div class="grid-2col left">   
-						<h2>{{localize 'libersf.valid'}}</h2>             
-	                	<input class="bouton vehichoix" type="a" value="{{localize 'libersf.choisir'}}">
-	                </div>
+					
 				</div>
 			</section>
-			<!--div class="etat">
-				{{#each actor.system.background.etat as |value etat|}}
-			  		<a class="etat{{@index}} chnget" data-lettre="{{@index}}" style="opacity: {{value}};"></a>
-				{{/each}}	
-			</div-->
+			
 		</div>
 	</div>
 </form>

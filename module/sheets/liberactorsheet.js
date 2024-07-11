@@ -8,7 +8,7 @@ import { range } from "./class/list.js";
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
           classes: ["Liber", "sheet", "actor"],
-          width: 660,
+          width: 860,
           height: 870,
           dragDrop: [{dragSelector: ".draggable", dropSelector: null},{dragSelector: ".ability", dropSelector: null}],
           tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -105,15 +105,6 @@ import { range } from "./class/list.js";
             niveau_secu = context.actor.system.niveau_secu || null;
             niveau_tech = context.actor.system.niveau_tech || null;
         }
-        console.log(metier+'+'+metier2)
-        // Fonction pour fusionner les objets JSON dans bonusmetierlvl
-        /*function mergeBonusMetierLvl(source) {
-            for (let key in source) {
-                if (source.hasOwnProperty(key)) {
-                    bonusmetierlvl[key] = source[key];
-                }
-            }
-        }*/
         function mergeBonusMetierLvl(source) {
             Object.assign(bonusmetierlvl, source);
         }
@@ -158,7 +149,6 @@ import { range } from "./class/list.js";
         } else if (metier2 == "m9") {
             mergeBonusMetierLvl(range.mecanicien);
         }
-        console.log(bonusmetierlvl)
         if (["personnage", "pnj", "monstre", "vehicule"].includes(this.actor.type)) {
             this._prepareCharacterItems(context);
             let stat= await this._onStatM(context);
@@ -364,8 +354,6 @@ import { range } from "./class/list.js";
         html.find('.validation').click(this._onAvantageRace.bind(this));
         //caractere aléatoire
         html.find('.genererp').click(this._onEarth.bind(this));
-        html.find('.generator').click(this._onStory2.bind(this));
-        html.find('.caractergen').click(this._onStory.bind(this));
         html.find('.aleatoire').click(this._onAleatoire.bind(this));
         /*Etat*/
         html.find('.action6').click(this._onCouv.bind(this));
@@ -449,7 +437,14 @@ import { range } from "./class/list.js";
         }   
         if(isNaN(resultat)){resultat='A Config';}
         html.find('.pointrestant').val(resultat); 
-
+        /*competence specifique */
+        let nomcomp=this.actor.system.nomcomp;
+        if(nomcomp!=''){
+            html.find('.compt5 a').html(nomcomp);
+        }
+        if(this.actor.system.background.race=='r8'){
+            html.find('textarea.bonusrace').removeAttr('readonly');
+        }
         /*Avantage*/
         var avant=html.find('.avant').val();
         var desan=html.find('.desan').val();
@@ -793,13 +788,13 @@ import { range } from "./class/list.js";
         var balistique=this.actor.system.attributs.Balistique;
 
         const jetdeDesFormule = "1d100";
-        let bonus =this.actor.system.stat.bonus;console.log(bonus)//test
-        var malus =this.actor.system.malus;console.log(malus)//test
+        let bonus =this.actor.system.stat.bonus;
+        var malus =this.actor.system.malus;
         if (["Artisanat", "Balistique", "Mécanique", "Pilotage", "Piratage"].includes(name) && ["personnage", "pnj"].includes(this.actor.type)) {
-            let etoiles = await this._onMeca(event);console.log(etoiles)
-            let meca = parseInt(maxstat) - (parseInt(etoiles) * 5);console.log(meca)
-            if (meca > 0) { meca = 0; }console.log(meca)
-            bonus = bonus + meca;console.log(bonus)
+            let etoiles = await this._onMeca(event);
+            let meca = parseInt(maxstat) - (parseInt(etoiles) * 5);
+            if (meca > 0) { meca = 0; }
+            bonus = bonus + meca;
         }
         var critique=5;
         if(type=="C"){
@@ -849,7 +844,6 @@ import { range } from "./class/list.js";
             etoilemax=parseInt(etoilemax)+2
         }
         let dif=parseInt(etoilemax)-parseInt(etoile);
-        console.log(dif+'='+etoilemax+'+'+etoile)
         if(dif>0){dif=0;}
         if(name=="Tir" || name=="Tircouv"){
             inforesult=parseInt(inforesult)+(dif*5)
@@ -917,7 +911,6 @@ import { range } from "./class/list.js";
 
         let r = await new Roll('1d100').evaluate();
         let retour = r.result;
-        console.log(retour)
         var deg='';
         var perte=0;
         var succes="";
@@ -1148,28 +1141,27 @@ import { range } from "./class/list.js";
         let racune=racunelist[Math.floor(Math.random()*racunelist.length)]
         let obsession=racunelist[Math.floor(Math.random()*racunelist.length)]
         let distingue=racunelist[Math.floor(Math.random()*racunelist.length)]
-
         return {
-            'system.caractere.distingue': distingue,
-            'system.caractere.residence': resident,
-            'system.caractere.sang': sang,
-            'system.caractere.politique': politique,
-            'system.caractere.interets': groupe,
-            'system.caractere.deces': dc,
-            'system.caractere.moral': moral,
-            'system.caractere.amour': amour,
-            'system.caractere.amitie': ami,
-            'system.caractere.haine': haine,
-            'system.caractere.principale': metier,
-            'system.caractere.secondaire': metier1,
-            'system.caractere.passion': metier2,
-            'system.caractere.caract': caractere,
-            'system.caractere.personnalite': personnalite,
-            'system.caractere.perception': vision,
-            'system.caractere.objectif': objectif,
-            'system.caractere.rancunier': racune,
-            'system.caractere.tare': tare,
-            'system.caractere.obsession': obsession
+            distingue,
+            resident,
+            sang,
+            politique,
+            groupe,
+            dc,
+            moral,
+            amour,
+            ami,
+            haine,
+            metier,
+            metier1,
+            metier2,
+            caractere,
+            personnalite,
+            vision,
+            objectif,
+            tare,
+            racune,
+            obsession
         };
 
     }
@@ -1188,9 +1180,7 @@ import { range } from "./class/list.js";
         let tonchoix=items4[Math.floor(Math.random()*items2.length)];
         let motivation  = items3[Math.floor(Math.random()*items3.length)];
         let textgen =game.i18n.localize("libersf.age")+age+game.i18n.localize("libersf.vie")+secteur+" "+planete+game.i18n.localize("libersf.jour")+evenement+", "+motivation+game.i18n.localize("libersf.decide")+tonchoix+".";
-        return {
-            'system.background.histoire': textgen
-        };
+        return textgen;
     }
 
     async _onAvantageRace(event){
@@ -1236,15 +1226,33 @@ import { range } from "./class/list.js";
             metier="10 "+game.i18n.localize("libersf.atir");
         }else if(metierliste=="m9"){
             metier="10 "+game.i18n.localize("libersf.meca");
-        }else if(metierliste=="10"){
+        }else if(metierliste=="m10"){
             metier="10 "+game.i18n.localize("libersf.scie");
         }else if(metierliste=="m11"){
             metier="10 "+game.i18n.localize("libersf.magie");
         }
-        let story= await this._onStory();
+        let storyValues= await this._onStory();
         let story2= await this._onStory2();
-        console.log(metier+'+'+bonusrace) //bug
-        this.actor.update({story,story2,'system.background.bonusmetier': metier,'system.background.bonusrace': bonusrace});
+        this.actor.update({'system.caractere.distingue': storyValues.distingue,
+        'system.caractere.residence': storyValues.resident,
+        'system.caractere.sang': storyValues.sang,
+        'system.caractere.politique': storyValues.politique,
+        'system.caractere.interets': storyValues.groupe,
+        'system.caractere.deces': storyValues.dc,
+        'system.caractere.moral': storyValues.moral,
+        'system.caractere.amour': storyValues.amour,
+        'system.caractere.amitie': storyValues.ami,
+        'system.caractere.haine': storyValues.haine,
+        'system.caractere.principale': storyValues.metier,
+        'system.caractere.secondaire': storyValues.metier1,
+        'system.caractere.passion': storyValues.metier2,
+        'system.caractere.caract': storyValues.caractere,
+        'system.caractere.personnalite': storyValues.personnalite,
+        'system.caractere.perception': storyValues.vision,
+        'system.caractere.objectif': storyValues.objectif,
+        'system.caractere.rancunier': storyValues.racune,
+        'system.caractere.tare': storyValues.tare,
+        'system.caractere.obsession': storyValues.obsession,'system.background.histoire': story2,'system.background.bonusmetier': metier,'system.background.bonusrace': bonusrace});
     }
 
     _onArmor(event){//Fr
@@ -1715,7 +1723,6 @@ import { range } from "./class/list.js";
         let nrj = this.actor.system.stat.encombrement.value;
         let energyCost = 0;
         
-        console.log("Classes de l'élément cliqué : ", classes);
         if (classes.includes("action10")) {
             energyCost = 20;
         } else if (classes.includes("action11")) {
