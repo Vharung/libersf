@@ -8,7 +8,7 @@ import { range } from "./class/list.js";
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
           classes: ["Liber", "sheet", "actor"],
-          width: 860,
+          width: 870,
           height: 870,
           dragDrop: [{dragSelector: ".draggable", dropSelector: null},{dragSelector: ".ability", dropSelector: null}],
           tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -846,6 +846,7 @@ import { range } from "./class/list.js";
         let dif=parseInt(etoilemax)-parseInt(etoile);
         if(dif>0){dif=0;}
         if(name=="Tir" || name=="Tircouv"){
+
             inforesult=parseInt(inforesult)+(dif*5)
             if(name=="Tir"){var conf="none;width: 200px;display:inline-block";}
             if(chargequi=='' || chargequi== undefined){
@@ -913,6 +914,38 @@ import { range } from "./class/list.js";
         let retour = r.result;
         var deg='';
         var perte=0;
+        var infoarme='';
+        if(name=="Tir"){
+            let typetir =await this._choixtir(event);
+            console.log(typetir)
+            if(typetir=="As"){
+                perte=1;
+                infoarme='<br><span class="infotir">Etourdi l’ennemi</span>';
+            }else if(typetir=="A"){
+                perte=10;
+                inforesult=inforesult-10;
+                infoarme='<br><span class="infotir">Ajout 10 de dégât, -10% en précision, –10 balles</span>';
+            }else if(typetir=="C"){
+                perte=1;
+                infoarme='<br><span class="infotir">Les munitions indique le nombre de tours que cela peut être maintenu</span>';
+            }else if(typetir=="CC"){
+                perte=1;
+                infoarme='<br><span class="infotir">Tire une balle par balle.</span>';
+            }else if(typetir=="D"){
+                perte=1;
+                infoarme='<br><span class="infotir">Tir en cône, peut toucher plusieurs cibles dans ce cône.</span>';
+            }else if(typetir=="L"){
+                perte=1;
+                infoarme='<br><span class="infotir">Pas de réduction de dommage contre les véhicules</span>';
+            }else if(typetir=="H"){
+                perte=1;
+                infoarme='<br><span class="infotir">Ceci permet de tirer depuis une zone située à l’extérieur de la map.</span>';
+            }else if(typetir=="R"){
+                inforesult=inforesult-5;
+                perte=3;
+                infoarme='<br><span class="infotir">Ajout 5 de dégât, -5% en précision, –3 balles</span>';
+            }
+        }
         var succes="";
         if(name=="Visée"){
             if(retour>echec){
@@ -949,27 +982,28 @@ import { range } from "./class/list.js";
             if(retour>95){
                 succes="<h4 class='resultat' style='background:#ff3333;'>"+game.i18n.localize('libersf.J17')+"</h4>";
                 deg='<h4 class="resultdeg">0</h4>';
+                perte=0;
             }else if(retour>(inforesult+20)){
                 succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J18')+"</h4>";
                 deg='<h4 class="resultdeg">0</h4>';
+                perte=0;
             }else if(retour>inforesult){
                 succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.J19')+"</h4>";
                 deg='<h4 class="resultdeg">0</h4>';
-                perte=1;
             }else if(retour>(inforesult-20)){
                 succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J20')+"</h4>";
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
-                perte=1;bles=1;                
+                bles=1;                
             }else if(retour>critique){
                 succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J21')+"</h4>";
                 degat=Math.round(parseInt(degat)*1.5);
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
-                perte=1;bles=1;
+                bles=1;
             }else if(retour<=critique){
                 succes="<h4 class='resultat' style='background:#78be50;'>"+game.i18n.localize('libersf.J22')+"</h4>";
                 degat=parseInt(degat)*2;
                 deg='<h4 class="resultdeg">'+degat+'</h4>';
-                perte=1;bles=1;               
+                bles=1;               
             } 
             //degat auto
             if(bles==1){
@@ -1035,22 +1069,19 @@ import { range } from "./class/list.js";
                 succes="<h4 class='resultat' style='background:#ff5733;'>"+game.i18n.localize('libersf.echec4')+"</h4>";
             }
         }
-        if(perte==1 || perte==10){
+        if(perte>0){
             let itemData= this.actor.items.filter(i=>i.name == chargequi);                 
             var iditem= itemData[0].id;
             var qty = itemData[0].system.quantite;
-            if(perte==10){list-compt
-                itemData[0].NunsMoins();
-            }else{
-                itemData[0].MunMoins();
-            }
+            console.log(perte)
+            itemData[0].MunMoins(perte);
         } 
         
     
         if(inforesult<=0){
             succes="<h4 class='resultat' style='background:#ff3333;'>"+game.i18n.localize('libersf.echec')+"</h4>";
         }
-        const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">'+game.i18n.localize('libersf.jet')+ name + " : " + retour +" / " + inforesult + '</p>'+ succes+'</span>'+deg;
+        const texte = '<span style="flex:'+conf+'"><p style="text-align: center;font-size: medium;background: #00abab;padding: 5px;color: white;">'+game.i18n.localize('libersf.jet')+ name + " : " + retour +" / " + inforesult + ' ' + infoarme+'</p>'+ succes+'</span>'+deg;
         //roll.roll().toMessage({
         if (r && texte) {
             await r.toMessage({
@@ -1060,6 +1091,45 @@ import { range } from "./class/list.js";
             });
         }
     }
+    async _choixtir(event) {
+    return new Promise((resolve, reject) => {
+        new Dialog({
+            title: "Sélection du type de tir",
+            content: `
+                <form>
+                    <div class="form-group">
+                        <label for="typetir">Type de Tir :</label>
+                        <select id="typetir" name="typetir">
+                            <option value="As">Assomante</option>
+                            <option value="A">Automatique</option>
+                            <option value="C">Continu</option>
+                            <option value="CC">Coup par coup</option>
+                            <option value="D">Dispersion</option>
+                            <option value="L">Lourd</option>
+                            <option value="H">Hors map</option>
+                            <option value="R">Rafale</option>
+                        </select>
+                    </div>
+                </form>
+            `,
+            buttons: {
+                ok: {
+                    label: "OK",
+                    callback: (html) => {
+                        const typetir = html.find('[name="typetir"]').val();
+                        console.log(typetir); // This will correctly log the string value of the selected option
+                        resolve(typetir);
+                    }
+                },
+                cancel: {
+                    label: "Annuler",
+                    callback: () => resolve(null) // If cancelled, resolve with null or any appropriate value
+                }
+            },
+            default: "ok"
+        }).render(true);
+    });
+}
 
     async _onMeca(event){
         return new Promise((resolve, reject) => {
@@ -1168,7 +1238,7 @@ import { range } from "./class/list.js";
 
     _onStory2(){
         var age = Math.floor((Math.random() * 34) + 16);
-        const items0 = [game.i18n.localize("libersf.surUnePlaneteDuSecteurDe"),game.i18n.localize("libersf.sur")];
+        /*const items0 = [game.i18n.localize("libersf.surUnePlaneteDuSecteurDe"),game.i18n.localize("libersf.sur")];
         const items1 = [game.i18n.localize("libersf.end125"),game.i18n.localize("libersf.proxima"),game.i18n.localize("libersf.atarus"),game.i18n.localize("libersf.sebos"),game.i18n.localize("libersf.zx52"),game.i18n.localize("libersf.dx128"),game.i18n.localize("libersf.rof89"),game.i18n.localize("libersf.hd720p"),game.i18n.localize("libersf.quenza"),game.i18n.localize("libersf.sigma"),game.i18n.localize("libersf.tk86"),game.i18n.localize("libersf.talouine"),game.i18n.localize("libersf.turka"),game.i18n.localize("libersf.rota"),game.i18n.localize("libersf.imperator"),game.i18n.localize("libersf.reset"),game.i18n.localize("libersf.creab"),game.i18n.localize("libersf.ab"),game.i18n.localize("libersf.th5"),game.i18n.localize("libersf.r852"),game.i18n.localize("libersf.natura"),game.i18n.localize("libersf.f10x"),game.i18n.localize("libersf.tella"),game.i18n.localize("libersf.olympus"),game.i18n.localize("libersf.iron"),game.i18n.localize("libersf.zeus"),game.i18n.localize("libersf.athena"),game.i18n.localize("libersf.gaia"),game.i18n.localize("libersf.apollon"),game.i18n.localize("libersf.gallus"),game.i18n.localize("libersf.mip"),game.i18n.localize("libersf.elysee"),game.i18n.localize("libersf.grandeNebuleuse"),game.i18n.localize("libersf.tartare"),game.i18n.localize("libersf.alexandrie"),game.i18n.localize("libersf.maxima"),game.i18n.localize("libersf.p74r"),game.i18n.localize("libersf.centaurus"),game.i18n.localize("libersf.nouvelleTerre"),game.i18n.localize("libersf.end128"),game.i18n.localize("libersf.terre"),game.i18n.localize("libersf.hatp1b"),game.i18n.localize("libersf.valhala"),game.i18n.localize("libersf.mysterious")];
         const items2 = [game.i18n.localize("libersf.taVilleSeFaitAttaque"),game.i18n.localize("libersf.tuEsAffecteAMissionImportantePourTaFaction"),game.i18n.localize("libersf.unProcheMeurtAssassine"),game.i18n.localize("libersf.tuQuittesTaPlanetePourVoyagerEtDecouvrirLeMonde"),game.i18n.localize("libersf.desContrebandiersTEntraineDansLeursMagouilles"),game.i18n.localize("libersf.tuTeFaisCapturerParUneFactionEnnemi"),game.i18n.localize("libersf.tuEsRecruteParUnEtrangePersonnagePourMission"),game.i18n.localize("libersf.unAmiProcheSeFaitEnlever"),game.i18n.localize("libersf.tonPereMeurtDurantBataille"),game.i18n.localize("libersf.tuTeFaisKidnapperParUnInconnu"),game.i18n.localize("libersf.tuEsPorteDisparuDurantBataille"),game.i18n.localize("libersf.tuEsVictimeTentativeAssassinat"),game.i18n.localize("libersf.durantAccidentTuPerdsMemoire"),game.i18n.localize("libersf.tonFrereADisparu"),game.i18n.localize("libersf.tonHamsterTeConfieMission")];
         const items3 = [game.i18n.localize("libersf.deRamenerPaixAuSeinDeGalaxie"),game.i18n.localize("libersf.deRechercherMoyenQueTonNomResteDansMemoires"),game.i18n.localize("libersf.deTuerPersonnesQuiSontResponsablesDeTesMalheurs"),game.i18n.localize("libersf.deSauverMondeRongerParGuerre"),game.i18n.localize("libersf.dAneantirPersonnesQueTuJugeTropFaible"),game.i18n.localize("libersf.dePartirEnQueteDAventure"),game.i18n.localize("libersf.deTeVengerDuMalQuiTaEteFait"),game.i18n.localize("libersf.dePartirEnQueteDeSavoir"),game.i18n.localize("libersf.dePartirTEnrichir"),game.i18n.localize("libersf.deDevenirPlusFort"),game.i18n.localize("libersf.deRechercherAmour"),game.i18n.localize("libersf.deDevenirConnu"),game.i18n.localize("libersf.dEnqueterSurEvenementsEtranges"),game.i18n.localize("libersf.dAttraperTousPokemons")];
@@ -1180,7 +1250,161 @@ import { range } from "./class/list.js";
         let tonchoix=items4[Math.floor(Math.random()*items2.length)];
         let motivation  = items3[Math.floor(Math.random()*items3.length)];
         let textgen =game.i18n.localize("libersf.age")+age+game.i18n.localize("libersf.vie")+secteur+" "+planete+game.i18n.localize("libersf.jour")+evenement+", "+motivation+game.i18n.localize("libersf.decide")+tonchoix+".";
-        return textgen;
+        return textgen;*/
+        const stages = [
+            game.i18n.localize("libersf.code111"),
+            game.i18n.localize("libersf.code112"),
+            game.i18n.localize("libersf.code113"),
+            game.i18n.localize("libersf.code114"),
+            game.i18n.localize("libersf.code115"),
+            game.i18n.localize("libersf.code116"),
+            game.i18n.localize("libersf.code117"),
+            game.i18n.localize("libersf.code118"),
+            game.i18n.localize("libersf.code119"),
+            game.i18n.localize("libersf.code120"),
+            game.i18n.localize("libersf.code121")
+        ];
+
+        const elements = {};
+        elements[game.i18n.localize("libersf.code111")] = [
+            game.i18n.localize("libersf.code001"),
+            game.i18n.localize("libersf.code002"),
+            game.i18n.localize("libersf.code003"),
+            game.i18n.localize("libersf.code004"),
+            game.i18n.localize("libersf.code005"),
+            game.i18n.localize("libersf.code006"),
+            game.i18n.localize("libersf.code007"),
+            game.i18n.localize("libersf.code008"),
+            game.i18n.localize("libersf.code009"),
+            game.i18n.localize("libersf.code010")
+        ];
+        elements[game.i18n.localize("libersf.code112")] = [
+            game.i18n.localize("libersf.code011"),
+            game.i18n.localize("libersf.code012"),
+            game.i18n.localize("libersf.code013"),
+            game.i18n.localize("libersf.code014"),
+            game.i18n.localize("libersf.code015"),
+            game.i18n.localize("libersf.code016"),
+            game.i18n.localize("libersf.code017"),
+            game.i18n.localize("libersf.code018"),
+            game.i18n.localize("libersf.code019"),
+            game.i18n.localize("libersf.code020")
+        ];
+        elements[game.i18n.localize("libersf.code113")] = [
+            game.i18n.localize("libersf.code021"),
+            game.i18n.localize("libersf.code022"),
+            game.i18n.localize("libersf.code023"),
+            game.i18n.localize("libersf.code024"),
+            game.i18n.localize("libersf.code025"),
+            game.i18n.localize("libersf.code026"),
+            game.i18n.localize("libersf.code027"),
+            game.i18n.localize("libersf.code028"),
+            game.i18n.localize("libersf.code029"),
+            game.i18n.localize("libersf.code030")
+        ];
+        elements[game.i18n.localize("libersf.code114")] = [
+            game.i18n.localize("libersf.code031"),
+            game.i18n.localize("libersf.code032"),
+            game.i18n.localize("libersf.code033"),
+            game.i18n.localize("libersf.code034"),
+            game.i18n.localize("libersf.code035"),
+            game.i18n.localize("libersf.code036"),
+            game.i18n.localize("libersf.code037"),
+            game.i18n.localize("libersf.code038"),
+            game.i18n.localize("libersf.code039"),
+            game.i18n.localize("libersf.code040")
+        ];
+        elements[game.i18n.localize("libersf.code115")] = [
+            game.i18n.localize("libersf.code041"),
+            game.i18n.localize("libersf.code042"),
+            game.i18n.localize("libersf.code043"),
+            game.i18n.localize("libersf.code044"),
+            game.i18n.localize("libersf.code045"),
+            game.i18n.localize("libersf.code046"),
+            game.i18n.localize("libersf.code047"),
+            game.i18n.localize("libersf.code048"),
+            game.i18n.localize("libersf.code049"),
+            game.i18n.localize("libersf.code050")
+        ];
+        elements[game.i18n.localize("libersf.code116")] = [
+            game.i18n.localize("libersf.code051"),
+            game.i18n.localize("libersf.code052"),
+            game.i18n.localize("libersf.code053"),
+            game.i18n.localize("libersf.code054"),
+            game.i18n.localize("libersf.code055"),
+            game.i18n.localize("libersf.code056"),
+            game.i18n.localize("libersf.code057"),
+            game.i18n.localize("libersf.code058"),
+            game.i18n.localize("libersf.code059"),
+            game.i18n.localize("libersf.code060")
+        ];
+        elements[game.i18n.localize("libersf.code117")] = [
+            game.i18n.localize("libersf.code061"),
+            game.i18n.localize("libersf.code062"),
+            game.i18n.localize("libersf.code063"),
+            game.i18n.localize("libersf.code064"),
+            game.i18n.localize("libersf.code065"),
+            game.i18n.localize("libersf.code066"),
+            game.i18n.localize("libersf.code067"),
+            game.i18n.localize("libersf.code068"),
+            game.i18n.localize("libersf.code069"),
+            game.i18n.localize("libersf.code070")
+        ];
+        elements[game.i18n.localize("libersf.code118")] = [
+            game.i18n.localize("libersf.code071"),
+            game.i18n.localize("libersf.code072"),
+            game.i18n.localize("libersf.code073"),
+            game.i18n.localize("libersf.code074"),
+            game.i18n.localize("libersf.code075"),
+            game.i18n.localize("libersf.code076"),
+            game.i18n.localize("libersf.code077"),
+            game.i18n.localize("libersf.code078"),
+            game.i18n.localize("libersf.code079"),
+            game.i18n.localize("libersf.code080")
+        ];
+        elements[game.i18n.localize("libersf.code119")] = [
+            game.i18n.localize("libersf.code081"),
+            game.i18n.localize("libersf.code082"),
+            game.i18n.localize("libersf.code083"),
+            game.i18n.localize("libersf.code084"),
+            game.i18n.localize("libersf.code085"),
+            game.i18n.localize("libersf.code086"),
+            game.i18n.localize("libersf.code087"),
+            game.i18n.localize("libersf.code088"),
+            game.i18n.localize("libersf.code089"),
+            game.i18n.localize("libersf.code090")
+        ];
+        elements[game.i18n.localize("libersf.code120")] = [
+            game.i18n.localize("libersf.code091"),
+            game.i18n.localize("libersf.code092"),
+            game.i18n.localize("libersf.code093"),
+            game.i18n.localize("libersf.code094"),
+            game.i18n.localize("libersf.code095"),
+            game.i18n.localize("libersf.code096"),
+            game.i18n.localize("libersf.code097"),
+            game.i18n.localize("libersf.code098"),
+            game.i18n.localize("libersf.code099"),
+            game.i18n.localize("libersf.code100")
+        ];
+        elements[game.i18n.localize("libersf.code121")] = [
+            game.i18n.localize("libersf.code101"),
+            game.i18n.localize("libersf.code102"),
+            game.i18n.localize("libersf.code103"),
+            game.i18n.localize("libersf.code104"),
+            game.i18n.localize("libersf.code105"),
+            game.i18n.localize("libersf.code106"),
+            game.i18n.localize("libersf.code107"),
+            game.i18n.localize("libersf.code108"),
+            game.i18n.localize("libersf.code109"),
+            game.i18n.localize("libersf.code110")
+        ];
+        let story = "";
+        stages.forEach(stage => {
+            const choices = elements[stage];
+            const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+            story += `${stage}: ${randomChoice}\n\n`;
+        });
+        return story;
     }
 
     async _onAvantageRace(event){
@@ -1230,6 +1454,8 @@ import { range } from "./class/list.js";
             metier="10 "+game.i18n.localize("libersf.scie");
         }else if(metierliste=="m11"){
             metier="10 "+game.i18n.localize("libersf.magie");
+        }else if(metierliste=="m12"){
+            metier="10 "+game.i18n.localize("libersf.force");
         }
         let storyValues= await this._onStory();
         let story2= await this._onStory2();
@@ -1899,3 +2125,8 @@ import { range } from "./class/list.js";
         }
     }
 }
+
+/*a faire
+- véhicule
+- montant en crédit des objets
+*/

@@ -18,7 +18,8 @@ body{background:url(fond2.png) no-repeat top center;font-family: "Electrolize" }
 /*outil*/
 .chat-message{color: #fff;border: none;margin-bottom: 15px;background: var(--couleur-noir);color:#fff;}
 .chat-message .message-header{color:var(--couleur-clair);}
-.chat-message.whisper,.chat-message.blind {background: var(--couleur-noir);border:none;}
+.chat-message.whisper{background: #152941;border:none;}
+.chat-message.blind {background: var(--couleur-noir);border:none;}
 /*.dialog .dialog-as a.default,form a,form button,.Liber button,.dialog .dialog-buttons button.default,.dialog .dialog-buttons button{background: rgb(143 26 40);border: none;color: #fff;}
 .directory .directory-header .header-search input ,.dialog-content input,select{background: #30220c;border: none;color: #fff;}
 #sidebar-tabs {color: #20180d;}*/
@@ -51,7 +52,7 @@ input.m_degat,input.m_pv,input.m_ar{color:grey}
 option,optgroup{background: var(--couleur-noir); color: var(--couleur-bleu)}
 
 .Liber input{border: none; background: none;}
-
+.infotir{font-size: 0.8em}
 #sidebar a.item i{display: none}
 #sidebar a.item {height: 20px;filter:invert(50%)}
 #sidebar a.item[data-tab="chat"]{background:url(" ../assets/icon/f1.png") no-repeat center center;background-size: 80%;}

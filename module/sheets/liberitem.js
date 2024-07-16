@@ -36,16 +36,11 @@ export class LiberItem extends Item {
   prepareDerivedData() {
   }
 
-  MunMoins(){
+  MunMoins(balle){
     let itemData = this.system;
     let qty=itemData.quantite;
-    qty--;
-    this.update({'system.quantite':qty});
-  }
-  NunsMoins(){
-    let itemData = this.system;
-    let qty=itemData.quantite;
-    qty=qty-10;
+    console.log(balle)
+    qty=qty-balle;
     this.update({'system.quantite':qty});
   }
   DegatArm(hp,hpmax){

@@ -96,6 +96,9 @@ export const range = Object.freeze({
 		m10: {
 			label:"libersf.metier10",
 		},
+		m12: {
+			label:"libersf.metier12",
+		},
 	},
 	typeTypes: {
 		m1: {
