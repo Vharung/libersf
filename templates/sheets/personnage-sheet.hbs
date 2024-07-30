@@ -36,22 +36,20 @@
 			<div class="life">
 				<input class="hp" name="system.stat.hp.value" type="text" value="{{actor.system.stat.hp.value}}" placeholder="10"/><span style="display: inline-block;">/</span><input class="hpmax" name="system.stat.hp.max" type="text" value="{{actor.system.stat.hp.max}}" placeholder="10"/>
 			</div>
-			<div class="magie">
-				<input class="psy andromede" name="system.psy.value" type="text" value="{{actor.system.magie}}" placeholder="10"/><span class="andromede">/</span><input class="psymax andromede" name="system.psy.max" type="text" value="{{actor.system.psy.max}}" placeholder="10" readonly />
+			<div class="seul">
+				<input class="solit" name="system.stat.solit" type="text" value="{{actor.system.stat.solit}}" title="{{localize 'libersf.solitude'}}" placeholder="0"/>
 			</div>
 			<div class="armcl"><input class="actarm" name="system.stat.armure.value" type="text" value="{{actor.system.stat.armure.value}}" placeholder="0"/><span>/</span><input class="actarmmax" name="system.stat.armure.max" type="text" value="{{actor.system.stat.armure.max}}" placeholder="0" readonly/></div>
 			<div class="boucl"><input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0"/><span>/</span><input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0" readonly/></div>
 			<span class="update">↺</span>
 		</div>
-		<div class="points bonus marge">
-			<h3>{{localize 'libersf.point'}}</h3>
-			<div class="equipe">
-				<input class="team" name="system.stat.team" type="text" value="{{actor.system.stat.team}}" title="{{localize 'libersf.team'}}" placeholder="0"/>
-			</div>
-			<div class="seul">
-				<input class="solit" name="system.stat.solit" type="text" value="{{actor.system.stat.solit}}" title="{{localize 'libersf.solitude'}}" placeholder="0"/>
-			</div>
-			
+		<div class="equipement marge">
+			<h3>{{localize 'libersf.equipement'}}</h3>
+			<a class="icongun jetdedes" data-name="Tir"></a><input  class="armed" name="system.armed" type="text" value="{{actor.system.armed}}" title="{{actor.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{actor.system.degatd}}" readonly="" style="display: none;"/><a class="desequi" data-genre="arme">🗑</a>
+			<span class="iconcha"></span><input  class="charged" name="system.charged" type="text" value="{{actor.system.charged}}" title="{{actor.system.charged}}" placeholder="Chargeur" readonly="" /><a class="desequi" data-genre="chargeur">🗑</a>			
+			<span class="iconarm"></span><input  class="armurequi" name="system.prog" type="text" value="{{actor.system.prog}}" title="{{actor.system.prog}}" placeholder="Armure" readonly="" /><a class="desequi" data-genre="armure">🗑</a>
+			<span class="iconbou"></span><input  class="bouclierqui" name="system.prod" type="text" value="{{actor.system.prod}}"  title="{{actor.system.prod}}" placeholder="Bouclier" readonly="" /><a class="desequi" data-genre="bouclier">🗑</a>
+			<span class="iconaut"></span><input  class="autrequi" name="system.autre" type="text" value="{{actor.system.autre}}" title="{{actor.system.autre}}" placeholder="Autre" readonly="" /><a class="desequi" data-genre="autre">🗑</a>
 		</div>
 		
 	</div>
@@ -97,14 +95,7 @@
 				</div>		
 			</div>
 		</div>
-		<div class="equipement">
-			<h3>{{localize 'libersf.equipement'}}</h3>
-			<a class="icongun jetdedes" data-name="Tir"></a><input  class="armed" name="system.armed" type="text" value="{{actor.system.armed}}" title="{{actor.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{actor.system.degatd}}" readonly="" style="display: none;"/><a class="desequi" data-genre="arme">🗑</a>
-			<span class="iconcha"></span><input  class="charged" name="system.charged" type="text" value="{{actor.system.charged}}" title="{{actor.system.charged}}" placeholder="Chargeur" readonly="" /><a class="desequi" data-genre="chargeur">🗑</a>			
-			<span class="iconarm"></span><input  class="armurequi" name="system.prog" type="text" value="{{actor.system.prog}}" title="{{actor.system.prog}}" placeholder="Armure" readonly="" /><a class="desequi" data-genre="armure">🗑</a>
-			<span class="iconbou"></span><input  class="bouclierqui" name="system.prod" type="text" value="{{actor.system.prod}}"  title="{{actor.system.prod}}" placeholder="Bouclier" readonly="" /><a class="desequi" data-genre="bouclier">🗑</a>
-			<span class="iconaut"></span><input  class="autrequi" name="system.autre" type="text" value="{{actor.system.autre}}" title="{{actor.system.autre}}" placeholder="Autre" readonly="" /><a class="desequi" data-genre="autre">🗑</a>
-		</div>
+		
 
 	</div>
 	<div class="col31">
@@ -121,27 +112,14 @@
 				</div>
 				<div class="histoires bonulvl marge">
 					<h3>{{localize 'libersf.competencespet'}}</h3>
-					<!--textarea class="spe" name="system.background.competencespet">{{actor.system.background.competencespet}}</textarea-->
-					<h2>Level 2</h2>
-					<SELECT class="factionliste" size="1" name="system.background.bm1">
-						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm1 labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-	                <h2>Level 4</h2>
-					<SELECT class="factionliste" size="1" name="system.background.bm2">
-						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm2 labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-	                <h2>Level 6</h2>
-					<SELECT class="factionliste" size="1" name="system.background.bm3">
-						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm3 labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-	                <h2>Level 8</h2>
-					<SELECT class="factionliste" size="1" name="system.background.bm4">
-						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm4 labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
-	                <h2>Level 10</h2>
-					<SELECT class="factionliste" size="1" name="system.background.bm5">
-						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bm5 labelAttr="label" localize=true blank="libersf.none"}}
-	                </select>
+					<ul class="level">
+						{{#each actor.level as |item id|}}
+			                <li class="item rexrow compte" data-item-id="{{item._id}}" style="background:url({{item.img}});background-size: contain;" title="{{item.name}} : {{item.description}}">
+		                        <a class="item-control item-edit" title="Edit Item" style="float: left;top: 35px;position: relative;"><i class="fas fa-edit"></i></a>
+		                        <a class="item-control item-delete" title="Delete Item" style="float: right;top: 35px;position: relative;"><i class="fas fa-trash"></i></a>
+			                </li>
+		                {{/each}}
+		    		</ul>		  
 				</div>
 				<div class="etat">
 					{{#each actor.system.background.etat as |value etat|}}
@@ -268,7 +246,6 @@
 				</div>
 				
 				<p>{{localize 'libersf.caution'}}</p>
-				<p class="notice">{{localize 'libersf.caution2'}}</p>
 				<div class="troisquart">
 				<h2>{{localize 'libersf.action0'}}</h2>
 					<div class="action0b" title="{{localize 'libersf.run'}}"></div>
@@ -322,9 +299,11 @@
 				<h3>{{localize 'libersf.race'}}</h3>
 				<div class="configuration">
 					<div class="grid-2col">
+						<h2>Sexe</h2>
 						<SELECT class="sexeliste" size="1" name="system.background.sexe">
 							{{selectOptions listValues.sexe selected=actor.system.background.sexe labelAttr="label" localize=true blank="libersf.none"}}
 		                </select>
+		                <h2>race</h2>
 						<SELECT class="raceliste" size="1" name="system.background.race">
 							{{selectOptions listValues.race selected=actor.system.background.race labelAttr="label" localize=true blank="libersf.none"}}
 		                </select>
@@ -332,26 +311,19 @@
 						<SELECT class="factionliste" size="1" name="system.background.religion">
 							{{selectOptions listValues.faction selected=actor.system.background.religion labelAttr="label" localize=true blank="libersf.none"}}
 		                </select>
-			            <h2>{{localize 'libersf.metier'}}</h2>
+			            
+		            </div>
+	                <div class="grid-2col">
+	                	<h2>{{localize 'libersf.metier'}}</h2>
 						<SELECT class="metierliste" size="1" name="system.background.metier">
 							{{selectOptions listValues.metier selected=actor.system.background.metier labelAttr="label" localize=true blank="libersf.none"}}
 		                </select>
-		                <h2>{{localize 'libersf.metier0'}}</h2>
-						<SELECT class="metierliste" size="1" name="system.background.metier2">
-							{{selectOptions listValues.metier selected=actor.system.background.metier2 labelAttr="label" localize=true blank="libersf.none"}}
-		                </select>
-		            </div>
-	                <div class="grid-2col">
 	                	<h2>{{localize 'libersf.comp'}}</h2>
-	                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="{{localize 'libersf.comp'}}">
+	                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="{{localize 'libersf.comp'}}" style="height: 42px;">
 	                	<h2>{{localize 'libersf.mut'}}</h2>
 	                	<SELECT class="mutation" size="1" name="system.mutation">
 							{{selectOptions listValues.choix selected=actor.system.mutation labelAttr="label" localize=true blank="libersf.none"}}
 		            	</select>
-	                	<h2>Andromède</h2>
-						<SELECT class="andomedes" size="1" name="system.andomedes">
-		                    {{selectOptions listValues.choix selected=actor.system.andomedes labelAttr="label" localize=true blank="libersf.none"}}
-		                </select>	
 			            <input type="a" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
 		            </div>
 		        </div>	

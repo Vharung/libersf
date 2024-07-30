@@ -16,7 +16,7 @@
             "piece":"Pièce",
             "argent":"Crédit",
             "sort":"Sorts",
-            "level":"Niveau"
+            "level":"Skill"
         }
     },
     "resid": "Residence",

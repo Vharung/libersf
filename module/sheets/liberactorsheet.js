@@ -295,7 +295,7 @@ import { range } from "./class/list.js";
         const armure = [];
         const piece = [];
         const argent = [];
-        const sort = [];
+        const level=[]
         
         // Iterate through items, allocating to containers
         // let totalWeight = 0;
@@ -321,11 +321,10 @@ import { range } from "./class/list.js";
           else if (i.type === "argent") {
             argent.push(i);
           }
-          else if (i.type === "sort") {
-            sort.push(i);
+          else if (i.type === "level") {
+            level.push(i);
           }
         }
-        sort.sort((a, b) => a.system.cout - b.system.cout);
         inventaire.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         arme.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
         varme.sort(function (a, b) {if (a.name < b.name) {return -1;} else {return 1;}});
@@ -338,7 +337,7 @@ import { range } from "./class/list.js";
         actorData.piece = piece;
         actorData.armure = armure;
         actorData.argent = argent;
-        actorData.sort = sort;
+        actorData.level = level;
     }
 
 
@@ -484,7 +483,7 @@ import { range } from "./class/list.js";
         var agi=html.find('.cpt0').val();
         var dex=html.find('.cpt6').val();
         if(agi >=30 && dex >=30){
-            html.find('.titreaction').html(game.i18n.localize("libersf.action2"))
+           // html.find('.titreaction').html(game.i18n.localize("libersf.action2"))
         }
 
         //couleur bar

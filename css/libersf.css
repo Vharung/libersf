@@ -106,7 +106,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .histoires,.Liber .histoire,.Liber .points,.Liber .equipement,.Liber .moteur{border:1px solid var(--couleur-noir);border-radius: 10px;background: var(--couleur-bleut)}
 .Liber .marge,.Liber h2.marge{margin-top:5px}
 .Liber .spe {height: 150px;resize: none;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
-.Liber .histoire{resize: none;width:404px;height: 262px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
+.Liber .histoire{resize: none;width:414px;height: 262px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
 .Liber .points div{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-or);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-or)}
 .Liber .points input{display: inline-block;width: 25px;color: var(--couleur-or);margin: 18px auto;text-align: center;}
 .Liber .equipe{background: url(dark-squad.png) no-repeat center center; background-size: cover;}
@@ -306,6 +306,12 @@ textarea{color:var(--couleur-clair)}
 .Liber .unquart h2{width: 88px;margin-bottom: 10px}
 .Liber .infoplanete select{float: right;width: 125px;background: none;color: var(--color-clair);height: 33px;margin-bottom: 10px;}
 .Liber .moitie2 #lab .inventator .grid-2col{float:left;margin-right:10px}
+.Liber .histoires, .Liber .zonecaract, .Liber .bonulvl {width: 426px;}
+.Liber .bonulvl {height: 400px}
+.Liber .compte{height: 45px;width: 45px;float:left;margin:5px}
+.Liber .compte a{opacity: 0}
+.Liber .compte:hover a {opacity: 1}
+}
 @keyframes scan {
     0% {top: -5px;}
     50% {top:190px;}

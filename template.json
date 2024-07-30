@@ -225,7 +225,6 @@
             "objet",
             "piece",
             "argent",
-            "sort",
             "level"
         ],
         "arme": {
@@ -295,15 +294,9 @@
             "quantite":"1",
             "valeur": "" 
         },
-        "sort": {
+        "level":{
             "description": "",
-            "genre": "",
-            "degats": "",
-            "portee": "",
-            "poids":"1",
-            "techno":"☆ ☆ ☆ ☆ ☆",
-            "valeur":"1",
-            "quantite":"1"
+            "prerequis": "" 
         }
     }
 }

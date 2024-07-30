@@ -16,7 +16,7 @@
             "piece":"Pièce",
             "argent":"Crédit",
             "sort":"Sorts",
-            "level":"Niveau"
+            "level":"Compétence"
         }
     },
     "resid": "Résidence",
@@ -1001,7 +1001,8 @@
         "bm32":"Ingénierie Avancée",
         "bm33":"Réparations Express",
         "bm34":"Accès aux Ressources",
-        "bm35":"Expertise Technologique"
+        "bm35":"Expertise Technologique",
+        "prerequi":"Pré requis"
 
     }
 }
