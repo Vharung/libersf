@@ -37,7 +37,19 @@
       "name": "arme",
       "label": "Inventaire",
       "system": "libersf",
-      "path": "pack/armes",
+      "path": "pack/inventaire-v2",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    },
+    {
+      "name": "competences",
+      "label": "Compétences",
+      "system": "libersf",
+      "path": "pack/competences",
       "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",
@@ -63,18 +75,6 @@
       "system": "libersf",
       "path": "pack/planete",
       "type": "Actor",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "flags": {}
-    },
-    {
-      "name": "magie",
-      "label": "Magie",
-      "system": "libersf",
-      "path": "pack/magie",
-      "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
