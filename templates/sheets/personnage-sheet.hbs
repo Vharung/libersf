@@ -112,9 +112,13 @@
 				</div>
 				<div class="histoires bonulvl marge">
 					<h3>{{localize 'libersf.competencespet'}}</h3>
+					<select class="bonusmetierlvl" size="1" name="system.background.bonusmetierlvl">
+						{{selectOptions listValues.bonusmetierlvl selected=actor.system.background.bonusmetierlvl labelAttr="label" localize=false blank=""}}
+	                </select>
+	                <input type="button" value="Choisir" class="choixcpt bouton">
 					<ul class="level">
 						{{#each actor.level as |item id|}}
-			                <li class="item rexrow compte" data-item-id="{{item._id}}" style="background:url({{item.img}});background-size: contain;" title="{{item.name}} : {{item.description}}">
+			                <li class="item rexrow compte" data-item-id="{{item._id}}" style="background:url({{item.img}});background-size: contain;" title="{{item.name}} : {{item.system.description}}">
 		                        <a class="item-control item-edit" title="Edit Item" style="float: left;top: 35px;position: relative;"><i class="fas fa-edit"></i></a>
 		                        <a class="item-control item-delete" title="Delete Item" style="float: right;top: 35px;position: relative;"><i class="fas fa-trash"></i></a>
 			                </li>
@@ -229,6 +233,7 @@
 			<div id="features" class="tab features active" data-group="primary" data-tab="features">
 				<h3 class="titreaction">{{localize 'libersf.action'}}</h3>
 				<div class="list-compt">
+					
 					{{#each actor.system.attributs as |value caract|}}
 						<div class="compt compt{{@index}}">
 						  <a class="jetdedes" data-name="{{caract}}" data-actionvalue="{{actor.system.attributs.bonus}}" data-attDice="{{value}}" title="{{caract}}">{{localize caract}}</a>
@@ -266,34 +271,6 @@
 				</div>			
 				<div class="clear"></div>
 			</div>
-			{{!-- Spell Tab --}}
-			<div id="magie" class="tab items " data-group="primary" data-tab="magie">   
-				<h3>{{localize 'libersf.sort'}}</h3>
-				<div class="zonemagie">
-					<ul class="items-list">
-		            {{#each actor.sort as |item id|}}
-		                <li class="item rexrow" data-item-id="{{item._id}}">
-		                    <div class="item-qty">{{item.system.quantite}}</div>
-		                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-		                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
-		                    <div class="zonecontrole">
-			                    <div class="cache">
-			                    	<div class="item-type" title="{{item.system.genre}}">{{item.system.genre}} - {{item.system.portee}}</div>
-			                    </div>
-		                  
-		                    	<div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
-			                    <div class="item-controls">
-			                    	<div class="item-techno">{{item.system.techno}}</div>
-			                    	<a class="item-control item-desc" title="Desc Sort">&#128712;</a>
-			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-			                    </div>
-			                </div>
-		                </li>
-		            {{/each}}
-	        		</ul>
-	        	</div>
-			</div>
 			{{!-- Lab Tab --}}
 			<div id="lab" class="tab stats" data-group="primary" data-tab="lab">
 				<h3>{{localize 'libersf.race'}}</h3>
@@ -324,7 +301,7 @@
 	                	<SELECT class="mutation" size="1" name="system.mutation">
 							{{selectOptions listValues.choix selected=actor.system.mutation labelAttr="label" localize=true blank="libersf.none"}}
 		            	</select>
-			            <input type="a" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
+			            <input type="button" value="{{localize 'libersf.choisir'}}" class="validation bouton">   
 		            </div>
 		        </div>	
 

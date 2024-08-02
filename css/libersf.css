@@ -311,6 +311,8 @@ textarea{color:var(--couleur-clair)}
 .Liber .compte{height: 45px;width: 45px;float:left;margin:5px}
 .Liber .compte a{opacity: 0}
 .Liber .compte:hover a {opacity: 1}
+.Liber select.bonusmetierlvl{width: 80%;}
+.Liber .choixcpt {color:var(--couleur-clair);width: 16%;height: 30px;border-radius: 5px;}
 }
 @keyframes scan {
     0% {top: -5px;}

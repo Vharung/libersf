@@ -51,7 +51,6 @@ import { range } from "./class/list.js";
         };        
         let faction=null;
         let metier = null;
-        let metier2 = null;
         let type = null;
         let choix = null;
         let taille = null;
@@ -93,7 +92,6 @@ import { range } from "./class/list.js";
             race = context.actor.system.background.race || null;
             faction = context.actor.system.background.religion || null;
             metier = context.actor.system.background.metier || null;
-            metier2 = context.actor.system.background.metier2 || null;
             type = context.actor.system.background.type || null;
             choix = context.actor.system.background.choix || null;
             taille = context.actor.system.background.taille || null;
@@ -105,52 +103,11 @@ import { range } from "./class/list.js";
             niveau_secu = context.actor.system.niveau_secu || null;
             niveau_tech = context.actor.system.niveau_tech || null;
         }
-        function mergeBonusMetierLvl(source) {
-            Object.assign(bonusmetierlvl, source);
-        }
-        // Vérification pour `metier`
-        if (metier == "m1") {
-            mergeBonusMetierLvl(range.artisan);
-        } else if (metier == "m2") {
-            mergeBonusMetierLvl(range.commerce);
-        } else if (metier == "m3") {
-            mergeBonusMetierLvl(range.colon);
-        } else if (metier == "m4") {
-            mergeBonusMetierLvl(range.intellectuel);
-        } else if (metier == "m5") {
-            mergeBonusMetierLvl(range.malandrin);
-        } else if (metier == "m6") {
-            mergeBonusMetierLvl(range.pilote);
-        } else if (metier == "m7") {
-            mergeBonusMetierLvl(range.medecin);
-        } else if (metier == "m8") {
-            mergeBonusMetierLvl(range.militaire);
-        } else if (metier == "m9") {
-            mergeBonusMetierLvl(range.mecanicien);
-        }
 
-        // Vérification pour `metier2`
-        if (metier2 == "m1") {
-            mergeBonusMetierLvl(range.artisan);
-        } else if (metier2 == "m2") {
-            mergeBonusMetierLvl(range.commerce);
-        } else if (metier2 == "m3") {
-            mergeBonusMetierLvl(range.colon);
-        } else if (metier2 == "m4") {
-            mergeBonusMetierLvl(range.intellectuel);
-        } else if (metier2 == "m5") {
-            mergeBonusMetierLvl(range.malandrin);
-        } else if (metier2 == "m6") {
-            mergeBonusMetierLvl(range.pilote);
-        } else if (metier2 == "m7") {
-            mergeBonusMetierLvl(range.medecin);
-        } else if (metier2 == "m8") {
-            mergeBonusMetierLvl(range.militaire);
-        } else if (metier2 == "m9") {
-            mergeBonusMetierLvl(range.mecanicien);
-        }
+        let compet=null;
         if (["personnage", "pnj", "monstre", "vehicule"].includes(this.actor.type)) {
-            this._prepareCharacterItems(context);
+            compet=this._prepareCharacterItems(context);
+            bonusmetierlvl= await this.competence(metier,compet)
             let stat= await this._onStatM(context);
             context.actor.system = {
                 ...context.actor.system,
@@ -205,9 +162,10 @@ import { range } from "./class/list.js";
                     }
                 }
             };
+            
         }
         if (["personnage", "pnj"].includes(this.actor.type)) {
-            this._onEncom(context);
+            this._onEncom(context);  
         }
         if(this.actor.type == "vehicule"){
             let stat= await this._onStatV(context);
@@ -282,6 +240,7 @@ import { range } from "./class/list.js";
             moteur: moteur && context.listValues.moteur[moteur] ? game.i18n.localize(context.listValues.moteur[moteur].label) : ''
         };
         console.log(context)
+        
         return context;
     }
 
@@ -338,6 +297,7 @@ import { range } from "./class/list.js";
         actorData.armure = armure;
         actorData.argent = argent;
         actorData.level = level;
+        return level;
     }
 
 
@@ -427,6 +387,10 @@ import { range } from "./class/list.js";
             $( this ).css({"background":"#a51b1b","color": "#fff"});
           }
         });*/
+
+        //ajout de compétence
+        html.find('.choixcpt').click(this._ajoutcompt.bind(this));
+
         if(level==undefined){
             resultat=resultat;
         }else if(this.actor.type!="vehicule"){
@@ -543,6 +507,7 @@ import { range } from "./class/list.js";
                crinv=parseInt(crinv)+(parseFloat(valeur[i])*parseFloat(quantite[i]));
             }
             if(exo=="Exosquelette"){
+                enc=enc-10;
                 enc=enc*2;
             }
             var enc=html.find('.enc').val();
@@ -759,6 +724,7 @@ import { range } from "./class/list.js";
             // Réinitialiser les styles CSS lorsque les points de vie sont supérieurs à 0
              $('#LiberActorSheet-Actor-'+this.actor._id+' .window-content').css('background', 'linear-gradient(218deg, #2a2b2c 0%, #120304 100%)');
         }
+        
     }
 
 
@@ -1128,7 +1094,7 @@ import { range } from "./class/list.js";
             default: "ok"
         }).render(true);
     });
-}
+    }
 
     async _onMeca(event){
         return new Promise((resolve, reject) => {
@@ -1232,7 +1198,6 @@ import { range } from "./class/list.js";
             racune,
             obsession
         };
-
     }
 
     _onStory2(){
@@ -1601,8 +1566,7 @@ import { range } from "./class/list.js";
         };
         ChatMessage.create(chatData, {});
     }
-
-    
+  
     _onEncom(data){
         const adata = data.actor;
         var  exo = adata.system.prog;
@@ -2121,6 +2085,98 @@ import { range } from "./class/list.js";
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: texte
             });
+        }
+    }
+
+    async competence(metier,compet) {
+        // Mappage des valeurs de 'metier' à 'namemetier'
+        const metierMap = {
+            "m1": "Artisan",
+            "m2": "Marchand",
+            "m4": "Intellectuel",
+            "m5": "Malandrins",
+            "m6": "Pilote",
+            "m7": "Médecin",
+            "m8": "Militaire",
+            "m9": "Technicien",
+            "m12": "Combattant"
+        };
+        // Trouver le nom du métier correspondant
+        const namemetier = metierMap[metier] || "";
+
+        // Vérification du pack et récupération des documents
+        const pack = game.packs.get('libersf.competences');
+        if (!pack) {
+            console.error("Le pack 'libersf.competences' est introuvable.");
+            return;
+        }
+
+        const tables = await pack.getDocuments();
+        // Filtrer les documents en fonction de 'namemetier'
+        const listem = tables.filter(value => {
+            const prerequi = value.system.prerequi;
+            const matchInCompet = compet.some(lvlItem => lvlItem.name === value.name);
+            if (matchInCompet) {
+                return false; // Ne pas inclure cet élément dans 'listem' si un match est trouvé
+            }
+            // Vérifier si le prerequi correspond à namemetier
+            if (prerequi == namemetier) {
+                return true;
+            }
+            
+            // Vérifier si le prerequi correspond au nom d'un élément de level
+            const matchInLevel = compet.some(lvlItem => lvlItem.name == prerequi);
+            return matchInLevel;
+        });
+        let acc=[]
+        // Retirer les éléments de level qui correspondent à listem
+        for (let item of listem) {
+            acc.push({
+                label: item.name,
+                value: item.name,
+                img: item.img,
+                description: item.system.description 
+            });
+        }
+        console.log(acc)
+        return acc;
+    }
+
+    async _ajoutcompt(event) {
+        // Récupérer la valeur de 'name' à partir de l'événement ou d'une autre source
+        const name = this.actor.system.background.bonusmetierlvl;
+        console.log(name)
+        // Rechercher l'élément dans le pack 'libersf.competences'
+        const pack = game.packs.get('libersf.competences');
+        if (!pack) {
+            console.error("Le pack 'libersf.competences' est introuvable.");
+            return;
+        }
+
+        const tables = await pack.getDocuments();
+
+        // Filtrer les documents en fonction du 'name'
+        const listem = tables.filter(value => value.name === name);
+        console.log(listem);
+
+        // Logique à exécuter après avoir trouvé l'élément correspondant
+        if (listem.length > 0) {
+            // Accéder au premier élément trouvé (ou gérer plusieurs éléments si nécessaire)
+            const { name, system, img } = listem[0];
+
+            console.log('Élément trouvé:', { name, system, img });
+
+            // Créer le document imbriqué avec les informations extraites
+            this.actor.createEmbeddedDocuments('Item', [{
+                name: name,
+                img: img,
+                type: 'level',
+                'system.description': system.description
+            }], { renderSheet: false });
+            this.actor.update({'system.background.bonusmetierlvl': ""});
+            // Faites quelque chose avec name, description, et img
+        } else {
+            console.log('Aucun élément correspondant trouvé pour:', name);
         }
     }
 }

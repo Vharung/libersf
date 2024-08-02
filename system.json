@@ -2,7 +2,7 @@
   "id": "libersf",
   "title": "Liber SF",
   "description": "The libersf SF  system for FoundryVTT!",
-  "version": "3.01",
+  "version": "3.05",
   "compatibility": {
     "minimum": "0.9",
     "verified": "12.327"
