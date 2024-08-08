@@ -319,6 +319,7 @@ import { range } from "./class/list.js";
         html.find('.chnget').click(this._onCouv.bind(this));
         html.find('.vehichoix').click(this._onStatV.bind(this));
         /*edition items*/
+        
         html.find('.item-edit').click(this._onItemEdit.bind(this));
         // Delete Inventory Item
         html.find('.item-delete').click(ev => {
@@ -532,6 +533,169 @@ import { range } from "./class/list.js";
             html.find('.encours').val(total);
             html.find('.crinv').val(crinv);
             html.find('.barenc').css({"width":pourcentage+"%"});
+
+
+            const items = html.find('ul.level li');
+            const listcpt = [];
+
+            // Extraire les données des éléments HTML
+            items.each(function(index, item) {
+                const $item = $(item);
+                const name = $item.data('name');
+                const prerequi = $item.data('prerequi');
+                const description = $item.attr('title');
+                const style = $item.attr('style');
+                const id = $item.data('item-id');
+                listcpt.push({
+                    'name': name,
+                    'prerequi': prerequi,
+                    'description': description,
+                    'style':style,
+                    'id':id
+                });
+            });
+
+            // Créer un objet pour stocker les compétences par nom pour une recherche rapide
+            const inverted = {};
+
+            // Inverser la structure des données
+            listcpt.forEach(cpt => {
+                inverted[cpt.name] = { ...cpt, subItems: [] };
+            });
+
+            // Construire l'arborescence en utilisant les prérequis
+            const arbo = {};
+
+            // Ajouter chaque compétence à son prérequis correspondant
+            listcpt.forEach(cpt => {
+                const { name, prerequi } = cpt;
+
+                // Si le prérequis est défini, l'ajouter à la structure arborescente
+                if (prerequi) {
+                    if (!inverted[prerequi]) {
+                        inverted[prerequi] = { subItems: [] };
+                    }
+                    inverted[prerequi].subItems.push(inverted[name]);
+                } else {
+                    // Sinon, ajouter la compétence directement à la racine de l'arborescence
+                    arbo[name] = inverted[name];
+                }
+            });
+
+            // Fonction pour générer le HTML récursivement
+            function generateHTML(node) {
+            let html2 = `<li class="item rexrow compte"><span title="${node.description}" style="${node.style}" data-item-id="${node.id}"></span>`;
+            
+            if (node.subItems.length > 0) {
+                html2 += '<ul>';
+                node.subItems.forEach(subItem => {
+                html2 += generateHTML(subItem);
+                });
+                html2 += '</ul>';
+            }
+
+            html2 += '</li>';
+            return html2;
+            }
+
+            // Créer le HTML pour l'arborescence
+            function createTreeHTML(data) {
+            let html2 = '<ul>';
+            
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                html2 += generateHTML(data[key]);
+                }
+            }
+            
+            html2 += '</ul>';
+            
+            return html2;
+            }
+
+            // Insérer le HTML dans un élément de la page
+            let container2 = createTreeHTML(arbo); // Utilisez 'arbo' ici
+            html.find('.colonnecpt').html(container2)
+
+            // Arborescence compétence
+            /*const items = html.find('ul.level li');
+            const columns = [];
+            const itemMap = new Map();
+            const isMetier =html.find('.metier').val();
+
+            // Créer une map des items par leur nom
+            items.each(function(index, item) {
+                const $item = $(item);
+                const name = $item.data('name');
+                itemMap.set(name, $item);
+            });
+
+            // Organiser les items par colonnes en fonction de leurs prérequis
+            items.each(function(index, item) {
+                const $item = $(item);
+                const prerequi = $item.data('prerequi');
+                if(prerequi==isMetier){
+
+                }
+                if (!prerequi) {
+                    columns.push([$item]); // Commence une nouvelle colonne
+                } else {
+                    let columnFound = false;
+                    for (let column of columns) {
+                        const lastItem = column[column.length - 1];
+                        if (lastItem.data('name') === prerequi) {
+                            column.push($item); // Ajoute à la colonne existante
+                            columnFound = true;
+                            break;
+                        }
+                    }
+                    if (!columnFound) {
+                        columns.push([$item]); // Si aucun prérequis n'est trouvé, commence une nouvelle colonne
+                    }
+                }
+                
+            });
+
+            // Réorganiser les éléments dans le DOM
+            const container = html.find('.colonnecpt').empty(); // Clear the container
+
+            
+            columns.forEach(column => {
+                // Crée une nouvelle colonne
+                const columnDiv = $('<div>').addClass('column');
+                
+                column.forEach($item => {
+                    const prerequi = $item.data('prerequi');
+
+                    // Vérifie si l'élément doit prendre deux colonnes
+                    if (prerequi==isMetier) {
+                        const doubleColumnDiv = $('<div>').addClass('column double-column');
+                        doubleColumnDiv.append($item); // Ajouter l'élément dans une colonne double
+                        container.append(doubleColumnDiv); // Ajouter cette colonne double au conteneur
+
+                        // Si vous souhaitez que l'élément apparaisse également dans une colonne normale, décommentez la ligne suivante
+                        // columnDiv.append($item.clone());
+                    } else {
+                        columnDiv.append($item); // Ajouter l'élément à la colonne normale
+                    }
+                });
+
+                container.append(columnDiv); // Ajouter la colonne normale au conteneur
+            });*/
+
+         
+
+
+
+
+
+
+
+
+
+
+
+                        
         }else if(this.actor.type=="vehicule"){
             let type=this.actor.system.type;
             let tail=this.actor.system.taille;
@@ -734,6 +898,7 @@ import { range } from "./class/list.js";
     }
 
     _onItemEdit(event){
+        console.log('itemedit')
         const item = this.getItemFromEvent(event);
         item.sheet.render(true);
     }
@@ -2171,7 +2336,8 @@ import { range } from "./class/list.js";
                 name: name,
                 img: img,
                 type: 'level',
-                'system.description': system.description
+                'system.description': system.description,
+                'system.prerequi': system.prerequi
             }], { renderSheet: false });
             this.actor.update({'system.background.bonusmetierlvl': ""});
             // Faites quelque chose avec name, description, et img

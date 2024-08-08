@@ -117,13 +117,16 @@
 	                </select>
 	                <input type="button" value="Choisir" class="choixcpt bouton">
 					<ul class="level">
+						<h2 style="text-align:center">Liste Compétences</h2>
 						{{#each actor.level as |item id|}}
-			                <li class="item rexrow compte" data-item-id="{{item._id}}" style="background:url({{item.img}});background-size: contain;" title="{{item.name}} : {{item.system.description}}">
+			                <li class="item rexrow compte" data-item-id="{{item._id}}" style="background:url({{item.img}});background-size: contain;" title="{{item.name}} : {{item.system.description}}" data-name="{{item.name}}" data-prerequi="{{item.system.prerequi}}">
 		                        <a class="item-control item-edit" title="Edit Item" style="float: left;top: 35px;position: relative;"><i class="fas fa-edit"></i></a>
 		                        <a class="item-control item-delete" title="Delete Item" style="float: right;top: 35px;position: relative;"><i class="fas fa-trash"></i></a>
 			                </li>
 		                {{/each}}
-		    		</ul>		  
+		    		</ul>
+		    		<div class="colonnecpt">
+		    		</div>		  
 				</div>
 				<div class="etat">
 					{{#each actor.system.background.etat as |value etat|}}
