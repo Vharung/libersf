@@ -317,7 +317,10 @@ import { range } from "./class/list.js";
         /*Etat*/
         html.find('.action6').click(this._onCouv.bind(this));
         html.find('.chnget').click(this._onCouv.bind(this));
-        html.find('.vehichoix').click(this._onStatV.bind(this));
+        html.find('.vehichoix').click(() => {
+            this._onStatV();
+            this._newV();
+        });
         /*edition items*/
         
         html.find('.item-edit').click(this._onItemEdit.bind(this));
@@ -776,6 +779,16 @@ import { range } from "./class/list.js";
             const zone=[proue,tribord,poupe,babord];
             const zonename=['proue','tribord','poupe','babord'];
             const zonemax=[prouemax,tribordmax,poupemax,babordmax];
+            for (let i = 0; i < zone.length; i++) {
+                if (zone[i] > zonemax[i]) {
+                    zone[i] = zonemax[i];
+                    let updateData = {};
+                    updateData[`system.bouclier.${zonename[i]}.value`] = zonemax[i];
+                    this.actor.update(updateData);
+                }
+            }
+            let totalzone=parseInt(proue)+parseInt(babord)+parseInt(tribord)+parseInt(poupe);
+            html.find(".actbou").val(totalzone)
             if(dif<0){
                 html.find('.refbarmax').css({'color':'red'});
             }else if(dif>0){
@@ -783,14 +796,14 @@ import { range } from "./class/list.js";
             }else{
                 html.find('.refbarmax').css({'color':'#b1feff'});
             }
-            dif=bouc-(proue+babord+tribord+poupe);
+            /*dif=bouc-(proue+babord+tribord+poupe);
             if(dif<0){
                 html.find('.refbar').css({'color':'red'});
             }else if(dif>0){
                 html.find('.refbar').css({'color':'green'});
             }else{
                 html.find('.refbar').css({'color':'#b1feff'});
-            }
+            }*/
 
             for (var i = zone.length - 1; i >= 0; i--) {
                 let pc=zone[i]*100/zonemax[i]
@@ -802,12 +815,16 @@ import { range } from "./class/list.js";
 
                 let cssProperty = 'border-' + border;
                 if (pc < 30) {
+                    $('input.refbar[data-zone="' + zonename[i] + '"]').css({'color': '#a10001'});    
                     $('.vehicule').css({[cssProperty]: '#a10001 solid 5px'}); // rouge
                 } else if (pc < 60) {
+                    $('input.refbar[data-zone="' + zonename[i] + '"]').css({'color': '#c9984b'});
                     $('.vehicule').css({[cssProperty]: '#c9984b solid 5px'}); // orange
                 } else if (pc < 90) {
+                    $('input.refbar[data-zone="' + zonename[i] + '"]').css({'color': '#00ab28'});
                     $('.vehicule').css({[cssProperty]: '#00ab28 solid 5px'}); // couleur 3
                 } else {
+                    $('input.refbar[data-zone="' + zonename[i] + '"]').css({'color': '#00abab'});
                     $('.vehicule').css({[cssProperty]: '#00abab solid 5px'}); // couleur 4
                 }   
             }
@@ -2070,7 +2087,14 @@ import { range } from "./class/list.js";
         };
         return context;
     }
-    
+    _newV(event){
+        let armure=this.actor.system.stat.armure.max;
+        let moteur=this.actor.system.stat.moteur.max;
+        let protections=this.actor.system.stat.protections.max;
+        let encombrement=this.actor.system.stat.encombrement.max;
+        let bouclier=parseInt(protections)/4;
+        this.actor.update({"system.stat.armure.value":armure,"system.stat.moteur.value":moteur,"system.stat.protections.value":protections,"system.stat.encombrement.value":encombrement,"system.bouclier.babord.value":bouclier,"system.bouclier.babord.max":bouclier,"system.bouclier.tribord.value":bouclier,"system.bouclier.tribord.max":bouclier,"system.bouclier.poupe.value":bouclier,"system.bouclier.poupe.max":bouclier,"system.bouclier.proue.value":bouclier,"system.bouclier.proue.max":bouclier,})
+    }
     _onNrj(event) {
         let classList = event.target.classList;
         let classes = Array.from(classList);
@@ -2303,14 +2327,12 @@ import { range } from "./class/list.js";
                 description: item.system.description 
             });
         }
-        console.log(acc)
         return acc;
     }
 
     async _ajoutcompt(event) {
         // Récupérer la valeur de 'name' à partir de l'événement ou d'une autre source
         const name = this.actor.system.background.bonusmetierlvl;
-        console.log(name)
         // Rechercher l'élément dans le pack 'libersf.competences'
         const pack = game.packs.get('libersf.competences');
         if (!pack) {

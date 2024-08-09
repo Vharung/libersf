@@ -36,22 +36,12 @@
 			<div class="life">
 				<input class="hp" name="system.stat.hp.value" type="text" value="{{actor.system.stat.hp.value}}" placeholder="10"/><span style="display: inline-block;">/</span><input class="hpmax" name="system.stat.hp.max" type="text" value="{{actor.system.stat.hp.max}}" placeholder="10"/>
 			</div>
-			<div class="magie">
-				<input class="psy andromede" name="system.psy.value" type="text" value="{{actor.system.magie}}" placeholder="10"/><span class="andromede">/</span><input class="psymax andromede" name="system.psy.max" type="text" value="{{actor.system.psy.max}}" placeholder="10" readonly />
+			<div class="seul">
+				<input class="solit" name="system.stat.solit" type="text" value="{{actor.system.stat.solit}}" title="{{localize 'libersf.solitude'}}" placeholder="0"/>
 			</div>
 			<div class="armcl"><input class="actarm" name="system.stat.armure.value" type="text" value="{{actor.system.stat.armure.value}}" placeholder="0"/><span>/</span><input class="actarmmax" name="system.stat.armure.max" type="text" value="{{actor.system.stat.armure.max}}" placeholder="0" readonly/></div>
 			<div class="boucl"><input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0"/><span>/</span><input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0" readonly/></div>
 			<span class="update">↺</span>
-		</div>
-		<div class="points bonus marge">
-			<h3>Points</h3>
-			<div class="equipe">
-				<input class="team" name="system.stat.team" type="text" value="{{actor.system.stat.team}}" title="{{localize 'libersf.team'}}" placeholder="0"/>
-			</div>
-			<div class="seul">
-				<input class="solit" name="system.stat.solit" type="text" value="{{actor.system.stat.solit}}" title="{{localize 'libersf.solitude'}}" placeholder="0"/>
-			</div>
-			
 		</div>
 		
 	</div>
@@ -70,7 +60,7 @@
 				<div class="action6" title="{{localize 'libersf.couver'}}" data-lettre="14"></div>
 				<div class="clear"></div>
 				
-				<div class="histoires marge">
+				<div class="histoires marge" style="width:618px">
 					<h3>{{localize 'libersf.histoire'}}</h3>
 					<textarea class="histoire" name="system.background.histoire">{{actor.system.background.histoire}}</textarea>
 				</div>

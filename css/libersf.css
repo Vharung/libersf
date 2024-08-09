@@ -297,7 +297,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .planet{height: 120px}
 .Liber .full{margin-top: 10px;width: 624px}
 .Liber .full h3{margin-top: 10px;width: 624px}
-.Liber .full .histoire{width: 608px;height: 360px}
+.Liber .full .histoire{width: 612px;height: 360px}
 .Liber .full .genererp{float: right;padding-right: 10px}
 .Liber .rond img{margin: -14px;max-width: 320px;}
 .Liber .compt26{display: none}
@@ -320,9 +320,10 @@ textarea{color:var(--couleur-clair)}
 .Liber .double-column { flex: 2;}*/
 .Liber ul.level{height: 24px;transition: 1s;display: block;overflow: hidden;border-bottom: 1px solid var(--couleur-bleu);}
 .Liber ul.level:hover{height: 200px}
+.Liber .colonnecpt {margin-left: 28px}
 .Liber .colonnecpt ul {list-style-type: none;padding: 0;margin: 0; display:block;background: none}
 .Liber .colonnecpt span {width: 45px; height: 45px; display: block;margin: 0 auto;}
-.Liber .colonnecpt ul li{width:420px;display: inline-block;margin: 10px 0;}
+.Liber .colonnecpt ul li{width:390px;display: inline-block;margin: 10px 0;}
 .Liber .colonnecpt ul ul li{width:130px}
 .Liber .colonnecpt ul ul ul li{width:55px}
 

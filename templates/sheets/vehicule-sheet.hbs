@@ -30,7 +30,7 @@
 			<h3>{{localize 'libersf.sante'}}</h3>
 			<div class="armcl"><input class="actarm" name="system.stat.armure.value" type="text" value="{{actor.system.stat.armure.value}}" placeholder="0"/><span>/</span>
 			<input class="actarmmax" name="system.stat.armure.max" type="text" value="{{actor.system.stat.armure.max}}" placeholder="0" readonly/></div>
-			<div class="boucl"><input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0"/><span>/</span>
+			<div class="boucl"><input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0" readonly/><span>/</span>
 			<input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0" readonly/></div>
 			<span class="update">↺</span>
 		</div>
@@ -297,8 +297,8 @@
 			            </div>
 			            <div class="grid-2col">
 							<h2>{{localize 'libersf.usage'}}</h2>
-							<select class="usage" size="1" name="system.nomcomp">
-								{{selectOptions listValues.usage selected=actor.system.nomcomp labelAttr="label" localize=true blank="libersf.none"}}
+							<select class="usage" size="1" name="system.usage">
+								{{selectOptions listValues.usage selected=actor.system.usage labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 			            </div>
 						<div class="grid-2col">
@@ -331,7 +331,9 @@
 								{{selectOptions listValues.blindage selected=actor.system.model.blindage.nb labelAttr="label" localize=true blank="libersf.none"}}
 			                </select>
 						</div>
-						<div class="grid-2col">   
+						<div class="grid-2col">  
+							<h2>{{localize 'libersf.comp'}}</h2>
+		                	<input type="text" name="system.nomcomp" value="{{actor.system.nomcomp}}" placeholder="{{localize 'libersf.comp'}}" style="height: 42px;"> 
 							<h2>{{localize 'libersf.valid'}}</h2>             
 		                	<input class="bouton vehichoix" type="a" value="{{localize 'libersf.choisir'}}">
 		                </div>
