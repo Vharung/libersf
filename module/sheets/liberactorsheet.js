@@ -164,7 +164,7 @@ import { range } from "./class/list.js";
             };
             
         }
-        if (["personnage", "pnj"].includes(this.actor.type)) {
+        if (["personnage", "pnj", "monstre"].includes(this.actor.type)) {
             this._onEncom(context);  
         }
         if(this.actor.type == "vehicule"){
@@ -618,87 +618,7 @@ import { range } from "./class/list.js";
 
             // Insérer le HTML dans un élément de la page
             let container2 = createTreeHTML(arbo); // Utilisez 'arbo' ici
-            html.find('.colonnecpt').html(container2)
-
-            // Arborescence compétence
-            /*const items = html.find('ul.level li');
-            const columns = [];
-            const itemMap = new Map();
-            const isMetier =html.find('.metier').val();
-
-            // Créer une map des items par leur nom
-            items.each(function(index, item) {
-                const $item = $(item);
-                const name = $item.data('name');
-                itemMap.set(name, $item);
-            });
-
-            // Organiser les items par colonnes en fonction de leurs prérequis
-            items.each(function(index, item) {
-                const $item = $(item);
-                const prerequi = $item.data('prerequi');
-                if(prerequi==isMetier){
-
-                }
-                if (!prerequi) {
-                    columns.push([$item]); // Commence une nouvelle colonne
-                } else {
-                    let columnFound = false;
-                    for (let column of columns) {
-                        const lastItem = column[column.length - 1];
-                        if (lastItem.data('name') === prerequi) {
-                            column.push($item); // Ajoute à la colonne existante
-                            columnFound = true;
-                            break;
-                        }
-                    }
-                    if (!columnFound) {
-                        columns.push([$item]); // Si aucun prérequis n'est trouvé, commence une nouvelle colonne
-                    }
-                }
-                
-            });
-
-            // Réorganiser les éléments dans le DOM
-            const container = html.find('.colonnecpt').empty(); // Clear the container
-
-            
-            columns.forEach(column => {
-                // Crée une nouvelle colonne
-                const columnDiv = $('<div>').addClass('column');
-                
-                column.forEach($item => {
-                    const prerequi = $item.data('prerequi');
-
-                    // Vérifie si l'élément doit prendre deux colonnes
-                    if (prerequi==isMetier) {
-                        const doubleColumnDiv = $('<div>').addClass('column double-column');
-                        doubleColumnDiv.append($item); // Ajouter l'élément dans une colonne double
-                        container.append(doubleColumnDiv); // Ajouter cette colonne double au conteneur
-
-                        // Si vous souhaitez que l'élément apparaisse également dans une colonne normale, décommentez la ligne suivante
-                        // columnDiv.append($item.clone());
-                    } else {
-                        columnDiv.append($item); // Ajouter l'élément à la colonne normale
-                    }
-                });
-
-                container.append(columnDiv); // Ajouter la colonne normale au conteneur
-            });*/
-
-         
-
-
-
-
-
-
-
-
-
-
-
-                        
+            html.find('.colonnecpt').html(container2)           
         }else if(this.actor.type=="vehicule"){
             let type=this.actor.system.type;
             let tail=this.actor.system.taille;
@@ -796,15 +716,6 @@ import { range } from "./class/list.js";
             }else{
                 html.find('.refbarmax').css({'color':'#b1feff'});
             }
-            /*dif=bouc-(proue+babord+tribord+poupe);
-            if(dif<0){
-                html.find('.refbar').css({'color':'red'});
-            }else if(dif>0){
-                html.find('.refbar').css({'color':'green'});
-            }else{
-                html.find('.refbar').css({'color':'#b1feff'});
-            }*/
-
             for (var i = zone.length - 1; i >= 0; i--) {
                 let pc=zone[i]*100/zonemax[i]
                 let border = '';
@@ -1022,41 +933,40 @@ import { range } from "./class/list.js";
         }
         let avantage="";
         let invonven="";
-        if(mutant==game.i18n.localize('libersf.oui')){
-             if(race==game.i18n.localize('libersf.humain')){
+        if(mutant=='o'){
+            if(race=='r0'){
             avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J1')+"</p>";
             invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J2')+"</p>";
             }
-            else if(race==game.i18n.localize('libersf.pleiadiens')){
+            else if(race=='r1'){
                 avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J3')+"</p>";
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J4')+"</p>";
             }
-            else if(race==game.i18n.localize('libersf.artu')){
+            else if(race=='r2'){
                 avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J5')+"</p>";
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J6')+"</p>";
             }
-            else if(race==game.i18n.localize('libersf.yor')){
+            else if(race=='r3'){
                 avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J7')+"</p>";
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J8')+"</p>";
             }
-            else if(race==game.i18n.localize('libersf.dragon2')){
+            else if(race=='r4'){
                 avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J9')+""
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J10')+"</p>";
             }
-            else if(race==game.i18n.localize('libersf.elf')){
+            else if(race=='r5'){
                 avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J11')+"</p>";
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J12')+"</p>";
             }
-            else if(race==game.i18n.localize('libersf.machine')){
+            else if(race=='r6'){
                 avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J13')+"</p>";
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J14')+"</p>";
             }
-            else if(race==game.i18n.localize('libersf.orqu')){
+            else if(race=='r7'){
                 avantage="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J15')+"</p>";
                 invonven="<h2 style='text-align:center'>"+game.i18n.localize('libersf.muta')+"</h2><p>"+game.i18n.localize('libersf.J16')+"</p>";
             }
         }
-
         let r = await new Roll('1d100').evaluate();
         let retour = r.result;
         var deg='';
@@ -1250,7 +1160,7 @@ import { range } from "./class/list.js";
                             <option value="As">Assomante</option>
                             <option value="A">Automatique</option>
                             <option value="C">Continu</option>
-                            <option value="CC">Coup par coup</option>
+                            <option value="CC" selected>Coup par coup</option>
                             <option value="D">Dispersion</option>
                             <option value="L">Lourd</option>
                             <option value="H">Hors map</option>
@@ -1384,19 +1294,6 @@ import { range } from "./class/list.js";
 
     _onStory2(){
         var age = Math.floor((Math.random() * 34) + 16);
-        /*const items0 = [game.i18n.localize("libersf.surUnePlaneteDuSecteurDe"),game.i18n.localize("libersf.sur")];
-        const items1 = [game.i18n.localize("libersf.end125"),game.i18n.localize("libersf.proxima"),game.i18n.localize("libersf.atarus"),game.i18n.localize("libersf.sebos"),game.i18n.localize("libersf.zx52"),game.i18n.localize("libersf.dx128"),game.i18n.localize("libersf.rof89"),game.i18n.localize("libersf.hd720p"),game.i18n.localize("libersf.quenza"),game.i18n.localize("libersf.sigma"),game.i18n.localize("libersf.tk86"),game.i18n.localize("libersf.talouine"),game.i18n.localize("libersf.turka"),game.i18n.localize("libersf.rota"),game.i18n.localize("libersf.imperator"),game.i18n.localize("libersf.reset"),game.i18n.localize("libersf.creab"),game.i18n.localize("libersf.ab"),game.i18n.localize("libersf.th5"),game.i18n.localize("libersf.r852"),game.i18n.localize("libersf.natura"),game.i18n.localize("libersf.f10x"),game.i18n.localize("libersf.tella"),game.i18n.localize("libersf.olympus"),game.i18n.localize("libersf.iron"),game.i18n.localize("libersf.zeus"),game.i18n.localize("libersf.athena"),game.i18n.localize("libersf.gaia"),game.i18n.localize("libersf.apollon"),game.i18n.localize("libersf.gallus"),game.i18n.localize("libersf.mip"),game.i18n.localize("libersf.elysee"),game.i18n.localize("libersf.grandeNebuleuse"),game.i18n.localize("libersf.tartare"),game.i18n.localize("libersf.alexandrie"),game.i18n.localize("libersf.maxima"),game.i18n.localize("libersf.p74r"),game.i18n.localize("libersf.centaurus"),game.i18n.localize("libersf.nouvelleTerre"),game.i18n.localize("libersf.end128"),game.i18n.localize("libersf.terre"),game.i18n.localize("libersf.hatp1b"),game.i18n.localize("libersf.valhala"),game.i18n.localize("libersf.mysterious")];
-        const items2 = [game.i18n.localize("libersf.taVilleSeFaitAttaque"),game.i18n.localize("libersf.tuEsAffecteAMissionImportantePourTaFaction"),game.i18n.localize("libersf.unProcheMeurtAssassine"),game.i18n.localize("libersf.tuQuittesTaPlanetePourVoyagerEtDecouvrirLeMonde"),game.i18n.localize("libersf.desContrebandiersTEntraineDansLeursMagouilles"),game.i18n.localize("libersf.tuTeFaisCapturerParUneFactionEnnemi"),game.i18n.localize("libersf.tuEsRecruteParUnEtrangePersonnagePourMission"),game.i18n.localize("libersf.unAmiProcheSeFaitEnlever"),game.i18n.localize("libersf.tonPereMeurtDurantBataille"),game.i18n.localize("libersf.tuTeFaisKidnapperParUnInconnu"),game.i18n.localize("libersf.tuEsPorteDisparuDurantBataille"),game.i18n.localize("libersf.tuEsVictimeTentativeAssassinat"),game.i18n.localize("libersf.durantAccidentTuPerdsMemoire"),game.i18n.localize("libersf.tonFrereADisparu"),game.i18n.localize("libersf.tonHamsterTeConfieMission")];
-        const items3 = [game.i18n.localize("libersf.deRamenerPaixAuSeinDeGalaxie"),game.i18n.localize("libersf.deRechercherMoyenQueTonNomResteDansMemoires"),game.i18n.localize("libersf.deTuerPersonnesQuiSontResponsablesDeTesMalheurs"),game.i18n.localize("libersf.deSauverMondeRongerParGuerre"),game.i18n.localize("libersf.dAneantirPersonnesQueTuJugeTropFaible"),game.i18n.localize("libersf.dePartirEnQueteDAventure"),game.i18n.localize("libersf.deTeVengerDuMalQuiTaEteFait"),game.i18n.localize("libersf.dePartirEnQueteDeSavoir"),game.i18n.localize("libersf.dePartirTEnrichir"),game.i18n.localize("libersf.deDevenirPlusFort"),game.i18n.localize("libersf.deRechercherAmour"),game.i18n.localize("libersf.deDevenirConnu"),game.i18n.localize("libersf.dEnqueterSurEvenementsEtranges"),game.i18n.localize("libersf.dAttraperTousPokemons")];
-        const items4 = [game.i18n.localize("libersf.fascineParCultureAutresRaces"),game.i18n.localize("libersf.animeParSoifConnaissance"),game.i18n.localize("libersf.expertDansTonDomaine"),game.i18n.localize("libersf.parAmourPropre"),game.i18n.localize("libersf.pourFuirTonDestin"),game.i18n.localize("libersf.apresAvoirLonguementReflechit"),game.i18n.localize("libersf.parAmour"),game.i18n.localize("libersf.parEnvie"),game.i18n.localize("libersf.parVengeance"),game.i18n.localize("libersf.parNecessite"),game.i18n.localize("libersf.parJalousie"),game.i18n.localize("libersf.parCuriosite"),game.i18n.localize("libersf.parChoix"),game.i18n.localize("libersf.apresTragiqueEvenement"),game.i18n.localize("libersf.parColere"),game.i18n.localize("libersf.parHasard")];
-
-        let secteur=items0[Math.floor(Math.random()*items0.length)];
-        let planete = items1[Math.floor(Math.random()*items1.length)];
-        let evenement=items2[Math.floor(Math.random()*items2.length)];
-        let tonchoix=items4[Math.floor(Math.random()*items2.length)];
-        let motivation  = items3[Math.floor(Math.random()*items3.length)];
-        let textgen =game.i18n.localize("libersf.age")+age+game.i18n.localize("libersf.vie")+secteur+" "+planete+game.i18n.localize("libersf.jour")+evenement+", "+motivation+game.i18n.localize("libersf.decide")+tonchoix+".";
-        return textgen;*/
         const stages = [
             game.i18n.localize("libersf.code111"),
             game.i18n.localize("libersf.code112"),
@@ -1598,10 +1495,8 @@ import { range } from "./class/list.js";
             metier="10 "+game.i18n.localize("libersf.meca");
         }else if(metierliste=="m10"){
             metier="10 "+game.i18n.localize("libersf.scie");
-        }else if(metierliste=="m11"){
-            metier="10 "+game.i18n.localize("libersf.magie");
         }else if(metierliste=="m12"){
-            metier="10 "+game.i18n.localize("libersf.force");
+            metier="10 "+game.i18n.localize("Force");
         }
         let storyValues= await this._onStory();
         let story2= await this._onStory2();
@@ -1904,8 +1799,6 @@ import { range } from "./class/list.js";
                 }
             }
         }
-
-        /*this.actor.update({"system.attributs.Agilité":cpt[0],"system.attributs.Artisanat":cpt[1],"system.attributs.Balistique":cpt[2],"system.attributs.Combat":cpt[3],"system.attributs.ConGén":cpt[4],"system.attributs.ConSpécif":cpt[5],"system.attributs.Dextérité":cpt[6],"system.attributs.Diplomatie":cpt[7],"system.attributs.Discrétion":cpt[8],"system.attributs.Force":cpt[9],"system.attributs.Investigation":cpt[10],"system.attributs.Jeu":cpt[11],"system.attributs.Mécanique":cpt[12],"system.attributs.Médecine":cpt[13],"system.attributs.Natation":cpt[14],"system.attributs.Navigation":cpt[15],"system.attributs.Négociation":cpt[16],"system.attributs.Perception":cpt[17],"system.attributs.Pilotage":cpt[18],"system.attributs.Piratage":cpt[19],"system.attributs.Pistage":cpt[20],"system.attributs.Religion":cpt[21],"system.attributs.Science":cpt[22],"system.attributs.Survie":cpt[23],"system.attributs.Tir":cpt[24],"system.attributs.Visée":cpt[25],"system.attributs.magie":cpt[26],"system.background.etat.a":active[0],"system.background.etat.b":active[1],"system.background.etat.c":active[2],"system.background.etat.d":active[3],"system.background.etat.e":active[4],"system.background.etat.f":active[5],"system.background.etat.g":active[6],"system.background.etat.h":active[7],"system.background.etat.i":active[8],"system.background.etat.j":active[9],"system.background.etat.k":active[10],"system.background.etat.l":active[11],"system.background.etat.m":active[12],"system.background.etat.n":active[14]}); */
         let context = {
             "system.attributs.Agilité": cpt[0],
             "system.attributs.Artisanat": cpt[1],
@@ -2290,11 +2183,15 @@ import { range } from "./class/list.js";
             "m9": "Technicien",
             "m12": "Combattant"
         };
+        /*const packs = game.packs.get('libersf.planete');
+        const table = await packs.getDocuments();
+        console.log(table)*/
         // Trouver le nom du métier correspondant
         const namemetier = metierMap[metier] || "";
 
         // Vérification du pack et récupération des documents
         const pack = game.packs.get('libersf.competences');
+        
         if (!pack) {
             console.error("Le pack 'libersf.competences' est introuvable.");
             return;
@@ -2368,8 +2265,3 @@ import { range } from "./class/list.js";
         }
     }
 }
-
-/*a faire
-- véhicule
-- montant en crédit des objets
-*/

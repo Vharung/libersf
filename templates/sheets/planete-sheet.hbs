@@ -11,10 +11,8 @@
             <select class="model" size="1" name="system.domination">
                 {{selectOptions listValues.faction selected=actor.system.domination labelAttr="label" localize=true blank="libersf.none"}}
             </select>
-            <span>{{localize 'libersf.arme'}}</span>
-            <select class="model" size="1" name="system.niveau_arme">
-                {{selectOptions listValues.niveau selected=actor.system.niveau_arme labelAttr="label" localize=true blank="libersf.none"}}
-            </select>
+            <span>{{localize 'libersf.pop'}}</span>
+            <input class="popu" name="system.niveau_pop" type="text" value="{{actor.system.niveau_pop}}" placeholder="Population"/>
             <span>{{localize 'libersf.crime'}}</span>
             <select class="model" size="1" name="system.niveau_crime">
                 {{selectOptions listValues.niveau selected=actor.system.niveau_crime labelAttr="label" localize=true blank="libersf.none"}}
@@ -35,36 +33,30 @@
         <textarea class="ville" name="system.ressource">{{actor.system.ressource}}</textarea>
         <h2 class="marge">{{localize 'libersf.pop'}}</h2>
         <div class="info">
-            {{#each config.raceTypes as |race|}}
-                <span>{{localize race}}</span>
-                <input name="{{lookup system (concat 'pop_' race)}}" type="text" value="{{lookup actor.system (concat 'pop_' race)}}" placeholder="{{localize race}}"/>
+            {{#each actor.system.pop as |value pop|}}
+                <span>{{pop}}</span>
+                <input name="system.pop.{{pop}}" type="text" value="{{value}}" placeholder="{{pop}}"/>
             {{/each}}
             
         </div>
         <div class="clear"></div>
-        <div class="points marge planet space">
-            <h3>{{localize 'libersf.sante'}}</h3>
-            <div class="life">
-                <input class="hp" name="system.stat.hp.value" type="text" value="{{actor.system.stat.hp.value}}" placeholder="10"/><span style="display: inline-block;">/</span><input class="hpmax" name="system.stat.hp.max" type="text" value="{{actor.system.stat.hp.max}}" placeholder="10"/>
-            </div>
-            <div class="boucl"><input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0"/><span>/</span>
-            <input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0" readonly/></div>
-            <span class="update">↺</span>
-        </div>
     </div>
     <div class="col32">
+        <div class="life life2">
+            <input class="hp" name="system.stat.hp.value" type="text" value="{{actor.system.stat.hp.value}}" placeholder="10"/><span style="display: inline-block;">/</span><input class="hpmax" name="system.stat.hp.max" type="text" value="{{actor.system.stat.hp.max}}" placeholder="10"/>
+        </div>
         <div class="rond">
             <div class="scan3"></div>
             <div class="danger">
                 <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
             </div>
         </div>
+        <div class="boucl boucl2"><input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0"/><span>/</span>
+            <input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0"/></div>
         <div class="full">
             <h3>{{localize 'libersf.histoire'}}</h3>
             <div class="zoneinfo">
-
                 <textarea class="histoire" name="system.background.histoire">{{actor.system.background.histoire}}</textarea>
-                <a class="genererp">{{localize 'libersf.aleatoire'}}</a>
             </div>
         </div>
     </div>

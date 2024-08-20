@@ -200,18 +200,20 @@
             "domination":"",
             "pouplation":"",
             "description": "",
-            "niveau_arme":"",
-            "niveau_crime":"", 
-            "niveau_secu":"", 
-            "niveau_tech":"", 
-            "pop_humain":"",
-            "pop_arthuriens":"",
-            "pop_draconiens":"",
-            "pop_machine":"",
-            "pop_pleiadiens":"",
-            "pop_yoribiens":"",
-            "pop_elfen":"",
-            "pop_orquanien":""
+            "niveau_crime":"☆ ☆ ☆ ☆ ☆", 
+            "niveau_secu":"☆ ☆ ☆ ☆ ☆", 
+            "niveau_tech":"☆ ☆ ☆ ☆ ☆", 
+            "pop":{
+                "Humain":"☆ ☆ ☆ ☆ ☆",
+                "Arthurien":"☆ ☆ ☆ ☆ ☆",
+                "Draconien":"☆ ☆ ☆ ☆ ☆",
+                "Machine":"☆ ☆ ☆ ☆ ☆",
+                "Pleiadien":"☆ ☆ ☆ ☆ ☆",
+                "Yoribien":"☆ ☆ ☆ ☆ ☆",
+                "Elfen":"☆ ☆ ☆ ☆ ☆",
+                "Orquanien":"☆ ☆ ☆ ☆ ☆"
+            }
+            
         }
 
         

@@ -2,9 +2,9 @@
 	{{!-- Sheet Header --}}
 	{{!-- Sheet Tab Navigation --}}
 	<nav class="sheet-tabs tabs navlib" data-group="primary">
-		<a class="item bg active" data-tab="bg" title="{{localize 'libersf.histoire'}}"><span></span></a>
+		<a class="item bg" data-tab="bg" title="{{localize 'libersf.histoire'}}"><span></span></a>
 		<a class="item inven" data-tab="items" title="{{localize 'libersf.inv'}}"><span></span></a>
-		<a class="item compe " data-tab="features" title="{{localize 'libersf.cpt'}}"><span></span></a>
+		<a class="item compe active" data-tab="features" title="{{localize 'libersf.cpt'}}"><span></span></a>
 		<a class="item magi andromede" data-tab="magie" title="{{localize 'libersf.magie'}}"><span></span></a>
 		<a class="item outil" data-tab="lab" title="⚙"><span></span></a>
 	</nav>
@@ -20,15 +20,15 @@
 		</div>
 		<h2>{{localize 'libersf.info'}}</h2>
 		<div class="info">
-			<span>{{localize 'libersf.race'}}</span><input class="race" type="text" value="{{actor.system.background.race}}" placeholder="{{localize 'libersf.race'}}" readonly />
-			<span>{{localize 'libersf.metier'}}</span><input class="metier" type="text" value="{{actor.system.background.metier}}" placeholder="{{localize 'libersf.metier'}}" readonly />
-			<span>{{localize 'libersf.faction'}}</span><input class="faction" type="text" value="{{actor.system.background.religion}}" placeholder="{{localize 'libersf.faction'}}" readonly />
+			<span>{{localize 'libersf.race'}}</span><input class="race" name="system.background.race" type="text" value="{{actor.system.background.race}}" placeholder="{{localize 'libersf.race'}}"  />
+			<span>Attitude</span><input class="metier" type="text" name="system.background.metier" value="{{actor.system.background.metier}}" placeholder="{{localize 'libersf.metier'}}"  />
+			<span>Taille</span><input class="faction" type="text" name="system.background.religion" value="{{actor.system.background.religion}}" placeholder="{{localize 'libersf.faction'}}"  />
 		</div>
 		<div class="clear"></div>
 		<h2 class="marge">Bonus</h2>
 		<div class="info">
 			<input class="bonusrace" title="{{actor.system.background.bonusrace}}" name="system.background.bonusrace" type="text" value="{{actor.system.background.bonusrace}}" placeholder="{{localize 'libersf.bonus'}}"/>
-			<input class="bonusmetier" title="{{actor.system.background.bonusmetier}}" name="system.background.bonusmetier" type="text" value="{{actor.system.background.bonusmetier}}" placeholder="{{localize 'libersf.bonus'}}" readonly />
+			<input class="bonusmetier" title="{{actor.system.background.bonusmetier}}" name="system.background.bonusmetier" type="text" value="{{actor.system.background.bonusmetier}}" placeholder="{{localize 'libersf.bonus'}}" />
 		</div>
 		<div class="clear"></div>
 		<div class="points marge  vie">
@@ -43,7 +43,14 @@
 			<div class="boucl"><input class="actbou" name="system.stat.protections.value" type="text" value="{{actor.system.stat.protections.value}}" placeholder="0"/><span>/</span><input  class="actboumax" name="system.stat.protections.max" type="text" value="{{actor.system.stat.protections.max}}" placeholder="0" readonly/></div>
 			<span class="update">↺</span>
 		</div>
-		
+		<div class="equipement marge">
+			<h3>{{localize 'libersf.equipement'}}</h3>
+			<a class="icongun jetdedes" data-name="Tir"></a><input  class="armed" name="system.armed" type="text" value="{{actor.system.armed}}" title="{{actor.system.armed}}" placeholder="Arme" readonly="" /><input  class="degatd" name="system.degatd" value="{{actor.system.degatd}}" readonly="" style="display: none;"/><a class="desequi" data-genre="arme">🗑</a>
+			<span class="iconcha"></span><input  class="charged" name="system.charged" type="text" value="{{actor.system.charged}}" title="{{actor.system.charged}}" placeholder="Chargeur" readonly="" /><a class="desequi" data-genre="chargeur">🗑</a>			
+			<span class="iconarm"></span><input  class="armurequi" name="system.prog" type="text" value="{{actor.system.prog}}" title="{{actor.system.prog}}" placeholder="Armure" readonly="" /><a class="desequi" data-genre="armure">🗑</a>
+			<span class="iconbou"></span><input  class="bouclierqui" name="system.prod" type="text" value="{{actor.system.prod}}"  title="{{actor.system.prod}}" placeholder="Bouclier" readonly="" /><a class="desequi" data-genre="bouclier">🗑</a>
+			<span class="iconaut"></span><input  class="autrequi" name="system.autre" type="text" value="{{actor.system.autre}}" title="{{actor.system.autre}}" placeholder="Autre" readonly="" /><a class="desequi" data-genre="autre">🗑</a>
+		</div>
 	</div>
 	<div class="col4">
 		{{!-- Sheet Body --}}

@@ -154,18 +154,17 @@
 		                <li class="item rexrow" data-item-id="{{item._id}}">
 		                    <div class="item-qty">{{item.system.quantite}}</div>
 		                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
-		                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
+		                    <div class="item-name arme-name" title="{{item.name}}">{{item.name}}</div>
+				            <div class="item-dommage" title="{{item.system.degats}} / {{item.system.portee}} m">{{item.system.degats}}</div>
+				            <div class="item-portee">{{item.system.portee}} m</div>
+		                    <div class="item-techno">{{item.system.techno}}</div>
 		                    <div class="zonecontrole">
 		                    	<div class="cache">
 				                	<div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
-				                    <div class="item-portee">{{item.system.portee}}</div>
-				                    <div class="item-dommage">{{item.system.degats}}</div>
-				                    <div class="item-poid">{{item.system.poids}}</div>
-				                    <div class="item-valeurs">{{item.system.valeur}}</div>
 				                </div>		                    
 		                    	<div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
 			                    <div class="item-controls">
-			                    	<div class="item-techno">{{item.system.techno}}</div>
+			                    	<div class="item-poid">{{item.system.poids}} Kg</div><div class="item-valeurs">{{item.system.valeur}} Cr</div>
 			                    	<span class="item-equip" title="{{localize 'libersf.arme'}}" genre="arme" name="{{item.name}}" data-genre="arme" data-name="{{item.name}}" data-degat="{{item.system.degats}}" data-type="{{item.system.type}}" data-etoile="{{item.system.techno}}">+</span>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -182,17 +181,18 @@
 		                    <div class="item-qty">{{item.system.quantite}}</div>
 		                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
 		                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
+		                    <div class="item-techno">{{item.system.techno}}</div>
 		                    <div class="zonecontrole">
 		                    	<div class="cache">
 				                    <div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
 				                    <div class="item-resitance">{{item.system.resitance}}</div>
 				                    <div class="item-hpmax">{{item.system.hp.max}}</div>
-				                    <div class="item-poid">{{item.system.poids}}</div>
-				                    <div class="item-valeurs">{{item.system.valeur}}</div>
+				                    
+				                    
 				                </div>
 			                    <div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
 			                    <div class="item-controls">
-			                    	<div class="item-techno">{{item.system.techno}}</div>
+			                    	<div class="item-poid">{{item.system.poids}} Kg</div><div class="item-valeurs">{{item.system.valeur}} Cr</div>
 			                    	<span class="item-equip" title="{{localize 'libersf.armure'}}" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}"  data-name="{{item.name}}" data-hpmax="{{item.system.hp.max}}" data-hp="{{item.system.resitance}}">+</span>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -208,15 +208,15 @@
 		                    <div class="item-qty">{{item.system.quantite}}</div>
 		                    <div class="item-image"><img src="{{item.img}}" title="{{item.name}}"/></div>
 		                    <div class="item-name" title="{{item.name}}">{{item.name}}</div>
+		                    <div class="item-techno">{{item.system.techno}}</div>
 		                    <div class="zonecontrole">
 		                    	<div class="cache">
 			                    	<div class="item-genre" title="{{item.system.genre}}">{{item.system.genre}}</div>
-				                    <div class="item-poid">{{item.system.poids}}</div>
-				                    <div class="item-valeurs">{{item.system.valeur}}</div>
-				                    <div class="item-techno">{{item.system.techno}}</div>
+				                    
 				                </div>
 			                    <div class="item-description" title="{{item.system.description}}">{{item.system.description}}</div>
 			                    <div class="item-controls">
+			                    	<div class="item-poid">{{item.system.poids}} Kg</div><div class="item-valeurs">{{item.system.valeur}} Cr</div>
 			                    	<span class="item-equip" title="{{localize 'libersf.chargeur'}}" genre="{{item.system.genre}}" name="{{item.name}}" data-name="{{item.name}}" data-genre="{{item.system.genre}}">+</span>
 			                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
 			                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

@@ -108,8 +108,12 @@ textarea{color:var(--couleur-clair)}
 .Liber .marge,.Liber h2.marge{margin-top:5px}
 .Liber .spe {height: 150px;resize: none;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
 .Liber .histoire{resize: none;width:414px;height: 262px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
-.Liber .points div{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-or);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-or)}
-.Liber .points input{display: inline-block;width: 25px;color: var(--couleur-or);margin: 18px auto;text-align: center;}
+.Liber .points div,.Liber .life2,.Liber .boucl2{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-or);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-or)}
+.Liber .points input,.Liber .life2 input,.Liber .boucl2 input{display: inline-block;width: 25px;color: var(--couleur-or);margin: 18px auto;text-align: center;}
+.Liber .life2,.Liber .boucl2{width: 140px;height: 140px;padding-top: 35px}
+.Liber .life2 input,.Liber .boucl2 input{width: 60px;margin: 0;width: 130px}
+.Liber .life2{position: absolute;left: 0;top: 0;}
+.Liber .boucl2{position: absolute;right: 0;top: 0;}
 .Liber .equipe{background: url(dark-squad.png) no-repeat center center; background-size: cover;}
 .Liber .seul{background: url(one-eyed.png) no-repeat center center; background-size: cover;}
 .Liber .armcl{background: url(chest-armor.png) no-repeat center center; background-size: cover;}
@@ -153,7 +157,8 @@ textarea{color:var(--couleur-clair)}
 .Liber .caract input {color:var(--couleur-clair);font-size: 0.8em}
 .Liber .caract span {color:var(--couleur-bleu);text-transform: uppercase;text-align: center; border-bottom: 1px solid var(--couleur-bleu); width: 100%;display: block;font-size: 0.8em;}
 .Liber .item-image,.Liber .item-image img, .Liber .item-qty, .Liber .item-name{display: inline-block;height: 20px;vertical-align: middle;}
-.Liber .item-name{width: 355px;overflow: hidden;}
+.Liber .item-name{width: 290px;overflow: hidden;}
+.Liber .arme-name{width: 183px;}
 .Liber .item-image img, .Liber .item-qty{width: 20px; text-align: center;}
 .Liber .items-list .item{border-bottom: 1px solid var(--couleur-bleu); padding-bottom: 3px;color:var(--couleur-clair)}
 .Liber .items-list .item.active{display: block}
@@ -165,7 +170,11 @@ textarea{color:var(--couleur-clair)}
 .Liber #items .items-list,.Liber #spells .items-list{display: block;scrollbar-width: none;overflow:auto;position:relative;background: var(--couleur-bleut)}
 .Liber ul{margin: 0;padding: 5px;list-style: none;}
 .Liber .cache{display: none}
-.Liber .item-techno{float: left;width: 100px; text-align: left;}
+.Liber .item-techno{float: right;width: 76px; text-align: left;}
+.Liber .item-portee{width: 50px; display: none;}
+.Liber .item-dommage{width: 100px; display: inline-block;text-align: right}
+.Liber .item-poid{float: left;width: 70px;padding-right: 5px;border-right: 1px solid var(--couleur-bleu);}
+.Liber .item-valeurs{float: left;width: 70px;}
 .Liber textarea{background: var(--couleur-bleut)}
 .Liber .armures, .Liber .armes,.Liber .objets,.Liber .list-compt,.Liber .configuration,.Liber .zonemagie,.Liber .zonecaract,.Liber .zoneinfo,.Liber .canon,.Liber .inventator{scrollbar-width: none;overflow:auto;border: 1px solid var(--couleur-noir);border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;margin-bottom: 10px;background: var(--couleur-bleut)}
 .Liber .armures, .Liber .armes,.Liber .objets{;width: 425px;}
@@ -306,6 +315,7 @@ textarea{color:var(--couleur-clair)}
 .Liber .unquart{width: 90px;float: left}
 .Liber .unquart h2{width: 88px;margin-bottom: 10px}
 .Liber .infoplanete select{float: right;width: 125px;background: none;color: var(--color-clair);height: 33px;margin-bottom: 10px;}
+.Liber.planete .col3 span{padding-top: 10px}
 .Liber .moitie2 #lab .inventator .grid-2col{float:left;margin-right:10px}
 .Liber .histoires, .Liber .zonecaract, .Liber .bonulvl {width: 426px;}
 .Liber .bonulvl {height: 400px;overflow: hidden}

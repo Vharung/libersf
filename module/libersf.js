@@ -10,7 +10,7 @@ Hooks.once("init", async function() {
   CONFIG.Actor.documentClass = LiberActor;
   CONFIG.Item.documentClass = LiberItem;
   CONFIG.Combat.initiative = {
-    formula: "30 + @attributs.Perception + @attributs.Dextérité",
+    formula: "30 + @attributs.Perception + @attributs.Investigation",
     decimals: 3
 	};
 
