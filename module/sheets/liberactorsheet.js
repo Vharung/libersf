@@ -844,6 +844,11 @@ import { range } from "./class/list.js";
         var mutant = this.actor.system.mutation;
 
         var balistique=this.actor.system.attributs.Balistique;
+        var Mécanique=this.actor.system.attributs.Mécanique;
+        var Artisanat=this.actor.system.attributs.Artisanat;
+        var Balistique=this.actor.system.attributs.Balistique;
+        var Pilotage=this.actor.system.attributs.Pilotage;
+        var Piratage=this.actor.system.attributs.Piratage;
 
         const jetdeDesFormule = "1d100";
         let bonus =this.actor.system.stat.bonus;
@@ -875,7 +880,20 @@ import { range } from "./class/list.js";
             inforesult=echec;
         }
 
-        let etoilemax = Math.floor(parseInt(balistique)/5)+2;
+        let etoilemax = 0
+        if(name=="Tir"){
+            etoilemax=Math.floor(parseInt(balistique)/5)+2;
+        }else if(name=="Mécanique"){
+            etoilemax=Math.floor(parseInt(Mécanique)/5)+2;
+        }else if(name=="Artisanat"){
+            etoilemax=Math.floor(parseInt(Artisanat)/5)+2;
+        }else if(name=="Balistique"){
+            etoilemax=Math.floor(parseInt(Balistique)/5)+2;
+        }else if(name=="Pilotage"){
+            etoilemax=Math.floor(parseInt(Pilotage)/5)+2;
+        }else if(name=="Piratage"){
+            etoilemax=Math.floor(parseInt(Piratage)/5)+2;
+        }
         let etoile=0;
         if(etoiled=="★ ★ ★ ★ ★"){
             etoile=10;
