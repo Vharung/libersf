@@ -855,11 +855,11 @@ import { range } from "./class/list.js";
             bonus = bonus + meca;
         }
         var critique=5;
-        if(type=="C"){
+        if(type=="C" && name=="Tir"){
             critique=10;
         }
         var echec=95;
-        if(type=="P"){
+        if(type=="P" && name=="Tir"){
             echec=90;
         }
         

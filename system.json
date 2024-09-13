@@ -27,10 +27,6 @@
       "system": "libersf",
       "path": "pack/vehicule",
       "type": "Actor",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
       "flags": {}
     },
     {
@@ -63,10 +59,6 @@
       "system": "libersf",
       "path": "pack/armevehicule",
       "type": "Item",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
       "flags": {}
     },
     {
@@ -75,10 +67,14 @@
       "system": "libersf",
       "path": "pack/planete",
       "type": "Actor",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
+      "flags": {}
+    },
+    {
+      "name": "monstre",
+      "label": "Monstre",
+      "system": "libersf",
+      "path": "pack/monstre",
+      "type": "Actor",
       "flags": {}
     },
     {
