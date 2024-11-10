@@ -849,7 +849,7 @@ import { range } from "./class/list.js";
         var Balistique=this.actor.system.attributs.Balistique;
         var Pilotage=this.actor.system.attributs.Pilotage;
         var Piratage=this.actor.system.attributs.Piratage;
-
+        console.log(Pilotage)
         const jetdeDesFormule = "1d100";
         let bonus =this.actor.system.stat.bonus;
         var malus =this.actor.system.malus;
@@ -857,7 +857,7 @@ import { range } from "./class/list.js";
             let etoiles = await this._onMeca(event);
             let meca = parseInt(maxstat) - (parseInt(etoiles) * 5);
             if (meca > 0) { meca = 0; }
-            bonus = bonus + meca;
+            bonus = parseInt(bonus) + parseInt(meca);
         }
         var critique=5;
         if(type=="C" && name=="Tir"){
@@ -879,7 +879,7 @@ import { range } from "./class/list.js";
         if(inforesult>echec){
             inforesult=echec;
         }
-
+        console.log(maxstat+'+'+bonus+"+"+malus+'+30 ')
         let etoilemax = 0
         if(name=="Tir"){
             etoilemax=Math.floor(parseInt(balistique)/5)+2;
@@ -894,6 +894,7 @@ import { range } from "./class/list.js";
         }else if(name=="Piratage"){
             etoilemax=Math.floor(parseInt(Piratage)/5)+2;
         }
+        console.log(etoilemax )
         let etoile=0;
         if(etoiled=="★ ★ ★ ★ ★"){
             etoile=10;
