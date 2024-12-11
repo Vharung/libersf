@@ -108,14 +108,15 @@ textarea{color:var(--couleur-clair)}
 .Liber .marge,.Liber h2.marge{margin-top:5px}
 .Liber .spe {height: 150px;resize: none;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
 .Liber .histoire{resize: none;width:414px;height: 262px;overflow: auto;scrollbar-width: none;color:var(--couleur-clair);margin: 5px;padding:5px}
-.Liber .points div,.Liber .life2,.Liber .boucl2{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-or);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-or)}
-.Liber .points input,.Liber .life2 input,.Liber .boucl2 input{display: inline-block;width: 25px;color: var(--couleur-or);margin: 18px auto;text-align: center;}
+.Liber .points div,.Liber .life2,.Liber .boucl2, .team,.seul{float: left;display: inline-block;width: 72px;height: 72px;border: 1px solid var(--couleur-or);border-radius: 50%;margin:8px 10px;padding: 4px;text-align: center;color: var(--couleur-or)}
+.Liber .points input,.Liber .life2 input,.Liber .boucl2 input,.Liber .seul input,.Liber .team input{display: inline-block;width: 25px;color: var(--couleur-or);margin: 18px auto;text-align: center;}
 .Liber .life2,.Liber .boucl2{width: 140px;height: 140px;padding-top: 35px}
 .Liber .life2 input,.Liber .boucl2 input{width: 60px;margin: 0;width: 130px}
 .Liber .life2{position: absolute;left: 0;top: 0;}
 .Liber .boucl2{position: absolute;right: 0;top: 0;}
 .Liber .equipe{background: url(dark-squad.png) no-repeat center center; background-size: cover;}
 .Liber .seul{background: url(one-eyed.png) no-repeat center center; background-size: cover;}
+.Liber .team{background: url(dark-squad.png) no-repeat center center; background-size: cover;}
 .Liber .armcl{background: url(chest-armor.png) no-repeat center center; background-size: cover;}
 .Liber .boucl{background: url(shieldcomb.png) no-repeat center center; background-size: cover;}
 .Liber .bleu,.Liber .bleu input{color:var(--couleur-bleu);}

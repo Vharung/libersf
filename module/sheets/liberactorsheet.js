@@ -834,48 +834,56 @@ import { range } from "./class/list.js";
     async _onRoll(event){
         let maxstat = event.target.dataset["attdice"];
         if(!maxstat){maxstat=this.actor.system.attributs.Tir}
-        var name = event.target.dataset["name"];
-        var type = this.actor.system.typed;
-        var arme = this.actor.system.armed;
-        var chargequi = this.actor.system.charged;
-        var degat = this.actor.system.degatd;
-        var etoiled = this.actor.system.etoiled;
-        var race = this.actor.system.background.race;
-        var mutant = this.actor.system.mutation;
+        let name = event.target.dataset["name"];
+        let type = this.actor.system.typed;
+        let arme = this.actor.system.armed;
+        let chargequi = this.actor.system.charged;
+        let degat = this.actor.system.degatd;
+        let etoiled = this.actor.system.etoiled;
+        let race = this.actor.system.background.race;
+        let mutant = this.actor.system.mutation;
 
-        var balistique=this.actor.system.attributs.Balistique;
-        var Mécanique=this.actor.system.attributs.Mécanique;
-        var Artisanat=this.actor.system.attributs.Artisanat;
-        var Balistique=this.actor.system.attributs.Balistique;
-        var Pilotage=this.actor.system.attributs.Pilotage;
-        var Piratage=this.actor.system.attributs.Piratage;
+        let balistique=this.actor.system.attributs.Balistique;
+        let Mécanique=this.actor.system.attributs.Mécanique;
+        let Artisanat=this.actor.system.attributs.Artisanat;
+        let Balistique=this.actor.system.attributs.Balistique;
+        let Pilotage=this.actor.system.attributs.Pilotage;
+        let Piratage=this.actor.system.attributs.Piratage;
+
+        
+        let solit=this.actor.system.stat.solit;
+        let escou=this.actor.system.stat.escouade;
+        let critique=5+(parseInt(solit)*5);
+        let echec=95-(parseInt(escou)*5);
+
         console.log(Pilotage)
         const jetdeDesFormule = "1d100";
         let bonus =this.actor.system.stat.bonus;
-        var malus =this.actor.system.malus;
+        if(bonus==""){bonus=0};
+        let malus =this.actor.system.malus;
         if (["Artisanat", "Balistique", "Mécanique", "Pilotage", "Piratage"].includes(name) && ["personnage", "pnj"].includes(this.actor.type)) {
             let etoiles = await this._onMeca(event);
             let meca = parseInt(maxstat) - (parseInt(etoiles) * 5);
             if (meca > 0) { meca = 0; }
             bonus = parseInt(bonus) + parseInt(meca);
         }
-        var critique=5;
         if(type=="C" && name=="Tir"){
-            critique=10;
+            critique=critique+5;
         }
-        var echec=95;
         if(type=="P" && name=="Tir"){
-            echec=90;
+            echec=echec-5;
         }
+        console.log(echec)
+        console.log(critique)
         
-        var conf="auto";
+        let conf="auto";
         if(bonus=='' || bonus ==undefined || bonus==null){
             bonus=0;
         }
         if(malus=='' || malus ==undefined || malus==null){
             malus=0;
         }
-        var inforesult=parseInt(maxstat)+parseInt(bonus)+parseInt(malus)+30;
+        let inforesult=parseInt(maxstat)+parseInt(bonus)+parseInt(malus)+30;
         if(inforesult>echec){
             inforesult=echec;
         }
@@ -925,7 +933,7 @@ import { range } from "./class/list.js";
         if(name=="Tir" || name=="Tircouv"){
 
             inforesult=parseInt(inforesult)+(dif*5)
-            if(name=="Tir"){var conf="none;width: 200px;display:inline-block";}
+            if(name=="Tir"){conf="none;width: 200px;display:inline-block";}
             if(chargequi=='' || chargequi== undefined){
                  chargequi="Mun. "+arme
             }
@@ -2122,6 +2130,7 @@ import { range } from "./class/list.js";
     }
 
     async _traiterChoix(html) {
+        console.log("_traiterChoix")
         const choixElement = html.find('.choix-option');
         const choix = choixElement.val();
         let bonus = parseFloat(html.find('.vise_joueur').val() || 0); // Convertir en nombre
@@ -2131,7 +2140,7 @@ import { range } from "./class/list.js";
         let degat = parseFloat(choixElement.find('option:selected').data("degat") || 0); // Convertir en nombre
         let conf="none;width: 200px;display:inline-block";
         const jetdeDesFormule = "1d100";
-        
+
         var critique=5;
         if(type=="C"){
             critique=10;
