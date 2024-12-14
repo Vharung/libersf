@@ -852,7 +852,8 @@ import { range } from "./class/list.js";
 
         
         let solit=this.actor.system.stat.solit;
-        let escou=this.actor.system.stat.escouade;
+        /*let escou=this.actor.system.stat.escouade;*/
+        let escou=0;
         let critique=5+(parseInt(solit)*5);
         let echec=95-(parseInt(escou)*5);
 
