@@ -90,6 +90,22 @@
       "flags": {}
     }
   ],
+  "packFolders": [
+      {
+        "name": "Liber SF",
+        "sorting": "m",
+        "color": "#05d1d6",
+        "packs": [
+          "arme",
+          "competences",
+          "vehicule",
+          "armevehicule",
+          "planete",
+          "monstre",
+          "regles"
+        ]
+      }
+    ],
   "languages": [
     {
       "lang": "fr",
