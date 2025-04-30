@@ -1,0 +1,21 @@
+<header  data-tooltip="{{item.name}}">
+    <div class="sheet-header cut-corner">
+	    <div class="avatar"> 
+	        <img class="character-img" src="{{item.img}}" data-edit="img" data-action='editImage' data-tooltip="{{item.name}}" />
+	        <div class="info">
+	            <strong>{{formInput fields.name value=source.name localize=true rootId=partId}}</strong>
+	        </div>
+	        <div class="qty">
+	        	{{formInput systemFields.quantity name="system.quantity" value=system.quantity localize=true rootId=partId}}
+	        </div>
+	    </div>
+	</div>
+	<div class="inventory-list cut-corner" style="margin-top:10px">
+		{{formInput
+          systemFields.biography
+          value=system.biography
+          name="system.biography"
+        }}
+	</div>
+</header>
+     

@@ -1,0 +1,24 @@
+<div class="inventory-list cut-corner" style="height:200px">
+	<div class="half">
+        <label>{{localize 'Liber.Items.Poids'}}
+			{{formInput systemFields.poids name="system.poids" value=system.poids localize=true rootId=partId}}
+	    </label>  
+	    <label>{{localize 'Liber.Items.Pv'}}
+			{{formInput systemFields.pv name="system.pv" value=system.pv localize=true rootId=partId}}
+	    </label> 
+	    <label>{{localize 'Liber.Items.Protection'}}
+			{{formInput systemFields.vetement name="system.vetement" value=system.vetement localize=true rootId=partId}}
+	    </label> 
+    </div>
+    <div class="half">
+        <label>{{localize 'Liber.Items.Valeur'}}
+			{{formInput systemFields.valeur name="system.valeur" value=system.valeur localize=true rootId=partId}}
+	    </label> 
+	    <label>{{localize 'Liber.Items.Pvmax'}}
+	    	{{formInput systemFields.pvmax name="system.pvmax" value=system.pvmax localize=true rootId=partId}}
+	    </label> 
+        <label>{{localize 'Liber.Items.Techno'}}
+            {{formInput systemFields.techno name="system.techno" value=system.techno localize=true rootId=partId}}
+        </label>         
+    </div>
+</div>

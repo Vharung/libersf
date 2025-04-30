@@ -1,0 +1,56 @@
+<div class="tab" id="competence" data-group="sheet" data-tab="competence">
+    <div class="character-biography cut-corner" style="height: 393px;">
+    	{{#each systemFields.competences.fields as |field caract|}}
+	        <div class="perso" data-ability="{{caract}}">
+	          <span title="{{localize 'field.label'}}" calc="{{caract}}" data-action="rollDamage" data-compt="{{caract}}">
+	            <i class="fa-solid fa-dice-d20"></i> {{localize field.label}}
+	          </span>
+	            {{formInput field 
+	              value=(lookup ../system.competences caract) 
+	              name=(concat "system.competences." caract)
+	              rootId=../partId
+	            }}
+	        </div>
+	    {{/each}}
+	    <div class="compspec">
+	    	<span>{{localize 'Liber.Character.Compspec'}}</span>
+	    	{{formInput systemFields.compspec name="system.compspec" value=system.compspec localize=true rootId=partId}}
+	    </div>
+    </div>
+    <div class="inventory-list cut-corner" style="height: 100px;">
+    	<div class="moitier">
+	    	<h3>{{localize 'Liber.Character.Pointrestant'}}</h3>
+        {{actor.system.pointrestant}}
+	    </div>
+	   	<div class="moitier">
+	    	<h3>{{localize 'Liber.Character.Bonus'}}</h3>
+	    	{{formInput systemFields.bonus name="system.bonus" value=system.bonus localize=true rootId=partId}}
+	    </div>
+    </div>
+    <footer class="sheet-footer cut-corner">
+        <div class="action">
+          <h4>{{localize 'Liber.Character.Action.Simple'}}</h4>
+          <div class="walk icon" title="{{localize 'Liber.Character.Action.Walk'}}"></div>
+          <div class="shoot icon" title="{{localize 'Liber.Character.Action.Shoot'}}"></div>
+          <div class="cover icon" title="{{localize 'Liber.Character.Action.Cover'}}"></div>
+          <div class="talk icon" title="{{localize 'Liber.Character.Action.Talk'}}"></div>
+          <div class="indi icon" title="{{localize 'Liber.Character.Action.Indiv'}}"></div>
+      </div>
+      <div class="action">
+          <h4>{{localize 'Liber.Character.Action.Complexe'}}</h4>
+          <div class="run icon" title="{{localize 'Liber.Character.Action.Run'}}"></div>
+          <div class="multishoot icon" title="{{localize 'Liber.Character.Action.Multishoot'}}"></div>
+          <div class="soutien icon" title="{{localize 'Liber.Character.Action.Soutien'}}"></div>
+          <div class="commun icon" title="{{localize 'Liber.Character.Action.Commun'}}"></div>
+          <div class="discours icon" title="{{localize 'Liber.Character.Action.Discours'}}"></div>
+      </div>
+      <div class="action">
+        <h4>{{localize 'Liber.Character.Action.Rapide'}}</h4>
+          <div class="rapide icon" title="{{localize 'Liber.Character.Action.Rapides'}}"></div>
+      </div>
+      <div class="action">
+        <h4>{{localize 'Liber.Character.Action.Bonus'}}</h4>
+          <div class="bonus icon" title="{{localize 'Liber.Character.Action.Bonuss'}}"></div>
+      </div>
+    </footer>
+</div>

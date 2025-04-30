@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+body{background:url(../assets/system/fond.webp) no-repeat top center #000;background-size: cover;font-family:'Orbitron',sans-serif; }
+:root {
+    --couleur-grisclair: #1c1f22; 
+    --couleur-blanc: #cfd2d6; 
+    --couleur-gris: #25282c; 
+    --couleur-clair2: #e9dec7; 
+    --couleur-rouge:#ff0800;
+    --couleur-orange:#ff6c00;
+    --couleur-vert:#56853b;
+    --couleur-bleuelect:#00f7ff;
+}
+/*General*/
+.cut-corner {background:var(--couleur-grisclair);
+    clip-path: polygon( 10px 0%,/* coin supérieur gauche */calc(100% - 10px) 0%,/* coin supérieur droit */100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,  10px 100%,0% calc(100% - 10px),0% 10px);
+    box-shadow: inset 20px -20px 8px -15px rgba(0,0,0,0.51), inset -20px 20px 8px -15px rgba(0,0,0,0.51), inset -20px 20px 8px -15px rgba(0,0,0,0.51);}
+#pause img.fa-spin{content: url(../assets/system/logo.webp)}
+#ui-right{opacity: 0.7;transition:0.5s}
+#ui-right:hover{opacity: 1;}
+#ui-right #sidebar{background: none}
+#ui-right menu.flexcol{margin-left: 10px}
+#ui-right #sidebar nav.faded-ui{border-bottom-left-radius: 5px;opacity:1;}
+#ui-right #sidebar nav.faded-ui,#ui-right #sidebar #sidebar-content{background: var(--couleur-noir)}
+#sidebar .flexcol button[data-tab="chat"]{background: url(../assets/system/talk.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="combat"]{background:url(../assets/system/light-sabers.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="scenes"]{background:url(../assets/system/earth-africa-europe.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="actors"]{background:url(../assets/system/astronaut-helmet.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="items"]{background:url(../assets/system/backpack.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="journal"]{background:url(../assets/system/smartphone.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="tables"]{background:url(../assets/system/rolling-dices.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="cards"]{background:url(../assets/system/card-ace-diamonds.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="playlists"]{background:url(../assets/system/sound-waves.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="compendium"]{background:url(../assets/system/cardboard-box-closed.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="settings"]{background:url(../assets/system/gears.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="macros"]{background:url(../assets/system/microchip.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
+#sidebar .flexcol button[data-tab="Expand"]{background:var(--couleur-bleuelect);background-size: 50%;text-indent: -9999em;}
+#sidebar .flexcol button.active,#sidebar .flexcol button:hover,#ui-left button[aria-pressed="true"]{border: 1px solid var(--couleur-clair);border-bottom: none;box-shadow: 0 0 10px #0178a2;background-color:var(--couleur-clair2);}
+
+
+/*Header*/
+.liber .window-content{background:var(--couleur-gris);color:var(--couleur-blanc);display:flex;}
+.liber .sheet-header{width:470px; height: 116px;padding:10px;display: flex
+;}
+.liber .avatar{display:flex;align-items:center;gap:15px;}
+.avatar img{width:88px;height:88px;border-radius:50%;border: 2px solid var(--couleur-bleuelect)}
+.liber .info{line-height:1.4}
+.liber .niveau input{width: 100px;height: 100px;font-size: 3em;text-align: center;}
+.liber input,.liber select{background: var(--couleur-gris);color:var(--couleur-blanc);}
+.liber .sheet-header select{width: 50%;float: left;font-size: 0.8em}
+.liber input[name="name"]{color:var(--couleur-bleuelect);}
+.liber .etoile{width: 50%;display: inline-block;}
+.liber .etoilev{width: 50%;display: inline-block;padding: 5px 10px;height: 32px;letter-spacing: 4px;}
+
+/*navigation*/
+.liber nav.tabs {border:none}
+.liber .boutons{display: inline-block;margin-top: 10px;}
+.button-lumineux {padding: 6px 10px;background: transparent;border: 2px solid var(--couleur-bleuelect);color: var(--couleur-blanc);font-size: 12px;cursor: pointer;transition: all 0.3s ease;box-shadow: 0 0 10px var(--couleur-blanc), 0 0 20px transparent;}
+.button-lumineux:hover, .button-lumineux.active {box-shadow: 0 0 20px var(--couleur-blanc), 0 0 40px var(--couleur-blanc);border-color: var(--couleur-blanc);color: #ffffff;background-color: rgba(0, 247, 255, 0.1);}
+
+/*stat*/
+.liber .character-biography{width:470px; height: 343px;padding:10px;margin-top: 10px;position: relative;}
+.liber .character-biography svg{height: 300px;position: absolute;left: 270px;}
+.liber .part,.liber .infos{width: 50px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
+.liber .part-vehicule{width: 75px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
+.liber .head{right: 60px;top: 20px;}
+.liber .torse{right: 102px;top: 100px;}
+.liber .handl{right: 18px;top: 100px;}
+.liber .handr{right: 182px;top: 100px;}
+.liber .jambeg{right: 18px;top: 262px;}
+.liber .jambed{right: 182px;top: 262px;}
+.liber .infos{border-radius: 50%;width: 70px;height: 70px;}
+.liber .vie{left: 6px;top: -42px;}
+.liber .blindage{left: 20px;top: 10px;font-size: 0.8em;}
+.liber .armure,.liber .champ{left: 20px;top: 90px}
+.liber .champ{font-size: 0.8em;}
+.liber .bouclier{left: 20px;top: 170px;}
+.liber .moteur{left: 10px;top: 162px;font-size: 0.8em;}
+.liber .encombrement{left: 20px;top: 250px;}
+.liber .full{left: 20px;top: 250px;font-size: 0.8em;}
+.liber .solitude{left: 108px;top: 10px;background:url(../assets/actor/wolf-howl.webp) no-repeat center center;background-size: 50%;border: 2px solid var(--couleur-bleuelect)}
+.liber .credit{left: 108px;top: 90px;background:url(../assets/actor/swipe-card.webp) no-repeat center center;background-size: 50%;border: 2px solid var(--couleur-bleuelect)}
+.liber .credit-vehicule{left: 108px;top: 10px;background:url(../assets/actor/swipe-card.webp) no-repeat center center;background-size: 50%;border: 2px solid var(--couleur-bleuelect); height: 92px;width: 92px}
+.liber .mutant{width: 50px;height: 50px;background:url(../assets/actor/dna1.webp) no-repeat center center;background-size: 100%;position: absolute;top: 19px;right: 181px;}
+.liber .part input{width: 48px;height: 48px; text-align: center; font-size: 1.8em; border:solid 1px var(--couleur-bleuelect)}
+.liber .part-vehicule input{width: 75px;height: 48px; text-align: center; font-size: 1em; border:solid 1px var(--couleur-bleuelect)}
+.liber .infos input{background: #25282ca3; text-align: center;}
+.liber .solitude input,.liber .credit input{width: 68px;height: 68px; text-align: center;}
+.liber .credit-vehicule input{width: 90px;height: 90px; text-align: center;}
+.liber .vie.infos, .liber .moteur.infos {position: relative;}
+.liber .circle {position: relative;width: 100%;height: 100%;border-radius: 50%;background: conic-gradient(var(--couleur-rouge) 0%, var(--couleur-bleuelect) 99%, var(--couleur-gris) 100%);display: flex;align-items: center;justify-content: center;}
+.liber .fill {position: absolute;width: 66px;height: 66px;border-radius: 50%;z-index: 1;overflow: hidden;}
+.liber .vie .fill{background:url(../assets/actor/vie.webp) no-repeat center center #1c1f22;background-size: 50%;}
+.liber .moteur .fill{background:url(../assets/actor/turbine.webp) no-repeat center center #1c1f22;background-size: 50%;}
+.liber .armure .fill,.liber .blindage .fill{background:url(../assets/actor/lamellar.webp) no-repeat center center #1c1f22;background-size: 50%;}
+.liber .bouclier .fill,.liber .champ .fill{background:url(../assets/actor/shieldcomb.webp) no-repeat center center #1c1f22;background-size: 50%;}
+.liber .encombrement .fill{background:url(../assets/actor/backpack.webp) no-repeat center center #1c1f22;background-size: 50%;}
+.liber .full .fill{background:url(../assets/actor/gas-pump.webp) no-repeat center center #1c1f22;background-size: 50%;}
+.liber .armr,.liber .legl,.liber .legr,.liber .arml, .liber .tete,.liber .body {fill:var(--couleur-vert);stroke:#070909;stroke-miterlimit:10;}
+.liber .st1{fill:#515151;stroke:#070909;stroke-miterlimit:10;}
+.liber .st2{fill:none;stroke:#070909;stroke-miterlimit:10;}
+.liber .body-status{display:flex;justify-content:space-between;margin:20px 0}
+.liber .body-status img{width:40%}
+.liber .character-biography .vehicule-status svg{left:6px;top:-26px}
+.liber .vehicule-status{border-radius: 50%;border: solid 3px var(--couleur-bleuelect);height: 230px;width: 230px;position: absolute;right: 30px;top: 50px;}
+.liber .vehicule-status .st0{fill:#515151;stroke:#000000;stroke-miterlimit:10;}
+.liber .vehicule-status .st1{fill:var(--couleur-bleuelect);stroke:#000000;stroke-miterlimit:10;}
+.liber .vehicule-status .st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+.liber .vehicule-status .st3{fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:10;}
+.liber .vehicule-status .st4{fill:#515151;stroke:#000000;stroke-width:0.5;stroke-miterlimit:10;}
+.liber .vehicule-status .st5{fill:#FFFFFF;}
+.liber .haut{right: 34px;top: 12px;}
+.liber .droite{right: 34px;top: 100px;}
+.liber .bas{right: 34px;top: 272px;}
+.liber .gauche{right: 182px;top: 100px;}
+.liber .info-arme{left: 108px;top: 174px;background:url(../assets/actor/info-armes.webp) no-repeat center center;position: absolute;width: 68px;height: 150px;}
+.liber .inventory-list .item {height: 82px; width: 82px;border:1px solid var(--couleur-clair2);border-radius:4px;overflow: hidden;}
+.liber .inventory-list .maingauche{background: url(../assets/actor/handgg.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .inventory-list .maindroite{background: url(../assets/actor/handrg.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .inventory-list .charger{background: url(../assets/actor/machine-gun-magazineg.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .inventory-list .ceinture{background: url(../assets/actor/belt-armorg.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .inventory-list .middle{background: url(../assets/actor/persong.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .inventory-list .noborder{border:none;height: 80px; width: 80px;}*
+
+.liber .inventory-list{position: relative}
+.liber .circles {position: absolute;width: 80px;height: 80px;margin: 50px auto;}
+.liber .circles span {position: absolute;left: 50%; top: 50%;transform-origin: 0 -30px; /* Rayon : ici 30px pour bien rester dans 80px */font-size: 12px;}
+.liber .circles span:nth-child(1) { transform: rotate(0deg); }
+.liber .circles span:nth-child(2) { transform: rotate(72deg); }
+.liber .circles span:nth-child(3) { transform: rotate(144deg); }
+.liber .circles span:nth-child(4) { transform: rotate(216deg); }
+.liber .circles span:nth-child(5) { transform: rotate(288deg); }
+.liber .circles.pilotage {left:35px; }
+.liber .circles.mecanique {left:140px; }
+.liber .circles.piratage {left:245px; }
+.liber .circles.visee {left:340px; }
+
+.liber .technoinfo{height: 60px;width: 60px;display: block;position: absolute;top: -19px;left: 11px;border: solid 1px var(--couleur-blanc);border-radius: 50%;}
+.liber .circles.pilotage .technoinfo{background: url(../assets/actor/artificial-intelligence.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .circles.mecanique .technoinfo{background: url(../assets/actor/mechanic-garage.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .circles.piratage .technoinfo{background: url(../assets/actor/computing.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .circles.visee .technoinfo{background: url(../assets/actor/reticule.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
+.liber .vehic h3{margin: 10px 0 15px 0;}
+
+/*inventaire*/
+.liber .inventory-list{width:470px; height: 150px;padding:10px;margin-top: 10px;}
+.liber .inventory-tabs{display:flex;gap:10px;font-size:12px;margin-bottom:10px}
+.liber .inventory-tabs div{cursor:pointer;padding:4px 8px;background:var(--couleur-gris);border:1px solid var(--couleur-clair2);border-radius:4px}
+.liber .inventaire {height: 290px; overflow: auto;    padding: 0;}
+.liber .inventaire li{height: 100px; width:100px; margin: 0 5px 5px 0; display: inline-block;position:relative;font-size: 0.8em;border: solid 1px var(--couleur-clair2);}
+.liber .inventaire .item-qty{position: absolute;top:0px;left: 3px;}
+.liber .inventaire .item-weigth{position: absolute;top:0px;right: 3px;}
+.liber .inventaire .item-name{position: absolute;bottom:0px;left: 3px;width: 92px;text-align:center;}
+.liber .inventaire .zonecontroledroit{position: absolute;right: 3px;width: 10px;top: 25px;}
+.liber .inventaire .zonecontrolegauche {position: absolute;left: 3px;width: 13px;top: 15px;height: 50px;}
+.liber .inventaire .zonecontrolegauche span{width:13px; height: 13px;display: block;cursor: pointer;opacity: 0.3;}
+.liber .inventaire .gauche{background: url(../assets/actor/handg.webp) no-repeat center center;background-size:contain;}
+.liber .inventaire .pilote{background: url(../assets/actor/car-seat.webp) no-repeat center center;background-size:contain;}
+.liber .inventaire .droite{background: url(../assets/actor/handr.webp) no-repeat center center;background-size:contain;}
+.liber .inventaire .chargeur{background: url(../assets/actor/machine-gun-magazine.webp) no-repeat center center;background-size:contain;}
+.liber .inventaire .ceinture{background: url(../assets/actor/belt-armor.webp) no-repeat center center;background-size:contain;}
+.liber .inventaire .middle{background: url(../assets/actor/person.webp) no-repeat center center;background-size:contain;}
+.liber .desequi{position: relative;top: 59px;left: 61px; padding:5px; background: var(--couleur-gris)}
+.liber .compt{height: 40px; width:40px; margin: 0 5px 5px 0; position:absolute;font-size: 0.8em;border: solid 1px var(--couleur-blanc);background: var(--couleur-gris);padding: 5px;}
+.liber .compt .zonecontroledroit{position: absolute;right: -14px;width: 10px;top: 5px;}
+.liber .niv0{top:14px; left:calc(50% - 25px);}
+.liber .niv11{top:60px; left:calc(22% - 25px);}
+.liber .niv12{top:60px; left:calc(50% - 25px);}
+.liber .niv13{top:60px; left:calc(80% - 25px);}
+.liber .niv21{top:106px; left:calc(15% - 25px);}
+.liber .niv22{top:106px; left:calc(28% - 25px);}
+.liber .niv23{top:106px; left:calc(44% - 25px);}
+.liber .niv24{top:106px; left:calc(57% - 25px);}
+.liber .niv25{top:106px; left:calc(74% - 25px);}
+.liber .niv26{top:106px; left:calc(87% - 25px);}
+.liber .niv31{top:152px; left:calc(15% - 25px);}
+.liber .niv32{top:152px; left:calc(28% - 25px);}
+.liber .niv33{top:152px; left:calc(44% - 25px);}
+.liber .niv34{top:152px; left:calc(57% - 25px);}
+.liber .niv35{top:152px; left:calc(74% - 25px);}
+.liber .niv36{top:152px; left:calc(87% - 25px);}
+.liber .niv41{top:198px; left:calc(15% - 25px);}
+.liber .niv42{top:198px; left:calc(28% - 25px);}
+.liber .niv43{top:198px; left:calc(44% - 25px);}
+.liber .niv44{top:198px; left:calc(57% - 25px);}
+.liber .niv45{top:198px; left:calc(74% - 25px);}
+.liber .niv46{top:198px; left:calc(87% - 25px);}
+.liber .inventory h3{border-bottom:1px solid #444;padding-bottom:5px;margin-bottom:10px}
+.liber .items{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.liber .item img{width:24px;height:24px;display:block;margin:0 auto 4px}
+.liber .nombre{position: relative;left: -16px;background: var(--couleur-gris);padding: 5px;}
+.liber .input-vehi select{margin-bottom: 12px}
+.liber .kit{background: url(../assets/actor/light-backpack.webp) no-repeat center center;background-size:contain;display: inline-block;height: 25px;width: 25px;}
+.liber .prosemirror menu, prose-mirror menu {padding: 0;}
+
+/*biography*/
+.liber .prosemirror, prose-mirror {min-height: 320px}
+.liber.item .prosemirror, prose-mirror {min-height: 130px}
+.liber .editor-content{height: 223px}
+.liber.item .editor-content{height: 76px}
+.liber h3.mutante{background:url(../assets/actor/dna1.webp) no-repeat left center;background-size:contain;padding-left: 22px;width: 49%; display:inline-block;}
+.liber .moitie{width: 50%; display:inline-block;}
+.liber .inventory-list h3{font-size: 1.2em;}
+.liber .avantage{font-size:0.8em}
+
+/*Competence*/
+.liber .perso{width:102px;margin:0px 10px 9px 0px; float: left;font-size: 0.8em;text-align: center;}
+.liber .perso input{text-align:center; color: var(--couleur-bleuelect); background:var(--couleur-gris);}
+.liber .moitier{width: 50%; float:left;text-align: center}
+.liber .moitier input{text-align: center}
+.liber .compspec{float: left;width: 213px;margin-top: -3px;}
+.liber .compspec span{font-size: 0.8em}
+
+/*footer*/
+.liber .sheet-footer{margin-top:10px;height:96px;padding:10px;width: 470px;}
+.liber .sheet-footer h4{font-size: 1em}
+.liber .action{float:left;margin-right: 20px;}
+.liber .icon{width: 30px; height: 30px; float:left;}
+.liber .icone{width: 25px; height: 25px; float:left;}
+.liber .walk{background:url(../assets/actor/walk.webp) no-repeat left center;background-size:contain;}
+.liber .shoot{background:url(../assets/actor/crosshair.webp) no-repeat left center;background-size:contain;}
+.liber .cover{background:url(../assets/actor/riot-shield.webp) no-repeat left center;background-size:contain;}
+.liber .talk{background:url(../assets/actor/walkie-talkie.webp) no-repeat left center;background-size:contain;}
+.liber .indi{background:url(../assets/actor/bullets.webp) no-repeat left center;background-size:contain;}
+.liber .run{background:url(../assets/actor/run.webp) no-repeat left center;background-size:contain;}
+.liber .multishoot{background:url(../assets/actor/multiple-targets.webp) no-repeat left center;background-size:contain;}
+.liber .soutien{background:url(../assets/actor/caduceus.webp) no-repeat left center;background-size:contain;}
+.liber .commun{background:url(../assets/actor/telepathy.webp) no-repeat left center;background-size:contain;}
+.liber .discours{background:url(../assets/actor/talk.webp) no-repeat left center;background-size:contain;}
+.liber .rapide{background:url(../assets/actor/fast-arrow.webp) no-repeat left center;background-size:contain;}
+.liber .bonus{background:url(../assets/actor/extra-time.webp) no-repeat left center;background-size:contain;}
+.liber .evasive{background:url(../assets/actor/jet-fighter.webp) no-repeat left center;background-size:contain;}
+.liber .pique{background:url(../assets/actor/airplane-arrival.webp) no-repeat left center;background-size:contain;}
+.liber .leurre{background:url(../assets/actor/delivery-drone.webp) no-repeat left center;background-size:contain;}
+.liber .invisible{background:url(../assets/actor/starfighter.webp) no-repeat left center;background-size:contain;}
+.liber .tactique{background:url(../assets/actor/commercial-airplane.webp) no-repeat left center;background-size:contain;}
+.liber .sprint{background:url(../assets/actor/light-fighter.webp) no-repeat left center;background-size:contain;}
+.liber .repair{background:url(../assets/actor/lightning-spanner.webp) no-repeat left center;background-size:contain;}
+.liber .surcharge{background:url(../assets/actor/rocket-thruster.webp) no-repeat left center;background-size:contain;}
+.liber .radar{background:url(../assets/actor/radar-sweep.webp) no-repeat left center;background-size:contain;}
+.liber .radio{background:url(../assets/actor/radio-tower.webp) no-repeat left center;background-size:contain;}
+.liber .medic{background:url(../assets/actor/medical-pack-alt.webp) no-repeat left center;background-size:contain;}
+.liber .urgence{background:url(../assets/actor/fire-shield.webp) no-repeat left center;background-size:contain;}
+.liber .sabotage{background:url(../assets/actor/mine-explosion.webp) no-repeat left center;background-size:contain;}
+.liber .abordage{background:url(../assets/actor/ship-wreck.webp) no-repeat left center;background-size:contain;}
+
+/*Items*/
+.liber .half{width: 50%; float: left;padding:5px;}
+.liber .half input{margin-bottom: 10px}
+.liber .qty input{width: 100px;height: 100px;font-size: 2em;text-align: center;}
+.liber .top{position: relative;top: 10px;}
+
+/*Chat*/
+#chat .chat-message{background: var(--couleur-grisclair); color:var(--couleur-blanc);border:none}
+#chat .chat-message .message-header{color:var(--couleur-blanc);}
+.intro-img{padding:10px;position: relative;}
+.intro-img img{width: 70px;height: 70px;border-radius: 50%;border: 2px solid var(--couleur-bleuelect);display: block;} 
+.intro-img h3{color: var(--couleur-bleuelect);position: absolute;top: 10px;font-size: 1.2em;left: 90px;padding: 0;margin: 0;} 
+.intro-img p{position: absolute;top: 40px;right: 20px;}
+.intro-img span{position: absolute;top: 48px;left: 91px;}
+.intro-chat {height: 34px;padding: 1px;text-align: center;color: var(--couleur-gris);margin-top: 10px;}
+
+/*dialog*/
+body.game .app.window-app.dialog .window-content{background: var(--couleur-gris); color:var(--couleur-blanc);}
+body.game .app.window-app.dialog .window-content select{background: var(--couleur-grisclair); color:var(--couleur-blanc);width: 100%;margin-bottom: 5px}
+body.game .app.window-app.dialog .window-content button{background: var(--couleur-grisclair); color:var(--couleur-blanc);border:solid 1px var(--couleur-bleuelect)}
+body.game .app.dialog  option {background: var(--couleur-grisclair); color:var(--couleur-blanc);}
+
+
+.erreur{ justify-content: center;
+            align-items: center;}

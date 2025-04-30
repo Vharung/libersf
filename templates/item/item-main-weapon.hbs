@@ -1,0 +1,27 @@
+<div class="inventory-list cut-corner" style="height:240px">
+	<div class="half">
+        <label>{{localize 'Liber.Items.Poids'}}
+			{{formInput systemFields.poids name="system.poids" value=system.poids localize=true rootId=partId}}
+	    </label>  
+	    <label>{{localize 'Liber.Items.Degat'}}
+			{{formInput systemFields.degat name="system.degat" value=system.degat localize=true rootId=partId}}
+	    </label> 
+        <label>{{localize 'Liber.Items.Energie'}}
+            {{formInput systemFields.energie name="system.energie" value=system.energie localize=true rootId=partId}}
+        </label>    
+        <label>{{localize 'Liber.Items.Enrayer'}}
+            {{formInput systemFields.enrayer name="system.enrayer" value=system.enrayer localize=true rootId=partId}}
+        </label>          
+    </div>
+    <div class="half">
+        <label>{{localize 'Liber.Items.Valeur'}}
+			{{formInput systemFields.valeur name="system.valeur" value=system.valeur localize=true rootId=partId}}
+	    </label> 
+	    <label>{{localize 'Liber.Items.Porte'}}
+			{{formInput systemFields.porter name="system.porter" value=system.porter localize=true rootId=partId}}
+	    </label>  
+        <label>{{localize 'Liber.Items.Techno'}}
+            {{formInput systemFields.techno name="system.techno" value=system.techno localize=true rootId=partId}}
+        </label>         
+    </div>
+</div>

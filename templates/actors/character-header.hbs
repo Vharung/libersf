@@ -1,0 +1,16 @@
+<header class="sheet-header cut-corner" data-tooltip="{{actor.name}}">
+    <div class="avatar"> 
+        <img class="character-img" src="{{actor.img}}" data-edit="img" data-action='editImage' data-tooltip="{{actor.name}}" />
+        <div class="info">
+            <strong>{{formInput fields.name value=source.name localize=true}}</strong>
+            {{formField systemFields.sex name="system.sex" value=system.sex localize=true rootId=partId type="select"}}
+            {{formField systemFields.faction name="system.faction" value=system.faction localize=true rootId=partId type="select"}}
+            {{formField systemFields.metier name="system.metier" value=system.metier localize=true rootId=partId type="select"}}
+            {{formField systemFields.race name="system.race" value=system.race localize=true rootId=partId type="select"}}
+        </div>
+        <div class="niveau">
+        	{{formInput systemFields.level name="system.level" value=system.level localize=true rootId=partId}}
+        </div>
+     </div>
+       
+</header>

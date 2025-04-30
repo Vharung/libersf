@@ -1,127 +1,159 @@
 {
   "id": "libersf",
-  "title": "Liber SF",
-  "description": "The libersf SF  system for FoundryVTT!",
-  "version": "3.055",
-  "compatibility": {
-    "minimum": "0.9",
-    "verified": "12.327"
-  },
+  "title": "Liber SF Game System",
+  "version": "0.1.0",
+  "description": "A simple game system with Physical, Mental, and Social characteristics.",
   "authors": [
     {
       "name": "Vharung",
-      "url": "https://foundryvtt.com",
-      "flags": {}
-    }
-  ],
-  "esmodules": [
-    "module/libersf.js"
-  ],
-  "styles": [
-    "css/libersf.css"
-  ],
-  "packs": [
-    {
-      "name": "vehicule",
-      "label": "Véhicule",
-      "system": "libersf",
-      "path": "pack/vehicule",
-      "type": "Actor",
-      "flags": {}
-    },
-    {
-      "name": "arme",
-      "label": "Inventaire",
-      "system": "libersf",
-      "path": "pack/inventaire-v2",
-      "type": "Item",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "flags": {}
-    },
-    {
-      "name": "competences",
-      "label": "Compétences",
-      "system": "libersf",
-      "path": "pack/competences",
-      "type": "Item",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "flags": {}
-    },
-    {
-      "name": "armevehicule",
-      "label": "Equipement vehicule",
-      "system": "libersf",
-      "path": "pack/armevehicule",
-      "type": "Item",
-      "flags": {}
-    },
-    {
-      "name": "planete",
-      "label": "Planete",
-      "system": "libersf",
-      "path": "pack/planete",
-      "type": "Actor",
-      "flags": {}
-    },
-    {
-      "name": "monstre",
-      "label": "Monstre",
-      "system": "libersf",
-      "path": "pack/monstre",
-      "type": "Actor",
-      "flags": {}
-    },
-    {
-      "label": "Régles",
-      "type": "JournalEntry",
-      "name": "regles",
-      "path": "pack/regles",
-      "system": "libersf",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "flags": {}
-    }
-  ],
-  "packFolders": [
-      {
-        "name": "Liber SF",
-        "sorting": "m",
-        "color": "#05d1d6",
-        "packs": [
-          "arme",
-          "competences",
-          "vehicule",
-          "armevehicule",
-          "planete",
-          "monstre",
-          "regles"
-        ]
-      }
-    ],
+      "discord": "Vharung"
+    }],
+  "version": "4",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "license": "MIT",
+  "scripts": [],
+  "styles": ["style/liber.css"],
   "languages": [
     {
       "lang": "fr",
       "name": "Français",
-      "path": "lang/fr.json",
-      "flags": {}
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
     }
   ],
-  "background": "systems/libersf/assets/accueil.jpg",
-  "grid": {
+  "esmodules": ["module/liber.js"],
+  "packs": [
+    { 
+      "name": "inventaire",
+      "label": "Inventaire",
+      "system": "liber",
+      "path": "./pack/inventaire",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "competences",
+      "label": "Compétences",
+      "system": "liber",
+      "path": "./pack/competences",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "monstre",
+      "label": "Monstres",
+      "system": "liber",
+      "path": "./pack/monstre",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "pnj",
+      "label": "PNJ",
+      "system": "liber",
+      "path": "./pack/pnj",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "vehicule",
+      "label": "Véhicule",
+      "system": "liber",
+      "path": "./pack/vehicule",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "lieux",
+      "label": "lieux",
+      "type": "Scene",
+      "path": "./pack/lieux",
+      "system": "liber",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "regles",
+      "label": "Régles",
+      "type": "JournalEntry",
+      "path": "./pack/regles",
+      "system": "liber",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Liber",
+      "sorting": "m",
+      "color": "#001f20",
+      "packs": [
+      ],
+      "folders": [
+        {
+            "name": "Acteur",
+            "sorting": "m",
+            "color": "#003e40",
+            "packs": [
+                "pnj",
+                "monstre",
+                "vehicule"
+            ]
+        },
+        {
+          "name": "Objets & Compétences",
+          "sorting": "m",
+          "color": "#005d60 ",
+          "packs": [
+              "inventaire",
+              "competences"
+          ]
+        },
+        {
+          "name": "Ressource",
+          "sorting": "m",
+          "color": "#007b80",
+          "packs": [
+              "lieux",
+              "regles"
+          ]
+        }
+      ]
+    }
+  ],
+  "background": "systems/libersf/assets/system/accueil.webp",
+  "grid":{
+    "dDistance": 1,
     "units": "m"
   },
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "psy",
-  "url": "https://github.com/Vharung/libersfsf",
-  "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
-  "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
+    
   "license": "LICENSE.txt"
 }

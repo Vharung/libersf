@@ -1,0 +1,46 @@
+<div class="tab" id="biography" data-group="sheet" data-tab="biography">
+    <div class="character-biography cut-corner">
+        {{formInput
+          systemFields.biography
+          value=system.biography
+          name="system.biography"
+        }}
+    </div>
+    <div class="inventory-list cut-corner">
+      <div class="moitier vehic">
+         <h3>{{localize 'Liber.Vehicule.IA.Title'}}</h3>
+         <h3>{{localize 'Liber.Vehicule.Moteur.Title'}}</h3>
+         <h3>{{localize 'Liber.Vehicule.Blindage.Title'}}</h3>
+         <h3>{{localize 'Liber.Vehicule.Usage'}}</h3>
+      </div>
+      <div class="moitier vehic">
+        {{formField systemFields.modeleIA name="system.modeleIA" value=system.modeleIA localize=true rootId=partId type="select"}}
+        {{formField systemFields.modeleMoteur name="system.modeleMoteur" value=system.modeleMoteur localize=true rootId=partId type="select"}}
+        {{formField systemFields.modeleBlindage name="system.modeleBlindage" value=system.modeleBlindage localize=true rootId=partId type="select"}}
+        {{formField systemFields.usage name="system.usage" value=system.usage localize=true rootId=partId type="select"}}
+      </div>
+    </div>
+    <footer class="sheet-footer cut-corner">
+        <div class="action">
+          <h4>{{localize 'Liber.Character.Action.Pilote'}}</h4>
+          <div class="evasive icone" title="{{localize 'Liber.Character.Action.Evasive'}}" data-action="fulldown" data-full="10" data-name="evasive"></div>
+          <div class="pique icone" title="{{localize 'Liber.Character.Action.Pique'}}" data-action="fulldown" data-full="20" data-name="pique"></div>
+          <div class="leurre icone" title="{{localize 'Liber.Character.Action.Leurre'}}" data-action="fulldown" data-full="10" data-name="leurre"></div>
+          <div class="invisible icone" title="{{localize 'Liber.Character.Action.Invisible'}}" data-action="fulldown" data-full="30" data-name="invisible"></div>
+          <div class="tactique icone" title="{{localize 'Liber.Character.Action.Tactique'}}" data-action="fulldown" data-full="10" data-name="tactique"></div>
+          <div class="sprint icone" title="{{localize 'Liber.Character.Action.Sprint'}}" data-action="fulldown" data-full="50" data-name="sprint"></div>
+        </div>
+        <div class="action">
+          <h4>{{localize 'Liber.Character.Action.Passager'}}</h4>
+          <div class="shoot icone" title="{{localize 'Liber.Character.Action.Secondaire'}}" data-action="fulldown" data-full="5" data-name="shoot"></div>
+          <div class="repair icone" title="{{localize 'Liber.Character.Action.Repair'}}" data-action="fulldown" data-full="20" data-name="repair"></div>
+          <div class="surcharge icone" title="{{localize 'Liber.Character.Action.Surcharge'}}" data-action="fulldown" data-full="20" data-name="surcharge"></div>
+          <div class="radar icone" title="{{localize 'Liber.Character.Action.Radar'}}" data-action="fulldown" data-full="5" data-name="radar"></div>
+          <div class="radio icone" title="{{localize 'Liber.Character.Action.Radio'}}" data-action="fulldown" data-full="5" data-name="radio"></div>
+          <div class="medic icone" title="{{localize 'Liber.Character.Action.Medic'}}" data-action="fulldown" data-full="10" data-name="medic"></div>
+          <div class="urgence icone" title="{{localize 'Liber.Character.Action.Urgence'}}" data-action="fulldown" data-full="5" data-name="urgence"></div>
+          <div class="sabotage icone" title="{{localize 'Liber.Character.Action.Sabotage'}}" data-action="fulldown" data-full="20" data-name="sabotage"></div>
+          <div class="abordage icone" title="{{localize 'Liber.Character.Action.Abordage'}}" data-action="fulldown" data-full="40" data-name="abordage"></div>
+        </div>
+    </footer>
+</div>

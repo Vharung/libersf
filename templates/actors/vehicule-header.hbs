@@ -1,0 +1,17 @@
+<header class="sheet-header cut-corner" data-tooltip="{{actor.name}}">
+    <div class="avatar"> 
+        <img class="character-img" src="{{actor.img}}" data-edit="img" data-action='editImage' data-tooltip="{{actor.name}}" />
+        <div class="info">
+            <strong>{{formInput fields.name value=source.name localize=true}}</strong>
+            {{formField systemFields.faction name="system.faction" value=system.faction localize=true rootId=partId type="select"}}
+            <div class="etoilev">
+            {{{actor.system.technogeneral}}}
+            </div>
+            {{formField systemFields.typevehicule name="system.typevehicule" value=system.typevehicule localize=true rootId=partId type="select"}}
+            {{formField systemFields.taillevehicule name="system.taillevehicule" value=system.taillevehicule localize=true rootId=partId type="select"}}
+        </div>
+        <div class="niveau" style="background:url(systems/libersf/assets/actor/{{system.faction}}.webp); background-size:contain;height: 80px; width: 80px;margin-left: 10px;">
+        </div>
+     </div>
+       
+</header>

@@ -1,0 +1,15 @@
+<header class="sheet-header cut-corner" data-tooltip="{{actor.name}}">
+    <div class="avatar"> 
+        <img class="character-img" src="{{actor.img}}" data-edit="img" data-action='editImage' data-tooltip="{{actor.name}}" />
+        <div class="info">
+            <strong>{{formInput fields.name value=source.name localize=true}}</strong>
+            {{formField systemFields.espece name="system.espece" value=system.espece localize=true rootId=partId}}
+            {{formField systemFields.attitude name="system.attitude" value=system.attitude localize=true rootId=partId type="select"}}
+            {{formField systemFields.taille name="system.taille" value=system.taille localize=true rootId=partId type="select"}}
+        </div>
+        <div class="niveau">
+        	{{formInput systemFields.level name="system.level" value=system.level localize=true rootId=partId}}
+        </div>
+     </div>
+       
+</header>

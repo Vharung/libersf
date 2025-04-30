@@ -1,0 +1,9 @@
+<nav class="navlib sheet-tabs tabs {{actor.type}}" aria-roledescription="Form Tab Navigation" data-application-part="tabs">
+  {{#each tabs as |tab|}}
+    <div class="boutons">
+      <a class="button-lumineux cut-corner {{tab.id}} {{tab.cssClass}}" data-action="tab" data-group="sheet" data-tab="{{tab.id}}">
+        <span>{{localize (concat 'Liber.Character.Bouton.' tab.id)}}</span>
+      </a>
+    </div>
+  {{/each}}
+</nav>
