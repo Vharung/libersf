@@ -147,13 +147,16 @@
       ]
     }
   ],
+  "url": "https://github.com/Vharung/libersf",
+  "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
+  "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
   "background": "systems/libersf/assets/system/accueil.webp",
   "grid":{
     "dDistance": 1,
     "units": "m"
   },
-  "primaryTokenAttribute": "hp",
-  "secondaryTokenAttribute": "psy",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "shield",
     
   "license": "LICENSE.txt"
 }
