@@ -30,7 +30,6 @@ export default class LiberCharacterData extends foundry.abstract.DataModel {
       piece: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       maxpiece: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       biography: new fields.HTMLField({ required: false, blank: true, initial: "", textSearch: true }),
-      avantagerace: new fields.HTMLField({ required: false, blank: true, initial: "+10 Diplomatie, +10 Perception, +10 Science, +10 Balistique. 10 Négociation", textSearch: true }),
       sun1: new fields.HTMLField({ required: true, initial: "" }),
       sun2: new fields.HTMLField({ required: true, initial: "" }),
       sun3: new fields.HTMLField({ required: true, initial: "" }),

@@ -27,17 +27,39 @@
         "Medecin": "Doctor",
         "Militaire": "Soldier",
         "Technicien": "Technician",
-        "Combattant": "Fighter"
+        "Combattant": "Fighter",
+        "Avantage": {
+          "Artisan": "+10 Crafting",
+          "Marchand": "+10 Negotiation",
+          "Colon": "+10 Survival",
+          "Intellectuel": "+10 Investigation",
+          "Malandrin": "+10 Stealth",
+          "Pilote": "+10 Piloting",
+          "Medecin": "+10 Medicine",
+          "Militaire": "+10 Shooting",
+          "Technicien": "+10 Mechanics",
+          "Combattant": "+10 Strength"
+        }
       },
       "Race": {
         "Humain": "Human",
-        "Arturien": "Arthurian",
+        "Arthurien": "Arthurian",
         "Dragon": "Alpha Draconian",
         "Machine": "Machine",
-        "Pleiadiens": "Pleiadian",
+        "Pleiadien": "Pleiadian",
         "Yoribien": "Yoribian",
         "Elfen": "Elfen",
-        "Orcanien": "Orcanian"
+        "Orcanien": "Orcanian",
+        "Avantage": {
+          "Humain": "+10 Diplomacy; +10 Perception, +10 Science, +10 Ballistics",
+          "Arthurien": "+10 Dexterity, +10 Perception, +10 Survival, Energy Burst",
+          "Dragon": "+10 Combat, +10 Diplomacy, +10 Piloting, Regeneration",
+          "Machine": "+10 Crafting, +10 Hacking, +10 Science, Network Interconnection",
+          "Pleiadien": "+10 Combat, +10 Perception, +10 Stealth, Empathic Link",
+          "Yoribien": "+10 Agility, +10 Perception, +10 Survival, Reinforced Exoskeleton",
+          "Elfen": "+10 Agility, +10 Stealth, +10 Perception, Technophile",
+          "Orcanien": "+10 Strength, +10 Combat, +10 Piloting, Berserk Fury"
+        }
       },
       "Faction": {
         "Empire": "Empire",

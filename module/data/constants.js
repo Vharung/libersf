@@ -1,6 +1,7 @@
 export const METIERS = {
     MARCHAND: "Marchand",
     ARTISAN: "Artisan",
+    COLON: "Colon",
     INTELLECTUEL: "Intellectuel",
     MALANDRIN: "Malandrin",
     PILOTE: "Pilote",

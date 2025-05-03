@@ -3,6 +3,7 @@ fiche peso
 	- compétence spécial des races a vérifier
 	- clic sur objet equipé retire un element ou lance roll ?
 
+
 Compentium à faire
 
 	- revoir piece 
@@ -19,76 +20,8 @@ Lang
 	
 ui.notifications.info(`${itemsToAdd.length} objet(s) ajouté(s) à ${this.actor.name} !`); equipé item
 
-
-piece : 
-1. Air de lancement (2 véhicules)
-➔ Permet de déployer rapidement des véhicules pour exploration ou combat : initiative au premier tour.
-
-2. Armurerie
-➔ Permet de réparer inutilisable ou modifier les armes gratuitement une fois par jour et de fabriquer des munitions.
-
-3. Atelier
-➔ Accélère la fabrication ou la réparation d'objets (+50% vitesse de craft ou réparation).
-
-4. Biomes
-➔ Production continue de nourriture et d'oxygène : annule les tests de survie en environnement hostile.
-
-5. Cafétéria
-➔ Permet une récupération mentale : -1 en point de solitude ou réduction du stress après un repas.
-
-6. Capsule de sauvetage (4 places)
-➔ En cas d’urgence, évacuation immédiate avec +20% de chances de survie.
-
-7. Chambre cryogénique
-➔ Mise en stase pour récupérer 100% des PV, maladies ou effets de fatigue (nécessite 24h de sommeil cryogénique).
-
-8. Cuve de soin
-➔ Permet de récupérer tous les PV en 1 heure et de soigner 1 condition grave (poison, brûlure, etc.).
-
-9. Défenses internes
-➔ Turrets automatiques : bonus de +20 à la défense du vaisseau en cas d'abordage.
-
-10. Hangar
-➔ Stockage rapide de véhicules ou modules lourds : +1 véhicule ou drone peut être transporté.
-
-11. Hangar de drones
-➔ Chaque joueur peut contrôler un drone d'assistance pendant les combats (attaque, réparation ou observation).
-
-12. Imprimante 3D pour armes
-➔ Création gratuite de munitions spéciales (type au choix) une fois par jour.
-
-13. Infirmerie
-➔ Traitement rapide : stabilise automatiquement un joueur mourant sans jet de compétence.
-
-14. Laboratoire de recherche
-➔ Permet de créer des prototypes ou analyser des objets/mutations (+1 bonus lors des jets de Science).
-
-15. Pont de commandement
-➔ Coordonne les actions : bonus de +1 à tous les jets d’initiative et de stratégie.
-
-16. Quartier privé
-➔ Donne un bonus temporaire (+1) sur la prochaine compétence utilisée après un repos dans sa chambre.
-
-17. Quartiers de l'équipage
-➔ Récupération complète d'énergie/moral pour l’équipage après 8h de repos.
-
-18. Salle de briefing
-➔ Définir une stratégie avant mission : un joueur peut relancer un jet raté par mission.
-
-19. Salle de réalité virtuelle
-➔ Entraînement intensif : permet d'apprendre temporairement une compétence non maîtrisée pour 24h.
-
-20. Salle de repos
-➔ +2 récupération de stress ou trauma léger après une session de 30 minutes.
-
-21. Salle des loisirs
-➔ Réduit drastiquement la fatigue mentale (-2 stress après utilisation).
-
-22. Salle des machines
-➔ Permet d'optimiser le vaisseau : +5% de vitesse de déplacement pendant 24h après maintenance.
-
-23. Salle des télécommunications
-➔ Communication optimisée : bonus aux négociations et accès à des informations secrètes.
-
-24. Zone de stockage
-➔ Capacité de stockage augmentée : +50% à l'encombrement transportable par le vaisseau.
+Aussi sur le bouclier je l'ai d'équiper mais il me donne pas de bouclier du tout
+Peut être par rapport à la vie actuel 
+Il manque une action "attaquer" pour les armes de melées car on peut tirer et tout mais pas attaquer avec un couteau
+Aussi quand tu montes de niveau tu n'obtiens pas plus de points à répartir
+Ma vengeance c'est de te dire tous les bugs que tu dois corriger en moins d'une semaine

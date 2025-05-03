@@ -8,7 +8,7 @@
     </div>
     <div class="inventory-list cut-corner">
         <h3>{{localize 'Liber.Character.Avantagerace'}}</h3>
-        <p class="avantage">{{actor.system.avantagerace}}</p>
+        <p class="avantage">{{localize (concat 'Liber.Character.Metier.Avantage.' system.metier)}}<br>{{localize (concat 'Liber.Character.Race.Avantage.' system.race)}}</p>
         <h3 class="mutante">{{localize 'Liber.Character.Mutant'}}</h3>
         <div class="moitie">
           {{formField systemFields.mutant name="system.mutant" value=system.mutant localize=true rootId=partId type="select"}}

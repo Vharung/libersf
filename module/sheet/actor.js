@@ -264,89 +264,104 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
 
 
 
-  async _onVerif() {
-    // Calcul des points de compétences
-    const competences = this.actor.system.competences;
-    let exosquelette=false;let logistique=false;let maitre=false;
-    let total = 40;
+ async _onVerif() {
+  const race = this.actor.system.race;
+  const metier = this.actor.system.metier;
+  const level = this.actor.system.level;
+  const competences = this.actor.system.competences;
 
-    for (let key in competences) {
-        if (competences.hasOwnProperty(key)) {
-            total += parseInt(competences[key]) || 0;
-        }
+  let exosquelette = false;
+  let logistique = false;
+  let maitre = false;
+  let total = 40;
+
+  if (race === "humain") total += 10;
+
+  for (let key in competences) {
+    if (competences.hasOwnProperty(key)) {
+      total -= parseInt(competences[key]) || 0;
     }
-
-    // Calcul de l'encombrement
-    const force = this.actor.system.competences.force;
-    const items = this.actor.items;
-    let encmax = force / 2 + 35;
-
-    let enc = 0;
-
-    items.forEach(item => {
-        const quantity = item.system.quantity || 0;
-        const poids = item.system.poids || 0;
-        enc += poids * quantity;
-
-        const equip = item.system.equip;
-        const itemid = item.id;
-        if (equip) {
-            const element = document.querySelector(`li[data-item-id="${itemid}"] .zonecontrolegauche .${equip}`);
-            if (element) {
-                element.style.opacity = "1";
-            }
-        }
-    });
-    enc=Math.round(enc * 10) / 10; 
-
-    // Mise à jour armure et bouclier
-    const armure = this.actor.system.armor;
-    const bouclier = this.actor.system.shield;
-
-    let armor = null;
-    let shield = null;
-
-    items.forEach(item => {
-        const equipLocation = item.system?.equip;
-        if (equipLocation === "middle") {
-            armor = item;
-            if(item.name=="Exosquelette"){
-              exosquelette=true;
-            }
-        } else if (equipLocation === "ceinture") {
-            shield = item;
-        }
-        if(item.name=="Logistique Optimisée"){
-          logistique=true;
-        }
-        if(item.name=="Maître du Fret"){
-          maitre=true;
-        }
-    });
-
-    if(exosquelette){
-      encmax=encmax*2;
-    }
-    if(logistique){
-      encmax=encmax*2;
-    }
-    if(maitre){
-      enc=0
-    }
-    const updates = [];
-    if (armor) updates.push(armor.update({ "system.pv": armure }));
-    if (shield) updates.push(shield.update({ "system.pv": bouclier }));
-
-    // Exécuter les updates en parallèle
-    if (updates.length > 0) await Promise.all(updates);
-
-    // Mise à jour de l'acteur
-    await this.actor.update({
-        'system.pointrestant': total,
-        'system.enc': enc,
-        'system.encmax': encmax
-    });
   }
+
+  const raceBonus = {
+    "Humain": ["diplomatie", "perception", "science", "balistique"],
+    "Arthurien": ["dexterite", "perception", "survie"],
+    "Dragon": ["combat", "diplomatie", "pilote"],
+    "Machine": ["artisanat", "piratage", "science"],
+    "Pleiadien": ["combat", "perception", "discretion"],
+    "Yoribien": ["agilite", "perception", "survie"],
+    "Elfen": ["agilite", "discretion", "perception"],
+    "Orcanien": ["force", "combat", "pilotage"]
+  };
+
+  const competencesConnues = Object.keys(competences);
+  const bonusValides = raceBonus[race]?.filter(c => competencesConnues.includes(c)) || [];
+console.log(race,bonusValides)
+  let updatesActeur = {};
+
+  bonusValides.forEach(nom => {
+    const valeur = parseInt(competences[nom]) || 0;console.log(valeur)
+    if (valeur < -20) {
+      console.warn(`⚠️ La compétence ${nom} est inférieure à -20 pour la race ${race}, mise à -20.`);
+      updatesActeur[`system.competences.${nom}`] = -20;
+    }
+  });
+
+  // Calcul de l'encombrement
+  const force = parseInt(this.actor.system.competences.force) || 0;
+  const items = this.actor.items;
+  let encmax = force / 2 + 35;
+  let enc = 0;
+
+  items.forEach(item => {
+    const quantity = item.system.quantity || 0;
+    const poids = item.system.poids || 0;
+    enc += poids * quantity;
+
+    const equip = item.system.equip;
+    const itemid = item.id;
+    if (equip) {
+      const element = this.element.querySelector(`li[data-item-id="${itemid}"] .zonecontrolegauche .${equip}`);
+      if (element) element.style.opacity = "1";
+    }
+
+    const name = item.name.toLowerCase();
+    if (item.system.equip === "middle" && name === "exosquelette") exosquelette = true;
+    if (name === "logistique optimisée") logistique = true;
+    if (name === "maître du fret") maitre = true;
+  });
+
+  if (exosquelette) encmax *= 2;
+  if (logistique) encmax *= 2;
+  if (maitre) enc = 0;
+
+  enc = Math.round(enc * 10) / 10;
+
+  // Mise à jour armure et bouclier
+  const armure = this.actor.system.armor;
+  const bouclier = this.actor.system.shield;
+
+  const itemUpdates = [];
+
+  items.forEach(item => {
+    if (item.system?.equip === "middle") {
+      itemUpdates.push(item.update({ "system.pv": armure }));
+    } else if (item.system?.equip === "ceinture") {
+      itemUpdates.push(item.update({ "system.pv": bouclier }));
+    }
+  });
+
+  if (itemUpdates.length > 0) await Promise.all(itemUpdates);
+
+  // Finaliser les mises à jour de l’acteur
+  updatesActeur['system.pointrestant'] = total;
+  updatesActeur['system.enc'] = enc;
+  updatesActeur['system.encmax'] = encmax;
+  console.log(updatesActeur)
+
+  await this.actor.update(updatesActeur);
+}
+
 
 
 

@@ -21,23 +21,46 @@
       "Metier":{
         "Artisan": "Artisan",
         "Marchand": "Marchand",
+        "Colon":"Colon",
         "Intellectuel": "Intellectuel",
         "Malandrin": "Malandrin",
         "Pilote": "Pilote",
         "Medecin": "Medecin",
         "Militaire": "Militaire",
         "Technicien": "Technicien",
-        "Combattant": "Combattant"
+        "Combattant": "Combattant",
+        "Avantage":{
+          "Artisan": "+10 Artisanat",
+          "Marchand": "+10 Négociation",
+          "Colon": "+10 Survie",
+          "Intellectuel": "+10 Investigation",
+          "Malandrin": "+10 Discrétion",
+          "Pilote": "+10 Pilote",
+          "Medecin": "+10 Medecine",
+          "Militaire": "+10 Tir",
+          "Technicien": "+10 Mécanique",
+          "Combattant": "+10 Force"
+        }
       },
       "Race":{
         "Humain": "Humain",
-        "Arturien": "Arthurien",
+        "Arthurien": "Arthurien",
         "Dragon": "Alpha Draconien",
         "Machine": "Machine",
-        "Pleiadiens": "Pleiadien",
+        "Pleiadien": "Pleiadien",
         "Yoribien": "Yoribien",
         "Elfen": "Elfen",
-        "Orcanien": "Orcanien"
+        "Orcanien": "Orcanien",
+        "Avantage":{
+          "Humain": "+10 Diplomatie; +10 Perception, +10 Science, +10 Balistique ",
+          "Arthurien": "+10 Dextérité, +10 Perception, +10 Survie, Explosion d'énergie",
+          "Dragon": "+10 Combat, +10 Diplomatie, +10 Pilote, Régénération",
+          "Machine": "+10 Artisanat, +10 Piratage, +10 Science, Interconnexion réseau",
+          "Pleiadien": "+10 Combat, +10 Perception, +10 Discrétion, Lien empathique",
+          "Yoribien": "+10 Agilité, +10 Perception, +10 Survie, Exoquelette renforcé",
+          "Elfen": "+10 Agilité, +10 Discrétion, +10 Perception, Technophile",
+          "Orcanien": "+10 Force, +10 Combat, +10 Pilotage, Fureur berserk",
+        }
       },
       "Faction":{
         "Empire": "Empire",
