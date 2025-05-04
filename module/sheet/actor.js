@@ -268,12 +268,13 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
   const race = this.actor.system.race;
   const metier = this.actor.system.metier;
   const level = this.actor.system.level;
+  const healthmax = this.actor.system.healthmax;
   const competences = this.actor.system.competences;
 
   let exosquelette = false;
   let logistique = false;
   let maitre = false;
-  let total = 40;
+  let total = 30 + (level * 10);
 
   if (race === "humain") total += 10;
 
@@ -282,6 +283,8 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
       total -= parseInt(competences[key]) || 0;
     }
   }
+
+  total = total - (healthmax - 20); 
 
   const raceBonus = {
     "Humain": ["diplomatie", "perception", "science", "balistique"],
@@ -296,7 +299,6 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
 
   const competencesConnues = Object.keys(competences);
   const bonusValides = raceBonus[race]?.filter(c => competencesConnues.includes(c)) || [];
-console.log(race,bonusValides)
   let updatesActeur = {};
 
   bonusValides.forEach(nom => {

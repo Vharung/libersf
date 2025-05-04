@@ -34,7 +34,7 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 #sidebar .flexcol button[data-tab="settings"]{background:url(../assets/system/gears.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
 #sidebar .flexcol button[data-tab="macros"]{background:url(../assets/system/microchip.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
 #sidebar .flexcol button[data-tab="Expand"]{background:var(--couleur-bleuelect);background-size: 50%;text-indent: -9999em;}
-#sidebar .flexcol button.active,#sidebar .flexcol button:hover,#ui-left button[aria-pressed="true"]{border: 1px solid var(--couleur-clair);border-bottom: none;box-shadow: 0 0 10px #0178a2;background-color:var(--couleur-clair2);}
+#sidebar .flexcol button.active,#sidebar .flexcol button:hover{border: 1px solid var(--couleur-clair);border-bottom: none;box-shadow: 0 0 10px #0178a2;background-color:var(--couleur-clair2);}
 
 
 /*Header*/

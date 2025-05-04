@@ -52,14 +52,14 @@
         "Elfen": "Elfen",
         "Orcanien": "Orcanien",
         "Avantage":{
-          "Humain": "+10 Diplomatie; +10 Perception, +10 Science, +10 Balistique ",
+          "Humain": "+10 Diplomatie, +10 Perception, +10 Science, +10 Balistique ",
           "Arthurien": "+10 Dextérité, +10 Perception, +10 Survie, Explosion d'énergie",
           "Dragon": "+10 Combat, +10 Diplomatie, +10 Pilote, Régénération",
           "Machine": "+10 Artisanat, +10 Piratage, +10 Science, Interconnexion réseau",
           "Pleiadien": "+10 Combat, +10 Perception, +10 Discrétion, Lien empathique",
           "Yoribien": "+10 Agilité, +10 Perception, +10 Survie, Exoquelette renforcé",
           "Elfen": "+10 Agilité, +10 Discrétion, +10 Perception, Technophile",
-          "Orcanien": "+10 Force, +10 Combat, +10 Pilotage, Fureur berserk",
+          "Orcanien": "+10 Force, +10 Combat, +10 Pilotage, Fureur berserk"
         }
       },
       "Faction":{
@@ -127,7 +127,7 @@
       "Action":{
         "Simple":"Action Simple",
         "Walk":"Marcher",
-        "Shoot":"Tirer",
+        "Shoot":"Tirer / Attaquer",
         "Cover":"Se mettre à couvert",
         "Talk":"Parler",
         "Indiv":"Recharger",

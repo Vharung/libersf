@@ -41,7 +41,7 @@
           "Combattant": "+10 Strength"
         }
       },
-      "Race": {
+      "Race":{
         "Humain": "Human",
         "Arthurien": "Arthurian",
         "Dragon": "Alpha Draconian",
@@ -50,8 +50,8 @@
         "Yoribien": "Yoribian",
         "Elfen": "Elfen",
         "Orcanien": "Orcanian",
-        "Avantage": {
-          "Humain": "+10 Diplomacy; +10 Perception, +10 Science, +10 Ballistics",
+        "Avantage":{
+          "Humain": "+10 Diplomacy, +10 Perception, +10 Science, +10 Ballistics",
           "Arthurien": "+10 Dexterity, +10 Perception, +10 Survival, Energy Burst",
           "Dragon": "+10 Combat, +10 Diplomacy, +10 Piloting, Regeneration",
           "Machine": "+10 Crafting, +10 Hacking, +10 Science, Network Interconnection",
@@ -61,7 +61,7 @@
           "Orcanien": "+10 Strength, +10 Combat, +10 Piloting, Berserk Fury"
         }
       },
-      "Faction": {
+      "Faction":{
         "Empire": "Empire",
         "OMC": "CMC",
         "Federation": "Federation",
@@ -100,8 +100,8 @@
         "artisanat": "Crafting",
         "balistique": "Ballistics",
         "combat": "Combat",
-        "connaissance_general": "Gen. Knowledge",
-        "connaissance_specifique": "Spec. Knowledge",
+        "connaissance_general": "G. Knowledge",
+        "connaissance_specifique": "Sp Knowledge",
         "dexterite": "Dexterity",
         "diplomatie": "Diplomacy",
         "discretion": "Stealth",
@@ -127,7 +127,7 @@
       "Action": {
         "Simple": "Simple Action",
         "Walk": "Walk",
-        "Shoot": "Shoot",
+        "Shoot": "Shoot / Fight",
         "Cover": "Take Cover",
         "Talk": "Talk",
         "Indiv": "Reload",

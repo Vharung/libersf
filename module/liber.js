@@ -20,6 +20,11 @@ Hooks.once("init", async function () {
   console.log("Initialisation du système Liber...");
   console.log(liber.ASCII)
 
+  CONFIG.Combat.initiative = {
+    formula: "30 + @attributs.Perception + @attributs.Investigation  + 1d20",
+    decimals: 3
+  };
+
   CONFIG.Actor.dataModels = {
     character: LiberCharacterData,
     pnj: LiberCharacterData,
