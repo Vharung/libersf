@@ -1,27 +1,9 @@
 fiche peso 
-	- Bonus race a verifier
-	- compétence spécial des races a vérifier
 	- clic sur objet equipé retire un element ou lance roll ?
 
-
 Compentium à faire
-
-	- revoir piece 
-		- Piece donner fonctionnalité plus précise (soin max, bonus dans certainne compétence, meilleur repos etc) 
-
-	- Planete (lieu)
 	- Véhicule 
-	- Monstre
 	- Regle
 	
-Lang
-	- Creer la base fr.json 
-	- Traduire la partie anglaise
 	
 ui.notifications.info(`${itemsToAdd.length} objet(s) ajouté(s) à ${this.actor.name} !`); equipé item
-
-Aussi sur le bouclier je l'ai d'équiper mais il me donne pas de bouclier du tout
-Peut être par rapport à la vie actuel 
-Il manque une action "attaquer" pour les armes de melées car on peut tirer et tout mais pas attaquer avec un couteau
-Aussi quand tu montes de niveau tu n'obtiens pas plus de points à répartir
-Ma vengeance c'est de te dire tous les bugs que tu dois corriger en moins d'une semaine

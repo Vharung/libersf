@@ -3,7 +3,7 @@
     "Actor": {
       "character": "Personnage",
       "pnj": "PNJ",
-      "monster": "Monstre",
+      "monstre": "Monstre",
       "vehicule": "Véhicule"
     },
     "Item": {
@@ -52,7 +52,7 @@
         "Elfen": "Elfen",
         "Orcanien": "Orcanien",
         "Avantage":{
-          "Humain": "+10 Diplomatie, +10 Perception, +10 Science, +10 Balistique ",
+          "Humain": "+10 Diplomatie; +10 Perception, +10 Science, +10 Balistique ",
           "Arthurien": "+10 Dextérité, +10 Perception, +10 Survie, Explosion d'énergie",
           "Dragon": "+10 Combat, +10 Diplomatie, +10 Pilote, Régénération",
           "Machine": "+10 Artisanat, +10 Piratage, +10 Science, Interconnexion réseau",

@@ -3,7 +3,7 @@
     "Actor": {
       "character": "Character",
       "pnj": "NPC",
-      "monster": "Monster",
+      "monstre": "Monster",
       "vehicule": "Vehicle"
     },
     "Item": {

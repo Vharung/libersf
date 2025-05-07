@@ -29,7 +29,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
     header: { template: "systems/libersf/templates/actors/monster-header.hbs" },
     tabs: { template: "systems/libersf/templates/actors/character-navigation.hbs"},
     stat: { template: "systems/libersf/templates/actors/character-stat.hbs" },
-    biography: { template: "systems/libersf/templates/actors/character-biography.hbs" },
+    biography: { template: "systems/libersf/templates/actors/monster-biography.hbs" },
     inventory: { template: "systems/libersf/templates/actors/character-inventory.hbs" },
     competence: { template: "systems/libersf/templates/actors/character-competence.hbs" }
   };
@@ -144,7 +144,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
     return context;
   }
 
-  _onRender(context, options) {
+  async _onRender(context, options) {
     super._onRender(context, options);  // Appelez la méthode parente si nécessaire
     console.log(context);
 
@@ -244,9 +244,70 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
       }  
     });
     const type=this.actor.type;
+    await this._onVerif()
+     // Calcul de l'encombrement
+    
 
     
   }
+
+  async _onVerif() {
+    const force = parseInt(this.actor.system.competences.force) || 0;
+    const taille = this.actor.system.taille || "moyen";
+    const items = this.actor.items;
+
+    let encmax = force / 2;
+    let enc = 0;
+
+    // Ajustement de l'encmax selon la taille
+    switch (taille) {
+      case "mini":
+        encmax = 0;
+        break;
+      case "petit":
+        encmax += 5;
+        break;
+      case "moyen":
+        encmax += 35;
+        break;
+      case "grand":
+        encmax += 70;
+        break;
+      case "geant":
+        encmax *= 2;
+        break;
+    }
+
+    // Calcul de l'encombrement total
+    items.forEach(item => {
+      if (!item.system) return;
+
+      const quantity = item.system.quantity || 0;
+      const poids = item.system.poids || 0;
+      enc += poids * quantity;
+
+      const equip = item.system.equip;
+      const itemid = item.id;
+
+      if (equip) {
+        const element = this.element.querySelector(`li[data-item-id="${itemid}"] .zonecontrolegauche .${equip}`);
+        if (element) {
+          element.style.opacity = "1";
+        }
+      }
+    });
+
+    // Mise à jour de l'acteur
+    const updatesActeur = {
+      'system.enc': enc,
+      'system.encmax': encmax,
+      'system.avantagerace': ""
+    };
+
+    console.log(updatesActeur);
+    await this.actor.update(updatesActeur);
+  }
+
 
   /** Gestion des événements au rendu */
     /** @override */
