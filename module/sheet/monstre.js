@@ -451,7 +451,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
       const result = roll.total;
       const label = game.i18n.localize(`Liber.Character.Competences.${compt}`);
       let infodegat;
-      let techno=0;
+      let techno="TECHNO0";
 
       
       let color = "var(--couleur-bleuelect)";

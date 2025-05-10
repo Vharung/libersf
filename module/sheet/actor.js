@@ -436,7 +436,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
       });
     }
 
-    async afficherDialogueAbbility() {
+   async afficherDialogueAbbility() {
       return new Promise((resolve) => {
         const dlg = new Dialog({
             title: "Niveau de technologie",

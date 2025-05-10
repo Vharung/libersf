@@ -258,6 +258,8 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .intro-img p{position: absolute;top: 40px;right: 20px;}
 .intro-img span{position: absolute;top: 48px;left: 91px;}
 .intro-chat {height: 34px;padding: 1px;text-align: center;color: var(--couleur-gris);margin-top: 10px;}
+#chat .chat-message.whisper {background: #525456;border:none;}
+#chat .chat-message.blind {background: #747575;border:none;}
 
 /*dialog*/
 body.game .app.window-app.dialog .window-content{background: var(--couleur-gris); color:var(--couleur-blanc);}

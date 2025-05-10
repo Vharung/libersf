@@ -4,6 +4,6 @@ fiche peso
 Compentium à faire
 	- Véhicule 
 	- Regle
-	
+
 	
 ui.notifications.info(`${itemsToAdd.length} objet(s) ajouté(s) à ${this.actor.name} !`); equipé item
