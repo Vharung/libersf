@@ -70,11 +70,11 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .liber .jambed{right: 182px;top: 262px;}
 .liber .infos{border-radius: 50%;width: 70px;height: 70px;}
 .liber .vie{left: 6px;top: -42px;}
-.liber .blindage{left: 20px;top: 10px;font-size: 0.8em;}
-.liber .armure,.liber .champ{left: 20px;top: 90px}
-.liber .champ{font-size: 0.8em;}
+.liber .moteur{left: 10px;top: 0px;font-size: 0.8em;}
+.liber .armure{left: 20px;top: 90px}
+.liber .blindage{left: 20px;top: 90px;font-size: 0.8em;}
 .liber .bouclier{left: 20px;top: 170px;}
-.liber .moteur{left: 10px;top: 162px;font-size: 0.8em;}
+.liber .champ{left: 20px;top: 172px;font-size: 0.8em;}
 .liber .encombrement{left: 20px;top: 250px;}
 .liber .full{left: 20px;top: 250px;font-size: 0.8em;}
 .liber .solitude{left: 108px;top: 10px;background:url(../assets/actor/wolf-howl.webp) no-repeat center center;background-size: 50%;border: 2px solid var(--couleur-bleuelect)}
