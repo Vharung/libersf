@@ -1,7 +1,6 @@
 {
   "id": "libersf",
   "title": "Liber SF Game System",
-  "version": "0.1.0",
   "description": "A simple game system with Physical, Mental, and Social characteristics.",
   "authors": [
     {
