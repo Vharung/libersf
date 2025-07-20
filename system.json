@@ -163,7 +163,7 @@
   "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
   "background": "systems/libersf/assets/system/accueil.webp",
   "grid":{
-    "dDistance": 1,
+    "distance": 1,
     "units": "m"
   },
   "primaryTokenAttribute": "health",
