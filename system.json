@@ -1,5 +1,5 @@
 {
-  "id": "libersf-main",
+  "id": "libersf",
   "title": "Liber SF Game System",
   "description": "A simple game system with Physical, Mental, and Social characteristics.",
   "authors": [
@@ -160,7 +160,7 @@
   ],
   "url": "https://github.com/Vharung/libersf",
   "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
-  "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
+  "download": "https://github.com/Vharung/libersf/releases/download/v4.0.1/libersf-v4.zip",
   "background": "systems/libersf/assets/system/accueil.webp",
   "grid":{
     "distance": 1,
