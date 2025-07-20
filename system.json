@@ -167,6 +167,5 @@
     "units": "m"
   },
   "primaryTokenAttribute": "health",
-  "secondaryTokenAttribute": "shield",    
-  "license": "LICENSE.txt"
+  "secondaryTokenAttribute": "shield"
 }
