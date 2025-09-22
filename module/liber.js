@@ -21,7 +21,7 @@ Hooks.once("init", async function () {
   console.log(liber.ASCII)
 
   CONFIG.Combat.initiative = {
-    formula: "30 + @attributs.Perception + @attributs.Investigation  + 1d20",
+    formula: "@competences.perception + @competences.investigation  + 1d20",
     decimals: 3
   };
 

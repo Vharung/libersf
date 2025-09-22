@@ -7,7 +7,7 @@
       "name": "Vharung",
       "discord": "Vharung"
     }],
-  "version": "4.1.0",
+  "version": "4",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
@@ -160,7 +160,7 @@
   ],
   "url": "https://github.com/Vharung/libersf",
   "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
-  "download": "https://github.com/Vharung/libersf/releases/download/v4.0.1/libersf.zip",
+  "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
   "background": "systems/libersf/assets/system/accueil.webp",
   "grid":{
     "distance": 1,

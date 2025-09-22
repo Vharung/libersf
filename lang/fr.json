@@ -205,12 +205,12 @@
         "Industriel":"Industriel"
       },
       "Attitude":{
-      "Tresamical":"Très amical",
-      "Amical":"Amical",
-      "Neutre":"Neutre",
-      "Agressif":"Agressif",
-      "Tresagressif":"Très agressif"
-     },
+        "Tresamical":"Très amical",
+        "Amical":"Amical",
+        "Neutre":"Neutre",
+        "Agressif":"Agressif",
+        "Tresagressif":"Très agressif"
+       },
       "Mutant":"Mutant",
       "Avantagerace":"Avantage",
       "Pointrestant":"Point Restant",

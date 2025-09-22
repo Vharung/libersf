@@ -15,6 +15,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     actions: {
       editImage: LiberCharacterSheet.#onEditImage,
       edit: LiberCharacterSheet.#onItemEdit,
+      use: LiberCharacterSheet.#onItemUse,
       delete: LiberCharacterSheet.#onItemDelete,
       rollSave: LiberCharacterSheet.#onItemRollSave,
       rollDamage: LiberCharacterSheet.#onItemRollDamage,
@@ -383,6 +384,11 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
      * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
      */
     static async #onItemDelete(event, target) {
+        const itemId = target.getAttribute('data-item-id');
+        const item = this.actor.items.get(itemId);
+        item.delete();
+    }
+    static async #onItemUse(event, target) {
         const itemId = target.getAttribute('data-item-id');
         const item = this.actor.items.get(itemId);
         if (item.system.quantity > 1) {
