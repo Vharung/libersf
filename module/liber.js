@@ -43,18 +43,22 @@ Hooks.once("init", async function () {
     room: LiberItemData
   };
 
-  Actors.unregisterSheet("core", ActorSheetV2);
-  Actors.registerSheet("liber", LiberCharacterSheet, { types: ["character","pnj"], makeDefault: true });
-  Actors.registerSheet("liber", LiberMonsterSheet, { types: ["monstre"], makeDefault: true });
-  Actors.registerSheet("liber", LiberVehiculeSheet, { types: ["vehicule"], makeDefault: true });
-  Items.unregisterSheet("core", ItemSheetV2);
-  Items.registerSheet("liber", LiberItemSheet, { types: ["item"], makeDefault: true });
-  Items.registerSheet("liber", LiberArmorSheet, { types: ["armor"], makeDefault: true });
-  Items.registerSheet("liber", LiberShieldSheet, { types: ["shield"], makeDefault: true });
-  Items.registerSheet("liber", LiberWeaponSheet, { types: ["weapon"], makeDefault: true });
-  Items.registerSheet("liber", LiberCompetenceSheet, { types: ["competence"], makeDefault: true });
-  Items.registerSheet("liber", LiberWeaponSheet, { types: ["weaponvehicule"], makeDefault: true });
-  Items.registerSheet("liber", LiberRoomSheet, { types: ["room"], makeDefault: true });
+// Acteurs
+foundry.documents.collections.Actors.unregisterSheet("core", ActorSheetV2);
+foundry.documents.collections.Actors.registerSheet("liber", LiberCharacterSheet, { types: ["character","pnj"], makeDefault: true });
+foundry.documents.collections.Actors.registerSheet("liber", LiberMonsterSheet, { types: ["monstre"], makeDefault: true });
+foundry.documents.collections.Actors.registerSheet("liber", LiberVehiculeSheet, { types: ["vehicule"], makeDefault: true });
+
+// Items
+foundry.documents.collections.Items.unregisterSheet("core", ItemSheetV2);
+foundry.documents.collections.Items.registerSheet("liber", LiberItemSheet, { types: ["item"], makeDefault: true });
+foundry.documents.collections.Items.registerSheet("liber", LiberArmorSheet, { types: ["armor"], makeDefault: true });
+foundry.documents.collections.Items.registerSheet("liber", LiberShieldSheet, { types: ["shield"], makeDefault: true });
+foundry.documents.collections.Items.registerSheet("liber", LiberWeaponSheet, { types: ["weapon"], makeDefault: true });
+foundry.documents.collections.Items.registerSheet("liber", LiberCompetenceSheet, { types: ["competence"], makeDefault: true });
+foundry.documents.collections.Items.registerSheet("liber", LiberWeaponSheet, { types: ["weaponvehicule"], makeDefault: true });
+foundry.documents.collections.Items.registerSheet("liber", LiberRoomSheet, { types: ["room"], makeDefault: true });
+
   
 });
 

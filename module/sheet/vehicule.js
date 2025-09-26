@@ -110,14 +110,14 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     switch (partId) {
       case "biography":
         context.tab = context.tabs.biography;
-        context.enrichedBiography = await TextEditor.enrichHTML(this.document.system.biography, { async: true });
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.biography, { async: true });
         break;
       case "inventory":
         context.tab = context.tabs.inventory;
         context.items = [];
         const itemsRaw = this.document.items;
         for (const item of itemsRaw) {
-            item.enrichedDescription = await TextEditor.enrichHTML(item.system.description, { async: true });
+            item.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description, { async: true });
             context.items.push(item);
       }
       break;

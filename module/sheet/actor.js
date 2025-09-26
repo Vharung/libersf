@@ -59,7 +59,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
   async _prepareContext() {
     console.log("Préparation du contexte de la feuille de personnage...");
     const filter = this.document.system.inventory;
-    const items = this.document.items.toObject();
+    const items = this.document.items;
 
     let armorpvmax, shieldpvmax;
 
@@ -74,22 +74,10 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     };
 
     // Répartir les objets selon leur emplacement d'équipement
-    items.forEach(item => {
+    for (const item of items) {
         const equipLocation = item.system?.equip;
-        if (equipLocation === "droite") {
-            filteredItems.droite.push(item);
-        } else if (equipLocation === "gauche") {
-            filteredItems.gauche.push(item);
-        } else if (equipLocation === "middle") {
-            filteredItems.middle.push(item);
-        } else if (equipLocation === "ceinture") {
-            filteredItems.ceinture.push(item);
-        } else if (equipLocation === "chargeur") {
-            filteredItems.chargeur.push(item);
-        } else {
-            filteredItems.autres.push(item);
-        }
-    });
+        (filteredItems[equipLocation] ?? filteredItems.autres).push(item);
+    }
 
     // Trier les compétences
     let competence = items
@@ -131,14 +119,14 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     switch (partId) {
       case "biography":
         context.tab = context.tabs.biography;
-        context.enrichedBiography = await TextEditor.enrichHTML(this.document.system.biography, { async: true });
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.biography, { async: true });
         break;
       case "inventory":
         context.tab = context.tabs.inventory;
         context.items = [];
         const itemsRaw = this.document.items;
         for (const item of itemsRaw) {
-            item.enrichedDescription = await TextEditor.enrichHTML(item.system.description, { async: true });
+            item.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description, { async: true });
             context.items.push(item);
       }
       break;
@@ -312,11 +300,11 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
 
   // Calcul de l'encombrement
   const force = parseInt(this.actor.system.competences.force) || 0;
-  const items = this.actor.items;
+  const objet = this.actor.items;
   let encmax = force / 2 + 35;
   let enc = 0;
 
-  items.forEach(item => {
+  objet.forEach(item => {
     const quantity = item.system.quantity || 0;
     const poids = item.system.poids || 0;
     enc += poids * quantity;
@@ -346,7 +334,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
 
   const itemUpdates = [];
 
-  items.forEach(item => {
+  objet.forEach(item => {
     if (item.system?.equip === "middle") {
       itemUpdates.push(item.update({ "system.pv": armure }));
     } else if (item.system?.equip === "ceinture") {

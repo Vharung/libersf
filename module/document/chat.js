@@ -138,7 +138,7 @@ export default class LiberChat {
         d.owner = this.actor.id;
         console.log(d)
         // Call the template renderer.
-        return await renderTemplate(this.template, d);
+        return await foundry.applications.handlebars.renderTemplate(this.template, d);
 
     }
 

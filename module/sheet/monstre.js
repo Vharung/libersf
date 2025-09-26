@@ -57,7 +57,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
   async _prepareContext() {
     console.log("Préparation du contexte de la feuille de personnage...");
     const filter = this.document.system.inventory;
-    const items = this.document.items.toObject();
+    const objet = this.document.items.toObject();
 
     let armorpvmax, shieldpvmax;
 
@@ -72,7 +72,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
     };
 
     // Répartir les objets selon leur emplacement d'équipement
-    items.forEach(item => {
+    objet.forEach(item => {
         const equipLocation = item.system?.equip;
         if (equipLocation === "droite") {
             filteredItems.droite.push(item);
@@ -129,14 +129,14 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
     switch (partId) {
       case "biography":
         context.tab = context.tabs.biography;
-        context.enrichedBiography = await TextEditor.enrichHTML(this.document.system.biography, { async: true });
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.biography, { async: true });
         break;
       case "inventory":
         context.tab = context.tabs.inventory;
         context.items = [];
         const itemsRaw = this.document.items;
         for (const item of itemsRaw) {
-            item.enrichedDescription = await TextEditor.enrichHTML(item.system.description, { async: true });
+            item.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description, { async: true });
             context.items.push(item);
       }
       break;
