@@ -52,6 +52,14 @@ export default class LiberItemData extends foundry.abstract.DataModel {
 	        TECHNO10: TECHNO.TECHNO10
 			  }
 		}),
+	    contents: new fields.ArrayField(//ajoute contenu
+        new fields.SchemaField({
+          id: new fields.StringField({ required: true }),   // ID de l'item contenu
+          name: new fields.StringField({ required: true }), // Nom de l'item
+          qty: new fields.NumberField({ required: true, min: 1, initial: 1 })
+        }),
+        { initial: [] }
+      ),
 			energie: new fields.StringField({
 			 	required: true,
         initial: ENERGIE.CINETIQUE, // Valeur par défaut

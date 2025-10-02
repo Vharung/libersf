@@ -1,24 +1,42 @@
 <div class="inventory-list cut-corner" style="height:200px">
-	<div class="half">
-        <label>{{localize 'Liber.Items.Poids'}}
-			{{formInput systemFields.poids name="system.poids" value=system.poids localize=true rootId=partId}}
-	    </label>  
-	    <label>{{localize 'Liber.Items.Pv'}}
-			{{formInput systemFields.pv name="system.pv" value=system.pv localize=true rootId=partId}}
-	    </label> 
-	    <label>{{localize 'Liber.Items.Protection'}}
-			{{formInput systemFields.vetement name="system.vetement" value=system.vetement localize=true rootId=partId}}
-	    </label> 
-    </div>
-    <div class="half">
-        <label>{{localize 'Liber.Items.Valeur'}}
-			{{formInput systemFields.valeur name="system.valeur" value=system.valeur localize=true rootId=partId}}
-	    </label> 
-	    <label>{{localize 'Liber.Items.Pvmax'}}
-	    	{{formInput systemFields.pvmax name="system.pvmax" value=system.pvmax localize=true rootId=partId}}
-	    </label> 
-        <label>{{localize 'Liber.Items.Techno'}}
-            {{formInput systemFields.techno name="system.techno" value=system.techno localize=true rootId=partId}}
-        </label>         
+    <div id="biography" class="tab active" data-group="sheet" data-tab="biography">
+		<div class="half">
+	        <label>{{localize 'Liber.Items.Poids'}}
+				{{formInput systemFields.poids name="system.poids" value=system.poids localize=true rootId=partId}}
+		    </label>  
+		    <label>{{localize 'Liber.Items.Pv'}}
+				{{formInput systemFields.pv name="system.pv" value=system.pv localize=true rootId=partId}}
+		    </label> 
+		    <label>{{localize 'Liber.Items.Protection'}}
+				{{formInput systemFields.vetement name="system.vetement" value=system.vetement localize=true rootId=partId}}
+		    </label> 
+	    </div>
+	    <div class="half">
+	        <label>{{localize 'Liber.Items.Valeur'}}
+				{{formInput systemFields.valeur name="system.valeur" value=system.valeur localize=true rootId=partId}}
+		    </label> 
+		    <label>{{localize 'Liber.Items.Pvmax'}}
+		    	{{formInput systemFields.pvmax name="system.pvmax" value=system.pvmax localize=true rootId=partId}}
+		    </label> 
+	        <label>{{localize 'Liber.Items.Techno'}}
+	            {{formInput systemFields.techno name="system.techno" value=system.techno localize=true rootId=partId}}
+	        </label>         
+	    </div>
+	 </div>
+    <div id="detail" class="tab" data-group="sheet" data-tab="detail">
+        <div class="conteneur" style="height:152px">
+          <ul>
+            {{#each system.contents as |c idx|}}
+                <li>
+                    <input type="number" name="system.contents.{{idx}}.qty" value="{{c.qty}}" min="0" class="content-qty">
+                    <input type="text" name="system.contents.{{idx}}.name" value="{{c.name}}" class="content-name">
+                    <button type="button" class="deletecontent" data-index="{{idx}}" data-action="deletecontent">🗑</button>
+                </li>
+            {{/each}}
+          </ul>
+         
+        </div>
+     <button type="button" class="add" data-action="addContent">{{localize "Liber.Items.Ajouter"}}</button>
+
     </div>
 </div>

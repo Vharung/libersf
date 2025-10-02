@@ -17,5 +17,15 @@
           name="system.biography"
         }}
 	</div>
+	<div class="navitem cut-corner" style="margin-top:10px">
+	<!-- ✅ Ajout d'une classe .tabs + data-group="sheet" obligatoire -->
+      <nav class="navitem sheet-tabs tabs" data-group="sheet">
+        {{#each tabs as |tab|}}
+          <a class="item {{tab.cssClass}}" data-tab="{{tab.id}}">
+            <i class="{{tab.icon}}"></i> {{tab.label}}
+          </a>
+        {{/each}}
+      </nav>
+    </div>
 </header>
      

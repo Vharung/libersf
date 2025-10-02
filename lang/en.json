@@ -266,6 +266,7 @@
     },
     "Items": {
       "Poids": "Weight",
+      "Ajouter": "Add",
       "Porte": "Range",
       "Consommable": "Consumable",
       "Valeur": "Value",

@@ -267,6 +267,7 @@
       },
     "Items":{
       "Poids":"Poids",
+      "Ajouter":"Ajouter",
       "Porte":"Portée",
       "Consommable":"Consommable",
       "Valeur":"Valeur",

@@ -6,4 +6,109 @@ Compentium à faire
 	- Regle
 
 	
-ui.notifications.info(`${itemsToAdd.length} objet(s) ajouté(s) à ${this.actor.name} !`); equipé item
+Objet	Composition
+Animateur de chair	1 Biomasse + 2 Nano-électronique + 1 Énergie
+Assistance médicale	1 Électronique + 1 Fibre synthétique + 1 Produit chimique
+Balise de détresse	1 Plastique + 1 Électronique + 1 Énergie
+Batterie	2 Cristal énergétique + 2 Fer + 1 Carbone
+Bouclier anti-émeute (léger)	2 Plastique + 1 Acier
+Bouclier anti-émeute (moyen)	2 Acier + 1 Carbone + 1 Plastique
+Bouclier anti-émeute (lourd)	3 Acier + 2 Carbone + 1 Fibre synthétique
+Bouteille d’oxygène	1 Acier + 1 Plastique + 1 Fibre synthétique
+Brouilleur	2 Nano-électronique + 1 Énergie + 1 Carbone
+Camouflage optique	2 Nano-électronique + 1 Fibre synthétique + 1 Cristal énergétique
+Camouflage thermique	1 Nano-électronique + 1 Fibre synthétique + 1 Céramique
+Chaussures magnétiques	1 Composite magnétique + 1 Fer + 1 Fibre synthétique
+Combinaison anti-radiation / virus	2 Fibre synthétique + 1 Céramique + 1 Produit chimique
+Contrôleur biométrique	2 Nano-électronique + 1 Carbone + 1 Énergie
+Détecteur de métaux	1 Électronique + 1 Composite magnétique + 1 Plastique
+Douglas & Adams 6	2 Produit chimique + 1 Nano-électronique + 1 Fer
+Drogue Amnésique	2 Produit chimique + 1 Biomasse
+Drogue Boost	1 Produit chimique + 1 Biomasse
+Drogue de Contrôle	2 Produit chimique + 1 Biomasse
+Drogue Hallucinogène	2 Produit chimique + 1 Biomasse
+Drogue Speed	2 Produit chimique + 1 Biomasse
+Drogue Strong	2 Produit chimique + 1 Biomasse
+Drone de combat	2 Titane + 2 Nano-électronique + 1 Énergie
+Drone de reconnaissance	1 Titane + 2 Électronique + 1 Fibre synthétique
+Drone de transport	1 Acier + 1 Plastique + 1 Énergie
+Explosif	2 Produit chimique + 1 Fer
+Extincteur	1 Fer + 1 Plastique + 1 Produit chimique
+Grappin magnétique	1 Composite magnétique + 1 Fer + 1 Plastique
+Grenade collante	1 Produit chimique + 1 Plastique
+Illusion holographique	2 Nano-électronique + 1 Énergie + 1 Carbone
+Jet pack	2 Titane + 1 Carbone + 1 Énergie
+Jumelles	1 Verre + 1 Plastique + 1 Électronique
+Modificateur de gravité	2 Cristal énergétique + 2 Nano-électronique + 1 Titane
+Kit de déminage	1 Électronique + 1 Plastique + 1 Fer
+Kit de réparation	1 Électronique + 1 Fer + 1 Plastique
+Kit de soin	1 Produit chimique + 1 Fibre synthétique + 1 Plastique
+Kit de traduction	2 Électronique + 1 Nano-électronique
+Lampe	1 Plastique + 1 Verre + 1 Énergie
+Lunette de visée	1 Verre + 1 Plastique + 1 Électronique
+Lunette de vision thermique	1 Verre + 1 Électronique + 1 Céramique
+Menottes	1 Fer + 1 Plastique
+Membre bionique	2 Titane + 2 Nano-électronique + 1 Fibre synthétique
+Mine	2 Fer + 1 Produit chimique
+Miniaturiseur	2 Cristal énergétique + 2 Nano-électronique + 1 Carbone
+Mouchard	1 Nano-électronique + 1 Plastique
+Ordinateur	2 Électronique + 1 Nano-électronique + 1 Carbone
+Photo holographique	1 Nano-électronique + 1 Verre + 1 Plastique
+Radar de mouvement	1 Électronique + 1 Carbone + 1 Plastique
+Radar infrarouge	1 Électronique + 1 Verre + 1 Céramique
+Radio	1 Plastique + 1 Électronique + 1 Énergie
+Ralentisseur de temps	3 Cristal énergétique + 2 Nano-électronique
+Réanimateur	2 Électronique + 1 Produit chimique + 1 Cristal énergétique
+Robot chirurgien	2 Nano-électronique + 1 Énergie + 1 Fibre synthétique
+Sérum de vérité	2 Produit chimique + 1 Biomasse
+Silencieux	1 Fer + 1 Carbone + 1 Plastique
+Spray médical	1 Produit chimique + 1 Plastique
+Super acide	2 Produit chimique + 1 Céramique
+Téléporteur	3 Cristal énergétique + 2 Nano-électronique
+Tenue d’invisibilité	2 Fibre synthétique + 2 Nano-électronique
+Virus biologique	2 Biomasse + 1 Produit chimique
+Virus informatique	1 Nano-électronique + 1 Électronique
+
+Arme	Composition (matériaux)
+Taser	1 Électronique + 1 Énergie + 1 Plastique
+Taser Sonique	1 Nano-électronique + 1 Électronique + 1 Énergie + 1 Plastique
+Pistolet Laser	2 Nano-électronique + 1 Cristal énergétique + 1 Titane
+Pistolet léger* (cinétique)	2 Acier + 1 Électronique + 1 Plastique
+Pistolet lance-flamme	1 Fer + 2 Produit chimique (carburant) + 1 Électronique
+Pistolet Mitrailleur*	3 Acier + 1 Électronique + 1 Énergie
+Pistolet Mitrailleur Lourd	4 Acier + 1 Carbone + 1 Énergie + 1 Plastique
+Pistolet Plasmique	3 Nano-électronique + 2 Cristal énergétique + 1 Titane
+Fusil à pompe*	4 Acier + 1 Plastique
+Lance-Flamme (arme)	2 Fer + 2 Produit chimique + 1 Énergie
+Fusil à pompe Lourd	5 Acier + 1 Carbone + 1 Plastique
+Fusil d’Assaut*	4 Acier + 1 Électronique + 1 Énergie
+Fusil Sonique	2 Nano-électronique + 1 Électronique + 1 Titane
+Fusil Laser	3 Nano-électronique + 1 Cristal énergétique + 1 Titane
+Fusil Plasmique	4 Nano-électronique + 3 Cristal énergétique + 1 Titane
+Fusil de Précision* (ballistique)	3 Acier + 1 Carbone + 1 Verre (longue-vue)
+Fusil de Précision laser	3 Nano-électronique + 1 Cristal énergétique + 1 Titane + 1 Verre
+Fusil Plasmique Lourd	5 Nano-électronique + 4 Cristal énergétique + 2 Titane
+Lance-Grenade	3 Acier + 2 Produit chimique + 1 Plastique
+Lance-Roquette	4 Acier + 3 Produit chimique + 1 Énergie
+Mitrailleuse Lourde	6 Acier + 2 Carbone + 2 Énergie + 1 Plastique
+Railgun	4 Titane + 3 Composite magnétique + 3 Énergie + 2 Nano-électronique + 1 Carbone
+Grenade (A) (fragmentation)	2 Produit chimique + 1 Fer + 1 Plastique
+Grenade Sonique	1 Nano-électronique + 1 Produit chimique + 1 Plastique
+Grenade Plasmique	2 Cristal énergétique + 1 Nano-électronique + 1 Produit chimique
+Grenade incendiaire	1 Produit chimique + 1 Plastique + 1 Fer
+Grenade aveuglante (flash)	1 Produit chimique + 1 Verre (élément flash) + 1 Plastique
+Grenade fumigène	1 Produit chimique + 1 Plastique
+Grenade antichar	3 Produit chimique + 2 Fer + 1 Carbone
+Grenade EMP	2 Nano-électronique + 1 Cristal énergétique + 1 Énergie + 1 Fer
+
+Objet	Composition (matériaux)	Remarque
+Combinaison spatiale	2 Fibre synthétique + 1 Céramique + 1 Électronique + 1 Énergie	Pour sorties extra-véhiculaire — étanchéité & filtration
+Combinaison de pilotage	2 Fibre synthétique + 1 Nano-électronique + 1 Cristal énergétique + 1 Carbone	Amélioration pilotage (+10) via interfaces et stabilisateurs
+Vêtement kevlar	2 Fibre synthétique + 1 Céramique + 1 Plastique	Protection balistique légère, flexible
+Armure légère*	2 Acier + 1 Fibre synthétique + 1 Céramique + 1 Électronique	Mobilité élevée, bonne protection de base
+Armure moyenne*	3 Acier + 1 Carbone + 1 Céramique + 1 Nano-électronique	Meilleure résistance, modulaire (slots pour upgrades)
+Armure lourde*	4 Acier + 2 Carbone + 1 Titane + 1 Céramique + 1 Nano-électronique	Protection maximale, lourde et encombrante
+Champ de force — léger	2 Nano-électronique + 1 Cristal énergétique + 1 Énergie	Bouclier portable, durée/puissance limitée
+Champ de force — moyen	3 Nano-électronique + 1 Cristal énergétique + 1 Énergie + 1 Carbone	Meilleure résilience et surface couverte
+Champ de force — lourd	4 Nano-électronique + 2 Cristal énergétique + 1 Énergie + 1 Titane	Fort, consomme beaucoup d’énergie
+Exosquelette	3 Titane + 2 Carbone + 2 Nano-électronique + 1 Énergie + 1 Fibre synthétique	Double capacité d’encombrement — servo-assistance & structure
