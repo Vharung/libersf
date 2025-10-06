@@ -5,7 +5,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 export default class LiberItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   static DEFAULT_OPTIONS = {
     classes: ["liber", "item"],
-    position: { width: 500, height: 550 },
+    position: { width: 500, height: 600 },
     form: { submitOnChange: true },
     window: { resizable: true },
     actions: {

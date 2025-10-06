@@ -7,10 +7,6 @@ Compentium à faire
 
 	
 Objet	Composition
-Animateur de chair	1 Biomasse + 2 Nano-électronique + 1 Énergie
-Assistance médicale	1 Électronique + 1 Fibre synthétique + 1 Produit chimique
-Balise de détresse	1 Plastique + 1 Électronique + 1 Énergie
-Batterie	2 Cristal énergétique + 2 Fer + 1 Carbone
 Bouclier anti-émeute (léger)	2 Plastique + 1 Acier
 Bouclier anti-émeute (moyen)	2 Acier + 1 Carbone + 1 Plastique
 Bouclier anti-émeute (lourd)	3 Acier + 2 Carbone + 1 Fibre synthétique

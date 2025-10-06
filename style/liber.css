@@ -188,7 +188,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 }
 
 /*inventaire*/
-.liber .inventory-list{width:470px; height: 150px;padding:10px;margin-top: 10px;}
+.liber .inventory-list{width:470px; height: 175px;padding:10px;margin-top: 10px;}
 .liber .inventory-tabs{display:flex;gap:10px;font-size:12px;margin-bottom:10px}
 .liber .inventory-tabs div{cursor:pointer;padding:4px 8px;background:var(--couleur-gris);border:1px solid var(--couleur-clair2);border-radius:4px}
 .liber .inventaire {height: 290px; overflow: auto;    padding: 0;}
@@ -294,7 +294,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .half input{margin-bottom: 10px}
 .liber .qty input{width: 100px;height: 100px;font-size: 2em;text-align: center;}
 .liber .top{position: relative;top: 10px;}
-.liber .conteneur {height: 106px; overflow: auto;}
+.liber .conteneur {height: 130px; overflow: auto;}
 .liber .conteneur li {list-style: none}
 .liber .conteneur input[type="number"] {width: 60px}
 .liber .conteneur input[type="text"] {width:calc(100% - 112px)}
