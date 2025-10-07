@@ -30,7 +30,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
     tabs: { template: "systems/libersf/templates/actors/character-navigation.hbs"},
     stat: { template: "systems/libersf/templates/actors/character-stat.hbs" },
     biography: { template: "systems/libersf/templates/actors/monster-biography.hbs" },
-    inventory: { template: "systems/libersf/templates/actors/character-inventory.hbs" },
+    inventory: { template: "systems/libersf/templates/actors/monster-inventory.hbs" },
     competence: { template: "systems/libersf/templates/actors/character-competence.hbs" }
   };
 
@@ -57,7 +57,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
   async _prepareContext() {
     console.log("Préparation du contexte de la feuille de personnage...");
     const filter = this.document.system.inventory;
-    const objet = this.document.items.toObject();
+    const items = this.document.items;
 
     let armorpvmax, shieldpvmax;
 
@@ -72,7 +72,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
     };
 
     // Répartir les objets selon leur emplacement d'équipement
-    objet.forEach(item => {
+    items.forEach(item => {
         const equipLocation = item.system?.equip;
         if (equipLocation === "droite") {
             filteredItems.droite.push(item);
