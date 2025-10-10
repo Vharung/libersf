@@ -42,7 +42,7 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 #ui-right #sidebar{background: none}
 #ui-right menu.flexcol{margin-left: 10px}
 #ui-right #sidebar nav.faded-ui{border-bottom-left-radius: 5px;opacity:1;}
-#ui-right #sidebar nav.faded-ui,#ui-right #sidebar #sidebar-content{background: var(--couleur-noir)}
+#ui-right #sidebar nav.faded-ui,#ui-right #sidebar #sidebar-content{background: #000}
 #sidebar .flexcol button[data-tab="chat"]{background: url(../assets/system/talk.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
 #sidebar .flexcol button[data-tab="combat"]{background:url(../assets/system/light-sabers.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
 #sidebar .flexcol button[data-tab="scenes"]{background:url(../assets/system/earth-africa-europe.webp) no-repeat center center var(--couleur-bleuelect);background-size: 80%;text-indent: -9999em;}
@@ -75,12 +75,13 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 
 /*navigation*/
 .liber nav.tabs {border:none}
+.liber .tab {display: block;height: 645px;overflow-y: auto;overflow-x: hidden;}
 .liber .boutons{display: inline-block;margin-top: 10px;}
 .button-lumineux {padding: 6px 10px;background: transparent;border: 2px solid var(--couleur-bleuelect);color: var(--couleur-blanc);font-size: 12px;cursor: pointer;transition: all 0.3s ease;box-shadow: 0 0 10px var(--couleur-blanc), 0 0 20px transparent;}
 .button-lumineux:hover, .button-lumineux.active {box-shadow: 0 0 20px var(--couleur-blanc), 0 0 40px var(--couleur-blanc);border-color: var(--couleur-blanc);color: #ffffff;background-color: rgba(0, 247, 255, 0.1);}
 
 /*stat*/
-.liber .character-biography{width:470px; height: 343px;padding:10px;margin-top: 10px;position: relative;}
+.liber .character-biography{width:470px; height: 343px;padding:10px;margin-top: 2px;position: relative;}
 .liber .character-biography svg{height: 300px;position: absolute;left: 270px;}
 .liber .part,.liber .infos{width: 50px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
 .liber .part-vehicule{width: 75px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
