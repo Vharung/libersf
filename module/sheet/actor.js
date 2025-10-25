@@ -2,6 +2,10 @@ const ActorSheetV2 = foundry.applications.sheets.ActorSheetV2;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import LiberChat from "../document/chat.js";
 
+// Import en haut du fichier
+import WeaponSelectionDialog from "../document/weponselectiondialog.js";
+import TechLevelDialog from "../document/techleveldialog.js";
+
 /** Gestion de la feuille de personnage */
 
 export default class LiberCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
@@ -395,81 +399,6 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
         const roll = await this.actor.rollSave(ability);
         //console.log('roll', roll);
     }
-
-    async afficherDialogueSelection(weapons, TIRMODES) {
-      return new Promise((resolve) => {
-        const options = weapons.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
-        const tirOptions = Object.entries(TIRMODES)
-          .map(([key, label]) => `<option value="${key}">${label}</option>`)
-          .join('');
-
-        new Dialog({
-          title: "Sélectionnez une arme",
-          content: `
-            <p>${game.i18n.localize("Liber.Roll.Choixarme")}</p>
-            <select id="selected-weapon">${options}</select>
-            <p>${game.i18n.localize("Liber.Roll.Choixtir")}</p>
-            <select id="selected-tir">${tirOptions}</select>
-          `,
-          buttons: {
-            confirm: {
-              label: "Valider",
-              callback: (html) => {
-                const weaponId = html[0].querySelector("#selected-weapon").value;
-                const selectedTir = html[0].querySelector("#selected-tir").value;
-                resolve({ weaponId, selectedTir });
-              }
-            },
-            cancel: {
-              label: "Annuler",
-              callback: () => resolve(null)
-            }
-          },
-          default: "confirm"
-        }).render(true);
-      });
-    }
-
-    async afficherDialogueAbbility() {
-      return new Promise((resolve) => {
-        const dlg = new Dialog({
-            title: "Niveau de technologie",
-            content: `
-                <p>${game.i18n.localize(`Liber.Items.Techno`)} :</p>
-                <select id="tech-level" name="system.techno">
-                    <option value="0" selected>☆ ☆ ☆ ☆ ☆</option>
-                    <option value="1">✬ ☆ ☆ ☆ ☆</option>
-                    <option value="2">★ ☆ ☆ ☆ ☆</option>
-                    <option value="3">★ ✬ ☆ ☆ ☆</option>
-                    <option value="4">★ ★ ☆ ☆ ☆</option>
-                    <option value="5">★ ★ ✬ ☆ ☆</option>
-                    <option value="6">★ ★ ★ ☆ ☆</option>
-                    <option value="7">★ ★ ★ ✬ ☆</option>
-                    <option value="8">★ ★ ★ ★ ☆</option>
-                    <option value="9">★ ★ ★ ★ ✬</option>
-                    <option value="10">★ ★ ★ ★ ★</option>
-                </select>
-            `,
-            buttons: {
-                confirm: {
-                    label: "Valider",
-                    callback: (html) => {
-                        const select = html[0].querySelector("#tech-level");
-                        const level = parseInt(select.value);
-                        resolve(level);
-                    }
-                },
-                cancel: {
-                    label: "Annuler",
-                    callback: () => resolve(null)
-                }
-            },
-            default: "confirm"
-        });
-        dlg.render(true);
-    });
-  }
-
     /**
      * @param {PointerEvent} event - The originating click event
      * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
@@ -522,7 +451,12 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
           ui.notifications.warn("Aucune arme équipée !");
           return;
         }
-        const selection = await this.afficherDialogueSelection(weapons, TIRMODES);
+        const selection = await new Promise((resolve) => {
+          const dialog = new WeaponSelectionDialog(weapons, TIRMODES);
+          dialog._resolve = resolve;
+          dialog.render(true);
+        });
+
         if (!selection) return;
 
         //recuperer dialog
@@ -589,7 +523,12 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
         }
         await chargeur.update(updateData);
       }else if (["artisanat", "balistique", "mecanique", "navigation", "pilotage", "piratage", "science", "visee"].includes(compt)){
-        techno = await this.afficherDialogueAbbility();
+        //techno = await this.afficherDialogueAbbility();
+        techno = await new Promise((resolve) => {
+          const dialog = new TechLevelDialog();
+          dialog._resolve = resolve;
+          dialog.render(true);
+        });
         techno="TECHNO"+techno;
       }
 

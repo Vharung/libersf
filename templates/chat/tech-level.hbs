@@ -1,0 +1,21 @@
+<div class="tech-level-dialog">
+  <div class="form-group">
+    <label for="tech-level">{{techLabel}} :</label>
+    <select id="tech-level" name="system.techno">
+      {{#each techLevels}}
+        <option value="{{this.value}}" {{#if (eq this.value 0)}}selected{{/if}}>
+          {{this.label}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="dialog-buttons">
+    <button type="button" data-action="confirm" class="dialog-button confirm">
+      <i class="fas fa-check"></i> Valider
+    </button>
+    <button type="button" data-action="cancel" class="dialog-button cancel">
+      <i class="fas fa-times"></i> Annuler
+    </button>
+  </div>
+</div>
