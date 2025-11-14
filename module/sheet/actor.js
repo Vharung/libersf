@@ -559,11 +559,11 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
         }
         let dif=etoilemax - techno ;
         if(dif>0){dif=0;}
-        valuemax=valuemax + dif*5;
+        valuemax=valuemax + dif*5;if(valuemax<0){valuemax=0;}
         info = `${result}/${valuemax}`;
-
+        
        // Définir le message en fonction du résultat
-      if (["tir","visee"].includes(compt)) { 
+      if (["tir"].includes(compt)) { 
             if(result>echec){
                 infodegat=game.i18n.localize('Liber.Roll.Degat.Inutilisable');
             }else if(result>(valuemax+20)){
@@ -577,6 +577,21 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
                 infodegat=dommage*1.5;
             }else if(result<=critique){
                 infodegat=dommage*2;
+            }
+        }
+        if (["visee"].includes(compt)) { 
+            if(result>echec){
+                infodegat=game.i18n.localize('Liber.Roll.Degat.Inutilisable');
+            }else if(result>(valuemax+20)){
+                infodegat=game.i18n.localize('Liber.Roll.Degat.Enraye');
+            }else if(result>valuemax){
+                infodegat=game.i18n.localize('Liber.Roll.Nodommage');
+            }else if(result>(valuemax-20)){
+                infodegat="Degat normal";
+            }else if(result>critique){
+                infodegat="Degat x1.5";
+            }else if(result<=critique){
+                infodegat="Degat x2";
             }
         }
       if (result > echec || valuemax==0) {
