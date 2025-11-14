@@ -415,7 +415,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
       let info = "";
       let succes = "";
       let valuemax = base + valeur + bonus;
-      const result = roll.total;
+      let result = roll.total;
       const label = game.i18n.localize(`Liber.Character.Competences.${compt}`);
       let infodegat;
       let techno="TECHNO0";
