@@ -325,19 +325,19 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     
     // Vérifier les limites
     if (valeur < minValeur) {
-      console.warn(`⚠️ La compétence ${nom} est inférieure à ${minValeur}, ajustée.`);
+      //console.warn(`⚠️ La compétence ${nom} est inférieure à ${minValeur}, ajustée.`);
       updatesActeur[`system.competences.${nom}`] = minValeur;
     } else if (valeur > maxValeur) {
-      console.warn(`⚠️ La compétence ${nom} dépasse le maximum de ${maxValeur}, ajustée.`);
+      //console.warn(`⚠️ La compétence ${nom} dépasse le maximum de ${maxValeur}, ajustée.`);
       updatesActeur[`system.competences.${nom}`] = maxValeur;
     }
     
-    console.log(`Compétence: ${nom}, Valeur: ${valeur}, Min: ${minValeur}, Max: ${maxValeur}, Bonus: +${bonus}`);
+    //console.log(`Compétence: ${nom}, Valeur: ${valeur}, Min: ${minValeur}, Max: ${maxValeur}, Bonus: +${bonus}`);
   });
 
   // Appliquer les mises à jour si nécessaire
   if (Object.keys(updatesActeur).length > 0) {
-    await actor.update(updatesActeur);
+    await this.actor.update(updatesActeur);
     console.log("Compétences ajustées:", updatesActeur);
   }
 

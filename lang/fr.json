@@ -239,7 +239,7 @@
         "Choixarme":"Choisissez l'arme utilisée :",
         "Choixtir":"Choisissez le type de tir :",
         "Degat":{
-          "Inutilisable":"Arme Inutilisable",
+          "Inutilisable":"Arme Inutilisable.",
           "Enraye":"L'arme est enrayé pour 1 tour"
         },
         "ModesTir": {

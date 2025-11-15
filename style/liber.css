@@ -305,7 +305,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 /*Chat*/
 #chat .chat-message{background: var(--couleur-grisclair); color:var(--couleur-blanc);border:none}
 #chat .chat-message .message-header{color:var(--couleur-blanc);}
-.intro-img{padding:10px;position: relative;}
+.intro-img{padding:10px;position: relative;color:var(--couleur-blanc);}
 .intro-img img{width: 70px;height: 70px;border-radius: 50%;border: 2px solid var(--couleur-bleuelect);display: block;} 
 .intro-img h3{color: var(--couleur-bleuelect);position: absolute;top: 10px;font-size: 1.2em;left: 90px;padding: 0;margin: 0;} 
 .intro-img p{position: absolute;top: 40px;right: 20px;}
