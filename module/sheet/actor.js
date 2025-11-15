@@ -267,9 +267,9 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
   let exosquelette = false;
   let logistique = false;
   let maitre = false;
-  let total = 30 + (level * 10);
+  let total = (level - 1)* 10;
 
-  if (race === "humain") total += 10;
+  //if (race === "humain") total += 10;
 
   for (let key in competences) {
     if (competences.hasOwnProperty(key)) {
@@ -278,6 +278,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
   }
 
   total = total - (healthmax - 20); 
+
 
   const raceBonus = {
     "Humain": ["diplomatie", "perception", "science", "balistique"],
@@ -290,17 +291,56 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     "Orcanien": ["force", "combat", "pilotage"]
   };
 
+  const metierBonus = {
+    "Marchand": ["negociation"],
+    "Artisan": ["artisanat"],
+    "Colon": ["survie"],
+    "Intellectuel": ["investigation"],
+    "Malandrin": ["discretion"],
+    "Pilote": ["pilotage"],
+    "Medecin": ["medecine"],
+    "Militaire": ["tir"],
+    "Technicien": ["mecanique"],
+    "Combattant": ["force"]
+  };
+
   const competencesConnues = Object.keys(competences);
-  const bonusValides = raceBonus[race]?.filter(c => competencesConnues.includes(c)) || [];
+  const bonusRace = raceBonus[race]?.filter(c => competencesConnues.includes(c)) || [];
+  const bonusMetier = metierBonus[metier]?.filter(c => competencesConnues.includes(c)) || [];
+
   let updatesActeur = {};
 
-  bonusValides.forEach(nom => {
-    const valeur = parseInt(competences[nom]) || 0;console.log(valeur)
-    if (valeur < -20) {
-      console.warn(`⚠️ La compétence ${nom} est inférieure à -20 pour la race ${race}, mise à -20.`);
-      updatesActeur[`system.competences.${nom}`] = -20;
+  competencesConnues.forEach(nom => {
+    const valeur = parseInt(competences[nom]) || 0;
+    
+    // Calculer le bonus selon la présence dans race/métier
+    let bonus = 0;
+    
+    if (bonusRace.includes(nom)) bonus += 10;
+    if (bonusMetier.includes(nom)) bonus += 10;
+    
+    // Limites : -30 à +30, +10 par bonus
+    const minValeur = -30;
+    const maxValeur = 30 + bonus;
+    
+    // Vérifier les limites
+    if (valeur < minValeur) {
+      console.warn(`⚠️ La compétence ${nom} est inférieure à ${minValeur}, ajustée.`);
+      updatesActeur[`system.competences.${nom}`] = minValeur;
+    } else if (valeur > maxValeur) {
+      console.warn(`⚠️ La compétence ${nom} dépasse le maximum de ${maxValeur}, ajustée.`);
+      updatesActeur[`system.competences.${nom}`] = maxValeur;
     }
+    
+    console.log(`Compétence: ${nom}, Valeur: ${valeur}, Min: ${minValeur}, Max: ${maxValeur}, Bonus: +${bonus}`);
   });
+
+  // Appliquer les mises à jour si nécessaire
+  if (Object.keys(updatesActeur).length > 0) {
+    await actor.update(updatesActeur);
+    console.log("Compétences ajustées:", updatesActeur);
+  }
+
 
   // Calcul de l'encombrement
   const force = parseInt(this.actor.system.competences.force) || 0;
