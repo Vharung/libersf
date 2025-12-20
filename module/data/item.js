@@ -35,6 +35,14 @@ export default class LiberItemData extends foundry.abstract.DataModel {
 		            [CHOISE.YES]: game.i18n.localize("Liber.Character.Choix.Yes")
 	        	}
 	    }),
+	    casser: new fields.StringField({
+	        required: true,
+	        initial: CHOISE.NO, // Valeur par défaut
+	        choices: {
+		            [CHOISE.NO]: game.i18n.localize("Liber.Character.Choix.No"),
+		            [CHOISE.YES]: game.i18n.localize("Liber.Character.Choix.Yes")
+	        	}
+	    }),
 	    techno: new fields.StringField({
 		    required: true,
 		    initial: "TECHNO0",  // correspond à la clé

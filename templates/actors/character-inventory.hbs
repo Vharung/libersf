@@ -10,7 +10,11 @@
         </div>
       <ul class="inventaire">
           {{#each visibleItems as |item id|}} 
-              <li class="item fexrow type-{{item.type}} draggable" data-item-id="{{item._id}}" style="background:url({{item.img}}) center center no-repeat;background-size:50%" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.degat}} | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
+              <li class="item fexrow type-{{item.type}} draggable 
+                {{#if (eq item.system.casser "Yes")}} casser{{/if}} 
+                {{#if (and (eq item.system.pv 0) (or (eq item.type "armor") (eq item.type "shield")))}} casser{{/if}}
+                {{#if (eq item.system.enrayer "Yes")}} enrayer{{/if}}" data-item-id="{{item._id}}" 
+              style="background:url({{item.img}}) center center no-repeat;background-size:50%" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.degat}} | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
                 <div class="item-qty">{{item.system.quantity}}</div>
                 <div class="item-weigth">{{item.system.poids}}Kg</div>
                 <div class="item-name">{{item.name}}</div>
@@ -28,7 +32,6 @@
                 </div>
                 <!--
                   <div class="item-controls">
-
                     <span class="dice" data-action="rollDamage" data-item-id="{{item._id}}"><i class="fa-solid fa-dice-d20"></i></span>
                   </div>
                 </div-->

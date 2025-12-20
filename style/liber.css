@@ -301,6 +301,8 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .conteneur input[type="text"] {width:calc(100% - 112px)}
 .liber .conteneur .deletecontent{float: right;margin-top: 3px;}
 .liber.item button.add{width: 100%}
+.liber .casser{border-color: red !important;color: red;}
+.liber .enrayer{border-color: orange !important;color: orange;}
 
 /*Chat*/
 #chat .chat-message{background: var(--couleur-grisclair); color:var(--couleur-blanc);border:none}
