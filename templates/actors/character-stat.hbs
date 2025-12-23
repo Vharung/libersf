@@ -131,17 +131,18 @@
             
             <div class="item middle">
                 {{#each inventory.middle as |item id|}}
-                    <div class="item noborder" style="background:url({{item.img}}) no-repeat center center var(--couleur-gris);background-size:contain" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.degat}} | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
+                    <div class="item noborder" style="background:url({{item.img}}) no-repeat center center var(--couleur-gris);background-size:contain" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.porter}} | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
                         <a class="desequi" data-action="desequip" data-ou="middle" data-item-id="{{item._id}}">🗑</a>
-                        <span class="nombre">{{item.system.quantity}}</<span>
+                        {{#if (eq item.type "weapon")}}<span class="distance">{{item.system.porter}} m</span>{{else}}<span class="nombre">{{item.system.quantity}}</<span>{{/if}}
                     </div>
                 {{/each}}
             </div>
             <div class="item maingauche">
                 {{#each inventory.gauche as |item id|}}
-                    <div class="item noborder" style="background:url({{item.img}}) no-repeat center center var(--couleur-gris);background-size:contain" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.degat}} | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
+                    <div class="item noborder" style="background:url({{item.img}}) no-repeat center center var(--couleur-gris);background-size:contain" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.porter}} | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
+
                         <a class="desequi" data-action="desequip" data-ou="gauche" data-item-id="{{item._id}}">🗑</a>
-                        <span class="nombre">{{item.system.quantity}}</<span>
+                        {{#if (eq item.type "weapon")}}<span class="distance">{{item.system.porter}} m</span>{{else}}<span class="nombre">{{item.system.quantity}}</<span>{{/if}}
                     </div>
                 {{/each}}
             </div>

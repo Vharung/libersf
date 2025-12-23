@@ -196,6 +196,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .inventaire li{height: 100px; width:100px; margin: 0 5px 5px 0; display: inline-block;position:relative;font-size: 0.8em;border: solid 1px var(--couleur-clair2);}
 .liber .inventaire .item-qty{position: absolute;top:0px;left: 3px;}
 .liber .inventaire .item-weigth{position: absolute;top:0px;right: 3px;}
+.liber .inventaire .item-distance{position: absolute;top: 13px;  right: 3px;}
 .liber .inventaire .item-name{position: absolute;bottom:0px;left: 3px;width: 92px;text-align:center;}
 .liber .inventaire .zonecontroledroit{position: absolute;right: 3px;width: 10px;top: 25px;}
 .liber .inventaire .zonecontrolegauche {position: absolute;left: 3px;width: 13px;top: 15px;height: 50px;}
@@ -234,7 +235,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .inventory h3{border-bottom:1px solid #444;padding-bottom:5px;margin-bottom:10px}
 .liber .items{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
 .liber .item img{width:24px;height:24px;display:block;margin:0 auto 4px}
-.liber .nombre{position: relative;left: -16px;background: var(--couleur-gris);padding: 5px;}
+.liber .nombre, .liber .distance{position: relative;left: -16px;background: var(--couleur-gris);padding: 5px;}
 .liber .input-vehi select{margin-bottom: 12px}
 .liber .kit{background: url(../assets/actor/light-backpack.webp) no-repeat center center;background-size:contain;display: inline-block;height: 25px;width: 25px;}
 .liber .prosemirror menu, prose-mirror menu {padding: 0;}

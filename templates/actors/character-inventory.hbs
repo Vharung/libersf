@@ -14,9 +14,10 @@
                 {{#if (eq item.system.casser "Yes")}} casser{{/if}} 
                 {{#if (and (eq item.system.pv 0) (or (eq item.type "armor") (eq item.type "shield")))}} casser{{/if}}
                 {{#if (eq item.system.enrayer "Yes")}} enrayer{{/if}}" data-item-id="{{item._id}}" 
-              style="background:url({{item.img}}) center center no-repeat;background-size:50%" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.degat}} | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
+              style="background:url({{item.img}}) center center no-repeat;background-size:50%" title="{{stripHTML item.system.biography}}{{#if (eq item.type "weapon")}} | Porter:{{item.system.porter}} m | Dommage: {{item.system.degat}}{{/if}}{{#if (eq item.type "armor")}}| Protection:{{item.system.protec}}{{/if}} [ {{item.system.valeur}}Cr ]">
                 <div class="item-qty">{{item.system.quantity}}</div>
                 <div class="item-weigth">{{item.system.poids}}Kg</div>
+                <div class="item-distance">{{#if (eq item.type "weapon")}} {{item.system.porter}} m{{/if}}</div>
                 <div class="item-name">{{item.name}}</div>
                 <div class="zonecontroledroit">
                   <a class="item-control item-edit" title="Edit Item" data-action="edit" data-item-id="{{item._id}}"><i class="fas fa-edit"></i></a>
