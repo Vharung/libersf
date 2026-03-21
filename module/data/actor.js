@@ -1,7 +1,7 @@
 import {METIERS, RACES, FACTIONS, SEX, CHOISE, COMPETENCES, ATTITUDE, TAILLE, TECHNO, TYPES, TAILLEV, IAMODEL, MOTEURMODEL, BLINDAGEMODEL, USAGE} from "./constants.js"; // Import de la constante METIERS
 
 /** Modèle de données pour un personnage */
-export default class LiberCharacterData extends foundry.abstract.DataModel {
+export default class LiberCharacterData extends foundry.abstract.TypeDataModel  {
   static defineSchema() {
     const fields = foundry.data.fields;
     return {

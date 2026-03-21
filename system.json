@@ -7,10 +7,10 @@
       "name": "Vharung",
       "discord": "Vharung"
     }],
-  "version": "4",
+  "version": "5",
   "compatibility": {
-    "minimum": "13",
-    "verified": "13"
+    "minimum": "14",
+    "verified": "14"
   },
   "license": "MIT",
   "scripts": [],
@@ -158,6 +158,23 @@
       ]
     }
   ],
+  "documentTypes": {
+    "Actor": {
+      "character": { "htmlFields": ["biography"] },
+      "pnj":       { "htmlFields": ["biography"] },
+      "monstre":   { "htmlFields": ["biography"] },
+      "vehicule":   { "htmlFields": ["biography"] }
+    },
+    "Item": {
+      "item":   { "htmlFields": ["biography"] },
+      "armor":  { "htmlFields": ["biography"] },
+      "shield":  { "htmlFields": ["biography"] },
+      "weapon": { "htmlFields": ["biography"] },
+      "competence":  { "htmlFields": ["biography"] },
+      "weaponvehicule":  { "htmlFields": ["biography"] },
+      "room":  { "htmlFields": ["biography"] }
+    }
+  },
   "url": "https://github.com/Vharung/libersf",
   "manifest": "https://raw.githubusercontent.com/Vharung/libersf/main/system.json",
   "download": "https://github.com/Vharung/libersf/archive/refs/heads/main.zip",
@@ -165,7 +182,5 @@
   "grid":{
     "distance": 1,
     "units": "m"
-  },
-  "primaryTokenAttribute": "health",
-  "secondaryTokenAttribute": "shield"
+  }
 }

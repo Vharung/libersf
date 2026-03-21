@@ -1,9 +1,0 @@
-fiche peso 
-	- clic sur objet equipé retire un element ou lance roll ?
-
-Compentium à faire
-	- Véhicule 
-	- Regle
-
-	
-ui.notifications.info(`${itemsToAdd.length} objet(s) ajouté(s) à ${this.actor.name} !`); equipé item

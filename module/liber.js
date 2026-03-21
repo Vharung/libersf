@@ -43,6 +43,13 @@ Hooks.once("init", async function () {
     room: LiberItemData
   };
 
+CONFIG.Actor.trackableAttributes = {
+      character: { bar: ["hp", "shield"], value: ["niveau", "armure"] },
+      pnj:       { bar: ["hp", "shield"], value: ["niveau", "armure"] },
+      monstre:   { bar: ["hp", "shield"], value: ["niveau", "armure"] }
+  };
+
+
 // Acteurs
 foundry.documents.collections.Actors.unregisterSheet("core", ActorSheetV2);
 foundry.documents.collections.Actors.registerSheet("liber", LiberCharacterSheet, { types: ["character","pnj"], makeDefault: true });
