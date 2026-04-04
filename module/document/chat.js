@@ -90,6 +90,7 @@ export default class LiberChat {
                 token: null,
             },
             content: this.content,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             rolls: []
         }
         console.log(messageData)
@@ -106,18 +107,19 @@ export default class LiberChat {
         }
 
         // Set the whisper and blind parameters according to the player roll mode settings
-        switch (game.settings.get('core', 'rollMode')) {
-            case 'gmroll':
+        switch (game.settings.get('core', 'messageMode')) {
+            case 'gm':
                 messageData.whisper = ChatMessage.getWhisperRecipients('GM').map((u) => u.id);
                 break;
-            case 'blindroll':
+            case 'blind':
                 messageData.whisper = ChatMessage.getWhisperRecipients('GM').map((u) => u.id);
                 messageData.blind = true;
                 break;
-            case 'selfroll':
+            case 'self':
                 messageData.whisper = [game.user.id];
                 break;
         }
+        console.log(messageData)
        
         this.chatData = messageData;
 
@@ -136,7 +138,8 @@ export default class LiberChat {
         // Update the data to provide to the template
         const d =  foundry.utils.duplicate(this.data);
         d.owner = this.actor.id;
-        console.log(d)
+        d.mode  = game.settings.get('core', 'messageMode');
+        console.log(d.mode)
         // Call the template renderer.
         return await foundry.applications.handlebars.renderTemplate(this.template, d);
 

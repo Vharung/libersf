@@ -524,6 +524,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
             succes:game.i18n.localize('Liber.Items.armeenrayé')
           };
 
+
           let chat = await new LiberChat(this.actor)
               .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
               .withContent("rollDamage")
@@ -666,6 +667,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
           colors:colors,
           succes: succes
       };
+      console.log(chatData)
 
       let chat = await new LiberChat(this.actor)
           .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")

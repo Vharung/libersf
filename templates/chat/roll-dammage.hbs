@@ -1,12 +1,10 @@
-<div class="chat roll">
-  {{#if (ne data.actingCharImg "icons/svg/mystery-man.svg")}}
+<div class="chat roll {{mode}}">
     <div class="intro-img cut-corner">
       <img src="{{actingCharImg}}" title="{{actingCharName}}" />
       <h3>{{actingCharName}}</h3>
       <p>{{{info}}}</p>
       <span>{{introText}}</span>
     </div>
-  {{/if}}
   {{#if infoarme}}
     <div class="intro-chat cut-corner">
       <p class="resultat" style="color:var(--couleur-blanc)">{{{infoarme}}}</p>
