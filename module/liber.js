@@ -72,3 +72,69 @@ foundry.documents.collections.Items.registerSheet("liber", LiberRoomSheet, { typ
 Handlebars.registerHelper('stripHTML', function(text) {
     return text.replace(/(<([^>]+)>)/gi, "");
 });
+
+// ----------------------------------------------------------------
+// Token — déplacement durant le turn order
+// ----------------------------------------------------------------
+if (!game.liberMovement) game.liberMovement = {};
+
+Hooks.on("updateCombat", (combat, changed) => {
+  if (!("turn" in changed) && !("round" in changed)) return;
+  game.liberMovement = {};
+});
+
+Hooks.on("preUpdateToken", (tokenDoc, changes) => {
+  if (!game.combat?.started) return;
+  if (!tokenDoc.isOwner) return;
+
+  if (changes.x === undefined && changes.y === undefined) return;
+
+  const id = tokenDoc.id;
+
+  const DISTANCE_MAX = tokenDoc.occludable.radius ?? 8;
+
+  const gridSize = canvas.grid.size;
+  const gridDistance = canvas.scene.grid.distance ?? 1;
+
+  const dx = (changes.x ?? tokenDoc.x) - tokenDoc.x;
+  const dy = (changes.y ?? tokenDoc.y) - tokenDoc.y;
+
+  const pixels = Math.sqrt(dx * dx + dy * dy);
+  const meters = (pixels / gridSize) * gridDistance;
+
+  if (!game.liberMovement[id]) {
+    game.liberMovement[id] = { moved: 0, sprinting: false, warned: false };
+  }
+
+  const state = game.liberMovement[id];
+  const total = state.moved + meters;
+
+  const walk = DISTANCE_MAX;
+  const sprint = DISTANCE_MAX * 2;
+
+  // 🔴 limite absolue
+  if (total > sprint) {
+    ui.notifications.error("⛔ Max "+sprint+" !");
+    return false;
+  }
+
+  // 🟠 dépassement marche → blocage + warning
+  if (total > walk && !state.sprinting) {
+    if (!state.warned) {
+      ui.notifications.warn("⚠️ Sprint nécessaire ! Refaite le déplacement pour confirmer.");
+      state.warned = true;
+    } else {
+      state.sprinting = true;
+      ui.notifications.info("🏃 Sprint activé !");
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ token: tokenDoc }),
+        content: `<strong>🏃 Sprint !</strong> <em>${tokenDoc.name}</em> dépasse sa marche normale et se met à sprinter.`,
+        type: CONST.CHAT_MESSAGE_TYPES?.OOC ?? 1,
+      });
+    }
+    return false;
+  }
+
+  // ✅ autorisé
+  state.moved = total;
+});
