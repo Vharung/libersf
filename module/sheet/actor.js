@@ -654,20 +654,51 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
           colors ='var(--couleur-blanc)';
 
       }
-      console.log(colors)
+
+      // ── Cible désignée ─────────────────────────────────────────────
+      const targets = game.user.targets;
+      let targetInfo = "";  // a voir en fonction du type d'arme pour la prise en non de l'armure ou du chanmp de bataille
+/*
+      if (targets.size > 0) {
+        const targetActor = targets.first().actor;
+
+        if (targetActor && infodegat && !isNaN(Number(infodegat))) {
+          const degats    = Number(infodegat);
+          const armure    = Number(targetActor.system.armure)   || 0;
+          const hpActuel  = Number(targetActor.system.hp.value) || 0;
+          const degatsNet = Math.max(0, degats - armure);
+          const hpNouveau = Math.max(0, hpActuel - degatsNet);
+
+          await targetActor.update({ "system.hp.value": hpNouveau });
+
+          if (hpNouveau <= 0) {
+            await targetActor.toggleStatusEffect("dead", { active: true, overlay: true });
+          } else {
+            await targetActor.toggleStatusEffect("dead", { active: false, overlay: false });
+          }
+
+          targetInfo = `
+            <div class="target-result">
+              <img src="${targetActor.img}">
+              <strong>${targetActor.name}</strong> —
+              ${hpNouveau <= 0 ? "<br><span style='color:#ff3333;'>☠ Hors combat</span>" : ""}
+            </div>`;
+        }
+      }*/
+
       // Pour affichage ou log si besoin :
       let chatData = {
           actingCharName: actor.name,
           actingCharImg: actor.img,
-          info:info,
+          info: info,
           introText: label,
-          infoarme:infoarme,
-          infodegat:infodegat,
-          color:color,
-          colors:colors,
-          succes: succes
+          infoarme: infoarme,
+          infodegat: infodegat,
+          color: color,
+          colors: colors,
+          succes: succes + targetInfo   // ← targetInfo ajouté ici
       };
-      console.log(chatData)
+      // Pour affichage ou log si besoin :
 
       let chat = await new LiberChat(this.actor)
           .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
