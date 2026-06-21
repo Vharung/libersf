@@ -1,4 +1,4 @@
-import {CHOISE, TECHNO, ENERGIE, VETEMENT} from "./constants.js"; // Import de la constante METIERS
+import {CHOISE, TECHNO, ENERGIE, VETEMENT, PREREQUIS, METIERS} from "./constants.js"; // Import de la constante METIERS
 
 /** Modèle de données pour un objet */
 export default class LiberItemData extends foundry.abstract.TypeDataModel  {
@@ -10,7 +10,16 @@ export default class LiberItemData extends foundry.abstract.TypeDataModel  {
 		quantity: new fields.NumberField({ required: true, min: 0, initial: 1 }),
 		position: new fields.NumberField({ required: true, min: 0, initial: 0 }),
 		degat: new fields.NumberField({ required: true, min: 0, initial: 0 }),
-		prerequis: new fields.StringField({ required: true, initial: "Aucun" }),
+		prerequis:  new fields.StringField({
+	        required: true,
+	        initial: PREREQUIS.ACTIF, // Valeur par défaut
+	        choices: {
+		            [PREREQUIS.ACTIF]: game.i18n.localize("Liber.Character.Choix.Actif"),
+		            [PREREQUIS.SUPPORT]: game.i18n.localize("Liber.Character.Choix.Support"),
+		            [PREREQUIS.PASSIF]: game.i18n.localize("Liber.Character.Choix.Passif"),
+		            [PREREQUIS.SPECIALISATION]: game.i18n.localize("Liber.Character.Choix.Specialisation")
+	        	}
+	    }),
 		porter: new fields.NumberField({ required: true, min: 0, initial: 0 }),
 		rayon: new fields.NumberField({ required: true, min: 0, initial: 0 }),
 		poids: new fields.NumberField({ required: true, min: 0, initial: 0 }),
@@ -88,14 +97,33 @@ export default class LiberItemData extends foundry.abstract.TypeDataModel  {
 	          [VETEMENT.TENUE]: game.i18n.localize("Liber.Items.Vetement.Tenue")
       		}
 		}),
+		metier: new fields.StringField({
+        required: true,
+        initial: METIERS.SOLDAT, // Valeur par défaut
+	        choices: {
+	          [METIERS.SOLDAT]: game.i18n.localize("Liber.Character.Metier.Soldat"),
+	          [METIERS.INGENIEUR]: game.i18n.localize("Liber.Character.Metier.Ingenieur"),
+	          [METIERS.HACKER]: game.i18n.localize("Liber.Character.Metier.Hacker"),
+	          [METIERS.MEDECIN]: game.i18n.localize("Liber.Character.Metier.Medecin"),
+	          [METIERS.DIPLOMATE]: game.i18n.localize("Liber.Character.Metier.Diplomate"),
+	          [METIERS.MERCENAIRE]: game.i18n.localize("Liber.Character.Metier.Mercenaire"),
+	          [METIERS.CHASSEUR]: game.i18n.localize("Liber.Character.Metier.Chasseur"),
+	          [METIERS.ECLAIREUR]: game.i18n.localize("Liber.Character.Metier.Eclaireur"),
+	          [METIERS.SCIENTIFIQUE]: game.i18n.localize("Liber.Character.Metier.Scientifique"),
+	          [METIERS.CONTREBANDIER]: game.i18n.localize("Liber.Character.Metier.Contrebandier"),
+	          [METIERS.PILOTE]: game.i18n.localize("Liber.Character.Metier.Pilote"),
+	          [METIERS.TOUS]: game.i18n.localize("Liber.Character.Metier.Tous")
+	          
+	        }
+	      }),
 		champ: new fields.StringField({
 			 	required: true,
         initial: VETEMENT.CHAMP, // Valeur par défaut
-        choices: {
-          [VETEMENT.CHAMP]: game.i18n.localize("Liber.Items.Vetement.Champ"),
-          [VETEMENT.BOUCL]: game.i18n.localize("Liber.Items.Vetement.Boucl")
-      	}
-			})
+	        choices: {
+	          [VETEMENT.CHAMP]: game.i18n.localize("Liber.Items.Vetement.Champ"),
+	          [VETEMENT.BOUCL]: game.i18n.localize("Liber.Items.Vetement.Boucl")
+	      	}
+		})
     };
   }
 }

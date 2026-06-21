@@ -12,6 +12,7 @@ import LiberCompetenceSheet from "./sheet/competence.js";
 import LiberRoomSheet from "./sheet/room.js";
 import LiberItemData from "./data/item.js";
 
+
 const ActorSheetV2 = foundry.applications.sheets.ActorSheetV2;
 const ItemSheetV2 = foundry.applications.sheets.ItemSheetV2;
 
@@ -68,6 +69,7 @@ foundry.documents.collections.Items.registerSheet("liber", LiberRoomSheet, { typ
 
   
 });
+
 
 Handlebars.registerHelper('stripHTML', function(text) {
     return text.replace(/(<([^>]+)>)/gi, "");
@@ -138,3 +140,4 @@ Hooks.on("preUpdateToken", (tokenDoc, changes) => {
   // ✅ autorisé
   state.moved = total;
 });
+

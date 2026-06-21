@@ -1,916 +1,618 @@
 const ActorSheetV2 = foundry.applications.sheets.ActorSheetV2;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import LiberChat from "../document/chat.js";
-
-// Import en haut du fichier
+import { RaceBonus, MetierBonus } from "../data/constants.js";
 import WeaponSelectionDialog from "../document/weponselectiondialog.js";
 import TechLevelDialog from "../document/techleveldialog.js";
 
-/** Gestion de la feuille de personnage */
-
 export default class LiberCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
-  /** @override */
+
   static DEFAULT_OPTIONS = {
     classes: ["liber", "actor", "character"],
     position: { width: 500, height: 900 },
     form: { submitOnChange: true },
     window: { resizable: true },
-    dragDrop: [{ dragSelector: '[data-drag]', dropSelector: '.inventory-list' }], // Remplacer '.inventory-list' par votre sélecteur    tabGroups: { sheet: "inventory" },
+    dragDrop: [{ dragSelector: '[data-drag]', dropSelector: '.inventory-list' }],
     actions: {
-      editImage: LiberCharacterSheet.#onEditImage,
-      edit: LiberCharacterSheet.#onItemEdit,
-      use: LiberCharacterSheet.#onItemUse,
-      delete: LiberCharacterSheet.#onItemDelete,
-      rollSave: LiberCharacterSheet.#onItemRollSave,
+      editImage:  LiberCharacterSheet.#onEditImage,
+      edit:       LiberCharacterSheet.#onItemEdit,
+      use:        LiberCharacterSheet.#onItemUse,
+      delete:     LiberCharacterSheet.#onItemDelete,
+      rollSave:   LiberCharacterSheet.#onItemRollSave,
       rollDamage: LiberCharacterSheet.#onItemRollDamage,
-      filtre:LiberCharacterSheet.#onFiltre,
-      equip: LiberCharacterSheet.#onItemEquip,
-      desequip: LiberCharacterSheet.#onItemDesequip,
-      kit: LiberCharacterSheet.#onKit
+      filtre:     LiberCharacterSheet.#onFiltre,
+      equip:      LiberCharacterSheet.#onItemEquip,
+      desequip:   LiberCharacterSheet.#onItemDesequip,
+      kit:        LiberCharacterSheet.#onKit,
+      level1:     LiberCharacterSheet.#initializerNiveau1,
+      AddCompt:   LiberCharacterSheet.#addCompt,
     }
   };
 
-  /** @override */
   static PARTS = {
-    header: { template: "systems/libersf/templates/actors/character-header.hbs" },
-    tabs: { template: "systems/libersf/templates/actors/character-navigation.hbs"},
-    stat: { template: "systems/libersf/templates/actors/character-stat.hbs" },
-    biography: { template: "systems/libersf/templates/actors/character-biography.hbs" },
-    inventory: { template: "systems/libersf/templates/actors/character-inventory.hbs" },
+    header:     { template: "systems/libersf/templates/actors/character-header.hbs" },
+    tabs:       { template: "systems/libersf/templates/actors/character-navigation.hbs" },
+    stat:       { template: "systems/libersf/templates/actors/character-stat.hbs" },
+    biography:  { template: "systems/libersf/templates/actors/character-biography.hbs" },
+    inventory:  { template: "systems/libersf/templates/actors/character-inventory.hbs" },
     competence: { template: "systems/libersf/templates/actors/character-competence.hbs" }
   };
 
+  // ─── Onglets ─────────────────────────────────────────────────────────────────
 
-  /** Gestion des onglets */
   #getTabs() {
-    const tabs = {
-      config: { id: "config", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.config" },
-      biography: { id: "biography", group: "sheet", icon: "fa-solid fa-book", label: "liber.Labels.long.biography" },
-      inventory: { id: "inventory", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.inventory" },
-      competence: { id: "competence", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.competence" }
-      
+    const activeTab = this.tabGroups.sheet ?? "config";
+    const defs = {
+      config:     { icon: "fa-solid fa-shapes",  label: "liber.Labels.long.config" },
+      biography:  { icon: "fa-solid fa-book",    label: "liber.Labels.long.biography" },
+      inventory:  { icon: "fa-solid fa-shapes",  label: "liber.Labels.long.inventory" },
+      competence: { icon: "fa-solid fa-shapes",  label: "liber.Labels.long.competence" },
     };
-    const activeTab = this.tabGroups.sheet || "background"; // Si aucune valeur n'est définie, l'onglet "features" est activé par défaut.
-    
-    for (const v of Object.values(tabs)) {
-      v.active = activeTab === v.id;
-      v.cssClass = v.active ? "active" : "";
-      }
-    return tabs;;
+    return Object.fromEntries(
+      Object.entries(defs).map(([id, def]) => [
+        id,
+        { id, group: "sheet", ...def, active: activeTab === id, cssClass: activeTab === id ? "active" : "" }
+      ])
+    );
   }
 
-  /** Préparation des données */
+  // ─── Contexte ────────────────────────────────────────────────────────────────
+
   async _prepareContext() {
-    console.log("Préparation du contexte de la feuille de personnage...");
+    const { items } = this.document;
     const filter = this.document.system.inventory;
-    const items = this.document.items;
 
-    let armorpvmax, shieldpvmax;
-
-    // Initialiser les listes d'équipement
-    let filteredItems = {
-        droite: [],
-        gauche: [],
-        middle: [],
-        ceinture: [],
-        chargeur: [],
-        autres: []
-    };
-
-    // Répartir les objets selon leur emplacement d'équipement
+    const filteredItems = { droite: [], gauche: [], middle: [], ceinture: [], chargeur: [], autres: [] };
     for (const item of items) {
-        const equipLocation = item.system?.equip;
-        (filteredItems[equipLocation] ?? filteredItems.autres).push(item);
+      const loc = item.system?.equip;
+      (filteredItems[loc] ?? filteredItems.autres).push(item);
     }
 
-    // Trier les compétences
-    let competence = items
-        .filter(item => item.type === "competence")
-        .sort((a, b) => a.system.quantity - b.system.quantity);
+    const competences = items.filter(i => i.type === "competence");
+    const competencesMetier = await this.getCompetencesMetier(this.actor.system.metier, competences);
 
-    // Appliquer le filtre d'affichage général
-    let visibleItems;
-    if (filter === "all") {
-        visibleItems = items.filter(item => item.type !== "competence");
-    } else {
-        visibleItems = items.filter(item => filter.includes(item.type));
-    }
-    
+    const visibleItems = filter === "all"
+      ? items.filter(i => i.type !== "competence")
+      : items.filter(i => filter.includes(i.type));
 
-    let img = this.document.img;
-    if (!img || !/\.(jpg|jpeg|png|webp|svg)$/i.test(img)) {
-        img = "icons/svg/mystery-man.svg"; // Image par défaut
-    }
+    const img = /\.(jpg|jpeg|png|webp|svg)$/i.test(this.document.img)
+      ? this.document.img
+      : "icons/svg/mystery-man.svg";
+
     return {
       tabs: this.#getTabs(),
       fields: this.document.schema.fields,
       systemFields: this.document.system.schema.fields,
       actor: this.document,
       system: this.document.system,
-      inventory:filteredItems,
-      visibleItems:visibleItems,
-      competence:competence,
+      inventory: filteredItems,
+      visibleItems,
+      competencesMetier,
+      competences,
       source: this.document.toObject(),
-      items: this.document.items.toObject(),
-      img // On utilise l'image corrigée
+      items: items.toObject(),
+      img,
     };
-    
   }
 
-
   async _preparePartContext(partId, context) {
-    const doc = this.document;
     switch (partId) {
       case "biography":
         context.tab = context.tabs.biography;
-        context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.biography, { async: true });
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(
+          this.document.system.biography, { async: true }
+        );
         break;
       case "inventory":
         context.tab = context.tabs.inventory;
         context.items = [];
-        const itemsRaw = this.document.items;
-        for (const item of itemsRaw) {
-            item.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description, { async: true });
-            context.items.push(item);
-      }
-      break;
+        for (const item of this.document.items) {
+          item.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(
+            item.system.description, { async: true }
+          );
+          context.items.push(item);
+        }
+        break;
     }
     return context;
   }
 
+  // ─── Rendu ───────────────────────────────────────────────────────────────────
+
   _onRender(context, options) {
-    super._onRender(context, options);  // Appelez la méthode parente si nécessaire
-    console.log(context);
-
-    //*Garder l'onglet ouvert*//
-    const activeTab = localStorage.getItem(`activeTab-${this.actor.id}`) || "config"; 
-    // Appliquer l'affichage correct
+    super._onRender(context, options);
+    console.log(context)
+    // Onglet persistant
+    const activeTab = localStorage.getItem(`activeTab-${this.actor.id}`) ?? "config";
     this._setActiveTab(activeTab);
-    // Gérer le clic sur les onglets pour changer de vue
     this.element.querySelectorAll(".sheet-tabs [data-tab]").forEach(tab => {
-      tab.addEventListener("click", (event) => {
-        const newTab = event.currentTarget.dataset.tab;
-        this._setActiveTab(newTab);
-      });
+      tab.addEventListener("click", e => this._setActiveTab(e.currentTarget.dataset.tab));
     });
 
-    //*Bord des cercles*//
-    document.querySelectorAll(".circle").forEach(circle => {
-        const inputs = circle.querySelectorAll('input');
-        if (inputs.length < 2) return;
-
-        const current = parseFloat(inputs[0].value) || 0;
-        const max = parseFloat(inputs[1].value) || 1;  // éviter division par zéro
-        const percent = Math.min(100, Math.max(0, (current / max) * 100));  // clamp entre 0 et 100
-
-        circle.style.background = `conic-gradient(
-            var(--couleur-rouge) 0%,
-            var(--couleur-bleuelect) ${percent - 1}% ,
-            var(--couleur-gris) ${percent}% 100%
-        )`;
-    });
-    document.querySelectorAll(".part").forEach(part => {
-        const input = part.querySelector('input');//value
-        const value = parseInt(input?.value) || 0;
-        const nameAttr=part.querySelector("input").getAttribute("name");  // récupère system.nom
-        const name = nameAttr ? nameAttr.split('.').pop() : '';
-        const circle = this.element.querySelector(`.${name}`);  // Sélectionne le <circle> à modifier
-        if (!circle) return;
-
-        if (value < 5) {
-            circle.style.fill = 'var(--couleur-vert)';
-        } else if (value < 7) {
-            circle.style.fill = 'var(--couleur-orange)';
-        } else if (value < 9) {
-            circle.style.fill = 'var(--couleur-rouge)';
-        } else {
-            circle.style.display = 'none';
-        }
+    // Cercles de progression
+    this.element.querySelectorAll(".circle").forEach(circle => {
+      const [cur, max] = [...circle.querySelectorAll("input")].map(i => parseFloat(i.value) || 0);
+      if (max === 0) return;
+      const pct = Math.min(100, Math.max(0, (cur / max) * 100));
+      circle.style.background = `conic-gradient(
+        var(--couleur-rouge) 0%,
+        var(--couleur-bleuelect) ${pct - 1}%,
+        var(--couleur-gris) ${pct}% 100%
+      )`;
     });
 
-    // Tab inventaire
+    // Colorisation des parties corporelles
+    this.element.querySelectorAll(".part").forEach(part => {
+      const input = part.querySelector("input");
+      const value = parseInt(input?.value) || 0;
+      const name  = input?.getAttribute("name")?.split(".").pop();
+      if (!name) return;
+      const circle = this.element.querySelector(`.${name}`);
+      if (!circle) return;
+      if      (value < 5) circle.style.fill = "var(--couleur-vert)";
+      else if (value < 7) circle.style.fill = "var(--couleur-orange)";
+      else if (value < 9) circle.style.fill = "var(--couleur-rouge)";
+      else                circle.style.display = "none";
+    });
+
+    // Filtre inventaire actif
     const inventory = this.actor.system.inventory;
-    const types = ["all", "weapon", "armor", "shield", "item"];
-
-    if (types.includes(inventory)) {
-        const activeTab = document.querySelector(`div[data-type="${inventory}"]`);
-        if (activeTab) {
-            activeTab.style.border = "solid 1px var(--couleur-bleuelect)";
-        }
+    if (["all","weapon","armor","shield","item"].includes(inventory)) {
+      const el = this.element.querySelector(`div[data-type="${inventory}"]`);
+      if (el) el.style.border = "solid 1px var(--couleur-bleuelect)";
     }
 
-    //*Affichage icone mutant*//
+    // Affichage mutant / couleur principale
     const mutant = this.actor.system.mutant;
-    const mutantElements = this.element.querySelectorAll('.mutant');
+    const mutantEls = this.element.querySelectorAll(".mutant");
     if (mutant === "No") {
-        mutantElements.forEach(element => {
-            element.style.display = 'none';
-        });
-        this.element.style.setProperty('--couleur-bleuelect', '#00f7ff');
-    }else{
-      this.element.style.setProperty('--couleur-bleuelect', 'green');
+      mutantEls.forEach(el => el.style.display = "none");
+      this.element.style.setProperty("--couleur-bleuelect", "#00f7ff");
+    } else {
+      this.element.style.setProperty("--couleur-bleuelect", "green");
     }
 
-    /*plus de PV*/
-    const pv =this.actor.system.health;
-    if(pv==0){
-      this.element.style.setProperty('--couleur-bleuelect', 'red');
+    if (this.actor.system.health === 0) {
+      this.element.style.setProperty("--couleur-bleuelect", "red");
     }
 
-    /*Colorise les compétences*/
-    document.querySelectorAll(".perso").forEach(compt => {
+    // Colorisation compétences
+    this.element.querySelectorAll(".perso").forEach(compt => {
       const input = compt.querySelector("input");
-      const spanElement = compt.querySelector("span");
-      const calc = compt.querySelector("span[calc]").getAttribute("calc");
-      const span = spanElement ? spanElement.innerHTML : ""; // Vérifie si <a> existe
-      const valor = parseInt(input?.value, 10) || 0; // Vérifie si input existe et parse en nombre
-      const dataAbility = compt.getAttribute('data-ability'); // Récupère la valeur de data-ability du parent .perso
-      // Appliquer la couleur selon la valeur
-      if (valor === 0) {
-        input.style.background = "var(--couleur-gris)";
-        input.style.color = "var(--couleur-bleuelect)";
-      } else if (valor > 0) {
-        input.style.background = "var(--couleur-vert)";
-        input.style.color = "white";
-      } else {
-        input.style.background = "var(--couleur-rouge)";
-        input.style.color = "white";
-      }  
+      if (!input) return;
+      const valor = parseInt(input.value, 10) || 0;
+      if      (valor === 0) { input.style.background = "var(--couleur-gris)"; input.style.color = "var(--couleur-bleuelect)"; }
+      else if (valor  >  0) { input.style.background = "var(--couleur-vert)"; input.style.color = "white"; }
+      else                  { input.style.background = "var(--couleur-rouge)"; input.style.color = "white"; }
     });
+
     this._onVerif();
-    
   }
 
-  /** Gestion des événements au rendu */
-    /** @override */
-    async _onDrop(event) {
-      event.preventDefault();
-      const data = TextEditor.getDragEventData(event);
-      if (data.type === "Item") {
-          const item = await Item.fromDropData(data);
-          console.log("Objet droppé :", item);
-          if (item) {
-              await this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
-          }
+  _setActiveTab(tabId) {
+    if (!this.actor) return;
+    localStorage.setItem(`activeTab-${this.actor.id}`, tabId);
+
+    this.element.querySelectorAll(".tab").forEach(t => t.style.display = "none");
+    this.element.querySelector(`.tab[data-tab="${tabId}"]`)?.style.setProperty("display", "block");
+
+    this.element.querySelectorAll(".sheet-tabs [data-tab]").forEach(t => t.classList.remove("active"));
+    this.element.querySelector(`.sheet-tabs [data-tab="${tabId}"]`)?.classList.add("active");
+
+    if (!game.user.isGM) {
+      this.element.querySelectorAll(".reponse").forEach(el => el.style.display = "none");
+    }
+  }
+
+  // ─── Drop ────────────────────────────────────────────────────────────────────
+
+  async _onDrop(event) {
+    event.preventDefault();
+    const data = TextEditor.getDragEventData(event);
+    if (data.type !== "Item") return;
+    const item = await Item.fromDropData(data);
+    if (item) await this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
+  }
+
+  // ─── Vérifications et calculs ────────────────────────────────────────────────
+
+  async _onVerif() {
+    const { race, metier, level, healthmax, competences } = this.actor.system;
+    const bonusRace   = RaceBonus[race]   || {};
+    const bonusMetier = MetierBonus[metier] || {};
+
+    const updates = {};
+
+    // Limites des compétences
+    for (const [nom, valRaw] of Object.entries(competences)) {
+      const valeur = parseInt(valRaw) || 0;
+      const bonus  = (bonusRace[nom] ?? 0) + (bonusMetier[nom] ?? 0) + (race === "Humain" ? 10 : 0);
+      const min    = -30 + bonus;
+      const max    = Math.min(50, 30 + bonus);
+      if      (valeur < min) updates[`system.competences.${nom}`] = min;
+      else if (valeur > max) updates[`system.competences.${nom}`] = max;
+    }
+
+    // Points restants au niveau 1
+    if (level === 1) {
+      const raceBonus = ["Draconien","Humain"].includes(race) ? 30 : 60;
+      const spent = Object.values(competences).reduce((s, v) => s + (parseInt(v) || 0), 0);
+      updates["system.pointrestant"] = (level - 1) * 10 + raceBonus - spent - (healthmax - 20);
+    }
+
+    // Encombrement
+    const force  = parseInt(competences.force) || 0;
+    let encmax   = force / 2 + 35;
+    let enc      = 0;
+    let exosquelette = false, logistique = false, maitre = false;
+
+    const itemUpdates = [];
+
+    for (const item of this.actor.items) {
+      const qty   = item.system.quantity || 0;
+      const poids = item.system.poids    || 0;
+      enc += poids * qty;
+
+      const equip  = item.system.equip;
+      const nameLc = item.name.toLowerCase();
+      if (equip === "middle"  && nameLc === "exosquelette")        exosquelette = true;
+      if (nameLc === "logistique optimisée")                       logistique   = true;
+      if (nameLc === "maître du fret")                             maitre       = true;
+
+      // Icônes d'équipement dans la liste
+      if (equip) {
+        const el = this.element.querySelector(`li[data-item-id="${item.id}"] .zonecontrolegauche .${equip}`);
+        if (el) el.style.opacity = "1";
       }
+
+      // Synchro armure / bouclier
+      const armor  = this.actor.system.armor;
+      const shield = this.actor.system.shield;
+      if      (equip === "middle")   itemUpdates.push(item.update({ "system.pv": armor }));
+      else if (equip === "ceinture") itemUpdates.push(item.update({ "system.pv": shield }));
     }
 
+    if (exosquelette) encmax *= 2;
+    if (logistique)   encmax *= 2;
+    if (maitre)       enc    =  0;
 
+    updates["system.enc"]    = Math.round(enc * 10) / 10;
+    updates["system.encmax"] = encmax;
 
- async _onVerif() {
-  const race = this.actor.system.race;
-  const metier = this.actor.system.metier;
-  const level = this.actor.system.level;
-  const healthmax = this.actor.system.healthmax;
-  const competences = this.actor.system.competences;
-
-  let exosquelette = false;
-  let logistique = false;
-  let maitre = false;
-  let total = (level - 1)* 10;
-
-  //if (race === "humain") total += 10;
-
-  for (let key in competences) {
-    if (competences.hasOwnProperty(key)) {
-      total -= parseInt(competences[key]) || 0;
-    }
+    if (itemUpdates.length) await Promise.all(itemUpdates);
+    if (Object.keys(updates).length) await this.actor.update(updates);
   }
 
-  total = total - (healthmax - 20); 
+  // ─── Compétences métier ──────────────────────────────────────────────────────
 
-
-  const raceBonus = {
-    "Humain": ["diplomatie", "perception", "science", "balistique"],
-    "Arthurien": ["dexterite", "perception", "survie"],
-    "Dragon": ["combat", "diplomatie", "pilote"],
-    "Machine": ["artisanat", "piratage", "science"],
-    "Pleiadien": ["combat", "perception", "discretion"],
-    "Yoribien": ["agilite", "perception", "survie"],
-    "Elfen": ["agilite", "discretion", "perception"],
-    "Orcanien": ["force", "combat", "pilotage"]
-  };
-
-  const metierBonus = {
-    "Marchand": ["negociation"],
-    "Artisan": ["artisanat"],
-    "Colon": ["survie"],
-    "Intellectuel": ["investigation"],
-    "Malandrin": ["discretion"],
-    "Pilote": ["pilotage"],
-    "Medecin": ["medecine"],
-    "Militaire": ["tir"],
-    "Technicien": ["mecanique"],
-    "Combattant": ["force"]
-  };
-
-  const competencesConnues = Object.keys(competences);
-  const bonusRace = raceBonus[race]?.filter(c => competencesConnues.includes(c)) || [];
-  const bonusMetier = metierBonus[metier]?.filter(c => competencesConnues.includes(c)) || [];
-
-  let updatesActeur = {};
-
-  competencesConnues.forEach(nom => {
-    const valeur = parseInt(competences[nom]) || 0;
-    
-    // Calculer le bonus selon la présence dans race/métier
-    let bonus = 0;
-    
-    if (bonusRace.includes(nom)) bonus += 10;
-    if (bonusMetier.includes(nom)) bonus += 10;
-    
-    // Limites : -30 à +30, +10 par bonus
-    const minValeur = -30;
-    const maxValeur = 30 + bonus;
-    
-    // Vérifier les limites
-    if (valeur < minValeur) {
-      console.warn(`⚠️ La compétence ${nom} est inférieure à ${minValeur}, ajustée.`);
-      updatesActeur[`system.competences.${nom}`] = minValeur;
-    } else if (valeur > maxValeur) {
-      console.warn(`⚠️ La compétence ${nom} dépasse le maximum de ${maxValeur}, ajustée.`);
-      updatesActeur[`system.competences.${nom}`] = maxValeur;
+  async getCompetencesMetier(metier, competencesActuelles) {
+    // Construire la map des niveaux possédés par groupe de prérequis
+    const niveauxMap = new Map();
+    for (const c of competencesActuelles) {
+      const key = c.system.prerequis;
+      const qty = c.system.quantity ?? 1;
+      if (qty > (niveauxMap.get(key) ?? 0)) niveauxMap.set(key, qty);
     }
-    
-    console.log(`Compétence: ${nom}, Valeur: ${valeur}, Min: ${minValeur}, Max: ${maxValeur}, Bonus: +${bonus}`);
-  });
-  console.log(updatesActeur)
-  // Appliquer les mises à jour si nécessaire
-  if (Object.keys(updatesActeur).length > 0) {
-    await this.actor.update(updatesActeur);
-    console.log("Compétences ajustées:", updatesActeur);
+
+    const pack = game.packs.get("libersf.competences");
+    if (!pack) return [];
+    const docs = await pack.getDocuments();
+
+    return docs
+      .filter(item => {
+        if (item.system.metier !== metier) return false;
+        const key    = item.system.prerequis;
+        const niveau = item.system.quantity ?? 1;
+        return niveau === (niveauxMap.get(key) ?? 0) + 1;
+      })
+      .map(item => {
+        item.biographyPlain = (item.system.biography ?? "").replace(/<[^>]*>/g, "");
+        return item;
+      });
   }
 
+  // ─── Actions ─────────────────────────────────────────────────────────────────
 
-  // Calcul de l'encombrement
-  const force = parseInt(this.actor.system.competences.force) || 0;
-  const objet = this.actor.items;
-  let encmax = force / 2 + 35;
-  let enc = 0;
+  static async #initializerNiveau1(event, target) {
+    const { race, metier, competences } = this.actor.system;
+    const bonusRace   = RaceBonus[race]   || {};
+    const bonusMetier = MetierBonus[metier] || {};
 
-  objet.forEach(item => {
-    const quantity = item.system.quantity || 0;
-    const poids = item.system.poids || 0;
-    enc += poids * quantity;
+    const updates = Object.fromEntries(
+      Object.keys(competences).map(nom => [
+        `system.competences.${nom}`,
+        (bonusRace[nom] ?? 0) + (bonusMetier[nom] ?? 0)
+      ])
+    );
+    await this.actor.update({ ...updates, "system.credit": 500 });
+  }
 
-    const equip = item.system.equip;
-    const itemid = item.id;
-    if (equip) {
-      const element = this.element.querySelector(`li[data-item-id="${itemid}"] .zonecontrolegauche .${equip}`);
-      if (element) element.style.opacity = "1";
+  static #onItemEdit(event, target) {
+    this.actor.items.get(target.dataset.itemId)?.sheet.render(true);
+  }
+
+  static async #onItemDelete(event, target) {
+    await this.actor.items.get(target.dataset.itemId)?.delete();
+  }
+
+  static async #onItemUse(event, target) {
+    const item = this.actor.items.get(target.dataset.itemId);
+    if (!item) return;
+    item.system.quantity > 1
+      ? await item.update({ "system.quantity": item.system.quantity - 1 })
+      : await item.delete();
+  }
+
+  static async #addCompt(event, target) {
+    const actor = this.document;
+    const selectEl  = target.closest(".tab, .window-content, form")
+                            ?.querySelector("select[name='system.competenceschoix']");
+    const selectedId = selectEl?.value;
+    if (!selectedId) { ui.notifications.warn("Aucune compétence sélectionnée."); return; }
+
+    const pack = game.packs.get("libersf.competences");
+    if (!pack) { ui.notifications.error("Compendium libersf.competences introuvable."); return; }
+
+    const itemData = await pack.getDocument(selectedId);
+    if (!itemData) { ui.notifications.error("Compétence introuvable dans le compendium."); return; }
+
+    const { prerequis: typePrereq, quantity: niveauItem = 1 } = itemData.system;
+    const dejaPresent = actor.items.some(
+      i => i.type === "competence" && i.system.prerequis === typePrereq && i.system.quantity === niveauItem
+    );
+    if (dejaPresent) {
+      ui.notifications.warn(`Une compétence ${typePrereq} de niveau ${niveauItem} est déjà présente.`);
+      return;
     }
 
-    const name = item.name.toLowerCase();
-    if (item.system.equip === "middle" && name === "exosquelette") exosquelette = true;
-    if (name === "logistique optimisée") logistique = true;
-    if (name === "maître du fret") maitre = true;
-  });
+    await actor.createEmbeddedDocuments("Item", [itemData.toObject()]);
+    ui.notifications.info(`${itemData.name} (Niv ${niveauItem}) ajoutée avec succès.`);
+    await actor.update({ "system.competenceschoix": "" });
+  }
 
-  if (exosquelette) encmax *= 2;
-  if (logistique) encmax *= 2;
-  if (maitre) enc = 0;
+  static async #onItemRollSave(event, target) {
+    await this.actor.rollSave(target.dataset.ability);
+  }
 
-  enc = Math.round(enc * 10) / 10;
+  static async #onItemRollDamage(event, target) {
+    const compt  = target.dataset.compt;
+    const actor  = this.actor;
+    const roll   = await new Roll("1d100").roll();
+    const bonus  = parseInt(actor.system.bonus) || 0;
+    const solitude  = parseInt(actor.system.solitude) || 0;
+    const valeur = actor.system.competences[compt];
+    const label  = game.i18n.localize(`Liber.Character.Competences.${compt}`);
 
-  // Mise à jour armure et bouclier
-  const armure = this.actor.system.armor;
-  const bouclier = this.actor.system.shield;
+    const CRITIQUE = 5, ECHEC = 95, BASE = 30;
+    // "Esprit d'Acier" divise le malus de solitude par 2
+    const espritAcier = actor.items.some(i => i.name === "Esprit d'Acier");
+    const sangfroid = actor.items.some(i => i.name === "Sang-froid");
+    // Sang-froid ignore le premier point de solitude
+    const solitudeEffective = sangfroid
+      ? Math.max(0, solitude - 1)
+      : solitude;
 
-  const itemUpdates = [];
-
-  objet.forEach(item => {
-    if (item.system?.equip === "middle") {
-      itemUpdates.push(item.update({ "system.pv": armure }));
-    } else if (item.system?.equip === "ceinture") {
-      itemUpdates.push(item.update({ "system.pv": bouclier }));
-    }
-  });
-
-  if (itemUpdates.length > 0) await Promise.all(itemUpdates);
-
-  // Finaliser les mises à jour de l’acteur
-  updatesActeur['system.pointrestant'] = total;
-  updatesActeur['system.enc'] = enc;
-  updatesActeur['system.encmax'] = encmax;
-  console.log(updatesActeur)
-
-  await this.actor.update(updatesActeur);
-}
-
-
-
-
-  //#region Actions
-    /**
-     * @param {PointerEvent} event - The originating click event
-     * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-     */
-    static #onItemEdit(event, target) {
-        const itemId = target.getAttribute('data-item-id');
-        const item = this.actor.items.get(itemId);
-        item.sheet.render(true);
-    }
-
-    /**
-     * @param {PointerEvent} event - The originating click event
-     * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-     */
-    static async #onItemDelete(event, target) {
-        const itemId = target.getAttribute('data-item-id');
-        const item = this.actor.items.get(itemId);
-        item.delete();
-    }
-    static async #onItemUse(event, target) {
-        const itemId = target.getAttribute('data-item-id');
-        const item = this.actor.items.get(itemId);
-        if (item.system.quantity > 1) {
-            await item.update({ "system.quantity": item.system.quantity - 1 });
-        } else {
-            item.delete();
-        }
-    }
-
-    /**
-     * @param {PointerEvent} event - The originating click event
-     * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-     */
-    static async #onItemRollSave(event, target) {//si competence tir ou visee ou combat
-        const ability = target.getAttribute('data-ability');
-        const roll = await this.actor.rollSave(ability);
-        //console.log('roll', roll);
-    }
-    /**
-     * @param {PointerEvent} event - The originating click event
-     * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-     */
-    static async #onItemRollDamage(event, target) {
-      const compt = target.getAttribute('data-compt');
-      const roll = await new Roll("1d100").roll();
-      const bonus = parseInt(this.actor.system.bonus) || 0;
-      const valeur = this.actor.system.competences[compt];
-      const critique = 5;
-      const echec = 95;
-      const base = 30;
-      const actor = this.actor;
-      let info = "";
-      let succes = "";
-      let valuemax = base + valeur + bonus;
-      let result = roll.total;
-      const label = game.i18n.localize(`Liber.Character.Competences.${compt}`);
-      let infodegat;
-      let techno="TECHNO0";
-
+    const ptsolitude = espritAcier
+      ? Math.floor(solitudeEffective * 10 / 2)
+      : solitudeEffective * 10;
       
-      let color = "var(--couleur-bleuelect)";
-      let colors = "var(--couleur-gris)";
+    let valuemax = BASE + valeur + bonus - ptsolitude;
+    let result   = roll.total;
+    let info     = "";
+    let infoarme = "";
+    let infodegat;
+    let techno   = 0; // valeur numérique directe
+    let dommage;
+    let weapon;
+    //malus de point de solitude
+    if (solitude > 0) {
+      const mention = espritAcier ? game.i18n.localize(`Liber.Roll.ModesTir.espritdacier`) : "";console.log(espritAcier,mention)
+      infoarme = game.i18n.localize(`Liber.Roll.ModesTir.solitude`) + ` : -${ptsolitude}<br>${mention}<br>`;
+    }
 
-      if (typeof type !== 'undefined' && typeof description !== 'undefined') {
-        info = `${info}<div class="infos"><span class="title">Info</span><div class="description">${description}</div></div>`;
+
+    // ── Tir ──────────────────────────────────────────────────────────
+    if (compt === "tir") {
+      const weapons   = actor.items.filter(i => i.type === "weapon" && i.system.equip);
+      const chargeurs = actor.items.filter(i => i.type === "item"   && i.system.equip);
+
+      if (!weapons.length) { ui.notifications.warn("Aucune arme équipée !"); return; }
+
+      const TIRMODES = Object.fromEntries(
+        ["coup_par_coup","assommante","continu","rafale","dispertion","lourd","hors_map","automatique","couverture"]
+          .map(k => [k, game.i18n.localize(`Liber.Roll.ModesTir.${k}`)])
+      );
+
+      const selection = await new Promise(resolve => {
+        const d = new WeaponSelectionDialog(weapons, TIRMODES);
+        d._resolve = resolve;
+        d.render(true);
+      });
+      if (!selection) return;
+
+      const { weaponId, selectedTir } = selection;
+      weapon = actor.items.get(weaponId);
+      if (!weapon) { ui.notifications.error("Arme non trouvée."); return; }
+
+      // Enrayement
+      if (weapon.system.enrayer === "Yes") {
+        return LiberCharacterSheet.#sendChat(actor, label, infoarme, info,
+          "var(--couleur-rouge)", "var(--couleur-blanc)",
+          game.i18n.localize("Liber.Items.armeenrayé")
+        );
+      }
+      // Enrayement
+      if (weapon.system.casser === "Yes") {
+        return LiberCharacterSheet.#sendChat(actor, label, infoarme, info,
+          "var(--couleur-rouge)", "var(--couleur-blanc)",
+          game.i18n.localize("Liber.Items.armeecassé")
+        );
       }
 
-      let selectedTir, weaponId, chargeur;
-      let infoarme="";
-      let dommage, enrayer, weapon;
+      dommage = weapon.system.degat;
+      techno  = parseInt(weapon.system.techno?.replace("TECHNO","")-2)*5 || 0;
 
-      //si tir affiche dialog
-      if (["tir"].includes(compt)) {
-        const weapons = actor.items.filter(i => i.type === "weapon" && i.system.equip);
-        const chargeurs = actor.items.filter(i => i.type === "item" && i.system.equip);
-        const TIRMODES = {
-          "coup_par_coup": game.i18n.localize("Liber.Roll.ModesTir.coup_par_coup"),
-          "assommante": game.i18n.localize("Liber.Roll.ModesTir.assommante"),
-          "continu": game.i18n.localize("Liber.Roll.ModesTir.continu"),
-          "rafale": game.i18n.localize("Liber.Roll.ModesTir.rafale"),
-          "dispertion": game.i18n.localize("Liber.Roll.ModesTir.dispertion"),
-          "lourd": game.i18n.localize("Liber.Roll.ModesTir.lourd"),
-          "hors_map": game.i18n.localize("Liber.Roll.ModesTir.hors_map"),
-          "automatique": game.i18n.localize("Liber.Roll.ModesTir.automatique"),
-          "couverture": game.i18n.localize("Liber.Roll.ModesTir.couverture"),
-        };
-        if (weapons.length === 0) {
-          ui.notifications.warn("Aucune arme équipée !");
-          return;
-        }
-        const selection = await new Promise((resolve) => {
-          const dialog = new WeaponSelectionDialog(weapons, TIRMODES);
-          dialog._resolve = resolve;
-          dialog.render(true);
-        });
-
-        if (!selection) return;
-
-        //recuperer dialog
-        weaponId = selection.weaponId;
-        selectedTir = selection.selectedTir;
-
-        //info arme
-        weapon = actor.items.get(weaponId);
-        if (!weapon) {
-          ui.notifications.error("Arme non trouvée.");
-          return;
-        }
-
-        //enrayement
-        enrayer= weapon.system.enrayer; 
-        if(enrayer=="Yes"){
-            let chatData = {
-            actingCharName: actor.name,
-            actingCharImg: actor.img,
-            info:info,
-            introText: label,
-            infoarme:infoarme,
-            color:'var(--couleur-rouge)',
-            colors :'var(--couleur-blanc)',
-            succes:game.i18n.localize('Liber.Items.armeenrayé')
-          };
-
-
-          let chat = await new LiberChat(this.actor)
-              .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
-              .withContent("rollDamage")
-              .withData(chatData)
-              .create();
-
-          await chat.display();
-          return
-        }
-
-        dommage=weapon.system.degat;
-        techno=weapon.system.techno;
-        chargeur = chargeurs.find(c => c.system.equip === "chargeur" && c.system.quantity > 0);
-        if (!chargeur) {
-          ui.notifications.warn(`${weapon.name} n'a plus de munitions ou aucun chargeur n'est chargé !`);
-          return;
-        }
-
-        //gestion des munitions et information
-        let munitionsPerdu = 1;
-        if (selectedTir === "coup_par_coup"){infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.coup_par_coup")}
-        else if (selectedTir === "assommante"){infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.assommante")}
-        else if (selectedTir === "continu"){infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.continu")}
-        else if (selectedTir === "rafale"){munitionsPerdu = 3;result=result - 5;infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.rafale");dommage=dommage+5;}
-        else if (selectedTir === "dispertion"){munitionsPerdu = 3;result=result - 5;infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.dispertion")}
-        else if (selectedTir === "lourd"){infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.lourd")}
-        else if (selectedTir === "hors_map"){infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.hors_map")}
-        else if (selectedTir === "automatique"){infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.automatique");dommage=dommage+10;}
-        else if (selectedTir === "couverture"){munitionsPerdu = 10;result=result - 10;infoarme=game.i18n.localize("Liber.Roll.ModesTir.effetarme.couverture")}
-        let newQty = chargeur.system.quantity - munitionsPerdu;
-        let updateData = { "system.quantity": newQty };
-        if (newQty <= 0) {
-          updateData["system.equip"] = "";
-          ui.notifications.info(`${chargeur.name} est vide et a été déséquipé.`);
-        } else {
-          ui.notifications.info(`${munitionsPerdu} munition(s) a été retirée de ${chargeur.name}.`);
-        }
-        await chargeur.update(updateData);
-      }else if (["artisanat", "balistique", "mecanique", "navigation", "pilotage", "piratage", "science", "visee"].includes(compt)){
-        //techno = await this.afficherDialogueAbbility();
-        techno = await new Promise((resolve) => {
-          const dialog = new TechLevelDialog();
-          dialog._resolve = resolve;
-          dialog.render(true);
-        });
-        techno="TECHNO"+techno;
+      const chargeur = chargeurs.find(c => c.system.equip === "chargeur" && c.system.quantity > 0);
+      if (!chargeur) {
+        ui.notifications.warn(`${weapon.name} n'a plus de munitions !`); return;
       }
 
-      //gestion des technologie 
-      let technoVars = {};
-      let index = parseInt(techno.replace("TECHNO", ""));
-      if (!isNaN(index)) {
-        if (index === 0) {
-          techno = 0;
-        } else {
-          techno=index;
-        }
-      }
-      if(this.actor.system.race=="elfen"){
-            techno=techno + 2;
-        }
-      let etoilemax = 0
-      let skillMap = {
-            tir: "balistique",
-            mecanique: "mecanique",
-            artisanat: "artisanat",
-            pilotage: "pilotage",
-            piratage: "piratage"
-        };
-        let key = skillMap[compt] || (name === "balistique" ? "balistique" : null);
-        if (key) {
-            etoilemax = Math.floor(this.actor.system.competences[key] / 5) + 2;
-        }
-        let dif=etoilemax - techno ;
-        if(dif>0){dif=0;}
-        valuemax=valuemax + dif*5;if(valuemax<0){valuemax=0;}
-        info = `${result}/${valuemax}`;
-        
-       // Définir le message en fonction du résultat
-      if (["tir"].includes(compt)) { 
-            if(result>echec){
-                infodegat=game.i18n.localize('Liber.Roll.Degat.Inutilisable');
-            }else if(result>(valuemax+20)){
-                infodegat=game.i18n.localize('Liber.Roll.Degat.Enraye');
-                weapon.update({'system.enrayer':"Yes"})
-            }else if(result>valuemax){
-                infodegat=game.i18n.localize('Liber.Roll.Nodommage');
-            }else if(result>(valuemax-20)){
-                infodegat=dommage;
-            }else if(result>critique){
-                infodegat=dommage*1.5;
-            }else if(result<=critique){
-                infodegat=dommage*2;
-            }
-        }
-        if (["visee"].includes(compt)) { 
-            if(result>echec){
-                infodegat=game.i18n.localize('Liber.Roll.Degat.Inutilisable');
-            }else if(result>(valuemax+20)){
-                infodegat=game.i18n.localize('Liber.Roll.Degat.Enraye');
-            }else if(result>valuemax){
-                infodegat=game.i18n.localize('Liber.Roll.Nodommage');
-            }else if(result>(valuemax-20)){
-                infodegat="Degat normal";
-            }else if(result>critique){
-                infodegat="Degat x1.5";
-            }else if(result<=critique){
-                infodegat="Degat x2";
-            }
-        }
-      if (result > echec || valuemax==0) {
-          succes = game.i18n.localize("Liber.Roll.EchecCrit");
-          color ='var(--couleur-rouge)';
-          colors ='var(--couleur-blanc)';
-      } else if (result <= critique) {
-          succes = game.i18n.localize("Liber.Roll.ReussiteCrit");
-          color ='var(--couleur-vert)';
-          colors ='var(--couleur-blanc)';
-      } else if (result <= valuemax) {
-          succes = game.i18n.localize("Liber.Roll.Reussite");
-          color='var(--couleur-bleuelect)';
-          colors ='var(--couleur-gris)';
-
-      } else {
-          succes = game.i18n.localize("Liber.Roll.Echec");
-          color='var(--couleur-orange)';
-          colors ='var(--couleur-blanc)';
-
-      }
-
-      // ── Cible désignée ─────────────────────────────────────────────
-      const targets = game.user.targets;
-      let targetInfo = "";  // a voir en fonction du type d'arme pour la prise en non de l'armure ou du chanmp de bataille
-/*
-      if (targets.size > 0) {
-        const targetActor = targets.first().actor;
-
-        if (targetActor && infodegat && !isNaN(Number(infodegat))) {
-          const degats    = Number(infodegat);
-          const armure    = Number(targetActor.system.armure)   || 0;
-          const hpActuel  = Number(targetActor.system.hp.value) || 0;
-          const degatsNet = Math.max(0, degats - armure);
-          const hpNouveau = Math.max(0, hpActuel - degatsNet);
-
-          await targetActor.update({ "system.hp.value": hpNouveau });
-
-          if (hpNouveau <= 0) {
-            await targetActor.toggleStatusEffect("dead", { active: true, overlay: true });
-          } else {
-            await targetActor.toggleStatusEffect("dead", { active: false, overlay: false });
-          }
-
-          targetInfo = `
-            <div class="target-result">
-              <img src="${targetActor.img}">
-              <strong>${targetActor.name}</strong> —
-              ${hpNouveau <= 0 ? "<br><span style='color:#ff3333;'>☠ Hors combat</span>" : ""}
-            </div>`;
-        }
-      }*/
-
-      // Pour affichage ou log si besoin :
-      let chatData = {
-          actingCharName: actor.name,
-          actingCharImg: actor.img,
-          info: info,
-          introText: label,
-          infoarme: infoarme,
-          infodegat: infodegat,
-          color: color,
-          colors: colors,
-          succes: succes + targetInfo   // ← targetInfo ajouté ici
+      // Modes de tir
+      const MODES = {
+        rafale:     { munitions: 3, resultMod: -5, infoKey: "rafale",    dommageBonus: 5 },
+        dispertion: { munitions: 3, resultMod: -5, infoKey: "dispertion" },
+        automatique:{ munitions: 1, resultMod: 0,  infoKey: "automatique", dommageBonus: 10 },
+        couverture: { munitions:10, resultMod:-10, infoKey: "couverture" },
       };
-      // Pour affichage ou log si besoin :
+      const mode = MODES[selectedTir];
+      let munitionsPerdu = mode?.munitions ?? 1;
+      if (mode?.resultMod)    result  += mode.resultMod;
+      if (mode?.dommageBonus) dommage += mode.dommageBonus;
+      infoarme += game.i18n.localize(`Liber.Roll.ModesTir.effetarme.${selectedTir}`)+"<br>";
 
-      let chat = await new LiberChat(this.actor)
-          .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
-          .withContent("rollDamage")
-          .withData(chatData)
-          .create();
 
-      await chat.display();
+
+      const newQty = chargeur.system.quantity - munitionsPerdu;
+      const upd    = { "system.quantity": newQty };
+      if (newQty <= 0) {
+        upd["system.equip"] = "";
+        ui.notifications.info(`${chargeur.name} est vide et a été déséquipé.`);
+      } else {
+        ui.notifications.info(`${munitionsPerdu} munition(s) retirée(s) de ${chargeur.name}.`);
+      }
+      await chargeur.update(upd);
+    }
+    // ── Compétences techniques ────────────────────────────────────────
+    else if (["artisanat","balistique","mecanique","navigation","pilotage","piratage","science","visee"].includes(compt)) {
+      techno = (parseInt(await new Promise(resolve => {
+        const d = new TechLevelDialog();
+        d._resolve = resolve;
+        d.render(true);
+      }))-2)*5 || 0;
+
+    }
+
+    // ── Maîtrise technologique ────────────────────────────────────────
+    const SKILL_MAP = { tir:"balistique", mecanique:"mecanique", artisanat:"artisanat", pilotage:"pilotage", piratage:"piratage" };
+    const techKey   = SKILL_MAP[compt] ?? null;
+    let maitrise    = techKey ? Math.floor(actor.system.competences[techKey] ) : 0;
+    if (actor.system.race === "elfen") maitrise += 2;
+
+
+    const diff = techno - maitrise;
+
+    if (diff > 30) { ui.notifications.warn("Technologie trop avancée pour être utilisée."); return; }
+    if (diff > 0) {
+      valuemax -= diff;
+      infoarme+=`-${diff} techno<br>`;
+      info = `<b title="(-${diff} techno)">`;
+    } else {
+      info = "<b>";
+    }
+    valuemax = Math.max(0, valuemax);
+    info += `${result}/${valuemax}</b>`;
+
+    // ── Résultat dommages ─────────────────────────────────────────────
+    if (compt === "tir") {
+      if      (result > ECHEC)           { infodegat = game.i18n.localize("Liber.Roll.Degat.Inutilisable"); weapon.update({ "system.casser": "Yes" }); }
+      else if (result > valuemax + 20)  { infodegat = game.i18n.localize("Liber.Roll.Degat.Enraye"); weapon.update({ "system.enrayer": "Yes" }); }
+      else if (result > valuemax)        infodegat = game.i18n.localize("Liber.Roll.Nodommage");
+      else if (result > valuemax - 20)   infodegat = dommage;
+      else if (result > CRITIQUE)        infodegat = dommage * 1.5;
+      else                               infodegat = dommage * 2;
+    } else if (compt === "visee") {
+      if      (result > ECHEC)           infodegat = game.i18n.localize("Liber.Roll.Degat.Inutilisable");
+      else if (result > valuemax + 20)   infodegat = game.i18n.localize("Liber.Roll.Degat.Enraye");
+      else if (result > valuemax)        infodegat = game.i18n.localize("Liber.Roll.Nodommage");
+      else if (result > valuemax - 20)   infodegat = "Degat normal";
+      else if (result > CRITIQUE)        infodegat = "Degat x1.5";
+      else                               infodegat = "Degat x2";
+    }
+
+    // ── Succès / échec ────────────────────────────────────────────────
+    let succes, color, colors;
+    if (result > ECHEC || valuemax === 0) {
+      succes = game.i18n.localize("Liber.Roll.EchecCrit");  color = "var(--couleur-rouge)";     colors = "var(--couleur-blanc)";
+    } else if (result <= CRITIQUE) {
+      succes = game.i18n.localize("Liber.Roll.ReussiteCrit"); color = "var(--couleur-vert)";    colors = "var(--couleur-blanc)";
+    } else if (result <= valuemax) {
+      succes = game.i18n.localize("Liber.Roll.Reussite");    color = "var(--couleur-bleuelect)"; colors = "var(--couleur-gris)";
+    } else {
+      succes = game.i18n.localize("Liber.Roll.Echec");       color = "var(--couleur-orange)";   colors = "var(--couleur-blanc)";
+    }
+
+    await LiberCharacterSheet.#sendChat(actor, label, infoarme, info, color, colors, succes, infodegat);
   }
 
-
-    /**
-     * @param {PointerEvent} event - The originating click event
-     * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-     */
-    static async #onShortRest(event, target) {
-        await this.actor.system.shortRest();
-    }
-
-    /**
-     * @param {PointerEvent} event - The originating click event
-     * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-     */
-    static async #onFullRest(event, target) {
-        await this.actor.system.fullRest();
-    }
-
-    static async #onKit(event, target) {
-      // Noms des objets que tu veux chercher
-      const itemNames = [
-          "Couteau", "Main nue", "Pistolet léger", "Fusil à pompe",
-          "Munitions Fusil à pompe", "Munitions Pistolet léger",
-          "Grenade", "Armure légere", "Champ de force léger"
-      ];
-
-      const pack = game.packs.get('libersf.inventaire');  // Nom complet du compendium
-      if (!pack) return ui.notifications.error("Compendium 'libersf.inventaire' introuvable.");
-
-      // Charger tous les documents
-      const tables = await pack.getDocuments();
-
-      // Trouver les objets correspondants
-      const matchingItems = tables.filter(e => itemNames.includes(e.name));
-      let itemsToAdd = [];
-
-      for (let item of matchingItems) {
-          let clone = item.toObject();
-
-          // Si c'est une munition, quantité = 10, sinon 1
-          if (clone.name === "Munitions Fusil à pompe" || clone.name === "Munitions Pistolet léger") {
-              clone.system.quantity = 10;
-          } else {
-              clone.system.quantity = 1;
-          }
-
-          itemsToAdd.push(clone);
-      }
-      // Ajouter les items à l'acteur
-      try {
-        await this.actor.createEmbeddedDocuments('Item', itemsToAdd, { renderSheet: false });
-        ui.notifications.info(`${itemsToAdd.length} objet(s) ajouté(s) à ${target.name} !`);
-      } catch (error) {
-        console.error("Erreur lors de l'ajout des objets :", error);
-        ui.notifications.error("Erreur lors de l'ajout des objets.");
-      }
-    }
-
-   static async #onItemEquip(event, target) {
-      const itemId = target.getAttribute('data-item-id');
-      const equipLocation = target.getAttribute('data-ou');
-
-      if(equipLocation=="middle"){
-        const protection=target.getAttribute('data-protection');
-        const protectionmax=target.getAttribute('data-protection-max');
-        await this.actor.update({'system.armor':protection,'system.armormax':protectionmax});
-      }
-      if(equipLocation=="ceinture"){
-        const protection=target.getAttribute('data-protection');
-        const protectionmax=target.getAttribute('data-protection-max');
-        await this.actor.update({'system.shield':protection,'system.shieldmax':protectionmax});
-      }
-      
-      // Récupération de l'item
-      const item = this.actor.items.get(itemId);
-      await item.update({'system.equip':equipLocation})
-    }
-
-    static async #onItemDesequip(event, target) {  
-      // Récupération de l'item
-      const itemId = target.getAttribute('data-item-id');
-      const item = this.actor.items.get(itemId);
-      const equipLocation = target.getAttribute('data-ou');
-      if(equipLocation=="middle"){
-       await this.actor.update({'system.armor':0,'system.armormax':0});
-      }else if(equipLocation=="ceinture"){
-        await this.actor.update({'system.shield':0,'system.shieldmax':0});
-      }
-      await item.update({'system.equip':""})
-    }
-
-    static async #onFiltre(event,target){
-      const types=target.getAttribute('data-type');
-      this.actor.update({'system.inventory':types})
-    }
-
-    /**
-     * Handle changing a Document's image.
-     *
-     * @this BoilerplateActorSheet
-     * @param {PointerEvent} event   The originating click event
-     * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
-     * @returns {Promise}
-     * @private
-     */
-    static async #onEditImage(event, target) {
-        const attr = target.dataset.edit;
-        const current = foundry.utils.getProperty(this.document, attr);
-        const { img } =
-            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
-            {};
-        const fp = new FilePicker({
-            current,
-            type: 'image',
-            redirectToRoot: img ? [img] : [],
-            callback: (path) => {
-                this.document.update({ [attr]: path });
-            },
-            top: this.position.top + 40,
-            left: this.position.left + 10,
-        });
-        return fp.browse();
-    }
-
-
-
-
-
-
-
-
-    /*conserver le dernier onglet ouvert*/
-  /** @override */
-  _setActiveTab(tabId) {
-      if (!this.actor) return;
-
-      // Stocker l'onglet actif en utilisant l'ID de l'acteur
-      localStorage.setItem(`activeTab-${this.actor.id}`, tabId);
-
-      // Masquer tous les onglets
-      this.element.querySelectorAll(".tab").forEach(tab => {
-          tab.style.display = "none";
-      });
-
-      // Afficher seulement l'onglet actif
-      const activeTab = this.element.querySelector(`.tab[data-tab="${tabId}"]`);
-      if (activeTab) {
-          activeTab.style.display = "block";
-      }
-
-      // Mettre à jour la classe "active" dans la navigation
-      this.element.querySelectorAll(".sheet-tabs [data-tab]").forEach(tab => {
-          tab.classList.remove("active");
-      });
-
-      const activeTabNav = this.element.querySelector(`.sheet-tabs [data-tab="${tabId}"]`);
-      if (activeTabNav) {
-          activeTabNav.classList.add("active");
-      }
-
-      const GM = game.user.isGM;
-      if (!GM) { // Vérifie si le joueur n'est PAS GM
-        document.querySelectorAll('.reponse').forEach(element => {
-          element.style.display = "none"; // Corrigé "this" -> "element"
-        });
-      }
+  /** Factorisation de l'envoi de message de dé */
+  static async #sendChat(actor, introText, infoarme, info, color, colors, succes, infodegat = undefined) {
+    const chatData = {
+      actingCharName: actor.name,
+      actingCharImg:  actor.img,
+      info, introText, infoarme, infodegat, color, colors, succes
+    };
+    const chat = await new LiberChat(actor)
+      .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
+      .withContent("rollDamage")
+      .withData(chatData)
+      .create();
+    await chat.display();
   }
 
-  /*conserver le dernier onglet ouvert*/
-  /** @override */
-  _setActiveTab(tabId) {
-      if (!this.actor) return;
+  static async #onKit(event, target) {
+    const pack = game.packs.get("libersf.inventaire");
+    if (!pack) { ui.notifications.error("Compendium 'libersf.inventaire' introuvable."); return; }
 
-      // Stocker l'onglet actif en utilisant l'ID de l'acteur
-      localStorage.setItem(`activeTab-${this.actor.id}`, tabId);
+    const NAMES = new Set([
+      "Couteau","Main nue","Pistolet léger","Fusil à pompe",
+      "Munitions Fusil à pompe","Munitions Pistolet léger",
+      "Grenade","Armure légere","Champ de force léger"
+    ]);
+    const AMMO = new Set(["Munitions Fusil à pompe","Munitions Pistolet léger"]);
 
-      // Masquer tous les onglets
-      this.element.querySelectorAll(".tab").forEach(tab => {
-          tab.style.display = "none";
-      });
+    const docs  = await pack.getDocuments();
+    const items = docs
+      .filter(e => NAMES.has(e.name))
+      .map(e => { const c = e.toObject(); c.system.quantity = AMMO.has(c.name) ? 10 : 1; return c; });
 
-      // Afficher seulement l'onglet actif
-      const activeTab = this.element.querySelector(`.tab[data-tab="${tabId}"]`);
-      if (activeTab) {
-          activeTab.style.display = "block";
-      }
-
-      // Mettre à jour la classe "active" dans la navigation
-      this.element.querySelectorAll(".sheet-tabs [data-tab]").forEach(tab => {
-          tab.classList.remove("active");
-      });
-
-      const activeTabNav = this.element.querySelector(`.sheet-tabs [data-tab="${tabId}"]`);
-      if (activeTabNav) {
-          activeTabNav.classList.add("active");
-      }
-
-      const GM = game.user.isGM;
-      if (!GM) { // Vérifie si le joueur n'est PAS GM
-        document.querySelectorAll('.reponse').forEach(element => {
-          element.style.display = "none"; // Corrigé "this" -> "element"
-        });
-      }
+    try {
+      await this.actor.createEmbeddedDocuments("Item", items, { renderSheet: false });
+      ui.notifications.info(`${items.length} objet(s) ajouté(s) !`);
+    } catch (err) {
+      console.error("Erreur ajout objets :", err);
+      ui.notifications.error("Erreur lors de l'ajout des objets.");
+    }
   }
 
+  static async #onItemEquip(event, target) {
+    const { itemId, ou: loc, protection, protectionMax } = target.dataset;
+    if (loc === "middle")   await this.actor.update({ "system.armor":  protection, "system.armormax":  protectionMax });
+    if (loc === "ceinture") await this.actor.update({ "system.shield": protection, "system.shieldmax": protectionMax });
+    await this.actor.items.get(itemId)?.update({ "system.equip": loc });
+  }
+
+  static async #onItemDesequip(event, target) {
+    const { itemId, ou: loc } = target.dataset;
+    if      (loc === "middle")   await this.actor.update({ "system.armor": 0, "system.armormax": 0 });
+    else if (loc === "ceinture") await this.actor.update({ "system.shield": 0, "system.shieldmax": 0 });
+    await this.actor.items.get(itemId)?.update({ "system.equip": "" });
+  }
+
+  static async #onFiltre(event, target) {
+    await this.actor.update({ "system.inventory": target.dataset.type });
+  }
+
+  static async #onEditImage(event, target) {
+    const attr    = target.dataset.edit;
+    const current = foundry.utils.getProperty(this.document, attr);
+    const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
+    return new FilePicker({
+      current,
+      type: "image",
+      redirectToRoot: img ? [img] : [],
+      callback: path => this.document.update({ [attr]: path }),
+      top: this.position.top + 40,
+      left: this.position.left + 10,
+    }).browse();
+  }
 }

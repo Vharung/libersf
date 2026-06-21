@@ -1,14 +1,30 @@
 <div class="tab" id="biography" data-group="sheet" data-tab="biography">
-    <div class="character-biography cut-corner">
+    <div class="character-biography0 cut-corner">
         {{formInput
           systemFields.biography
           value=system.biography
           name="system.biography"
         }}
     </div>
-    <div class="inventory-list cut-corner">
+    <div class="inventory-list0 cut-corner">
         <h3>{{localize 'Liber.Character.Avantagerace'}}</h3>
-        <p class="avantage">{{localize (concat 'Liber.Character.Metier.Avantage.' system.metier)}}<br>{{localize (concat 'Liber.Character.Race.Avantage.' system.race)}}</p>
+        <p class="avantage">{{localize (concat 'Liber.Character.Race.Avantage.' system.race)}}</p>
+        <h3 class="faction" title="{{localize (concat 'Liber.Character.Faction.Lien.Empire.' system.relation_empire)}}">{{localize 'Liber.Character.Faction.Empire'}}</h3>
+        <div class="moitie">
+          {{formField systemFields.relation_empire name="system.relation_empire" value=system.relation_empire localize=true rootId=partId type="select"}}
+        </div>
+        <h3 class="faction" title="{{localize (concat 'Liber.Character.Faction.Lien.OMC.' system.relation_omc)}}">{{localize 'Liber.Character.Faction.OMC'}}</h3>
+        <div class="moitie">
+          {{formField systemFields.relation_omc name="system.relation_omc" value=system.relation_omc localize=true rootId=partId type="select"}}
+        </div>
+        <h3 class="faction" title="{{localize (concat 'Liber.Character.Faction.Lien.Federation.' system.relation_federation)}}">{{localize 'Liber.Character.Faction.Federation'}}</h3>
+        <div class="moitie">
+          {{formField systemFields.relation_federation name="system.relation_federation" value=system.relation_federation localize=true rootId=partId type="select"}}
+        </div>
+        <h3 class="faction" title="{{localize (concat 'Liber.Character.Faction.Lien.Pleiade.' system.relation_pleiade)}}">{{localize 'Liber.Character.Faction.Pleiade'}}</h3>
+        <div class="moitie">
+          {{formField systemFields.relation_pleiade name="system.relation_pleiade" value=system.relation_pleiade localize=true rootId=partId type="select"}}
+        </div>
         <h3 class="mutante">{{localize 'Liber.Character.Mutant'}}</h3>
         <div class="moitie">
           {{formField systemFields.mutant name="system.mutant" value=system.mutant localize=true rootId=partId type="select"}}

@@ -82,7 +82,10 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .button-lumineux:hover, .button-lumineux.active {box-shadow: 0 0 20px var(--couleur-blanc), 0 0 40px var(--couleur-blanc);border-color: var(--couleur-blanc);color: #ffffff;background-color: rgba(0, 247, 255, 0.1);}
 
 /*stat*/
-.liber .character-biography{width:470px; height: 343px;padding:10px;margin-top: 2px;position: relative;}
+.liber .character-biography,.liber .character-biography0,.liber .character-biography1{width:470px; padding:10px;margin-top: 2px;position: relative;}
+.liber .character-biography{height: 343px;}
+.liber .character-biography0{height: 243px;}
+.liber .character-biography1{height: 275px;}
 .liber .character-biography svg{height: 300px;position: absolute;left: 270px;}
 .liber .part,.liber .infos{width: 50px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
 .liber .part-vehicule{width: 75px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
@@ -143,9 +146,9 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .liber .inventory-list .charger{background: url(../assets/actor/machine-gun-magazineg.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
 .liber .inventory-list .ceinture{background: url(../assets/actor/belt-armorg.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
 .liber .inventory-list .middle{background: url(../assets/actor/persong.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
-.liber .inventory-list .noborder{border:none;height: 80px; width: 80px;}*
+.liber .inventory-list .noborder{border:none;height: 80px; width: 80px;}
 
-.liber .inventory-list{position: relative}
+.liber .inventory-list, .liber .inventory-list0,.liber .inventory-list1{position: relative}
 .liber .circles {position: absolute;width: 80px;height: 80px;margin: 50px auto;}
 .liber .circles span {position: absolute;left: 50%; top: 50%;transform-origin: 0 -30px; /* Rayon : ici 30px pour bien rester dans 80px */font-size: 12px;}
 .liber .circles span:nth-child(1) { transform: rotate(0deg); }
@@ -190,10 +193,13 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 }
 
 /*inventaire*/
-.liber .inventory-list{width:470px; height: 175px;padding:10px;margin-top: 10px;}
+.liber .inventory-list, .liber .inventory-list0,.liber .inventory-list1{width:470px; padding:10px;margin-top: 10px;}
+.liber .inventory-list{height: 175px}
+.liber .inventory-list0{height: 275px;}
+.liber .inventory-list1{height: 349px;overflow:auto;}
 .liber .inventory-tabs{display:flex;gap:10px;font-size:12px;margin-bottom:10px}
 .liber .inventory-tabs div{cursor:pointer;padding:4px 8px;background:var(--couleur-gris);border:1px solid var(--couleur-clair2);border-radius:4px}
-.liber .inventaire {height: 290px; overflow: auto;    padding: 0;}
+.liber .inventaire {height: 220px; overflow: auto;    padding: 0;}
 .liber .inventaire li{height: 100px; width:100px; margin: 0 5px 5px 0; display: inline-block;position:relative;font-size: 0.8em;border: solid 1px var(--couleur-clair2);}
 .liber .inventaire .item-qty{position: absolute;top:0px;left: 3px;}
 .liber .inventaire .item-weigth{position: absolute;top:0px;right: 3px;}
@@ -209,8 +215,20 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .inventaire .ceinture{background: url(../assets/actor/belt-armor.webp) no-repeat center center;background-size:contain;}
 .liber .inventaire .middle{background: url(../assets/actor/person.webp) no-repeat center center;background-size:contain;}
 .liber .desequi{position: relative;top: 59px;left: 61px; padding:5px; background: var(--couleur-gris)}
-.liber .compt{height: 40px; width:40px; margin: 0 5px 5px 0; position:absolute;font-size: 0.8em;border: solid 1px var(--couleur-blanc);background: var(--couleur-gris);padding: 5px;}
-.liber .compt .zonecontroledroit{position: absolute;right: -14px;width: 10px;top: 5px;}
+
+.liber .validcompt{text-align: center;width: 45%;margin-left: 3px;border: solid var(--couleur-blanc) 1px;display: inline-block;float: right;padding: 5px;background: var(--couleur-gris);cursor: pointer;}
+.liber .compt {height: 40px;}
+.liber .compt td {height: 40px;vertical-align: middle;padding: 0 4px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.liber .compt:hover {background: rgba(255,255,255,0.08);}
+.liber .img_compt {width: 28px;text-align: center;display: inline-block;}
+.liber .img_compt img {width: 20px;height: 20px;vertical-align: middle;border: 1px solid var(--couleur-blanc);margin-top: 10px;}
+.liber .nom_compt {max-width: 140px;font-weight: bold;text-transform: uppercase;}
+.liber .eff_compt {max-width: 140px;color: #CCC;}
+.liber .lev_compt {width: 40px;text-align: center;font-weight: bold;}
+.liber .con_compt {width: 60px;text-align: center;}
+.liber .con_compt a {display: inline-block;padding: 2px;margin: 0 2px;}
+.liber .con_compt i {vertical-align: middle;}
+
 .liber .niv0{top:14px; left:calc(50% - 25px);}
 .liber .niv11{top:60px; left:calc(22% - 25px);}
 .liber .niv12{top:60px; left:calc(50% - 25px);}
@@ -242,13 +260,15 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .prosemirror menu, prose-mirror menu {padding: 0;}
 
 /*biography*/
-.liber .prosemirror, prose-mirror {min-height: 320px}
+.liber .prosemirror, prose-mirror {min-height: 220px}
 .liber.item .prosemirror, prose-mirror {min-height: 130px}
 .liber .editor-content{height: 223px}
 .liber.item .editor-content{height: 76px}
 .liber h3.mutante{background:url(../assets/actor/dna1.webp) no-repeat left center;background-size:contain;padding-left: 22px;width: 49%; display:inline-block;}
+.liber h3.faction{width: 49%; display:inline-block;margin: 0;height: 20px}
 .liber .moitie{width: 50%; display:inline-block;}
 .liber .inventory-list h3{font-size: 1.2em;}
+.liber .inventory-list0 h3{font-size: 1.2em;}
 .liber .avantage{font-size:0.8em}
 
 /*Competence*/
@@ -291,6 +311,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .urgence{background:url(../assets/actor/fire-shield.webp) no-repeat left center;background-size:contain;}
 .liber .sabotage{background:url(../assets/actor/mine-explosion.webp) no-repeat left center;background-size:contain;}
 .liber .abordage{background:url(../assets/actor/ship-wreck.webp) no-repeat left center;background-size:contain;}
+.liber .restelevel{position: absolute;right: 16px;top: 20px;}
 
 /*Items*/
 .liber .half{width: 50%; float: left;padding:5px;}
@@ -314,7 +335,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .intro-img h3{color: var(--couleur-bleuelect);position: absolute;top: 10px;font-size: 1.2em;left: 90px;padding: 0;margin: 0;} 
 .intro-img p{position: absolute;top: 40px;right: 20px;}
 .intro-img span{position: absolute;top: 48px;left: 91px;}
-.intro-chat {height: 34px;padding: 1px;text-align: center;color: var(--couleur-gris);margin-top: 10px;}
+.intro-chat {min-height: 34px;padding: 1px;text-align: center;color: var(--couleur-gris);margin-top: 10px;}
 #chat .chat-message.whisper {background: #525456;border:none;}
 #chat .chat-message.blind {background: #747575;border:none;}
 
@@ -327,3 +348,21 @@ body.game .app.dialog  option {background: var(--couleur-grisclair); color:var(-
 
 .erreur{ justify-content: center;
             align-items: center;}
+
+
+/****Extentions**/
+.libersf-gm .tab{position: absolute;}
+.libersf-gm .menucol{width: 200px;display: inline-block;position: absolute;top:0}
+.libersf-gm .menucol li{list-style: none}
+.libersf-gm .menucol li li{}
+.libersf-gm .contenue{padding-top: 10px;display: inline-block;height: 492px;width:721px; overflow:auto; position:absolute;left:200px }
+
+#liber-escuade-points{opacity: 0.8}
+#liber-escuade-points .header-control{display: none}
+#liber-escuade-points .window-title{text-align: center}
+.libersf-escuade-hud {position: fixed;bottom: 10px;right: 10px;z-index: 99;background: rgba(15, 20, 30, 0.8);border: 1px solid #00ffff66;border-radius: 12px;padding: 8px 12px;font-family: "Orbitron", sans-serif;color: #00eaff;box-shadow: 0 0 8px #00eaff44;backdrop-filter: blur(4px);}
+.hud-container {display: flex;flex-direction: column;align-items: center;}
+.hud-title {font-size: 13px;margin-bottom: 4px;text-shadow: 0 0 4px #00eaff;}
+.hud-controls {display: flex;align-items: center;gap: 6px;}
+.hud-controls button {background: #00334a;color: #00eaff;border: 1px solid #00eaff55;border-radius: 5px;width: 24px;height: 24px;cursor: pointer;font-weight: bold;}
+.hud-controls .value {font-size: 18px;min-width: 30px;text-align: center;}

@@ -7,7 +7,7 @@
       "name": "Vharung",
       "discord": "Vharung"
     }],
-  "version": "5",
+  "version": "6",
   "compatibility": {
     "minimum": "13",
     "verified": "14"
@@ -27,7 +27,7 @@
       "path": "lang/en.json"
     }
   ],
-  "esmodules": ["module/liber.js"],
+  "esmodules": ["module/liber.js","extensions/gmscreen/gmscreen.js","extensions/escuade/escuade.js"],
   "packs": [
     { 
       "name": "inventaire",

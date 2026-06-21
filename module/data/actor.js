@@ -1,5 +1,20 @@
-import {METIERS, RACES, FACTIONS, SEX, CHOISE, COMPETENCES, ATTITUDE, TAILLE, TECHNO, TYPES, TAILLEV, IAMODEL, MOTEURMODEL, BLINDAGEMODEL, USAGE} from "./constants.js"; // Import de la constante METIERS
-
+import {METIERS, RACES, FACTIONS,RELATION, SEX, CHOISE, COMPETENCES, ATTITUDE, TAILLE, TECHNO, TYPES, TAILLEV, IAMODEL, MOTEURMODEL, BLINDAGEMODEL, USAGE} from "./constants.js"; // Import de la constante METIERS
+function relationField(fields) {
+  return new fields.StringField({
+    required: true,
+    initial: RELATION.AUCUNE,
+    choices: {
+      [RELATION.TERRORISTE]:  game.i18n.localize("Liber.Character.Relation.Terroriste"),
+      [RELATION.ENNEMI]:      game.i18n.localize("Liber.Character.Relation.Ennemi"),
+      [RELATION.RECHERCHER]:  game.i18n.localize("Liber.Character.Relation.Rechercher"),
+      [RELATION.AUCUNE]:      game.i18n.localize("Liber.Character.Relation.Aucune"),
+      [RELATION.SYMPATHISANT]:game.i18n.localize("Liber.Character.Relation.Sympathisant"),
+      [RELATION.CITOYEN]:     game.i18n.localize("Liber.Character.Relation.Citoyen"),
+      [RELATION.COMMANDANT]:  game.i18n.localize("Liber.Character.Relation.Commandant"),
+      [RELATION.GOUVERNEUR]:  game.i18n.localize("Liber.Character.Relation.Gouverneur"),
+    }
+  });
+}
 /** Modèle de données pour un personnage */
 export default class LiberCharacterData extends foundry.abstract.TypeDataModel  {
   static defineSchema() {
@@ -24,7 +39,7 @@ export default class LiberCharacterData extends foundry.abstract.TypeDataModel  
       encmax: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       credit: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       pointrestant: new foundry.data.fields.NumberField({ required: true, initial: 0 }),
-      bonus: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
+      bonus: new foundry.data.fields.NumberField({ required: true, min: -50, initial: 0 }),
       arme: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       maxarme: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       piece: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
@@ -36,31 +51,40 @@ export default class LiberCharacterData extends foundry.abstract.TypeDataModel  
       sun4: new fields.HTMLField({ required: true, initial: "" }),
       metier: new fields.StringField({
         required: true,
-        initial: METIERS.MARCHAND, // Valeur par défaut
+        initial: METIERS.SOLDAT, // Valeur par défaut
         choices: {
-          [METIERS.MARCHAND]: game.i18n.localize("Liber.Character.Metier.Marchand"),
-          [METIERS.ARTISAN]: game.i18n.localize("Liber.Character.Metier.Artisan"),
-          [METIERS.INTELLECTUEL]: game.i18n.localize("Liber.Character.Metier.Intellectuel"),
-          [METIERS.MALANDRIN]: game.i18n.localize("Liber.Character.Metier.Malandrin"),
-          [METIERS.PILOTE]: game.i18n.localize("Liber.Character.Metier.Pilote"),
+          [METIERS.SOLDAT]: game.i18n.localize("Liber.Character.Metier.Soldat"),
+          [METIERS.INGENIEUR]: game.i18n.localize("Liber.Character.Metier.Ingenieur"),
+          [METIERS.HACKER]: game.i18n.localize("Liber.Character.Metier.Hacker"),
           [METIERS.MEDECIN]: game.i18n.localize("Liber.Character.Metier.Medecin"),
-          [METIERS.MILITAIRE]: game.i18n.localize("Liber.Character.Metier.Militaire"),
-          [METIERS.TECHNICIEN]: game.i18n.localize("Liber.Character.Metier.Technicien"),
-          [METIERS.COMBATTANT]: game.i18n.localize("Liber.Character.Metier.Combattant")
+          [METIERS.DIPLOMATE]: game.i18n.localize("Liber.Character.Metier.Diplomate"),
+          [METIERS.MERCENAIRE]: game.i18n.localize("Liber.Character.Metier.Mercenaire"),
+          [METIERS.CHASSEUR]: game.i18n.localize("Liber.Character.Metier.Chasseur"),
+          [METIERS.ECLAIREUR]: game.i18n.localize("Liber.Character.Metier.Eclaireur"),
+          [METIERS.SCIENTIFIQUE]: game.i18n.localize("Liber.Character.Metier.Scientifique"),
+          [METIERS.CONTREBANDIER]: game.i18n.localize("Liber.Character.Metier.Contrebandier"),
+          [METIERS.PILOTE]: game.i18n.localize("Liber.Character.Metier.Pilote"),
+          
         }
       }),
+      relation_empire:    relationField(fields),
+      relation_omc:       relationField(fields),
+      relation_federation: relationField(fields),
+      relation_pleiade:   relationField(fields),
+
       race: new fields.StringField({
         required: true,
-        initial: RACES.HUMAIN, // Valeur par défaut
+        initial: RACES.DRAGON, // Valeur par défaut
         choices: {
-          [RACES.HUMAIN]: game.i18n.localize("Liber.Character.Race.Humain"),
-          [RACES.ARTHURIEN]: game.i18n.localize("Liber.Character.Race.Arthurien"),
-          [RACES.DRAGON]: game.i18n.localize("Liber.Character.Race.Dragon"),
-          [RACES.MACHINE]: game.i18n.localize("Liber.Character.Race.Machine"),
-          [RACES.PLEIADIEN]: game.i18n.localize("Liber.Character.Race.Pleiadien"),
-          [RACES.YORIBIEN]: game.i18n.localize("Liber.Character.Race.Yoribien"),
+          [RACES.DRAGON]: game.i18n.localize("Liber.Character.Race.Draconien"),
           [RACES.ELFEN]: game.i18n.localize("Liber.Character.Race.Elfen"),
-          [RACES.ORCANIEN]: game.i18n.localize("Liber.Character.Race.Orcanien")
+          [RACES.ORCANIEN]: game.i18n.localize("Liber.Character.Race.Orquanien"),
+          [RACES.ARTHURIEN]: game.i18n.localize("Liber.Character.Race.Arthurien"),
+          [RACES.NAIN]: game.i18n.localize("Liber.Character.Race.Nain"),
+          [RACES.HUMAIN]: game.i18n.localize("Liber.Character.Race.Humain"),
+          [RACES.FELINIS]: game.i18n.localize("Liber.Character.Race.Felinis"),
+          [RACES.DEMON]: game.i18n.localize("Liber.Character.Race.Demon"),
+          [RACES.MACHINE]: game.i18n.localize("Liber.Character.Race.Machine")
         }
       }),
       attitude: new fields.StringField({
@@ -97,6 +121,10 @@ export default class LiberCharacterData extends foundry.abstract.TypeDataModel  
           [FACTIONS.REBEL]: game.i18n.localize("Liber.Character.Faction.Rebel"),
           [FACTIONS.AUTRE]: game.i18n.localize("Liber.Character.Faction.Autre")
         }
+      }),
+      competenceschoix: new fields.StringField({
+          required: false,
+          initial: "",
       }),
       techno: new fields.StringField({
         required: true,

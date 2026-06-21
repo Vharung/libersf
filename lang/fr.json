@@ -19,47 +19,50 @@
   "Liber": {
     "Character": {
       "Metier":{
-        "Artisan": "Artisan",
-        "Marchand": "Marchand",
-        "Colon":"Colon",
-        "Intellectuel": "Intellectuel",
-        "Malandrin": "Malandrin",
-        "Pilote": "Pilote",
-        "Medecin": "Medecin",
-        "Militaire": "Militaire",
-        "Technicien": "Technicien",
-        "Combattant": "Combattant",
-        "Avantage":{
-          "Artisan": "+10 Artisanat",
-          "Marchand": "+10 Négociation",
-          "Colon": "+10 Survie",
-          "Intellectuel": "+10 Investigation",
-          "Malandrin": "+10 Discrétion",
-          "Pilote": "+10 Pilote",
-          "Medecin": "+10 Medecine",
-          "Militaire": "+10 Tir",
-          "Technicien": "+10 Mécanique",
-          "Combattant": "+10 Force"
-        }
+        "Soldat": "Soldat",
+        "Ingenieur": "Ingénieur",
+        "Hacker":"Hacker",
+        "Medecin": "Médecin",
+        "Diplomate": "Diplomate",
+        "Mercenaire": "Mercenaire",
+        "Chasseur": "Chasseur de prime",
+        "Eclaireur":"Eclaireur",
+        "Scientifique":"Scientifique",
+        "Contrebandier":"Contrebandier",
+        "Pilote":"Pilote",
+        "Tous":"Tous"
+      },
+      "Relation":{
+        "Terroriste":"Terroriste",
+        "Ennemi":"Ennemi",
+        "Rechercher":"Rechercher",
+        "Aucune":"Aucune",
+        "Sympathisant":"Sympathisant",
+        "Citoyen":"Citoyen",
+        "Officier":"Officier",
+        "Commandant":"Commandant",
+        "Gouverneur":"Gouverneur"
       },
       "Race":{
-        "Humain": "Humain",
-        "Arthurien": "Arthurien",
-        "Dragon": "Alpha Draconien",
-        "Machine": "Machine",
-        "Pleiadien": "Pleiadien",
-        "Yoribien": "Yoribien",
+        "Draconien": "Draconien",
         "Elfen": "Elfen",
-        "Orcanien": "Orcanien",
+        "Orquanien": "Orquanien",
+        "Arthurien": "Arthurien",
+        "Nain": "Nain",
+        "Humain": "Humain",
+        "Felinis":"Félinis",
+        "Demon": "Démon",
+        "Machine": "Synthétiques",
         "Avantage":{
-          "Humain": "+10 Diplomatie; +10 Perception, +10 Science, +10 Balistique ",
-          "Arthurien": "+10 Dextérité, +10 Perception, +10 Survie, Explosion d'énergie",
-          "Dragon": "+10 Combat, +10 Diplomatie, +10 Pilote, Régénération",
-          "Machine": "+10 Artisanat, +10 Piratage, +10 Science, Interconnexion réseau",
-          "Pleiadien": "+10 Combat, +10 Perception, +10 Discrétion, Lien empathique",
-          "Yoribien": "+10 Agilité, +10 Perception, +10 Survie, Exoquelette renforcé",
-          "Elfen": "+10 Agilité, +10 Discrétion, +10 Perception, Technophile",
-          "Orcanien": "+10 Force, +10 Combat, +10 Pilotage, Fureur berserk"
+          "Draconien": "Une fois par tour : déplacement gratuit ou attaque avec +20",
+          "Elfen": "+1 Etoile pour tout ce qui technologie.",
+          "Orquanien": "Compagnon de Guerre : Commence avec un animal dressé.",
+          "Arthurien": "Peux utiliser de la magie, jet de religion. Leur corps est pur énergie.",
+          "Nain": "Peut modifier ses armes et armures entre deux missions : portée, dégâts, précision, protection, résistance. +1d6",
+          "Humain": "Une fois par scene soit : relance n'importe quel jet ou une seconde action bonus",
+          "Felinis": "Premier tir ou première attaque : +40 précision.",
+          "Demon": "Une fois par jour peut revenir à la vie avec La moitié de leurs PV",
+          "Synthétiques": "Une fois par combat : attaque réussie automatiquement, si le tir est possible. Hors combat +20 en connaissances"
         }
       },
       "Faction":{
@@ -69,7 +72,53 @@
         "Pleiade": "Pleiade",
         "Fanatique": "Fanatique",
         "Rebel": "Rebelion",
-        "Autre": "Autre"
+        "Autre": "Autre",
+        "Lien":{
+          "Empire":{
+            "Terroriste":"Très grosse prime sur ta tête. Toutes Villes/Planètes informées",
+            "Ennemi":"Bon prime sur ta tête. Ville/Planète moyenne informée",
+            "Rechercher":"Petite prime sur ta tête. Ville/Planète importante informée",
+            "Aucune":"Aucun Avantage ou desavantage",
+            "Sympathisant":"Réduction 10% matériel impérial",
+            "Citoyen":"Accès bases impériales",
+            "Officier":"Soldats de soutien",
+            "Commandant":"Vaisseau militaire",
+            "Gouverneur":"Influence politique"
+          },
+          "OMC":{
+            "Terroriste":"Très grosse prime sur ta tête. Toutes Villes/Planètes informées",
+            "Ennemi":"Bon prime sur ta tête. Ville/Planète moyenne informée",
+            "Rechercher":"Petite prime sur ta tête. Ville/Planète importante informée",
+            "Aucune":"Aucun Avantage ou desavantage",
+            "Sympathisant":"Réseau d'informations",
+            "Citoyen":"Documents officiels",
+            "Officier":"Soutien administratif",
+            "Commandant":"Ressources planétaires",
+            "Gouverneur":"Influence diplomatique"
+          },
+          "Federation":{
+            "Terroriste":"Très grosse prime sur ta tête. Toutes Villes/Planètes informées",
+            "Ennemi":"Bon prime sur ta tête. Ville/Planète moyenne informée",
+            "Rechercher":"Petite prime sur ta tête. Ville/Planète importante informée",
+            "Aucune":"Aucun Avantage ou desavantage",
+            "Sympathisant":"Réduction commerciale",
+            "Citoyen":"Accès marchés privés",
+            "Officier":"Contrats exclusifs",
+            "Commandant":"Routes commerciales",
+            "Gouverneur":"Influence économique"
+          },
+          "Pleiade":{
+            "Terroriste":"Très grosse prime sur ta tête. Toutes Villes/Planètes informées",
+            "Ennemi":"Bon prime sur ta tête. Ville/Planète moyenne informée",
+            "Rechercher":"Petite prime sur ta tête. Ville/Planète importante informée",
+            "Aucune":"Aucun Avantage ou desavantage",
+            "Sympathisant":"Réseau criminel",
+            "Citoyen":"Marché noir",
+            "Officier":"Hommes de main",
+            "Commandant":"Contrôle local",
+            "Gouverneur":"Organisation criminelle majeure"
+          }
+        }
       },
       "Sex":{
         "Male": "Male",
@@ -78,7 +127,11 @@
       },
       "Choix":{
         "Yes":"Oui",
-        "No":"Non"
+        "No":"Non",
+        "Actif":"Actif",
+        "Support":"Support",
+        "Passif":"Passif",
+        "Specialisation":"Spécialisation"
       },
       "Bouton":{
         "biography":"Biographie",
@@ -94,7 +147,8 @@
         "Shield":"Bouclier",
         "Room":"Pièces",
         "Consomables":"Consommables",
-        "Other":"Autre"
+        "Other":"Autre",
+        "Kit":"Equiupement de Base"
       },
       "Competences":{
         "agilite": "Agilité",
@@ -118,7 +172,7 @@
         "pilotage": "Pilotage", 
         "piratage": "Piratage", 
         "pistage": "Pistage", 
-        "religion": "Culture/Relig.",
+        "religion": "Magie/Relig.",
         "science": "Science", 
         "survie": "Survie", 
         "tir": "Tir", 
@@ -252,6 +306,8 @@
           "hors_map": "Hors map",
           "automatique": "Automatique",
           "couvrture":"Tir de couverture",
+          "solitude":"Points de solitude",
+          "espritdacier":"(Esprit d'Acier ÷2)",
           "effetarme":{
             "coup_par_coup": "Tire une balle par balle.",
             "assommante": "Etourdi l’ennemi",
@@ -282,6 +338,7 @@
       "Enrayer":"Enrayé",
       "Casser":"Casser",
       "armeenrayé":"Arme enrayé",
+      "armeecassé":"Arme cassée",
       "Energies":{
         "Energie":"Energie",
         "Cinetique":"Cinétique",
@@ -339,5 +396,7 @@
           "Ultrarenforce":"Ultrarenforcé"
         }
       }
-  }
+  },
+  "libersf-escuade.settings.pointsEscouade.name": "Points d’Escouade",
+  "libersf-escuade.settings.pointsEscouade.hint": "Ressource commune partagée par toute l’escouade."
 }
