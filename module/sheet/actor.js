@@ -35,7 +35,8 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     stat:       { template: "systems/libersf/templates/actors/character-stat.hbs" },
     biography:  { template: "systems/libersf/templates/actors/character-biography.hbs" },
     inventory:  { template: "systems/libersf/templates/actors/character-inventory.hbs" },
-    competence: { template: "systems/libersf/templates/actors/character-competence.hbs" }
+    competence: { template: "systems/libersf/templates/actors/character-competence.hbs" },
+    level: { template: "systems/libersf/templates/actors/character-level.hbs" }
   };
 
   // ─── Onglets ─────────────────────────────────────────────────────────────────
@@ -47,6 +48,7 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
       biography:  { icon: "fa-solid fa-book",    label: "liber.Labels.long.biography" },
       inventory:  { icon: "fa-solid fa-shapes",  label: "liber.Labels.long.inventory" },
       competence: { icon: "fa-solid fa-shapes",  label: "liber.Labels.long.competence" },
+      level: { icon: "fa-solid fa-shapes",  label: "liber.Labels.long.level" }
     };
     return Object.fromEntries(
       Object.entries(defs).map(([id, def]) => [
@@ -459,8 +461,8 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
 
       // Modes de tir
       const MODES = {
-        rafale:     { munitions: 3, resultMod: -5, infoKey: "rafale",    dommageBonus: 5 },
-        dispertion: { munitions: 3, resultMod: -5, infoKey: "dispertion" },
+        rafale:     { munitions: 5, resultMod: -5, infoKey: "rafale",    dommageBonus: 5 },
+        dispertion: { munitions: 1, resultMod: -5, infoKey: "dispertion" },
         automatique:{ munitions: 1, resultMod: 0,  infoKey: "automatique", dommageBonus: 10 },
         couverture: { munitions:10, resultMod:-10, infoKey: "couverture" },
       };
@@ -509,7 +511,9 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     } else {
       info = "<b>";
     }
+
     valuemax = Math.max(0, valuemax);
+    if(valuemax>ECHEC){valuemax=ECHEC}
     info += `${result}/${valuemax}</b>`;
 
     // ── Résultat dommages ─────────────────────────────────────────────

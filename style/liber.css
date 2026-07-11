@@ -85,7 +85,7 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .liber .character-biography,.liber .character-biography0,.liber .character-biography1{width:470px; padding:10px;margin-top: 2px;position: relative;}
 .liber .character-biography{height: 343px;}
 .liber .character-biography0{height: 243px;}
-.liber .character-biography1{height: 275px;}
+.liber .character-biography1{height: 590px;}
 .liber .character-biography svg{height: 300px;position: absolute;left: 270px;}
 .liber .part,.liber .infos{width: 50px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
 .liber .part-vehicule{width: 75px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
@@ -199,7 +199,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .inventory-list1{height: 349px;overflow:auto;}
 .liber .inventory-tabs{display:flex;gap:10px;font-size:12px;margin-bottom:10px}
 .liber .inventory-tabs div{cursor:pointer;padding:4px 8px;background:var(--couleur-gris);border:1px solid var(--couleur-clair2);border-radius:4px}
-.liber .inventaire {height: 220px; overflow: auto;    padding: 0;}
+.liber .inventaire {height: 530px; overflow: auto;    padding: 0;}
 .liber .inventaire li{height: 100px; width:100px; margin: 0 5px 5px 0; display: inline-block;position:relative;font-size: 0.8em;border: solid 1px var(--couleur-clair2);}
 .liber .inventaire .item-qty{position: absolute;top:0px;left: 3px;}
 .liber .inventaire .item-weigth{position: absolute;top:0px;right: 3px;}
@@ -311,7 +311,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 .liber .urgence{background:url(../assets/actor/fire-shield.webp) no-repeat left center;background-size:contain;}
 .liber .sabotage{background:url(../assets/actor/mine-explosion.webp) no-repeat left center;background-size:contain;}
 .liber .abordage{background:url(../assets/actor/ship-wreck.webp) no-repeat left center;background-size:contain;}
-.liber .restelevel{position: absolute;right: 16px;top: 20px;}
+.liber .restelevel{position: absolute;right: 16px;top: 20px;background: var(--couleur-gris);padding: 5px 8px;border-radius: 5px;border: solid 1px var(--couleur-blanc);}
 
 /*Items*/
 .liber .half{width: 50%; float: left;padding:5px;}

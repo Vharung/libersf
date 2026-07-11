@@ -45,6 +45,7 @@ export default class LiberCharacterData extends foundry.abstract.TypeDataModel  
       piece: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       maxpiece: new foundry.data.fields.NumberField({ required: true, min: 0, initial: 0 }),
       biography: new fields.HTMLField({ required: false, blank: true, initial: "", textSearch: true }),
+      infolevel: new fields.HTMLField({ required: false, blank: true, initial: "", textSearch: true }),
       sun1: new fields.HTMLField({ required: true, initial: "" }),
       sun2: new fields.HTMLField({ required: true, initial: "" }),
       sun3: new fields.HTMLField({ required: true, initial: "" }),

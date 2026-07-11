@@ -134,10 +134,11 @@
         "Specialisation":"Spécialisation"
       },
       "Bouton":{
-        "biography":"Biographie",
+        "biography":"Bio",
         "inventory":"Inventaire",
-        "competence":"Competences",
-        "config":"Configuration"
+        "competence":"Compet.",
+        "config":"Santé",
+        "level":"Level"
       },
       "Inventory":{
         "All":"Tous",
@@ -312,8 +313,8 @@
             "coup_par_coup": "Tire une balle par balle.",
             "assommante": "Etourdi l’ennemi",
             "continu": "Les munitions indique le nombre de tours que cela peut être maintenu",
-            "rafale": "Ajout 5 de dégât, -5% en précision, –3 balles",
-            "dispertion": "Tir en cône, peut toucher plusieurs cibles dans ce cône.",
+            "rafale": "Ajout 5 de dégât, -5% en précision, –5 balles",
+            "dispertion": "Tir en cône, peut toucher plusieurs cibles dans ce cône, -5 en précision",
             "lourd": "Pas de réduction de dommage contre les véhicules",
             "hors_map": "Ceci permet de tirer depuis une zone située à l’extérieur de la map.",
             "automatique": "Ajout 10 de dégât, -10% en précision, –10 balles",
