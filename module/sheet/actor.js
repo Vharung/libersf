@@ -610,12 +610,13 @@ export default class LiberCharacterSheet extends HandlebarsApplicationMixin(Acto
     const attr    = target.dataset.edit;
     const current = foundry.utils.getProperty(this.document, attr);
     const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
-    return new FilePicker({
+    const FilePickerImpl = foundry.applications.apps.FilePicker.implementation;
+    return new FilePickerImpl({
       current,
       type: "image",
       redirectToRoot: img ? [img] : [],
       callback: path => this.document.update({ [attr]: path }),
-      top: this.position.top + 40,
+      top:  this.position.top  + 40,
       left: this.position.left + 10,
     }).browse();
   }
