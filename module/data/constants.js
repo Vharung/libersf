@@ -68,7 +68,7 @@ export const MOTEURMODEL = {
   M6: "Moteurreaction",
   M7: "Moteurnucleaire",
   M8: "Moteurfusion",
-  M9: "PropulsionWarp"
+  M9: "Warp"
 };
 
 export const BLINDAGEMODEL = {

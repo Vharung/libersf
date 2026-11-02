@@ -7,11 +7,13 @@ import LiberChat from "../document/chat.js";
  *
  *  Champs optionnels à ajouter au modèle de données du véhicule
  *  (valeurs par défaut gérées si absents) :
- *    - modeleChamp  (String)  "M1"…"M10" ou "P0"…"P8" : générateur de champ de force
- *                             (absent : on reprend le palier du moteur, comme avant)
  *    - anciennete   (String)  Prototype | Neuf | Standard | Usage | Vetuste
  *    - iaActive     (Boolean) true par défaut ; false = IA désactivée
  *    - iaPlus / iaMoins (String) spécialisation d'IA : pilotage | mecanique | piratage | visee
+ *
+ *  Champ de force : palier de base = palier du moteur - 2 (minimum 0), +1 palier par pièce
+ *  « Générateur de champ de force » (2 maximum). Cette pièce n'existe que sur les vaisseaux Mère
+ *  équipés d'un moteur Warp (P8) ; le champ ne dépasse jamais le palier du moteur.
  *
  *  Coûts d'énergie des actions : voir COUT_ACTIONS (en %, indexés par data-name du template).
  * ========================================================================== */
@@ -38,9 +40,8 @@ const empItem = (item) => Number(
 /** Anciens modèles M1…M10 convertis en paliers P0…P8 (index = numéro M). */
 const M_VERS_PALIER = {
   ia:       [null, 0, 1, 2, 3, 4, 5, 6, 7, 8, 8], // Supérieure et Quasi-consciente fusionnent
-  moteur:   [null, 0, 1, 2, 3, 4, 5, 6, 7, 7, 8], // Propulsion furtive devient un module
-  blindage: [null, 0, 1, 2, 3, 4, 5, 6, 7, 7, 8], // Blindage énergétique absorbé par le champ
-  champ:    [null, 0, 1, 2, 3, 4, 5, 6, 7, 7, 8]
+  moteur:   [null, 0, 1, 2, 3, 4, 5, 6, 7, 8, 8], // Propulsion furtive devient un module
+  blindage: [null, 0, 1, 2, 3, 4, 5, 6, 7, 8, 8]  // Blindage énergétique absorbé par le champ de force
 };
 
 /** Accepte "M7" (ancien format) ou "P6" (nouveau format). */
@@ -110,6 +111,7 @@ const STAT_PAR_COMPETENCE = {
  */
 const PIECES = {
   "soute":                   { emp: 1, prix: 1000, max: 3, min: { Space: 1, Terre: 1, Mer: 1, Air: 1 } },
+  "generateur-de-champ-de-force": { emp: 2, prix: 3000, max: 2, min: { Space: 4, Terre: 4, Mer: 4, Air: 4 }, moteurMin: 8 }, // Mère uniquement, moteur Warp (P8) uniquement
   "generateur-auxiliaire":   { emp: 1, prix: 2000, max: 2, min: { Space: 1, Terre: 1, Mer: 1, Air: 1 } },
   "capsule-de-sauvetage":    { emp: 1, prix: 1500, max: 1, min: { Space: 1, Terre: 0, Mer: 2, Air: 2 } },
   "generateur-de-furtivite": { emp: 2, prix: 4000, max: 1, min: { Space: 1, Terre: 0, Mer: 2, Air: 1 } }, // Mer : sous-marin
@@ -132,15 +134,13 @@ function calculerVehicule(actor) {
   const sys = actor.system;
   const type = sys.typevehicule;
   const nbtaille = TAILLES[sys.taillevehicule] ?? 1;
-  const usage = sys.usage;
   const anc = ANCIENNETE[slug(sys.anciennete)] ?? ANCIENNETE.standard;
   const alertes = [];
 
   // --- Paliers des composants ---
   const pIA = versPalier(sys.modeleIA, "ia");
-  const pMoteur = versPalier(sys.modeleMoteur, "moteur");
+  const pMoteur = versPalier(sys.modeleMoteur, "moteur"); console.log(pMoteur)
   const pBlindage = versPalier(sys.modeleBlindage, "blindage");
-  const pChamp = sys.modeleChamp ? versPalier(sys.modeleChamp, "champ") : pMoteur;
 
   // --- Statistiques (en paliers), IA désactivée = P IA à 0 ---
   const iaActive = sys.iaActive !== false;
@@ -187,6 +187,9 @@ function calculerVehicule(actor) {
         } else if (nbtaille < mini) {
           alertes.push(`${item.name} : taille minimale « ${NOMS_TAILLE[mini]} » pour ce type de véhicule.`);
         }
+        if (def.moteurMin && pMoteur < def.moteurMin) {
+          alertes.push(`${item.name} : réservé aux moteurs Warp.`);
+        }
       } else {
         empUtilises += empItem(item) * qty;
         prixPieces += (item.system?.valeur || 0) * qty;
@@ -197,6 +200,15 @@ function calculerVehicule(actor) {
     if (n > PIECES[cle].max) alertes.push(`${cle} : maximum ${PIECES[cle].max} par véhicule.`);
   }
 
+  // --- Champ de force : base = moteur - 2, +1 par générateur, plafonné au palier du moteur ---
+  const defGen = PIECES["generateur-de-champ-de-force"];
+  const nbGenChamp = pMoteur >= defGen.moteurMin ? (compte["generateur-de-champ-de-force"] || 0) : 0;
+  const pChampBase = Math.max(0, pMoteur - 2);
+  const pChamp = Math.min(pMoteur, pChampBase + nbGenChamp);
+  if (pChampBase + nbGenChamp > pMoteur) {
+    alertes.push("Le champ de force ne peut pas dépasser le palier du moteur : un générateur de champ est inutile.");
+  }
+
   // --- Défenses, coque, énergie ---
   const armormax = (pBlindage + 1) * 100 * nbtaille;
   let shieldmax = (pChamp + 1) * 100 * nbtaille;
@@ -205,13 +217,6 @@ function calculerVehicule(actor) {
   let pieceMax = 10 * nbtaille;
   let regen = 10 + 5 * pMoteur + 10 * (compte["generateur-auxiliaire"] || 0);
 
-  // Vocation du véhicule
-  if (usage === "Combat") armeMax += 2;
-  else if (usage === "Exploration") regen += 10;
-  else if (usage === "Commerce") healthmax *= 2;
-  else if (usage === "Industriel") { pieceMax += 2; shieldmax = Math.round(shieldmax * 1.5); }
-  regen = Math.min(100, regen);
-
   // --- Vérifications ---
   if (empUtilises > pieceMax) alertes.push(`Trop de pièces : ${empUtilises} emplacements utilisés sur ${pieceMax}.`);
   if (armesUtil > armeMax) alertes.push(`Trop d'armes : ${armesUtil} emplacements utilisés sur ${armeMax}.`);
@@ -219,10 +224,10 @@ function calculerVehicule(actor) {
     alertes.push("Le moteur Warp n'équipe que les vaisseaux spatiaux de taille Moyen ou plus.");
   }
 
-  // --- Prix : base de taille + composants, x ancienneté, + armes et pièces ---
+  // --- Prix : base de taille + composants (le champ de base est inclus avec le moteur), x ancienneté, + armes et pièces ---
   const composant = (p) => Math.pow(p + 1, 2) * 100 * nbtaille;
-  const prixCoque = 20000 * nbtaille * nbtaille + composant(pMoteur) + composant(pBlindage) + composant(pChamp) + composant(pIA);
-  const prix = Math.round(prixCoque + prixArmes + prixPieces)* anc.prix;
+  const prixCoque = 20000 * nbtaille + composant(pMoteur) + composant(pBlindage) + composant(pIA) +composant(pChampBase);
+  const prix = Math.round(prixCoque  + prixArmes + prixPieces) * anc.prix;
 
   return {
     type, nbtaille,
@@ -274,6 +279,12 @@ function verifierAjout(actor, item) {
     if (deja + qty > def.max) {
       return `${item.name} : maximum ${def.max} par véhicule.`;
     }
+    if (def.moteurMin && r.paliers.moteur < def.moteurMin) {console.log(def.moteurMin,r.paliers.moteur,def.moteurMin)
+      return `${item.name} est réservé aux véhicules équipés d'un moteur Warp.`;
+    }
+    if (cle === "generateur-de-champ-de-force" && Math.max(0, r.paliers.moteur - 2) + deja + qty > r.paliers.moteur) {
+      return `${item.name} : le champ de force a déjà atteint le palier du moteur.`;
+    }
   }
   if (r.empUtilises + emp > r.pieceMax) {
     return `${item.name} : plus assez d'emplacements de pièces (${r.empUtilises} / ${r.pieceMax}).`;
@@ -313,7 +324,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     stat: { template: "systems/libersf/templates/actors/vehicule-stat.hbs" },
     biography: { template: "systems/libersf/templates/actors/vehicule-biography.hbs" },
     inventory: { template: "systems/libersf/templates/actors/vehicule-inventory.hbs" },
-    competence: { template: "systems/libersf/templates/actors/vehicule-competence.hbs" }
+    soute: { template: "systems/libersf/templates/actors/vehicule-soute.hbs" }
   };
 
 
@@ -323,7 +334,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       config: { id: "config", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.config" },
       biography: { id: "biography", group: "sheet", icon: "fa-solid fa-book", label: "liber.Labels.long.biography" },
       inventory: { id: "inventory", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.inventory" },
-      competence: { id: "competence", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.competence" }
+      soute: { id: "soute", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.soute" }
 
     };
     const activeTab = this.tabGroups.sheet || "background"; // Si aucune valeur n'est définie, l'onglet "features" est activé par défaut.

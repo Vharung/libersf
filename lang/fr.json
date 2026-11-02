@@ -382,7 +382,7 @@
           "Moteurreaction":"Nucléaire",
           "Moteurnucleaire":"Ionique",
           "Moteurfusion":"A fusion",
-          "PropulsionWarp":"Propulsion Warp"
+          "Warp":"Warp"
         },
         "Blindage":{
           "Title":"Blindage",
