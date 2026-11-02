@@ -221,8 +221,8 @@ function calculerVehicule(actor) {
 
   // --- Prix : base de taille + composants, x ancienneté, + armes et pièces ---
   const composant = (p) => Math.pow(p + 1, 2) * 100 * nbtaille;
-  const prixCoque = 20000 * nbtaille + composant(pMoteur) + composant(pBlindage) + composant(pChamp) + composant(pIA);
-  const prix = Math.round(prixCoque * anc.prix + prixArmes + prixPieces);
+  const prixCoque = 20000 * nbtaille * nbtaille + composant(pMoteur) + composant(pBlindage) + composant(pChamp) + composant(pIA);
+  const prix = Math.round(prixCoque + prixArmes + prixPieces)* anc.prix;
 
   return {
     type, nbtaille,
