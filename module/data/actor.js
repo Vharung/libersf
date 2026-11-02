@@ -153,14 +153,15 @@ export default class LiberCharacterData extends foundry.abstract.TypeDataModel  
           [SEX.AUTRE]: game.i18n.localize("Liber.Character.Sex.Autre")
         }
       }),
-      usage: new fields.StringField({
+      anciennete: new fields.StringField({
         required: true,
-        initial: USAGE.COMBAT, // Valeur par défaut
+        initial: USAGE.STANDARD, // Valeur par défaut
         choices: {
-          [USAGE.COMBAT]: game.i18n.localize("Liber.Character.Usage.Combat"),
-          [USAGE.EXPLOR]: game.i18n.localize("Liber.Character.Usage.Exploration"),
-          [USAGE.COMMER]: game.i18n.localize("Liber.Character.Usage.Commerce"),
-          [USAGE.INDUST]: game.i18n.localize("Liber.Character.Usage.Industriel")
+          [USAGE.PROTOTYPE]: game.i18n.localize("Liber.Character.Usage.Prototype"),
+          [USAGE.NEUF]: game.i18n.localize("Liber.Character.Usage.Neuf"),
+          [USAGE.STANDARD]: game.i18n.localize("Liber.Character.Usage.Standard"),
+          [USAGE.USAGE]: game.i18n.localize("Liber.Character.Usage.Usage"),
+          [USAGE.VETUSTE]: game.i18n.localize("Liber.Character.Usage.Vetuste")
         }
       }),
       typevehicule: new fields.StringField({

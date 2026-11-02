@@ -12,6 +12,7 @@
       "armor": "Armure",
       "shield": "Bouclier",
       "competence": "Competence",
+      "soute": "Soute",
       "weaponvehicule": "Arme de véhicule",
       "room": "Salle de véhicule"
     }
@@ -137,6 +138,7 @@
         "biography":"Bio",
         "inventory":"Inventaire",
         "competence":"Compet.",
+        "soute":"Soute.",
         "config":"Santé",
         "level":"Level"
       },
@@ -146,7 +148,7 @@
         "Weapon":"Arme",
         "Armor":"Armure",
         "Shield":"Bouclier",
-        "Room":"Pièces",
+        "Room":"Module",
         "Consomables":"Consommables",
         "Other":"Autre",
         "Kit":"Equiupement de Base"
@@ -254,10 +256,11 @@
         "Meres":"Mère"
       },
       "Usage":{
-        "Combat":"Militaire",
-        "Exploration":"Exploration",
-        "Commerce":"Commerce",
-        "Industriel":"Industriel"
+        "Prototype":"Prototype",
+        "Neuf":"Neuf",
+        "Standard":"Standard",
+        "Usage":"Usagé",
+        "Vetuste":"Vétuste"
       },
       "Attitude":{
         "Tresamical":"Très amical",
@@ -356,7 +359,7 @@
       }
     },
     "Vehicule":{
-        "Usage":"Usage",
+        "Anciennete":"Ancienneté du véhicule",
         "IA":{ 
           "Title":"IA",
           "Basique":"Basique",
@@ -367,20 +370,18 @@
           "Strategique":"Stratégique",
           "Predictive":"Prédictive",
           "Sentient":"Sentient",
-          "Superieure":"Supérieure",
           "Quasiconsciente":"Quasi Consciente"
         },
         "Moteur":{
           "Title":"Moteur",
-          "Moteurdiesel":"Moteur diesel",
-          "Moteuressence":"Moteur à essence",
-          "Moteurelectrique":"Moteur électrique",
-          "Moteurhybride":"Moteur hybride",
-          "Moteurhelices":"Moteur à hélices",
-          "Moteurreaction":"Moteur à réaction",
-          "Moteurnucleaire":"Moteur nucléaire",
-          "Moteurfusion":"Moteur à fusion",
-          "Propulsionfurtive":"Propulsion furtive",
+          "Moteurdiesel":"Diesel",
+          "Moteuressence":"Essence",
+          "Moteurelectrique":"Electrique",
+          "Moteurhybride":"Hybride",
+          "Moteurhelices":"Hydrogène",
+          "Moteurreaction":"Nucléaire",
+          "Moteurnucleaire":"Ionique",
+          "Moteurfusion":"A fusion",
           "PropulsionWarp":"Propulsion Warp"
         },
         "Blindage":{
@@ -393,7 +394,6 @@
           "Reactif":"Réactif",
           "Nano":"Nano",
           "Adaptatif":"Adaptatif",
-          "Energetique":"Energétique",
           "Ultrarenforce":"Ultrarenforcé"
         }
       }

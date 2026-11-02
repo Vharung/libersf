@@ -1,31 +1,24 @@
-<div class="tab" id="competence" data-group="sheet" data-tab="competence">
-    <div class="character-biography cut-corner" style="height: 393px;">
-    	{{#each systemFields.competences.fields as |field caract|}}
-	        <div class="perso" data-ability="{{caract}}">
-	          <span title="{{localize 'field.label'}}" calc="{{caract}}" data-action="rollDamage" data-compt="{{caract}}">
-	            <i class="fa-solid fa-dice-d20"></i> {{localize field.label}}
-	          </span>
-	            {{formInput field 
-	              value=(lookup ../system.competences caract) 
-	              name=(concat "system.competences." caract)
-	              rootId=../partId
-	            }}
-	        </div>
-	    {{/each}}
-	    <div class="compspec">
-	    	<span>{{localize 'Liber.Character.Compspec'}}</span>
-	    	{{formInput systemFields.compspec name="system.compspec" value=system.compspec localize=true rootId=partId}}
-	    </div>
+<div class="tab" id="biography" data-group="sheet" data-tab="biography">
+    <div class="character-biography cut-corner">
+        {{formInput
+          systemFields.biography
+          value=system.biography
+          name="system.biography"
+        }}
     </div>
-    <div class="inventory-list cut-corner" style="height: 100px;">
-    	<div class="moitier">
-	    	<h3>{{localize 'Liber.Character.Pointrestant'}}</h3>
-	    	{{actor.system.pointrestant}}
-	    </div>
-	   	<div class="moitier">
-	    	<h3>{{localize 'Liber.Character.Bonus'}}</h3>
-	    	{{formInput systemFields.bonus name="system.bonus" value=system.bonus localize=true rootId=partId}}
-	    </div>
+    <div class="inventory-list cut-corner">
+      <div class="moitier vehic">
+         <h3>{{localize 'Liber.Vehicule.IA.Title'}}</h3>
+         <h3>{{localize 'Liber.Vehicule.Moteur.Title'}}</h3>
+         <h3>{{localize 'Liber.Vehicule.Blindage.Title'}}</h3>
+         <h3>{{localize 'Liber.Vehicule.Usage'}}</h3>
+      </div>
+      <div class="moitier vehic">
+        {{formInput systemFields.modeleIA name="system.modeleIA" value=system.modeleIA localize=true rootId=partId type="select"}}
+        {{formInput systemFields.modeleMoteur name="system.modeleMoteur" value=system.modeleMoteur localize=true rootId=partId type="select"}}
+        {{formInput systemFields.modeleBlindage name="system.modeleBlindage" value=system.modeleBlindage localize=true rootId=partId type="select"}}
+        {{formInput systemFields.usage name="system.usage" value=system.usage localize=true rootId=partId type="select"}}
+      </div>
     </div>
     <footer class="sheet-footer cut-corner">
         <div class="action">

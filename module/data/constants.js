@@ -44,7 +44,7 @@ export const TAILLEV = {
 };
 
 export const USAGE = {
-    COMBAT:"Combat",EXPLOR:"Exploration",COMMER:"Commerce",INDUST:"Industriel"
+    PROTOTYPE:"Prototype",NEUF:"Neuf",STANDARD:"Standard",USAGE:"Usage",VETUSTE:"Vetuste"
 };
 
 export const IAMODEL = {
@@ -56,8 +56,7 @@ export const IAMODEL = {
   M6: "Strategique",
   M7: "Predictive",
   M8: "Sentient",
-  M9: "Superieure",
-  M10: "Quasiconsciente"
+  M9: "Quasiconsciente"
 };
 
 export const MOTEURMODEL = {
@@ -69,8 +68,7 @@ export const MOTEURMODEL = {
   M6: "Moteurreaction",
   M7: "Moteurnucleaire",
   M8: "Moteurfusion",
-  M9: "Propulsionfurtive",
-  M10: "PropulsionWarp"
+  M9: "PropulsionWarp"
 };
 
 export const BLINDAGEMODEL = {
@@ -82,8 +80,7 @@ export const BLINDAGEMODEL = {
   M6: "Reactif",
   M7: "Nano",
   M8: "Adaptatif",
-  M9: "Energetique",
-  M10: "Ultrarenforce"
+  M9: "Ultrarenforce"
 };
 
 export const RaceBonus = {

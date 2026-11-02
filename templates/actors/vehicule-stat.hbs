@@ -111,19 +111,19 @@
     <div class="inventory-list cut-corner">
         <div class="circles pilotage">
             {{{actor.system.sun1}}}
-            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.pilotage'}} / {{localize 'Liber.Character.IA.AI'}}"></div>
+            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.pilotage'}} / {{localize 'Liber.Character.IA.AI'}} : +{{calcul.bonus.pilotage}}"></div>
         </div>
         <div class="circles mecanique">
             {{{actor.system.sun2}}}
-            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.mecanique'}}"></div>
+            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.mecanique'}} : +{{calcul.bonus.mecanique}}"></div>
         </div>
         <div class="circles piratage">
             {{{actor.system.sun3}}}
-            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.piratage'}}"></div>
+            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.piratage'}} : +{{calcul.bonus.piratage}}"></div>
         </div>
         <div class="circles visee">
             {{{actor.system.sun4}}}
-            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.visee'}}"></div>
+            <div class="technoinfo" title="{{localize 'Liber.Character.Competences.visee'}} : +{{calcul.bonus.visee}}"></div>
         </div>
     </div>
     <footer class="sheet-footer cut-corner">
@@ -135,6 +135,7 @@
           <div class="invisible icone" title="{{localize 'Liber.Character.Action.Invisible'}}" data-action="fulldown" data-full="30" data-name="invisible"></div>
           <div class="tactique icone" title="{{localize 'Liber.Character.Action.Tactique'}}" data-action="fulldown" data-full="10" data-name="tactique"></div>
           <div class="sprint icone" title="{{localize 'Liber.Character.Action.Sprint'}}" data-action="fulldown" data-full="50" data-name="sprint"></div>
+          <div class="newturn icone" title="Nouveau tour" data-action="newTurn">⟳</div>
         </div>
         <div class="action">
           <h4>{{localize 'Liber.Character.Action.Passager'}}</h4>

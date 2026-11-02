@@ -78,9 +78,9 @@
       "label": "Véhicule",
       "system": "liber",
       "path": "./pack/vehicule",
-      "type": "Actor",
+      "type": "Item",
       "ownership": {
-        "PLAYER": "NONE",
+        "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
     },
@@ -132,8 +132,7 @@
             "color": "#003e40",
             "packs": [
                 "pnj",
-                "monstre",
-                "vehicule"
+                "monstre"
             ]
         },
         {
@@ -142,7 +141,8 @@
           "color": "#005d60 ",
           "packs": [
               "inventaire",
-              "competences"
+              "competences",
+              "vehicule"
           ]
         },
         {
