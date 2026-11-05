@@ -1,5 +1,5 @@
  <div class="config tab active" id="config" data-group="sheet" data-tab="config">
-    <div class="character-biography cut-corner">
+        <div class="character-biography cut-corner">
         <div class="vehicule-status">
             <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
      viewBox="0 0 135.71 190.35" style="enable-background:new 0 0 135.71 190.35;" xml:space="preserve">
@@ -93,22 +93,48 @@
                 </div>
             </div>
         </div>
-        <div class="full infos">
-            <div class="circle">
-                <div class="fill">
-                    {{formInput systemFields.enc name="system.enc" value=system.enc localize=true rootId=partId}}
-                    {{formInput systemFields.encmax name="system.encmax" value=system.encmax localize=true rootId=partId}}
+        {{#if voirEnergie}}
+            <div class="full infos">
+                <div class="circle">
+                    <div class="fill">
+                        {{formInput systemFields.enc name="system.enc" value=system.enc localize=true rootId=partId}}
+                        {{formInput systemFields.encmax name="system.encmax" value=system.encmax localize=true rootId=partId}}
+                    </div>
                 </div>
-            </div>
-        </div>    
+            </div>    
+        {{/if}}  
         <div class="credit-vehicule infos">
             {{formInput systemFields.credit name="system.credit" value=system.credit localize=true rootId=partId}}
         </div>
-        <div class="info-arme">
-        </div>
-        <div class="deco"><div id="radar-container"><div id="radar"><div id="targets"></div></div></div></div>
     </div>
-    <div class="inventory-list cut-corner">
+    <div class="tdb" aria-hidden="true">
+      <div class="tdb-radar">
+        <div class="tdb-sweep"></div>
+        <i class="blip b1"></i><i class="blip b2"></i><i class="blip b3"></i>
+      </div>
+
+      <div class="tdb-centre">
+        <div class="tdb-jauges">
+          <span style="--v:78%"></span>
+          <span style="--v:45%"></span>
+          <span style="--v:92%"></span>
+        </div>
+        <div class="tdb-boutons">
+          <b class="btn on"></b><b class="btn"></b><b class="btn warn"></b><b class="btn on"></b>
+          <b class="btn"></b><b class="btn on"></b><b class="btn"></b><b class="btn warn"></b>
+        </div>
+        <div class="tdb-leds">
+          <i class="led v"></i><i class="led v"></i><i class="led o"></i><i class="led r"></i><i class="led"></i>
+        </div>
+      </div>
+
+      <div class="tdb-leviers">
+        <span style="--p:25%"></span>
+        <span style="--p:70%"></span>
+        <span style="--p:45%"></span>
+      </div>
+    </div>
+    <div class="inventory-list3 cut-corner">
         <div class="circles pilotage">
             {{{actor.system.sun1}}}
             <div class="technoinfo" title="{{localize 'Liber.Character.Competences.pilotage'}} / {{localize 'Liber.Character.IA.AI'}} : +{{calcul.bonus.pilotage}}"></div>
@@ -126,28 +152,4 @@
             <div class="technoinfo" title="{{localize 'Liber.Character.Competences.visee'}} : +{{calcul.bonus.visee}}"></div>
         </div>
     </div>
-    <footer class="sheet-footer cut-corner">
-        <div class="action">
-          <h4>{{localize 'Liber.Character.Action.Pilote'}}</h4>
-          <div class="evasive icone" title="{{localize 'Liber.Character.Action.Evasive'}}" data-action="fulldown" data-full="10" data-name="evasive"></div>
-          <div class="pique icone" title="{{localize 'Liber.Character.Action.Pique'}}" data-action="fulldown" data-full="20" data-name="pique"></div>
-          <div class="leurre icone" title="{{localize 'Liber.Character.Action.Leurre'}}" data-action="fulldown" data-full="10" data-name="leurre"></div>
-          <div class="invisible icone" title="{{localize 'Liber.Character.Action.Invisible'}}" data-action="fulldown" data-full="30" data-name="invisible"></div>
-          <div class="tactique icone" title="{{localize 'Liber.Character.Action.Tactique'}}" data-action="fulldown" data-full="10" data-name="tactique"></div>
-          <div class="sprint icone" title="{{localize 'Liber.Character.Action.Sprint'}}" data-action="fulldown" data-full="50" data-name="sprint"></div>
-          <div class="newturn icone" title="Nouveau tour" data-action="newTurn">⟳</div>
-        </div>
-        <div class="action">
-          <h4>{{localize 'Liber.Character.Action.Passager'}}</h4>
-          <div class="shoot icone" title="{{localize 'Liber.Character.Action.Secondaire'}}" data-action="fulldown" data-full="5" data-name="shoot"></div>
-          <div class="repair icone" title="{{localize 'Liber.Character.Action.Repair'}}" data-action="fulldown" data-full="20" data-name="repair"></div>
-          <div class="surcharge icone" title="{{localize 'Liber.Character.Action.Surcharge'}}" data-action="fulldown" data-full="20" data-name="surcharge"></div>
-          <div class="radar icone" title="{{localize 'Liber.Character.Action.Radar'}}" data-action="fulldown" data-full="5" data-name="radar"></div>
-          <div class="radio icone" title="{{localize 'Liber.Character.Action.Radio'}}" data-action="fulldown" data-full="5" data-name="radio"></div>
-          <div class="medic icone" title="{{localize 'Liber.Character.Action.Medic'}}" data-action="fulldown" data-full="10" data-name="medic"></div>
-          <div class="urgence icone" title="{{localize 'Liber.Character.Action.Urgence'}}" data-action="fulldown" data-full="5" data-name="urgence"></div>
-          <div class="sabotage icone" title="{{localize 'Liber.Character.Action.Sabotage'}}" data-action="fulldown" data-full="20" data-name="sabotage"></div>
-          <div class="abordage icone" title="{{localize 'Liber.Character.Action.Abordage'}}" data-action="fulldown" data-full="40" data-name="abordage"></div>
-        </div>
-    </footer>
 </div>

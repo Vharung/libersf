@@ -78,14 +78,16 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .liber nav.tabs {border:none}
 .liber .tab {display: block;height: 645px;overflow-y: auto;overflow-x: hidden;}
 .liber .boutons{display: inline-block;margin-top: 10px;}
+.liber .boutons a{width: auto; display: block;}
 .button-lumineux {padding: 6px 10px;background: transparent;border: 2px solid var(--couleur-bleuelect);color: var(--couleur-blanc);font-size: 12px;cursor: pointer;transition: all 0.3s ease;box-shadow: 0 0 10px var(--couleur-blanc), 0 0 20px transparent;}
 .button-lumineux:hover, .button-lumineux.active {box-shadow: 0 0 20px var(--couleur-blanc), 0 0 40px var(--couleur-blanc);border-color: var(--couleur-blanc);color: #ffffff;background-color: rgba(0, 247, 255, 0.1);}
 
 /*stat*/
-.liber .character-biography,.liber .character-biography0,.liber .character-biography1{width:470px; padding:10px;margin-top: 2px;position: relative;}
-.liber .character-biography{height: 343px;}
+.liber .character-biography,.liber .character-biography0,.liber .character-biography1,.liber .character-biography2{width:470px; padding:10px;margin-top: 2px;position: relative;}
+.liber .character-biography{height: 343px;}bonus-stat
 .liber .character-biography0{height: 243px;}
 .liber .character-biography1{height: 590px;}
+.liber .character-biography2{height: 455px;}
 .liber .character-biography svg{height: 300px;position: absolute;left: 270px;}
 .liber .part,.liber .infos{width: 50px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
 .liber .part-vehicule{width: 75px;height: 50px; position:absolute; background:var(--couleur-gris);overflow: hidden;} 
@@ -149,7 +151,7 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .liber .inventory-list .noborder{border:none;height: 80px; width: 80px;}
 
 .liber .inventory-list, .liber .inventory-list0,.liber .inventory-list1{position: relative}
-.liber .circles {position: absolute;width: 80px;height: 80px;margin: 50px auto;}
+.liber .circles {position: absolute;width: 80px;height: 80px;margin: 25px auto;}/*50px*/
 .liber .circles span {position: absolute;left: 50%; top: 50%;transform-origin: 0 -30px; /* Rayon : ici 30px pour bien rester dans 80px */font-size: 12px;}
 .liber .circles span:nth-child(1) { transform: rotate(0deg); }
 .liber .circles span:nth-child(2) { transform: rotate(72deg); }
@@ -160,6 +162,7 @@ body{background:url(../assets/system/fond.webp) no-repeat top center #000;backgr
 .liber .circles.mecanique {left:140px; }
 .liber .circles.piratage {left:245px; }
 .liber .circles.visee {left:340px; }
+.liber .bonus-stat{position: relative;top: -23px;text-align: center;width: 100%;display: block;z-index: 100;background: #1c1f22c9;padding: 5px;color: #fff;font-size: 1.2em;}
 
 .liber .technoinfo{height: 60px;width: 60px;display: block;position: absolute;top: -19px;left: 11px;border: solid 1px var(--couleur-blanc);border-radius: 50%;}
 .liber .circles.pilotage .technoinfo{background: url(../assets/actor/artificial-intelligence.webp) no-repeat center center var(--couleur-gris);background-size:contain;}
@@ -193,9 +196,14 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 }
 
 /*inventaire*/
-.liber .inventory-list, .liber .inventory-list0,.liber .inventory-list1{width:470px; padding:10px;margin-top: 10px;}
-.liber .inventory-list{height: 175px}
+.liber .inventory-list,.liber .inventory-list2, .liber .inventory-list0,.liber .inventory-list1,.liber .inventory-list3,.liber .inventory-list4{width:470px; padding:10px;margin-top: 10px;}
+.liber .inventory-list{height: 175px;overflow: hidden;}
 .liber .inventory-list0{height: 275px;}
+.liber .inventory-list2{height: 155px;}
+.liber .inventory-list3{height: 95px;}
+.liber .inventory-list4{height: 445px;overflow: auto;}
+
+.liber .inventory-list2 h3{font-size: 1.2em;}
 .liber .inventory-list1{height: 349px;overflow:auto;}
 .liber .inventory-tabs{display:flex;gap:10px;font-size:12px;margin-bottom:10px}
 .liber .inventory-tabs div{cursor:pointer;padding:4px 8px;background:var(--couleur-gris);border:1px solid var(--couleur-clair2);border-radius:4px}
@@ -261,14 +269,14 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 
 /*biography*/
 .liber .prosemirror, prose-mirror {min-height: 220px}
+.liber .monster .prosemirror {min-height: 320px}
 .liber.item .prosemirror, prose-mirror {min-height: 130px}
-.liber .editor-content{height: 223px}
+.liber .editor-content{height: auto}
 .liber.item .editor-content{height: 76px}
 .liber h3.mutante{background:url(../assets/actor/dna1.webp) no-repeat left center;background-size:contain;padding-left: 22px;width: 49%; display:inline-block;}
 .liber h3.faction{width: 49%; display:inline-block;margin: 0;height: 20px}
 .liber .moitie{width: 50%; display:inline-block;}
-.liber .inventory-list h3{font-size: 1.2em;}
-.liber .inventory-list0 h3{font-size: 1.2em;}
+.liber .inventory-list h3,.liber .inventory-list0 h3 ,.liber .inventory-list2 h3{font-size: 1.2em;}
 .liber .avantage{font-size:0.8em}
 
 /*Competence*/
@@ -366,3 +374,214 @@ body.game .app.dialog  option {background: var(--couleur-grisclair); color:var(-
 .hud-controls {display: flex;align-items: center;gap: 6px;}
 .hud-controls button {background: #00334a;color: #00eaff;border: 1px solid #00eaff55;border-radius: 5px;width: 24px;height: 24px;cursor: pointer;font-weight: bold;}
 .hud-controls .value {font-size: 18px;min-width: 30px;text-align: center;}
+
+/*radar*/
+.tdb {
+  --tdb-bleu: var(--couleur-bleuelect, #00f7ff);
+  --tdb-rouge: var(--couleur-rouge, #e01010);
+  --tdb-vert: var(--couleur-vert, #3fd05a);
+  --tdb-orange: var(--couleur-orange, #ff8a00);
+  --tdb-fond: #14181b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 14px;
+  padding: 14px;
+  background: linear-gradient(160deg, #1d2226, var(--tdb-fond));
+  border: 1px solid #2c343a;
+  border-radius: 6px;
+  box-shadow: inset 0 0 24px #000a, 0 0 0 1px #0008;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+/* ---------- Radar ---------- */
+.tdb-radar {
+  position: relative;
+  flex: 0 0 124px;
+  height: 124px;
+  border-radius: 50%;
+  border: 2px solid var(--tdb-vert);
+  background:
+    linear-gradient(var(--tdb-vert), var(--tdb-vert)) center / 1px 100% no-repeat,
+    linear-gradient(var(--tdb-vert), var(--tdb-vert)) center / 100% 1px no-repeat,
+    repeating-radial-gradient(circle, transparent 0 19px, #3fd05a55 20px 21px),
+    radial-gradient(circle, #06210f 0%, #020a05 100%);
+  box-shadow: 0 0 14px #3fd05a55, inset 0 0 20px #000;
+  overflow: hidden;
+}
+.tdb-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #3fd05a00 0deg 270deg, #3fd05a99 350deg, #b6ffc4 360deg);
+  animation: tdb-balayage 4s linear infinite;
+}
+.blip {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b6ffc4;
+  box-shadow: 0 0 8px var(--tdb-vert);
+  animation: tdb-clignote 4s ease-in-out infinite;
+}
+.blip.b1 { top: 28%; left: 62%; }
+.blip.b2 { top: 66%; left: 30%; animation-delay: -1.3s; background: var(--tdb-rouge); box-shadow: 0 0 8px var(--tdb-rouge); }
+.blip.b3 { top: 44%; left: 22%; animation-delay: -2.6s; }
+
+/* ---------- Centre : jauges, boutons, voyants ---------- */
+.tdb-centre {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tdb-jauges { display: grid; gap: 6px; }
+.tdb-jauges span {
+  height: 8px;
+  background: #0b0e10;
+  border: 1px solid #2c343a;
+  border-radius: 2px;
+  position: relative;
+}
+.tdb-jauges span::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  width: calc(var(--v) - 2px);
+  background: repeating-linear-gradient(90deg, var(--tdb-bleu) 0 6px, transparent 6px 8px);
+  box-shadow: 0 0 8px var(--tdb-bleu);
+  animation: tdb-pulse 3s ease-in-out infinite;
+}
+.tdb-jauges span:nth-child(3)::after {
+  background: repeating-linear-gradient(90deg, var(--tdb-orange) 0 6px, transparent 6px 8px);
+  box-shadow: 0 0 8px var(--tdb-orange);
+}
+
+.tdb-boutons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.btn {
+  height: 20px;
+  border-radius: 3px;
+  background: linear-gradient(#2a3238, #171c20);
+  border: 1px solid #3a444b;
+  box-shadow: 0 2px 0 #0009, inset 0 1px 0 #ffffff14;
+  position: relative;
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 8px; height: 3px;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+  background: #4a555c;
+}
+.btn.on::after   { background: var(--tdb-bleu);   box-shadow: 0 0 8px var(--tdb-bleu); }
+.btn.warn::after { background: var(--tdb-rouge);  box-shadow: 0 0 8px var(--tdb-rouge); }
+
+.tdb-leds { display: flex; gap: 8px; justify-content: center; }
+.led {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #2a3238;
+  border: 1px solid #0008;
+}
+.led.v { background: var(--tdb-vert);   box-shadow: 0 0 8px var(--tdb-vert); }
+.led.o { background: var(--tdb-orange); box-shadow: 0 0 8px var(--tdb-orange); animation: tdb-clignote 1.6s steps(2) infinite; }
+.led.r { background: var(--tdb-rouge);  box-shadow: 0 0 8px var(--tdb-rouge);  animation: tdb-clignote 0.9s steps(2) infinite; }
+
+/* ---------- Leviers verticaux ---------- */
+.tdb-leviers { display: flex; gap: 10px; height: 96px; }
+.tdb-leviers span {
+  position: relative;
+  width: 8px;
+  background: #0b0e10;
+  border: 1px solid #2c343a;
+  border-radius: 4px;
+}
+.tdb-leviers span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: var(--p);
+  width: 18px; height: 10px;
+  transform: translate(-50%, 50%);
+  border-radius: 2px;
+  background: linear-gradient(#cfd6da, #7c878d);
+  border: 1px solid #000;
+  box-shadow: 0 2px 4px #000a;
+}
+
+/* ---------- Animations ---------- */
+@keyframes tdb-balayage { to { transform: rotate(360deg); } }
+@keyframes tdb-clignote { 0%, 100% { opacity: 1; } 50% { opacity: .15; } }
+@keyframes tdb-pulse    { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tdb *, .tdb *::after { animation: none !important; }
+}
+
+/*Reservoir*/
+/* chaque poste prend toute la largeur, actions sur 5 colonnes */
+#actions .sheet-footer { display: block; }
+#actions .sheet-footer .action { display: block; width: 100%; float: none; }
+.grille-actions { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 6px 0 14px; }
+.tuile {
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px;
+  padding: 8px 2px 6px; min-height: 92px; min-width: 0; overflow-wrap: anywhere; cursor: pointer;
+  color: var(--couleur-blanc, #fff); text-align: center; line-height: 1.15;
+  background: linear-gradient(#2a3238, #171c20); border: 1px solid var(--couleur-rouge, #e01010); border-radius: 4px;
+  box-shadow: 0 2px 0 #0009, inset 0 1px 0 #ffffff14;
+}
+.tuile i { font-size: 1.7rem; color: var(--couleur-bleuelect, #00f7ff); margin-top: 2px; }
+.tuile .nom { font-size: .68rem; }
+.tuile .cout { font-size: .68rem; opacity: .75; margin-top: auto; }
+.tuile:hover { border-color: var(--couleur-bleuelect, #00f7ff); box-shadow: 0 0 8px var(--couleur-bleuelect, #00f7ff); }
+.tuile:active { transform: translateY(1px); }
+.tuile.indispo { opacity: .4; }
+.tuile.indispo i { color: var(--couleur-rouge, #e01010); }
+
+/* ---------- Jauge d'énergie (réservoir) ---------- */
+.jauge-nrj { --nrj: 0; --max: 100; width: 220px; margin: 10px auto 14px; text-align: center; }
+.jauge-nrj .cadran { position: relative; width: 220px; height: 122px; overflow: hidden; }
+
+/* arc coloré : rouge (vide) -> orange -> bleu (plein) */
+.jauge-nrj .arc {
+  position: absolute; top: 0; left: 0; width: 220px; height: 220px; border-radius: 50%;
+  background: conic-gradient(from -90deg,
+    var(--couleur-rouge, #e01010) 0deg 36deg,
+    var(--couleur-orange, #ff8a00) 36deg 72deg,
+    var(--couleur-bleuelect, #00f7ff) 72deg 180deg,
+    transparent 180deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 78px, #000 79px 100px, transparent 101px);
+          mask: radial-gradient(circle, transparent 0 78px, #000 79px 100px, transparent 101px);
+  filter: drop-shadow(0 0 6px #0008);
+}
+/* graduations tous les 18° (10 %) */
+.jauge-nrj .graduations {
+  position: absolute; top: 0; left: 0; width: 220px; height: 220px; border-radius: 50%;
+  background: repeating-conic-gradient(from -90.5deg, #000 0deg 1deg, transparent 1deg 18deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 78px, #000 79px 100px, transparent 101px);
+          mask: radial-gradient(circle, transparent 0 78px, #000 79px 100px, transparent 101px);
+  opacity: .8;
+}
+.jauge-nrj .repere { position: absolute; bottom: 20px; font-size: .8rem; font-weight: bold; color: var(--couleur-blanc, #fff); }
+.jauge-nrj .repere.vide { left: 30px; }
+.jauge-nrj .repere.plein { right: 30px; }
+
+/* aiguille : -90° = vide, +90° = plein */
+.jauge-nrj .aiguille {
+  position: absolute; left: 50%; bottom: 12px; width: 3px; height: 92px;
+  background: linear-gradient(var(--couleur-rouge, #e01010) 60%, #ddd 60%);
+  border-radius: 2px; transform-origin: 50% 100%;
+  transform: translateX(-50%) rotate(calc(-90deg + 180deg * var(--nrj) / var(--max)));
+  box-shadow: 0 0 4px #000a;
+}
+.jauge-nrj .moyeu {
+  position: absolute; left: 50%; bottom: 3px; width: 18px; height: 18px; transform: translateX(-50%);
+  border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ccc, #333); border: 1px solid #000;
+}
+
+.jauge-nrj .lecture { margin-top: 4px; font-size: 1.3rem; color: var(--couleur-bleuelect, #00f7ff); letter-spacing: .05em; }
+.jauge-nrj .lecture small { font-size: .75rem; opacity: .7; }

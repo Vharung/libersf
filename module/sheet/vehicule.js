@@ -3,7 +3,7 @@ const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 import LiberChat from "../document/chat.js";
 
 /* ==========================================================================
- *  RÈGLES DES VÉHICULES : version « paliers » + pièces
+ *  RÈGLES DES VÉHICULES : version « paliers » + pièces + rôles d'équipage
  *
  *  Champs optionnels à ajouter au modèle de données du véhicule
  *  (valeurs par défaut gérées si absents) :
@@ -15,7 +15,11 @@ import LiberChat from "../document/chat.js";
  *  « Générateur de champ de force » (2 maximum). Cette pièce n'existe que sur les vaisseaux Mère
  *  équipés d'un moteur Warp (P8) ; le champ ne dépasse jamais le palier du moteur.
  *
- *  Coûts d'énergie des actions : voir COUT_ACTIONS (en %, indexés par data-name du template).
+ *  Rôles d'équipage : stockés dans le flag  flags.libersf.roles = { idUtilisateur: ["pilote", ...] }
+ *  Le MJ attribue les rôles (bouton « Équipage »). Un joueur peut en avoir plusieurs.
+ *  Chaque joueur ne voit que les actions de ses postes ; seuls le MJ et le mécanicien voient l'énergie.
+ *
+ *  Actions à bord et coûts d'énergie : voir ACTIONS.
  * ========================================================================== */
 
 const PALIER_MAX = 8;
@@ -59,8 +63,15 @@ function etoiles(p) {
   return "<span>★</span>".repeat(1 + Math.floor(p / 2)) + (p % 2 ? "<span>✬</span>" : "");
 }
 
-/** Bonus donné au joueur à un poste : +5 par ★ entière au-dessus de ★ (max +20). */
-const bonusEtoiles = (p) => Math.min(20, 5 * Math.floor(p / 2));
+/**
+ * Bonus donné au joueur à un poste, même formule que « techno » dans actor.js :
+ *   techno = parseInt(valeur - 2) * 5 || 0   ->   P2 = 0, P3 = +5, P4 = +10 … P8 = +30, P0 = -10.
+ */
+const bonusEtoiles = (p) => (Math.floor(p) - 2) * 5 || 0;
+const signe = (n) => (n > 0 ? "+" : "") + n;
+
+/** Étoiles suivies, en dessous, de la valeur du bonus (affiché sous le rappel d'étoiles de la feuille). */
+const etoilesBonus = (p) => `${etoiles(p)}<br><small class="bonus-stat">${signe(bonusEtoiles(clamp(p, 0, PALIER_MAX)))}</small>`;
 
 const TAILLES = { Leger: 1, Moyen: 2, Lourd: 3, Meres: 4, Mere: 4 };
 const NOMS_TAILLE = ["", "Léger", "Moyen", "Lourd", "Mère"];
@@ -85,16 +96,130 @@ const CRITIQUE_BASE = 5;
 const ECHEC_BASE = 95;
 
 /**
- * Coût en énergie (en %) de chaque action, indexé par le data-name des icônes du template.
- * Prioritaire sur data-full : les templates n'ont pas besoin d'être modifiés.
+ * Actions à bord, par poste. Une action = { name (data-name), nom, cout (en % d'énergie), effet, ... } avec en option :
+ *  arme: n        -> coût = énergie des n armes choisies + cout (tir, tir ciblé, saturation)
+ *  horsCombat     -> aucune énergie, action de repos
+ *  soin: f        -> rend f x PV de coque max
+ *  convertir      -> {pv, nrj} : retire pv x PV de coque max et ajoute nrj % d'énergie
  */
-const COUT_ACTIONS = {
-  // Pilote
-  evasive: 20, pique: 10, leurre: 5, invisible: 15, tactique: 5, sprint: 25,
-  // Passagers
-  shoot: 5, repair: 15, surcharge: 0, radar: 5, radio: 5, medic: 10,
-  urgence: 10, sabotage: 20, abordage: 40
+const ACTIONS = [
+  { id: "pilote", titre: "Pilote (Pilotage)", liste: [
+    { name: "evasive", nom: "Manœuvre évasive", cout: 20, effet: "-20 pour toucher le véhicule jusqu'au prochain tour. Fait perdre la prochaine action." },
+    { name: "pique", nom: "Attaque en piqué / charge", cout: 10, effet: "+20 pour toucher, dégâts ×2. -20 en défense au tour suivant." },
+    { name: "leurre", nom: "Déploiement de leurres", cout: 5, effet: "Chaque tir ennemi doit réussir un jet de chance (50 %) ou est détourné. 1 tour." },
+    { name: "assistance", nom: "Assistance de tir", cout: 5, effet: "+15 pour toucher à l'artilleur." },
+    { name: "invisible", nom: "Escamotage / furtivité", cout: 15, effet: "Un jet de détection est nécessaire pour le trouver." },
+    { name: "tactique", nom: "Survol tactique", cout: 5, effet: "+10 aux jets de détection de l'équipage." },
+    { name: "sprint", nom: "Sprint", cout: 25, effet: "Déplacement doublé, permet de fuir." },
+    { name: "pivoter", nom: "Pivoter", cout: 5, effet: "Expose le secteur de son choix à l'ennemi." }
+  ] },
+  { id: "artilleur", titre: "Artilleur (Visée / Tir)", liste: [
+    { name: "tir", nom: "Tir", cout: 0, arme: 1, effet: "Attaque classique." },
+    { name: "cible", nom: "Tir ciblé", cout: 5, arme: 1, effet: "-20 pour toucher, vise un secteur ou un système précis." },
+    { name: "saturation", nom: "Tir de saturation", cout: 10, arme: 2, effet: "Deux armes sur la même cible, +10 pour toucher, aucune autre action ce tour." },
+    { name: "verrouillage", nom: "Verrouillage", cout: 5, effet: "La cible est marquée : +10 pour toucher pour tous les tirs de l'équipage." }
+  ] },
+  { id: "mecanicien", titre: "Mécanicien (Mécanique)", liste: [
+    { name: "equilibrage", nom: "Rééquilibrage du champ", cout: 0, effet: "Déplace les points entre secteurs. Obligatoire en fin de tour." },
+    { name: "repair", nom: "Réparation d'urgence", cout: 15, soin: 0.10, effet: "Rend 10 % des PV de coque. Une fois par combat." },
+    { name: "surcharge", nom: "Surcharge du moteur", cout: 0, convertir: { pv: 0.10, nrj: 20 }, effet: "Convertit 10 % de PV de coque en 20 % d'énergie." },
+    { name: "redemarrage", nom: "Redémarrage", cout: 15, effet: "Remet en marche un véhicule en panne." },
+    { name: "blindage", nom: "Réparation du blindage", cout: 0, horsCombat: true, effet: "Nécessite un kit de réparation d'armure." }
+  ] },
+  { id: "operateur", titre: "Opérateur (Piratage)", liste: [
+    { name: "sabotage", nom: "Sabotage", cout: 20, effet: "Test opposé contre le Piratage ennemi : désactive son champ de force 1 tour." },
+    { name: "abordage", nom: "Abordage", cout: 40, effet: "Téléportation à bord de l'ennemi, sauf défenses internes. Test opposé, -20 si l'ennemi a un champ actif." },
+    { name: "detection", nom: "Détection", cout: 5, effet: "Repère les ennemis, informations tactiques." },
+    { name: "brouillage", nom: "Brouillage", cout: 10, effet: "Les tirs ennemis subissent -10 pour toucher pendant 1 tour." },
+    { name: "communication", nom: "Communication", cout: 5, effet: "Coordination avec les alliés." }
+  ] },
+  { id: "capitaine", titre: "Médecin / capitaine", liste: [
+    { name: "medic", nom: "Support médical", cout: 10, effet: "Premiers soins à l'équipage." },
+    { name: "urgence", nom: "Urgence", cout: 10, soin: 0.05, effet: "Éteint les incendies, rend 5 % des PV de coque." },
+    { name: "commandement", nom: "Commandement", cout: 0, effet: "" }
+  ] }
+];
+
+/** Icônes Font Awesome (incluses dans Foundry) des boutons d'action. */
+const ICONES = {
+  evasive: "fa-shuffle", pique: "fa-jet-fighter-up", leurre: "fa-burst", assistance: "fa-crosshairs", invisible: "fa-user-secret",
+  tactique: "fa-binoculars", sprint: "fa-gauge-high", pivoter: "fa-rotate",
+  tir: "fa-bullseye", cible: "fa-location-crosshairs", saturation: "fa-explosion", verrouillage: "fa-lock",
+  equilibrage: "fa-scale-balanced", repair: "fa-wrench", surcharge: "fa-bolt", redemarrage: "fa-power-off", blindage: "fa-shield-halved",
+  sabotage: "fa-bomb", abordage: "fa-person-rifle", detection: "fa-satellite-dish", brouillage: "fa-wave-square", communication: "fa-tower-broadcast",
+  medic: "fa-kit-medical", urgence: "fa-fire-extinguisher", commandement: "fa-star"
 };
+const trouverAction = (name) => ACTIONS.flatMap(r => r.liste).find(a => a.name === name);
+const coutTexte = (a) => a.arme ? (a.cout ? `arme + ${a.cout} %` : "arme") : a.horsCombat ? "hors combat" : a.cout ? `${a.cout} %` : "gratuit";
+
+/* ==========================================================================
+ *  RÔLES D'ÉQUIPAGE
+ * ========================================================================== */
+
+/** Rôles = les ids des postes de ACTIONS (pilote, artilleur, mecanicien, operateur, capitaine). */
+const ROLES = ACTIONS.map(r => ({ id: r.id, titre: r.titre }));
+
+/** Rôles d'un utilisateur sur ce véhicule. Le MJ a tous les rôles. */
+const getRoles = (actor, user = game.user) => {
+  if (user.isGM) return new Set(ROLES.map(r => r.id));
+  return new Set(actor.getFlag("libersf", "roles")?.[user.id] ?? []);
+};
+
+/** Seuls le MJ et le mécanicien voient l'énergie. */
+const voitEnergie = (actor, user = game.user) => user.isGM || getRoles(actor, user).has("mecanicien");
+
+/** Poste (id de ACTIONS) auquel appartient une action. */
+const roleDeAction = (name) => ACTIONS.find(r => r.liste.some(a => a.name === name))?.id;
+
+/** Dialogue du MJ : cases à cocher joueur x rôle. */
+async function gererEquipage(actor) {
+  const actuels = actor.getFlag("libersf", "roles") ?? {};
+  const joueurs = game.users.filter(u => !u.isGM);
+  if (!joueurs.length) return ui.notifications.warn("Aucun joueur.");
+
+  const entete = ROLES.map(r => `<th>${r.titre.replace(/\s*\(.*\)/, "")}</th>`).join("");
+  const lignes = joueurs.map(u => `<tr><td>${u.name}</td>` + ROLES.map(r =>
+    `<td style="text-align:center"><input type="checkbox" data-user="${u.id}" data-role="${r.id}" ${(actuels[u.id] ?? []).includes(r.id) ? "checked" : ""}></td>`
+  ).join("") + `</tr>`).join("");
+
+  const res = await DialogV2.prompt({
+    window: { title: `Équipage : ${actor.name}`, resizable: true },
+    position: { width: 720 },
+    content: `<table style="width:100%"><thead><tr><th></th>${entete}</tr></thead><tbody>${lignes}</tbody></table>`,
+    rejectClose: false,
+    ok: {
+      label: "Valider",
+      callback: (ev, btn) => {
+        const out = Object.fromEntries(joueurs.map(u => [u.id, []]));
+        btn.form.querySelectorAll("input[type=checkbox]:checked").forEach(i => out[i.dataset.user].push(i.dataset.role));
+        return out;
+      }
+    }
+  });
+  if (res) await actor.update({ "flags.libersf.roles": res });
+}
+
+/* ========================================================================== */
+
+/** Énergie (en %) consommée par un tir d'une arme de véhicule. Champ à adapter à votre modèle d'objet. */
+const coutArme = (item) => Number(item.flags?.libersf?.energie ?? item.system?.energie ?? 0) || 0;
+
+/** Demande à l'utilisateur de choisir n arme(s) du véhicule. Retourne les objets ou null (annulé). */
+async function choisirArmes(actor, n) {
+  const armes = actor.items.filter(i => i.type === "weaponvehicule");
+  if (!armes.length) { ui.notifications.warn("Ce véhicule n'a aucune arme."); return null; }
+  const voulu = Math.min(n, armes.length);
+  const type = n > 1 ? "checkbox" : "radio";
+  const content = `<p>Choisir ${voulu} arme${voulu > 1 ? "s" : ""} :</p>` + armes.map((a, k) =>
+    `<label style="display:block"><input type="${type}" name="arme" value="${a.id}" ${n === 1 && k === 0 ? "checked" : ""}> ${a.name} (${coutArme(a)} %)</label>`).join("");
+  const ids = await DialogV2.prompt({
+    window: { title: "Choix de l'arme" }, content, rejectClose: false,
+    ok: { label: "Valider", callback: (ev, btn) => [...btn.form.querySelectorAll('input[name="arme"]:checked')].map(i => i.value) }
+  });
+  if (!ids) return null;
+  if (ids.length !== voulu) { ui.notifications.warn(`Il faut choisir exactement ${voulu} arme(s).`); return null; }
+  return ids.map(id => actor.items.get(id));
+}
 
 /** Compétence de la feuille -> statistique du véhicule (à adapter à vos clés). */
 const STAT_PAR_COMPETENCE = {
@@ -139,7 +264,7 @@ function calculerVehicule(actor) {
 
   // --- Paliers des composants ---
   const pIA = versPalier(sys.modeleIA, "ia");
-  const pMoteur = versPalier(sys.modeleMoteur, "moteur"); console.log(pMoteur)
+  const pMoteur = versPalier(sys.modeleMoteur, "moteur");
   const pBlindage = versPalier(sys.modeleBlindage, "blindage");
 
   // --- Statistiques (en paliers), IA désactivée = P IA à 0 ---
@@ -211,11 +336,11 @@ function calculerVehicule(actor) {
 
   // --- Défenses, coque, énergie ---
   const armormax = (pBlindage + 1) * 100 * nbtaille;
-  let shieldmax = (pChamp + 1) * 100 * nbtaille;
-  let healthmax = 200 * nbtaille * nbtaille;
-  let armeMax = 2 * nbtaille;
-  let pieceMax = 10 * nbtaille;
-  let regen = 10 + 5 * pMoteur + 10 * (compte["generateur-auxiliaire"] || 0);
+  const shieldmax = (pChamp + 1) * 100 * nbtaille;
+  const healthmax = 200 * nbtaille * nbtaille;
+  const armeMax = 2 * nbtaille;
+  const pieceMax = 10 * nbtaille;
+  const regen = 10 + 5 * pMoteur + 10 * (compte["generateur-auxiliaire"] || 0);
 
   // --- Vérifications ---
   if (empUtilises > pieceMax) alertes.push(`Trop de pièces : ${empUtilises} emplacements utilisés sur ${pieceMax}.`);
@@ -226,8 +351,8 @@ function calculerVehicule(actor) {
 
   // --- Prix : base de taille + composants (le champ de base est inclus avec le moteur), x ancienneté, + armes et pièces ---
   const composant = (p) => Math.pow(p + 1, 2) * 100 * nbtaille;
-  const prixCoque = 20000 * nbtaille + composant(pMoteur) + composant(pBlindage) + composant(pIA) +composant(pChampBase);
-  const prix = Math.round(prixCoque  + prixArmes + prixPieces) * anc.prix;
+  const prixCoque = 20000 * nbtaille + composant(pMoteur) + composant(pBlindage) + composant(pIA) + composant(pChampBase);
+  const prix = Math.round(prixCoque + prixArmes + prixPieces) * anc.prix;
 
   return {
     type, nbtaille,
@@ -279,7 +404,7 @@ function verifierAjout(actor, item) {
     if (deja + qty > def.max) {
       return `${item.name} : maximum ${def.max} par véhicule.`;
     }
-    if (def.moteurMin && r.paliers.moteur < def.moteurMin) {console.log(def.moteurMin,r.paliers.moteur,def.moteurMin)
+    if (def.moteurMin && r.paliers.moteur < def.moteurMin) {
       return `${item.name} est réservé aux véhicules équipés d'un moteur Warp.`;
     }
     if (cle === "generateur-de-champ-de-force" && Math.max(0, r.paliers.moteur - 2) + deja + qty > r.paliers.moteur) {
@@ -292,6 +417,49 @@ function verifierAjout(actor, item) {
   return null;
 }
 
+/**
+ * Début de tour d'un véhicule (bouton « Nouveau tour » ou tour de combat automatique) :
+ *  - énergie : + regen (10 % + 5 % par palier de moteur + 10 % par générateur auxiliaire)
+ *  - champ de force : +10 % de son maximum s'il n'a pas été touché au tour précédent
+ */
+async function debutDeTour(actor) {
+  const sys = actor.system;
+  const r = calculerVehicule(actor);
+  const nrj = Math.min(r.encmax, (Number(sys.enc) || 0) + r.regen);
+  const update = { "system.enc": nrj };
+
+  const touche = await DialogV2.confirm({
+    window: { title: `Nouveau tour : ${actor.name}` },
+    content: "<p>Le champ de force a-t-il été touché au tour précédent ?</p>",
+    yes: { label: "Oui" },
+    no: { label: "Non" }
+  });
+
+  let infoChamp = "";
+  if (touche === false) {
+    const actuel = ["haut", "droite", "bas", "gauche"].reduce((n, k) => n + (Number(sys[k]) || 0), 0);
+    const gain = Math.min(Math.round(r.shieldmax * 0.10), Math.max(0, r.shieldmax - actuel));
+    const parSecteur = Math.floor(gain / 4);
+    for (const k of ["haut", "droite", "bas", "gauche"]) update[`system.${k}`] = (Number(sys[k]) || 0) + parSecteur;
+    infoChamp = ` · Champ de force +${parSecteur * 4}`;
+  }
+
+  const chat = await new LiberChat(actor)
+    .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
+    .withContent("rollDamage")
+    .withData({
+      actingCharName: actor.name,
+      actingCharImg: actor.img,
+      introText: "",
+      infoarme: "Nouveau tour",
+      color: "var(--couleur-bleuelect)",
+      succes: `Énergie +${r.regen} %${infoChamp}`
+    })
+    .create();
+  await chat.display();
+  await actor.update(update);
+}
+
 /** Gestion de la feuille de véhicule */
 
 export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
@@ -301,7 +469,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     position: { width: 500, height: 900 },
     form: { submitOnChange: true },
     window: { resizable: true },
-    dragDrop: [{ dragSelector: '[data-drag]', dropSelector: '.inventory-list' }], // Remplacer '.inventory-list' par votre sélecteur    tabGroups: { sheet: "inventory" },
+    dragDrop: [{ dragSelector: '[data-drag]', dropSelector: '.inventory-list' }], // Remplacer '.inventory-list' par votre sélecteur
     actions: {
       editImage: LiberVehiculeSheet.#onEditImage,
       edit: LiberVehiculeSheet.#onItemEdit,
@@ -313,7 +481,8 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       equip: LiberVehiculeSheet.#onItemEquip,
       desequip: LiberVehiculeSheet.#onItemDesequip,
       fulldown: LiberVehiculeSheet.#onFullDown,
-      newTurn: LiberVehiculeSheet.#onNewTurn // NOUVEAU : bouton « Nouveau tour »
+      newTurn: LiberVehiculeSheet.#onNewTurn,
+      equipage: LiberVehiculeSheet.#onEquipage // NOUVEAU : le MJ attribue les rôles
     }
   };
 
@@ -322,6 +491,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     header: { template: "systems/libersf/templates/actors/vehicule-header.hbs" },
     tabs: { template: "systems/libersf/templates/actors/character-navigation.hbs" },
     stat: { template: "systems/libersf/templates/actors/vehicule-stat.hbs" },
+    actions: { template: "systems/libersf/templates/actors/vehicule-actions.hbs" },
     biography: { template: "systems/libersf/templates/actors/vehicule-biography.hbs" },
     inventory: { template: "systems/libersf/templates/actors/vehicule-inventory.hbs" },
     soute: { template: "systems/libersf/templates/actors/vehicule-soute.hbs" }
@@ -334,10 +504,10 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       config: { id: "config", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.config" },
       biography: { id: "biography", group: "sheet", icon: "fa-solid fa-book", label: "liber.Labels.long.biography" },
       inventory: { id: "inventory", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.inventory" },
-      soute: { id: "soute", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.soute" }
-
+      soute: { id: "soute", group: "sheet", icon: "fa-solid fa-shapes", label: "liber.Labels.long.soute" },
+      actions: { id: "actions", group: "sheet", icon: "fa-solid fa-bolt", label: "liber.Labels.long.actions" }
     };
-    const activeTab = this.tabGroups.sheet || "background"; // Si aucune valeur n'est définie, l'onglet "features" est activé par défaut.
+    const activeTab = this.tabGroups.sheet || "background";
 
     for (const v of Object.values(tabs)) {
       v.active = activeTab === v.id;
@@ -348,7 +518,6 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
 
   /** Préparation des données */
   async _prepareContext() {
-    console.log("Préparation du contexte de la feuille de personnage...");
     const filter = this.document.system.inventory;
     const filterV = this.document.system.inventoryv;
     const items = this.document.items.toObject();
@@ -377,7 +546,28 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     if (!img || !/\.(jpg|jpeg|png|webp|svg)$/i.test(img)) {
       img = "icons/svg/mystery-man.svg"; // Image par défaut
     }
+
+    // Rôles de l'utilisateur : il ne voit que les actions de ses postes.
+    const roles = getRoles(this.document);
+    const voirEnergie = voitEnergie(this.document);
+    const enc = Number(this.document.system.enc) || 0;
+    const actions = ACTIONS
+      .filter(r => roles.has(r.id))
+      .map(r => ({
+        id: r.id, titre: r.titre,
+        liste: r.liste.map(a => ({
+          name: a.name, nom: a.nom, effet: a.effet, coutTexte: coutTexte(a),
+          fa: ICONES[a.name] ?? "fa-circle",
+          // Griser une action selon l'énergie révélerait le niveau d'énergie : seulement pour ceux qui le voient.
+          indispo: voirEnergie && a.cout > enc
+        }))
+      }));
+
     return {
+      actions,
+      estMJ: game.user.isGM,
+      voirEnergie,
+      mesRoles: [...roles],
       tabs: this.#getTabs(),
       fields: this.document.schema.fields,
       systemFields: this.document.system.schema.fields,
@@ -387,24 +577,23 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       visibleItemsV: visibleItemsV,
       source: this.document.toObject(),
       items: this.document.items.toObject(),
-      calcul: calculerVehicule(this.document), // NOUVEAU : {{calcul.bonus.pilotage}}, {{calcul.regen}}, {{calcul.alertes}}…
+      calcul: calculerVehicule(this.document), // {{calcul.bonus.pilotage}}, {{calcul.regen}}, {{calcul.alertes}}…
       img // On utilise l'image corrigée
     };
-
   }
 
   async _preparePartContext(partId, context) {
     switch (partId) {
       case "biography":
         context.tab = context.tabs.biography;
-        context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.biography, { async: true });
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biography, { async: true });
         break;
       case "inventory":
         context.tab = context.tabs.inventory;
         context.items = [];
         const itemsRaw = this.document.items;
         for (const item of itemsRaw) {
-          item.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(item.system.description, { async: true });
+          item.enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(item.system.description, { async: true });
           context.items.push(item);
         }
         break;
@@ -413,15 +602,13 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
   }
 
   _onRender(context, options) {
-    super._onRender(context, options);  // Appelez la méthode parente si nécessaire
-    console.log(context);
+    super._onRender(context, options);
+    const root = this.element;
 
     //*Garder l'onglet ouvert*//
     const activeTab = localStorage.getItem(`activeTab-${this.actor.id}`) || "config";
-    // Appliquer l'affichage correct
     this._setActiveTab(activeTab);
-    // Gérer le clic sur les onglets pour changer de vue
-    this.element.querySelectorAll(".sheet-tabs [data-tab]").forEach(tab => {
+    root.querySelectorAll(".sheet-tabs [data-tab]").forEach(tab => {
       tab.addEventListener("click", (event) => {
         const newTab = event.currentTarget.dataset.tab;
         this._setActiveTab(newTab);
@@ -429,13 +616,13 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     });
 
     //*Bord des cercles*//
-    document.querySelectorAll(".circle").forEach(circle => {
+    root.querySelectorAll(".circle").forEach(circle => {
       const inputs = circle.querySelectorAll('input');
       if (inputs.length < 2) return;
 
       const current = parseFloat(inputs[0].value) || 0;
       const max = parseFloat(inputs[1].value) || 1;  // éviter division par zéro
-      const percent = Math.min(100, Math.max(0, (current / max) * 100));  // clamp entre 0 et 100
+      const percent = Math.min(100, Math.max(0, (current / max) * 100));
 
       circle.style.background = `conic-gradient(
             var(--couleur-rouge) 0%,
@@ -443,12 +630,14 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
             var(--couleur-gris) ${percent}% 100%
         )`;
     });
-    document.querySelectorAll(".part").forEach(part => {
-      const input = part.querySelector('input');//value
-      const value = parseInt(input?.value) || 0;
-      const nameAttr = part.querySelector("input").getAttribute("name");  // récupère system.nom
+    root.querySelectorAll(".part").forEach(part => {
+      const input = part.querySelector('input');
+      if (!input) return;
+      const value = parseInt(input.value) || 0;
+      const nameAttr = input.getAttribute("name");  // récupère system.nom
       const name = nameAttr ? nameAttr.split('.').pop() : '';
-      const circle = this.element.querySelector(`.${name}`);  // Sélectionne le <circle> à modifier
+      if (!name) return;
+      const circle = root.querySelector(`.${name}`);
       if (!circle) return;
 
       if (value < 5) {
@@ -457,8 +646,6 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
         circle.style.fill = 'var(--couleur-orange)';
       } else if (value < 9) {
         circle.style.fill = 'var(--couleur-rouge)';
-      } else {
-        //circle.style.display = 'none';
       }
     });
 
@@ -467,20 +654,16 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     const types = ["all", "weapon", "armor", "shield", "item"];
 
     if (types.includes(inventory)) {
-      const activeTab = document.querySelector(`.soute div[data-type="${inventory}"]`);
-      if (activeTab) {
-        activeTab.style.border = "solid 1px var(--couleur-bleuelect)";
-      }
+      const tab = root.querySelector(`.soute div[data-type="${inventory}"]`);
+      if (tab) tab.style.border = "solid 1px var(--couleur-bleuelect)";
     }
-    // Tab inventaire
+    // Tab inventaire véhicule
     const inventoryv = this.actor.system.inventoryv;
     const typesv = ["allv", "weaponvehicule", "room"];
 
     if (typesv.includes(inventoryv)) {
-      const activeTab = document.querySelector(`.vehicule div[data-type="${inventoryv}"]`);
-      if (activeTab) {
-        activeTab.style.border = "solid 1px var(--couleur-bleuelect)";
-      }
+      const tab = root.querySelector(`.vehicule div[data-type="${inventoryv}"]`);
+      if (tab) tab.style.border = "solid 1px var(--couleur-bleuelect)";
     }
 
     /*plus de PV*/
@@ -492,72 +675,56 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     const droiteValue = this.actor.system.droite;
     const basValue = this.actor.system.bas;
     const gaucheValue = this.actor.system.gauche;
-    const amorValue = armor * 100 / armormax;
+    const amorValue = armormax ? armor * 100 / armormax : 0;
     if (amorValue < 25) {
-      this.element.style.setProperty('--couleur-bleuelect', 'red');
+      root.style.setProperty('--couleur-bleuelect', 'red');
     } else if (amorValue < 50) {
-      this.element.style.setProperty('--couleur-bleuelect', '#ff6c00');
+      root.style.setProperty('--couleur-bleuelect', '#ff6c00');
     } else if (amorValue < 75) {
-      this.element.style.setProperty('--couleur-bleuelect', '#56853b');
+      root.style.setProperty('--couleur-bleuelect', '#56853b');
     } else {
-      this.element.style.setProperty('--couleur-bleuelect', '#00f7ff');
+      root.style.setProperty('--couleur-bleuelect', '#00f7ff');
     }
 
     //couleur du champ de force
     if (shield > shieldmax) {
-      this.element.querySelectorAll('.part-vehicule input').forEach(el => {
+      root.querySelectorAll('.part-vehicule input').forEach(el => {
         el.style.border = '1px solid var(--couleur-rouge)';
       });
     }
 
-    const champ = this.element.querySelector(".vehicule-status");
-    /*if(shield==0){ 
-        champ.style.border='solid 3px var(--couleur-grisclair)';
-    }*/
+    const champ = root.querySelector(".vehicule-status");
     const quart = shieldmax / 4;
     const moitie = shieldmax / 2;
 
-    // Valeurs des boucliers
-    const values = {
-      haut: hautValue,
-      bas: basValue,
-      droite: droiteValue,
-      gauche: gaucheValue
-    };
+    const values = { haut: hautValue, bas: basValue, droite: droiteValue, gauche: gaucheValue };
 
-    // Pour chaque direction, appliquer la couleur correspondante à la bonne bordure
-    for (const [direction, value] of Object.entries(values)) {
-      let color = "green"; // valeur par défaut
+    if (champ) {
+      for (const [direction, value] of Object.entries(values)) {
+        let color = "green";
 
-      if (value == 0) {
-        color = "var(--couleur-rouge)";
-      } else if (value < quart) {
-        color = "var(--couleur-orange)";
-      } else if (value < moitie) {
-        color = "var(--couleur-vert)";
-      }
+        if (value == 0) {
+          color = "var(--couleur-rouge)";
+        } else if (value < quart) {
+          color = "var(--couleur-orange)";
+        } else if (value < moitie) {
+          color = "var(--couleur-vert)";
+        }
 
-      switch (direction) {
-        case "haut":
-          champ.style.borderTop = `3px solid ${color}`;
-          break;
-        case "bas":
-          champ.style.borderBottom = `3px solid ${color}`;
-          break;
-        case "gauche":
-          champ.style.borderLeft = `3px solid ${color}`;
-          break;
-        case "droite":
-          champ.style.borderRight = `3px solid ${color}`;
-          break;
+        switch (direction) {
+          case "haut": champ.style.borderTop = `3px solid ${color}`; break;
+          case "bas": champ.style.borderBottom = `3px solid ${color}`; break;
+          case "gauche": champ.style.borderLeft = `3px solid ${color}`; break;
+          case "droite": champ.style.borderRight = `3px solid ${color}`; break;
+        }
       }
     }
 
     /*Colorise les compétences*/
-    document.querySelectorAll(".perso").forEach(compt => {
+    root.querySelectorAll(".perso").forEach(compt => {
       const input = compt.querySelector("input");
-      const valor = parseInt(input?.value, 10) || 0; // Vérifie si input existe et parse en nombre
-      // Appliquer la couleur selon la valeur
+      if (!input) return;
+      const valor = parseInt(input.value, 10) || 0;
       if (valor === 0) {
         input.style.background = "var(--couleur-gris)";
         input.style.color = "var(--couleur-bleuelect)";
@@ -573,26 +740,26 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     this._onVerif();
   }
 
-  /** Gestion des événements au rendu */
   /** @override */
   async _onDrop(event) {
     event.preventDefault();
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     if (data.type === "Item") {
       const item = await Item.fromDropData(data);
-      console.log("Objet droppé :", item);
       if (item) {
         await this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
       }
     }
   }
 
-
   /**
    * Recalcule et enregistre les caractéristiques du véhicule
    * (voir calculerVehicule pour les formules).
+   * Plusieurs joueurs peuvent ouvrir la feuille : on n'écrit que si une valeur a réellement changé
+   * (évite les mises à jour en boucle) et seulement si l'utilisateur est propriétaire.
    */
   _onVerif() {
+    if (!this.actor.isOwner) return;
     const sys = this.actor.system;
     const r = calculerVehicule(this.actor);
     const alertes = [...r.alertes];
@@ -608,8 +775,8 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     }
 
     // Les valeurs courantes ne dépassent jamais le maximum
-    const nrj = Math.min(sys.enc ?? 0, r.encmax);          // énergie en %
-    const pvCoque = Math.min(sys.health ?? 0, r.healthmax); // PV de coque
+    const nrj = Math.min(sys.enc ?? 0, r.encmax);
+    const pvCoque = Math.min(sys.health ?? 0, r.healthmax);
     const armor = Math.min(sys.armor ?? 0, r.armormax);
 
     // ANCIEN système : points d'IA à répartir dans les compétences.
@@ -623,14 +790,15 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       }
     }
 
-    // Une seule notification par changement d'état (évite le spam à chaque rendu)
+    // Alertes : réservées au MJ (évite que chaque joueur reçoive les mêmes notifications),
+    // et une seule notification par changement d'état.
     const signature = alertes.join("|");
-    if (signature && signature !== this._derniereAlerte) {
+    if (game.user.isGM && signature && signature !== this._derniereAlerte) {
       alertes.forEach(a => ui.notifications.warn(a));
     }
     this._derniereAlerte = signature;
 
-    this.actor.update({
+    const voulu = {
       "system.credit": r.prix,
       "system.armor": armor,
       "system.armormax": r.armormax,
@@ -640,34 +808,43 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       "system.encmax": r.encmax,
       "system.health": pvCoque,
       "system.healthmax": r.healthmax,
-      "system.sun1": etoiles(r.stats.pilotage),   // le template affiche sun1 dans le cercle « pilotage »
-      "system.sun2": etoiles(r.stats.mecanique),  // et sun2 dans le cercle « mécanique »
-      "system.sun3": etoiles(r.stats.piratage),
-      "system.sun4": etoiles(r.stats.visee),
+      "system.sun1": etoilesBonus(r.stats.pilotage),   // le template affiche sun1 dans le cercle « pilotage »
+      "system.sun2": etoilesBonus(r.stats.mecanique),  // et sun2 dans le cercle « mécanique »
+      "system.sun3": etoilesBonus(r.stats.piratage),
+      "system.sun4": etoilesBonus(r.stats.visee),
       "system.maxpiece": r.pieceMax,
       "system.maxarme": r.armeMax,
       "system.piece": r.empUtilises,
       "system.arme": r.armesUtil,
       "system.pointrestant": total,
       "system.technogeneral": etoiles(r.techno)
-    });
+    };
+
+    // Ne met à jour que ce qui a changé
+    const update = {};
+    for (const [chemin, valeur] of Object.entries(voulu)) {
+      if (foundry.utils.getProperty(this.actor, chemin) !== valeur) update[chemin] = valeur;
+    }
+    if (Object.keys(update).length) this.actor.update(update);
   }
 
   //#region Actions
   /**
+   * Le MJ attribue les rôles d'équipage.
    * @param {PointerEvent} event - The originating click event
    * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
    */
+  static async #onEquipage(event, target) {
+    if (!game.user.isGM) return;
+    await gererEquipage(this.actor);
+  }
+
   static #onItemEdit(event, target) {
     const itemId = target.getAttribute('data-item-id');
     const item = this.actor.items.get(itemId);
     item.sheet.render(true);
   }
 
-  /**
-   * @param {PointerEvent} event - The originating click event
-   * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-   */
   static async #onItemDelete(event, target) {
     const itemId = target.getAttribute('data-item-id');
     const item = this.actor.items.get(itemId);
@@ -678,99 +855,15 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     }
   }
 
-  /**
-   * @param {PointerEvent} event - The originating click event
-   * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-   */
-  static async #onItemRollSave(event, target) {//si competence tir ou visee ou combat
+  static async #onItemRollSave(event, target) { // si competence tir ou visee ou combat
     const ability = target.getAttribute('data-ability');
     await this.actor.rollSave(ability);
-  }
-
-
-  //a voir si utile
-  async afficherDialogueSelection(weapons, TIRMODES) {
-    return new Promise((resolve) => {
-      const options = weapons.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
-      const tirOptions = Object.entries(TIRMODES)
-        .map(([key, label]) => `<option value="${key}">${label}</option>`)
-        .join('');
-
-      new Dialog({
-        title: "Sélectionnez une arme",
-        content: `
-            <p>${game.i18n.localize("Liber.Roll.Choixarme")}</p>
-            <select id="selected-weapon">${options}</select>
-            <p>${game.i18n.localize("Liber.Roll.Choixtir")}</p>
-            <select id="selected-tir">${tirOptions}</select>
-          `,
-        buttons: {
-          confirm: {
-            label: "Valider",
-            callback: (html) => {
-              const weaponId = html[0].querySelector("#selected-weapon").value;
-              const selectedTir = html[0].querySelector("#selected-tir").value;
-              resolve({ weaponId, selectedTir });
-            }
-          },
-          cancel: {
-            label: "Annuler",
-            callback: () => resolve(null)
-          }
-        },
-        default: "confirm"
-      }).render(true);
-    });
-  }
-
-  //a voir si utile
-  async afficherDialogueAbbility() {
-    return new Promise((resolve) => {
-      const dlg = new Dialog({
-        title: "Niveau de technologie",
-        content: `
-                <p>${game.i18n.localize(`Liber.Items.Techno`)} :</p>
-                <select id="tech-level" name="system.techno">
-                    <option value="0" selected>☆ ☆ ☆ ☆ ☆</option>
-                    <option value="1">✬ ☆ ☆ ☆ ☆</option>
-                    <option value="2">★ ☆ ☆ ☆ ☆</option>
-                    <option value="3">★ ✬ ☆ ☆ ☆</option>
-                    <option value="4">★ ★ ☆ ☆ ☆</option>
-                    <option value="5">★ ★ ✬ ☆ ☆</option>
-                    <option value="6">★ ★ ★ ☆ ☆</option>
-                    <option value="7">★ ★ ★ ✬ ☆</option>
-                    <option value="8">★ ★ ★ ★ ☆</option>
-                    <option value="9">★ ★ ★ ★ ✬</option>
-                    <option value="10">★ ★ ★ ★ ★</option>
-                </select>
-            `,
-        buttons: {
-          confirm: {
-            label: "Valider",
-            callback: (html) => {
-              const select = html[0].querySelector("#tech-level");
-              const level = parseInt(select.value);
-              resolve(level);
-            }
-          },
-          cancel: {
-            label: "Annuler",
-            callback: () => resolve(null)
-          }
-        },
-        default: "confirm"
-      });
-      dlg.render(true);
-    });
   }
 
   /**
    * Jet de compétence du véhicule (le véhicule agit seul, via son IA).
    * Seuil = 30 + bonus d'étoiles de la statistique correspondante + bonus libre.
    * Si la compétence n'est pas reliée à une statistique, l'ancienne valeur saisie est utilisée.
-   *
-   * @param {PointerEvent} event - The originating click event
-   * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
    */
   static async #onItemRollDamage(event, target) {
     const compt = target.getAttribute('data-compt');
@@ -788,7 +881,6 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     const echec = calcul.echecCrit;
     const base = 30;
     const actor = this.actor;
-    let info = "";
     let succes = "";
     const valuemax = base + valeur + bonus;
     const result = roll.total;
@@ -797,9 +889,8 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     let color = "var(--couleur-bleuelect)";
     let infoarme = "";
 
-    info = `${result}/${valuemax}`;
+    const info = `${result}/${valuemax}`;
 
-    // Définir le message en fonction du résultat
     if (result > echec || valuemax == 0) {
       succes = game.i18n.localize("Liber.Roll.EchecCrit");
       color = 'var(--couleur-rouge)';
@@ -814,8 +905,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       color = 'var(--couleur-orange)';
     }
 
-    console.log(`Résultat: ${result}, Limite: ${valuemax}, Info: ${info}, Succès: ${succes}`);
-    let chatData = {
+    const chatData = {
       actingCharName: actor.name,
       actingCharImg: actor.img,
       info: info,
@@ -826,7 +916,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       succes: succes
     };
 
-    let chat = await new LiberChat(this.actor)
+    const chat = await new LiberChat(this.actor)
       .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
       .withContent("rollDamage")
       .withData(chatData)
@@ -835,121 +925,94 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     await chat.display();
   }
 
-
-  /**
-   * @param {PointerEvent} event - The originating click event
-   * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-   */
   static async #onShortRest(event, target) {
     await this.actor.system.shortRest();
   }
 
-  /**
-   * @param {PointerEvent} event - The originating click event
-   * @param {HTMLElement} target - the capturing HTML element which defined a [data-action]
-   */
   static async #onFullRest(event, target) {
     await this.actor.system.fullRest();
   }
 
   /**
-   * Action à bord : consomme de l'énergie.
-   * L'énergie est un POURCENTAGE (0-100). Coût lu dans COUT_ACTIONS, à défaut dans data-full.
+   * Action à bord : consomme de l'énergie (POURCENTAGE 0-100) selon la table ACTIONS.
+   * Les actions de tir demandent l'arme (coût = énergie de l'arme + supplément).
+   * Réservé aux utilisateurs qui ont le rôle correspondant (le MJ les a tous).
    */
   static async #onFullDown(event, target) {
-    const name = target.getAttribute('data-name');
-    const cout = COUT_ACTIONS[name] ?? (Number(target.getAttribute('data-full')) || 0);
+    const def = trouverAction(target.getAttribute('data-name'));
+    if (!def) return;
+    if (!getRoles(this.actor).has(roleDeAction(def.name))) {
+      return ui.notifications.warn("Vous n'avez pas ce rôle sur ce véhicule.");
+    }
     const actor = this.actor;
-    const label = game.i18n.localize('Liber.Character.Action.Vehicule.' + name);
+    const sys = actor.system;
+    let cout = def.cout;
+    let detail = "";
+    if (def.arme) {
+      const armes = await choisirArmes(actor, def.arme);
+      if (!armes) return;
+      cout += armes.reduce((n, a) => n + coutArme(a), 0);
+      detail = ` (${armes.map(a => a.name).join(" + ")})`;
+    }
+
+    const enc = Number(sys.enc) || 0;
+    const update = {};
     let color = "var(--couleur-bleuelect)";
-    let succes = `${game.i18n.localize('Liber.Character.Action.Vehicule.Energie')} ${cout} %`;
-    let full = this.actor.system.enc;
-    if (full == 0) {
-      succes = game.i18n.localize('Liber.Character.Action.Vehicule.Panne');
-      color = "var(--couleur-rouge)";
-    }
-    full = full - cout;
-    if (full < 0) {
-      succes = game.i18n.localize('Liber.Character.Action.Vehicule.Pannes');
-      color = "var(--couleur-orange)";
-    }
-    let chatData = {
-      actingCharName: actor.name,
-      actingCharImg: actor.img,
-      introText: "",
-      infoarme: label,
-      color: color,
-      succes: succes
-    };
+    let succes = def.horsCombat ? "Hors combat" : `${game.i18n.localize('Liber.Character.Action.Vehicule.Energie')} ${cout} %`;
+    let echec = false;
 
-    let chat = await new LiberChat(this.actor)
-      .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
-      .withContent("rollDamage")
-      .withData(chatData)
-      .create();
-
-    await chat.display();
-    if (full < 0) {
-      return;
-    }
-    this.actor.update({ 'system.enc': full });
-  }
-
-  /**
-   * NOUVEAU : début de tour.
-   *  - énergie : + (10 % + 5 % par ☆ de moteur + générateurs auxiliaires, etc.)
-   *  - champ de force : +10 % de son maximum s'il n'a pas été touché au tour précédent
-   * Bouton à ajouter au template : <a data-action="newTurn">Nouveau tour</a>
-   */
-  static async #onNewTurn(event, target) {
-    const sys = this.actor.system;
-    const r = calculerVehicule(this.actor);
-
-    const nrj = Math.min(r.encmax, (sys.enc ?? 0) + r.regen);
-    const update = { "system.enc": nrj };
-
-    const touche = await DialogV2.confirm({
-      window: { title: "Nouveau tour" },
-      content: "<p>Le champ de force a-t-il été touché au tour précédent ?</p>",
-      yes: { label: "Oui" },
-      no: { label: "Non" }
-    });
-
-    let infoChamp = "";
-    if (touche === false) {
-      const actuel = (Number(sys.haut) || 0) + (Number(sys.droite) || 0) + (Number(sys.bas) || 0) + (Number(sys.gauche) || 0);
-      const gain = Math.min(Math.round(r.shieldmax * 0.10), Math.max(0, r.shieldmax - actuel));
-      const parSecteur = Math.floor(gain / 4);
-      for (const s of ["haut", "droite", "bas", "gauche"]) {
-        update[`system.${s}`] = (Number(sys[s]) || 0) + parSecteur;
+    if (cout > enc) {   // panne : rien n'est consommé
+      echec = true;
+      color = enc === 0 ? "var(--couleur-rouge)" : "var(--couleur-orange)";
+      succes = game.i18n.localize(enc === 0 ? 'Liber.Character.Action.Vehicule.Panne' : 'Liber.Character.Action.Vehicule.Pannes');
+    } else {
+      let nrj = enc - cout;
+      let pv = Number(sys.health) || 0;
+      const pvMax = Number(sys.healthmax) || 0;
+      if (def.convertir) {
+        const perte = Math.round(pvMax * def.convertir.pv);
+        if (pv <= perte) { ui.notifications.warn("Coque trop endommagée pour la surcharge."); return; }
+        pv -= perte;
+        nrj = Math.min(100, nrj + def.convertir.nrj);
+        succes = `Coque -${perte} PV · Énergie +${def.convertir.nrj} %`;
+        update["system.health"] = pv;
       }
-      infoChamp = ` · Champ de force +${parSecteur * 4}`;
+      if (def.soin) {
+        const gain = Math.min(Math.round(pvMax * def.soin), Math.max(0, pvMax - pv));
+        update["system.health"] = pv + gain;
+        succes += ` · Coque +${gain} PV`;
+      }
+      update["system.enc"] = nrj;
     }
 
-    let chatData = {
-      actingCharName: this.actor.name,
-      actingCharImg: this.actor.img,
-      introText: "",
-      infoarme: "Nouveau tour",
-      color: "var(--couleur-bleuelect)",
-      succes: `Énergie +${r.regen} %${infoChamp}`
-    };
-    let chat = await new LiberChat(this.actor)
+    const chat = await new LiberChat(actor)
       .withTemplate("systems/libersf/templates/chat/roll-dammage.hbs")
       .withContent("rollDamage")
-      .withData(chatData)
+      .withData({
+        actingCharName: actor.name,
+        actingCharImg: actor.img,
+        introText: "",
+        infoarme: `<b>${def.nom}</b>${detail}<br>${def.effet}`,
+        color,
+        succes
+      })
       .create();
     await chat.display();
-
-    await this.actor.update(update);
+    if (!echec) await actor.update(update);
   }
 
-  //a voir si utile pour pilote mettre en bleuelect
+  /** Bouton « Nouveau tour » : réservé au MJ et au mécanicien (ceux qui voient l'énergie). */
+  static async #onNewTurn(event, target) {
+    if (!voitEnergie(this.actor)) {
+      return ui.notifications.warn("Seul le mécanicien peut gérer l'énergie.");
+    }
+    await debutDeTour(this.actor);
+  }
+
   static async #onItemEquip(event, target) {
     const itemId = target.getAttribute('data-item-id');
     let equipLocation = target.getAttribute('data-ou');
 
-    // Récupération de l'item
     const item = this.actor.items.get(itemId);
     if (item.system.equip == "pilote") {
       equipLocation = "";
@@ -958,7 +1021,6 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
   }
 
   static async #onItemDesequip(event, target) {
-    // Récupération de l'item
     const itemId = target.getAttribute('data-item-id');
     const item = this.actor.items.get(itemId);
     const equipLocation = target.getAttribute('data-ou');
@@ -974,6 +1036,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     const types = target.getAttribute('data-type');
     this.actor.update({ 'system.inventory': types });
   }
+
   static async #onFiltres(event, target) {
     const types = target.getAttribute('data-type');
     this.actor.update({ 'system.inventoryv': types });
@@ -981,12 +1044,7 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
 
   /**
    * Handle changing a Document's image.
-   *
-   * @this BoilerplateActorSheet
-   * @param {PointerEvent} event   The originating click event
-   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
-   * @returns {Promise}
-   * @private
+   * @this LiberVehiculeSheet
    */
   static async #onEditImage(event, target) {
     const attr = target.dataset.edit;
@@ -1003,27 +1061,22 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
     }).browse();
   }
 
-
   /*conserver le dernier onglet ouvert*/
   /** @override */
   _setActiveTab(tabId) {
     if (!this.actor) return;
 
-    // Stocker l'onglet actif en utilisant l'ID de l'acteur
     localStorage.setItem(`activeTab-${this.actor.id}`, tabId);
 
-    // Masquer tous les onglets
     this.element.querySelectorAll(".tab").forEach(tab => {
       tab.style.display = "none";
     });
 
-    // Afficher seulement l'onglet actif
     const activeTab = this.element.querySelector(`.tab[data-tab="${tabId}"]`);
     if (activeTab) {
       activeTab.style.display = "block";
     }
 
-    // Mettre à jour la classe "active" dans la navigation
     this.element.querySelectorAll(".sheet-tabs [data-tab]").forEach(tab => {
       tab.classList.remove("active");
     });
@@ -1033,9 +1086,8 @@ export default class LiberVehiculeSheet extends HandlebarsApplicationMixin(Actor
       activeTabNav.classList.add("active");
     }
 
-    const GM = game.user.isGM;
-    if (!GM) { // Vérifie si le joueur n'est PAS GM
-      document.querySelectorAll('.reponse').forEach(element => {
+    if (!game.user.isGM) {
+      this.element.querySelectorAll('.reponse').forEach(element => {
         element.style.display = "none";
       });
     }
@@ -1054,4 +1106,16 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
     ui.notifications.warn(message);
     return false;
   }
+});
+
+/**
+ * Tour de combat : quand c'est au tour d'un véhicule, son énergie se régénère.
+ * Exécuté uniquement par le MJ actif (évite le double traitement).
+ */
+Hooks.on("updateCombat", async (combat, changed) => {
+  if (!game.user.isActiveGM) return;
+  if (!("turn" in changed) && !("round" in changed)) return;
+  const actor = combat.combatant?.actor;
+  if (!actor || actor.system?.taillevehicule === undefined) return;
+  await debutDeTour(actor);
 });

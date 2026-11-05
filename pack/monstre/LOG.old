@@ -1,8 +1,26 @@
-2026/06/11-16:48:05.998650 714cb0dfa6c0 Recovering log #300
-2026/06/11-16:48:06.000211 714cb0dfa6c0 Delete type=0 #300
-2026/06/11-16:48:06.000242 714cb0dfa6c0 Delete type=3 #298
-2026/06/12-15:46:12.152410 714c613ff6c0 Level-0 table #305: started
-2026/06/12-15:46:12.152580 714c613ff6c0 Level-0 table #305: 0 bytes OK
-2026/06/12-15:46:12.153331 714c613ff6c0 Delete type=0 #303
-2026/06/12-15:46:12.154113 714c613ff6c0 Manual compaction at level-0 from '!actors!56MGlx9cp0zdkmVt' @ 72057594037927935 : 1 .. '!actors.items!tKE0vCE1jqGCjA2b.hP0kcslJ90zw1OyA' @ 0 : 0; will stop at (end)
-2026/06/12-15:46:12.154213 714c613ff6c0 Manual compaction at level-1 from '!actors!56MGlx9cp0zdkmVt' @ 72057594037927935 : 1 .. '!actors.items!tKE0vCE1jqGCjA2b.hP0kcslJ90zw1OyA' @ 0 : 0; will stop at (end)
+2026/11/02-21:52:12.648212 7e32f7fff6c0 Recovering log #307
+2026/11/02-21:52:12.648242 7e32f7fff6c0 Recovering log #379
+2026/11/02-21:52:12.650088 7e32f7fff6c0 Delete type=3 #284
+2026/11/02-21:52:12.650155 7e32f7fff6c0 Delete type=3 #306
+2026/11/02-21:52:12.650235 7e32f7fff6c0 Delete type=0 #307
+2026/11/02-21:52:12.650268 7e32f7fff6c0 Delete type=0 #303
+2026/11/02-21:52:12.650289 7e32f7fff6c0 Delete type=3 #296
+2026/11/02-21:52:12.650323 7e32f7fff6c0 Delete type=0 #297
+2026/11/02-21:52:12.650342 7e32f7fff6c0 Delete type=3 #281
+2026/11/02-21:52:12.650371 7e32f7fff6c0 Delete type=0 #283
+2026/11/02-21:52:12.650389 7e32f7fff6c0 Delete type=0 #379
+2026/11/02-21:52:12.650410 7e32f7fff6c0 Delete type=2 #330
+2026/11/02-21:52:12.679261 7e32f7fff6c0 Delete type=2 #282
+2026/11/02-21:52:12.679338 7e32f7fff6c0 Delete type=3 #302
+2026/11/02-21:52:12.679382 7e32f7fff6c0 Delete type=2 #105
+2026/11/02-21:52:12.679467 7e32f7fff6c0 Delete type=3 #248
+2026/11/02-21:52:12.679504 7e32f7fff6c0 Delete type=0 #249
+2026/11/02-21:52:12.679533 7e32f7fff6c0 Delete type=0 #300
+2026/11/02-21:52:12.679552 7e32f7fff6c0 Delete type=2 #272
+2026/11/02-21:52:12.679590 7e32f7fff6c0 Delete type=3 #298
+2026/11/02-21:52:12.679613 7e32f7fff6c0 Delete type=0 #286
+2026/11/02-22:24:06.320516 7e32f67ff6c0 Level-0 table #382: started
+2026/11/02-22:24:06.320672 7e32f67ff6c0 Level-0 table #382: 0 bytes OK
+2026/11/02-22:24:06.321318 7e32f67ff6c0 Delete type=0 #380
+2026/11/02-22:24:06.326282 7e32f67ff6c0 Manual compaction at level-0 from '!actors!56MGlx9cp0zdkmVt' @ 72057594037927935 : 1 .. '!actors.items!tKE0vCE1jqGCjA2b.hP0kcslJ90zw1OyA' @ 0 : 0; will stop at (end)
+2026/11/02-22:24:06.329883 7e32f67ff6c0 Manual compaction at level-1 from '!actors!56MGlx9cp0zdkmVt' @ 72057594037927935 : 1 .. '!actors.items!tKE0vCE1jqGCjA2b.hP0kcslJ90zw1OyA' @ 0 : 0; will stop at (end)

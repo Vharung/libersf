@@ -1,0 +1,32 @@
+<div class="tab" id="actions" data-group="sheet" data-tab="actions">
+    {{#if voirEnergie}}
+      <div class="jauge-nrj" style="--nrj:{{system.enc}}; --max:{{system.encmax}}" title="Énergie : {{system.enc}} / {{system.encmax}} %">
+        <div class="cadran">
+          <div class="arc"></div>
+          <div class="graduations"></div>
+          <span class="repere vide">E</span>
+          <span class="repere plein">F</span>
+          <div class="aiguille"></div>
+          <div class="moyeu"></div>
+        </div>
+        <div class="lecture">{{system.enc}} <small>/ {{system.encmax}} %</small></div>
+      </div>
+    {{/if}}
+    <div class="inventory-list4 cut-corner">
+      {{#unless actions.length}}<p>Aucun poste ne vous est attribué.</p>{{/unless}}
+      {{#each actions}}
+        <div class="action">
+          <h4>{{titre}}</h4>
+          <div class="grille-actions">
+            {{#each liste}}
+            <button type="button" class="tuile{{#if indispo}} indispo{{/if}}" data-action="fulldown" data-name="{{name}}" title="{{effet}}">
+              <i class="fa-solid {{fa}}"></i>
+              <span class="nom">{{nom}}</span>
+              <span class="cout">{{coutTexte}}</span>
+            </button>
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+</div>

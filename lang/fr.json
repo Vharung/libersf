@@ -140,7 +140,8 @@
         "competence":"Compet.",
         "soute":"Soute.",
         "config":"Santé",
-        "level":"Level"
+        "level":"Level",
+        "actions":"Actions"
       },
       "Inventory":{
         "All":"Tous",
