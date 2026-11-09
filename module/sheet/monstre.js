@@ -31,7 +31,7 @@ export default class LiberMonsterSheet extends HandlebarsApplicationMixin(ActorS
     stat: { template: "systems/libersf/templates/actors/character-stat.hbs" },
     biography: { template: "systems/libersf/templates/actors/monster-biography.hbs" },
     inventory: { template: "systems/libersf/templates/actors/monster-inventory.hbs" },
-    competence: { template: "systems/libersf/templates/actors/character-competence.hbs" }
+    competence: { template: "systems/libersf/templates/actors/monster-competence.hbs" }
   };
 
 

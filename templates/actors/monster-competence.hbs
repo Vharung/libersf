@@ -1,0 +1,20 @@
+<div class="tab" id="competence" data-group="sheet" data-tab="competence">
+    <div class="character-biography cut-corner" style="height: 393px;">
+    	{{#each systemFields.competences.fields as |field caract|}}
+	        <div class="perso" data-ability="{{caract}}">
+	          <span title="{{localize 'field.label'}}" calc="{{caract}}" data-action="rollDamage" data-compt="{{caract}}">
+	            <i class="fa-solid fa-dice-d20"></i> {{localize field.label}}
+	          </span>
+	            {{formInput field 
+	              value=(lookup ../system.competences caract) 
+	              name=(concat "system.competences." caract)
+	              rootId=../partId
+	            }}
+	        </div>
+	    {{/each}}
+	    <div class="compspec">
+	    	<span>{{localize 'Liber.Character.Compspec'}}</span>
+	    	{{formInput systemFields.compspec name="system.compspec" value=system.compspec localize=true rootId=partId}}
+	    </div>
+    </div>
+</div>

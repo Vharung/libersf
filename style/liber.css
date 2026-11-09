@@ -197,7 +197,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 
 /*inventaire*/
 .liber .inventory-list,.liber .inventory-list2, .liber .inventory-list0,.liber .inventory-list1,.liber .inventory-list3,.liber .inventory-list4{width:470px; padding:10px;margin-top: 10px;}
-.liber .inventory-list{height: 175px;overflow: hidden;}
+.liber .inventory-list{height: 140px;overflow: hidden;}
 .liber .inventory-list0{height: 275px;}
 .liber .inventory-list2{height: 155px;}
 .liber .inventory-list3{height: 95px;}
@@ -269,6 +269,7 @@ background-image:linear-gradient(to bottom,transparent calc(50%),  hsl(from var(
 
 /*biography*/
 .liber .prosemirror, prose-mirror {min-height: 220px}
+.liber .character-biography1 .prosemirror,.character-biography1 prose-mirror {min-height: 570px}
 .liber .monster .prosemirror {min-height: 320px}
 .liber.item .prosemirror, prose-mirror {min-height: 130px}
 .liber .editor-content{height: auto}
