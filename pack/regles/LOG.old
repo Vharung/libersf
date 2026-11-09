@@ -1,22 +1,8 @@
-2026/11/02-21:52:12.705823 7e32f7fff6c0 Recovering log #303
-2026/11/02-21:52:12.705850 7e32f7fff6c0 Recovering log #374
-2026/11/02-21:52:12.707507 7e32f7fff6c0 Delete type=3 #280
-2026/11/02-21:52:12.707548 7e32f7fff6c0 Delete type=0 #303
-2026/11/02-21:52:12.707567 7e32f7fff6c0 Delete type=0 #374
-2026/11/02-21:52:12.707584 7e32f7fff6c0 Delete type=0 #250
-2026/11/02-21:52:12.707602 7e32f7fff6c0 Delete type=3 #294
-2026/11/02-21:52:12.707624 7e32f7fff6c0 Delete type=0 #296
-2026/11/02-21:52:12.707641 7e32f7fff6c0 Delete type=0 #285
-2026/11/02-21:52:12.707658 7e32f7fff6c0 Delete type=0 #281
-2026/11/02-21:52:12.707674 7e32f7fff6c0 Delete type=3 #292
-2026/11/02-21:52:12.707702 7e32f7fff6c0 Delete type=3 #249
-2026/11/02-21:52:12.707722 7e32f7fff6c0 Delete type=3 #282
-2026/11/02-21:52:12.707743 7e32f7fff6c0 Delete type=3 #302
-2026/11/02-21:52:12.707763 7e32f7fff6c0 Delete type=0 #299
-2026/11/02-21:52:12.707780 7e32f7fff6c0 Delete type=0 #293
-2026/11/02-21:52:12.707796 7e32f7fff6c0 Delete type=3 #298
-2026/11/02-22:24:06.332730 7e32f67ff6c0 Level-0 table #377: started
-2026/11/02-22:24:06.332912 7e32f67ff6c0 Level-0 table #377: 0 bytes OK
-2026/11/02-22:24:06.333427 7e32f67ff6c0 Delete type=0 #375
-2026/11/02-22:24:06.334339 7e32f67ff6c0 Manual compaction at level-0 from '!journal!Me5n6Kawd12XYoSa' @ 72057594037927935 : 1 .. '!journal.pages!Me5n6Kawd12XYoSa.xdKqOOtK2PbPKVb6' @ 0 : 0; will stop at (end)
-2026/11/02-22:24:06.337233 7e32f67ff6c0 Manual compaction at level-1 from '!journal!Me5n6Kawd12XYoSa' @ 72057594037927935 : 1 .. '!journal.pages!Me5n6Kawd12XYoSa.xdKqOOtK2PbPKVb6' @ 0 : 0; will stop at (end)
+2026/11/09-08:13:22.827265 7ecb7f7fe6c0 Recovering log #382
+2026/11/09-08:13:22.828813 7ecb7f7fe6c0 Delete type=3 #380
+2026/11/09-08:13:22.828849 7ecb7f7fe6c0 Delete type=0 #382
+2026/11/09-08:17:34.840139 7ecb7df0e6c0 Level-0 table #387: started
+2026/11/09-08:17:34.840191 7ecb7df0e6c0 Level-0 table #387: 0 bytes OK
+2026/11/09-08:17:34.840799 7ecb7df0e6c0 Delete type=0 #385
+2026/11/09-08:17:34.841454 7ecb7df0e6c0 Manual compaction at level-0 from '!journal!Me5n6Kawd12XYoSa' @ 72057594037927935 : 1 .. '!journal.pages!Me5n6Kawd12XYoSa.xdKqOOtK2PbPKVb6' @ 0 : 0; will stop at (end)
+2026/11/09-08:17:34.843978 7ecb7df0e6c0 Manual compaction at level-1 from '!journal!Me5n6Kawd12XYoSa' @ 72057594037927935 : 1 .. '!journal.pages!Me5n6Kawd12XYoSa.xdKqOOtK2PbPKVb6' @ 0 : 0; will stop at (end)
